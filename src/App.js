@@ -118,7 +118,8 @@ class App extends React.Component{
         { product.map(product=>{
           return (
             <li key={product.id}>
-              name: {product.name} <img src={product.imageUrl}/>
+               <div class="picture"><img src={product.imageUrl}width="170" 
+     height="170" /></div><div class='name'>{product.name}</div> 
             </li>
           )
         })}
@@ -168,8 +169,7 @@ class App extends React.Component{
           )
         })}
         </ul>): null}
-       
-        
+
       </main>
     );
 
