@@ -1,39 +1,59 @@
 const app = require('./app');
 const { conn, User, Product } = require('./db');
-const { faker } = require('@faker-js/faker');
 
-// line 5 - 16 = create array of 50 random games
+const igdb = require('igdb-api-node').default;
 
-const gamesArray = [];
 
-function createRandomGames(){
-  return {
-    name: `${faker.random.word()}`,
-    description: `${faker.lorem.sentences(3)}`
-  }
-};
+const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
 
-Array.from({length: 50}).forEach(()=> gamesArray.push(createRandomGames()));
 
-// console.log("hello world");
 
 const setUp = async()=> {
   try {
     await conn.sync({ force: true });
+
+    await User.create({ username: 'moe', password: 'moe_pw'});
+
+    const zeldaGames = await client
+      .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+      .limit(10)
+      .search('zelda')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
+      // console.log(games.data)
+      zeldaGames.data.map(game=>{
+        Product.create({name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
+     });
+
+    const marioGames = await client
+      .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+      .limit(10)
+      .search('mario')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
+      // console.log(games.data)
+      marioGames.data.map(game=>{
+        Product.create({name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
+    });
+
+    const thisMonthGames1989 = await client
+      .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+      .limit(10)
+      .where('release_dates.date < 652165260 & release_dates.date > 649486860& total_rating > 50')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      thisMonthGames1989.data.map(game=>{
+        Product.create({name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
+    });
+
+    const thisYearsGames1985 = await client
+      .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+      .limit(10)
+      .where('release_dates.date < 504853200 & release_dates.date > 473403600 & total_rating > 80')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      thisYearsGames1985.data.map(game=>{
+        Product.create({name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
+    });
+
     await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com'});
     const lucy = await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});
-    const foo = await Product.create({ name: 'foo' }); 
-    const bar = await Product.create({ name: 'bar' }); 
-
-    // faker test
-    const bazz = await Product.create({ name: `${faker.commerce.product()}` });
-
-    await lucy.addToCart({ product: foo, quantity: 3 });
-    await lucy.addToCart({ product: bar, quantity: 4 });
-    await lucy.addToCart({ product: bazz, quantity: 1 });
-
-    // generate 50 fake games (name + description)
-    await Promise.all( gamesArray.map( game => Product.create(game)));
 
     const port = process.env.PORT || 3000;
     app.listen(port, ()=> console.log(`listening on port ${port}`));
@@ -42,6 +62,5 @@ const setUp = async()=> {
     console.log(ex);
   }
 };
-console.log('hi')
 
 setUp();
