@@ -7,9 +7,11 @@ import SignUp from './SignUp';
 import Cart from './Cart';
 
 
+
 import igdb from 'igdb-api-node';
 
 const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
+
 
 
 class App extends React.Component{
@@ -25,6 +27,7 @@ class App extends React.Component{
     }
   }
   render(){
+
     const { auth, logout, cart, zeldaGames, thisMonthGames1989  } = this.props;
     return (
       <main>
@@ -32,9 +35,7 @@ class App extends React.Component{
         <header>
         <div class="topnav">
           <a href="home">Home</a>
-          {/* <Link to='/genre'>Genre</Link>
-     */}
-
+          <a href="genre">Genre</a>
           <a href="platform">Platform</a>
           <a href="games">Games A-Z</a>
           <a href="popular">Popular</a>
@@ -128,9 +129,11 @@ class App extends React.Component{
           Spotlight 
         </div>
 
-        {/* <h1>Grace Shopper</h1> */}
+      
 
-        <h1>Grace Shopper</h1>
+
+
+      
 
         {
           auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignIn />
