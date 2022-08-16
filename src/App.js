@@ -73,7 +73,7 @@ class App extends React.Component{
         { product.map(product=>{
           return (
             <li key={product.id}>
-              name: {product.name} description: {product.description}
+              name: {product.name} <img src={product.imageUrl}/>
             </li>
           )
         })}

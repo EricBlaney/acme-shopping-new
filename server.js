@@ -3,16 +3,16 @@ const { conn, User, Product } = require('./db');
 
 const igdb = require('igdb-api-node').default;
 
-
 const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
 
 const setUp = async()=> {
   try {
     await conn.sync({ force: true });
+
     const zeldaGames = await client
       .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
       .limit(10)
-      .search('zelda')
+      .search('zelda') 
       .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
       // console.log(games.data)
       zeldaGames.data.map(game=>{
@@ -48,7 +48,7 @@ const setUp = async()=> {
     });
 
     await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com'});
-    const lucy = await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});
+    await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});
 
     const port = process.env.PORT || 3000;
     app.listen(port, ()=> console.log(`listening on port ${port}`));
