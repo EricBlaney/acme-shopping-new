@@ -1,13 +1,23 @@
+const { DATE } = require('sequelize');
 const conn = require('./conn');
 const { Sequelize } = conn;
-const { STRING } = Sequelize;
+const { STRING, TEXT } = Sequelize;
 
 const Product = conn.define('product', {
   name: {
     type: STRING
   },
-  description: {
+  summary: {
+    type: TEXT
+  },
+  imageUrl: {
     type: STRING
+  },
+  rating: {
+    type: STRING
+  },
+  releaseDate:{
+    type: DATE
   }
 });
 
