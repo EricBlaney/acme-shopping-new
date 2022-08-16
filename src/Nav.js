@@ -11,17 +11,15 @@ class Nav extends Component {
         <nav>
         <header>
         <div class="topnav">
-        <NavLink className="nav" activeClassName="current" exact to='/'>Home</NavLink>
-            <NavLink className="nav" activeClassName="current" exact to='/api/genre'>Genre</NavLink>
-            <NavLink className="nav" activeClassName="current" to='/api/platform'>Platform </NavLink>
-            <NavLink className="nav" activeClassName="current" to='/api/games'>Games A-Z</NavLink>
-            <NavLink className="nav" activeClassName="current" to='/api/popular'>Popular</NavLink>
-
-      
+            <NavLink exact to='/'>Home</NavLink>
+            <NavLink exact to='/api/genre'>Genre</NavLink>
+            <NavLink exact to='/api/platform'>Platform </NavLink>
+            <NavLink exact to='/api/games'>Games A-Z</NavLink>
+            <NavLink exact to='/api/popular'>Popular</NavLink>
         <div class="topnav-right">
-          <a href="myaccount">My Account</a>
-          <a href="signin">Sign In</a>
-          <a href="cart">Cart</a>
+            <NavLink exact to='/myaccount'>My Account </NavLink>
+            <NavLink exact to='/signin'>Sign In</NavLink>
+            <NavLink to='/cart'>Cart</NavLink>
           {/* <form class="example" action="/action_page.php" style="margin:auto;max-width:200px;"> */}
             {/* <input type="text" placeholder="Search.." name="search2"> */}
           {/* </form> */}

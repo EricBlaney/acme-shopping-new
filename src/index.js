@@ -5,12 +5,14 @@ import { Provider, connect } from 'react-redux';
 import Nav from './Nav';
 import store from './store';
 import { HashRouter as Router, Route } from 'react-router-dom';
+import Cart from './Cart';
 
 class _App extends Component{
     render(){
         return(
         <div>
         <Nav/>
+        <Route path='/cart' exact component={ Cart }/>
         <Route path='/' exact component={ LandingPage }/>
         </div>
         )
