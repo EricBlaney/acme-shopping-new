@@ -18,6 +18,9 @@ const Product = conn.define('product', {
   },
   releaseDate:{
     type: DATE
+  },
+  theme: {
+    type: STRING
   }
 });
 
