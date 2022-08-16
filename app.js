@@ -5,6 +5,7 @@ const path = require('path');
 app.use(express.json());
 app.use('/dist', express.static('dist'));
 
+console.log("hello");
 
 const isLoggedIn = async(req, res, next)=> {
   try {
