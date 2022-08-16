@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts, fetchCart, exchangeToken, logout } from './store';
 import { Link, Route } from 'react-router-dom';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import SignUpContainer from './SignUp/SignUpContainer';
+import SignInContainer from './SignIn/SignInContainer';
 import Cart from './Cart';
 
 
@@ -27,7 +27,8 @@ class App extends React.Component{
     }
   }
   render(){
-
+    const signUpTriggerText = 'Sign Up';
+    const signInTriggerText = 'Sign In';
     const { auth, logout, cart, zeldaGames, thisMonthGames1989  } = this.props;
     return (
       <main>
@@ -42,7 +43,14 @@ class App extends React.Component{
       
         <div class="topnav-right">
           <a href="myaccount">My Account</a>
-          <a href="signin">Sign In</a>
+          {
+          auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignInContainer triggerText={signInTriggerText} />
+        }
+                {
+          auth.id ? null : (
+              <SignUpContainer triggerText={signUpTriggerText} />
+          ) 
+        }
           <a href="cart">Cart</a>
           {/* <form class="example" action="/action_page.php" style="margin:auto;max-width:200px;"> */}
             {/* <input type="text" placeholder="Search.." name="search2"> */}
@@ -136,12 +144,6 @@ class App extends React.Component{
       
 
         {
-          auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignIn />
-        }
-        <div id="sign-up">
-          {auth.id ? null : <Link to='/signUp'>Sign Up</Link>}
-        </div>
-        {
           auth.id ? <Link to='/cart'>Cart ({cart.lineItems.length})</Link>: null
         }
         
@@ -151,13 +153,6 @@ class App extends React.Component{
               <Route path='/cart' component={ Cart } />
             </Fragment>
           ): null 
-        }
-        {
-          auth.id ? null : (
-            <Fragment>
-              <Route path='/signUp' component={ SignUp } />
-            </Fragment>
-          ) 
         }
 
         {auth.id ? (<ul>
