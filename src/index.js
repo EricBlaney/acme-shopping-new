@@ -6,8 +6,8 @@ import Nav from './Nav';
 import store from './store';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import Cart from './Cart';
-import SignIn from './SignIn'
-import SignUp from './SignUp'
+import SignInContainer from './SignIn/SignInContainer';
+import './index.css';
 
 class _App extends Component{
     render(){
@@ -16,8 +16,8 @@ class _App extends Component{
         <Nav/>
         <Route path='/cart' exact component={ Cart }/>
         <Route path='/' exact component={ LandingPage }/>
-        <Route path='/signin' component={ SignIn } />
-        <Route path='/signup' component= { SignUp } />
+        <Route path='/signin' component={ SignInContainer } />
+        {/* <Route path='/signup' component= { SignUpContainer } /> */}
         </div>
         )
     }

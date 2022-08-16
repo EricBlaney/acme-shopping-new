@@ -6,14 +6,6 @@ import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 import Cart from './Cart';
 
-
-
-import igdb from 'igdb-api-node';
-
-const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
-
-
-
 class LandingPage extends React.Component{
 
   componentDidMount(){
@@ -32,41 +24,6 @@ class LandingPage extends React.Component{
     const { auth, logout, cart, zeldaGames, thisMonthGames1989  } = this.props;
     return (
       <main>
-
-        <header>
-        <div class="topnav">
-          <a href="home">Home</a>
-          <a href="genre">Genre</a>
-          <a href="platform">Platform</a>
-          <a href="games">Games A-Z</a>
-          <a href="popular">Popular</a>
-      
-        <div class="topnav-right">
-          <a href="myaccount">My Account</a>
-          {
-          auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignInContainer triggerText={signInTriggerText} />
-        }
-                {
-          auth.id ? null : (
-              <SignUpContainer triggerText={signUpTriggerText} />
-          ) 
-        }
-          <a href="cart">Cart</a>
-          {/* <form class="example" action="/action_page.php" style="margin:auto;max-width:200px;"> */}
-            {/* <input type="text" placeholder="Search.." name="search2"> */}
-          {/* </form> */}
-        </div>
-        <div class="footer">
-          <a href="instagram">Instagram</a>
-          <a href="facebook">Facebook</a>
-          <a href="twitter">Twitter</a>
-          <a href="contact">Contact</a>
-        <div class="footer-right">
-          Sources
-        </div>
-       </div>
-       </div>
-        </header>
 
           <h1>LOGO</h1>
       { auth.id ? (
@@ -150,10 +107,11 @@ class LandingPage extends React.Component{
           ): null 
         }
         {
+          auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignInContainer triggerText={signInTriggerText} />
+        }
+                {
           auth.id ? null : (
-            <Fragment>
-              <Route path='/signUp' component={ SignUp } />
-            </Fragment>
+              <SignUpContainer triggerText={signUpTriggerText} />
           ) 
         }
       
