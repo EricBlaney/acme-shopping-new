@@ -3,11 +3,15 @@ const { conn, User, Product } = require('./db');
 
 const igdb = require('igdb-api-node').default;
 
+
 const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
+
+
 
 const setUp = async()=> {
   try {
     await conn.sync({ force: true });
+
     await User.create({ username: 'moe', password: 'moe_pw'});
 
     const zeldaGames = await client
@@ -47,6 +51,9 @@ const setUp = async()=> {
       thisYearsGames1985.data.map(game=>{
         Product.create({name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
     });
+
+    await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com'});
+    const lucy = await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});
 
     const port = process.env.PORT || 3000;
     app.listen(port, ()=> console.log(`listening on port ${port}`));

@@ -1,5 +1,3 @@
-const Dotenv = require('dotenv-webpack');
-
 module.exports = {
   devtool: 'source-map',
   plugins: [
@@ -14,7 +12,12 @@ module.exports = {
         options: {
           presets: ['@babel/preset-react']
         }
+      },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   }
 };
+
