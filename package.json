@@ -1,14 +1,15 @@
 {
   "name": "the-acme-auth-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "- create dev and testing databases - npm i - npm run test:dev - npm run start:dev",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
     "build:dev": "npm run build -- --watch --mode=development",
     "test": "mocha spec.js",
     "test:dev": "QUIET=true JWT=shh DATABASE_URL=postgres://localhost/acme_db_test npm test -- --watch",
-    "start:dev": "JWT=shhh nodemon server --ignore src/ --ignore dist/ & npm run build:dev"
+    "start:dev": "JWT=shhh nodemon server --ignore src/ --ignore dist/ & npm run build:dev",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -49,5 +50,13 @@
     "supertest": "^6.2.4",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EricBlaney/acme-shopping-new.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EricBlaney/acme-shopping-new/issues"
+  },
+  "homepage": "https://github.com/EricBlaney/acme-shopping-new#readme"
 }
