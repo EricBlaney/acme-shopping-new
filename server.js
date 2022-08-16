@@ -205,7 +205,7 @@ const setUp = async()=> {
     // console.log(genreIds.data); 
 
     await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com'});
-    // await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});
+    await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});
 
     const port = process.env.PORT || 3000;
     app.listen(port, ()=> console.log(`listening on port ${port}`));
