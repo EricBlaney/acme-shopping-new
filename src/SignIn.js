@@ -22,7 +22,9 @@ class SignIn extends Component{
   render(){
     const { onChange, onSubmit } = this;
     const { username, password } = this.state;
+    const { auth } = this.props;
     return (
+      (auth.id ? ( <div> You're Signed In Already! </div>) : (
       <form onSubmit={ onSubmit }>
         Username: 
         <input name='username' onChange={ onChange } value={ username }/>
@@ -30,7 +32,9 @@ class SignIn extends Component{
         <input type='password' name='password' value={ password } onChange={ onChange }/>
         <button>Login</button>
       </form>
-    );
+      )
+    )
+    )
   }
 }
 
@@ -42,4 +46,9 @@ const mapDispatch = (dispatch)=> {
   };
 };
 
-export default connect(null, mapDispatch)(SignIn);
+const mapState = ({ auth }) => {
+  return {
+    auth
+  }
+}
+export default connect(mapState, mapDispatch)(SignIn);
