@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createUser } from './store';
 import { connect } from 'react-redux';
 
+
 class SignUp extends Component{
   constructor(){
     super();
@@ -35,6 +36,7 @@ class SignUp extends Component{
     const { username, password, email } = this.state;
     return (
       <form onSubmit={ onSubmit }>
+        Sign-Up <br></br>
         Username:
         <input name='username' onChange={ onChange } value={ username }/>
         Email:

@@ -12,7 +12,6 @@ const setUp = async()=> {
   try {
     await conn.sync({ force: true });
 
-    await User.create({ username: 'moe', password: 'moe_pw'});
 
     const zeldaGames = await client
       .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')

@@ -5,6 +5,7 @@ import { Link, Route } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Cart from './Cart';
+import Container from './Container';
 
 class App extends React.Component{
   componentDidMount(){
@@ -17,17 +18,24 @@ class App extends React.Component{
       this.props.fetchCart();
     }
   }
+
+  onSubmit(ev) {
+    ev.preventDefault(ev);
+        
+  }
+
   render(){
     const { auth, logout, cart, product } = this.props;
+    const triggerText = 'Sign Up'
     return (
       <main>
         <h1>Grace Shopper</h1>
         {
           auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignIn />
         }
-        <div id="sign-up">
+        {/* <div id="sign-up">
           {auth.id ? null : <Link to='/signUp'>Sign Up</Link>}
-        </div>
+        </div> */}
         {
           auth.id ? <Link to='/cart'>Cart ({cart.lineItems.length})</Link>: null
         }
@@ -40,12 +48,14 @@ class App extends React.Component{
         }
         {
           auth.id ? null : (
-            <Fragment>
-              <Route path='/signUp' component={ SignUp } />
-            </Fragment>
+            // <Fragment>
+            //   <Route path='/signUp' component={ Container } />
+            // </Fragment>
+
+              <Container triggerText={triggerText} onSubmit={this.onSubmit}/>
+
           ) 
         }
-
         {auth.id ? (<ul>
         { product.map(product=>{
           return (
