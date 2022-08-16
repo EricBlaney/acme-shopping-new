@@ -43,8 +43,98 @@ class App extends React.Component{
   render(){
     const { auth, logout, cart, product } = this.props;
     return (
+
       <main>
-        <h1>Grace Shopper</h1>
+        <header>
+        <div class="topnav">
+          <a href="#home">Home</a>
+          <a href="#genre">Genre</a>
+          <a href="#platform">Platform</a>
+          <a href="#games">Games A-Z</a>
+          <a href="#popular">Popular</a>
+      
+        <div class="topnav-right">
+          <a href="#myaccount">My Account</a>
+          <a href="#signin">Sign In</a>
+          <a href="#cart">Cart</a>
+          {/* <form class="example" action="/action_page.php" style="margin:auto;max-width:200px;"> */}
+            {/* <input type="text" placeholder="Search.." name="search2"> */}
+          {/* </form> */}
+        </div>
+      
+        <div class="footer">
+          <a href="instagram">Instagram</a>
+          <a href="facebook">Facebook</a>
+          <a href="twitter">Twitter</a>
+          <a href="contact">Contact</a>
+        <div class="footer-right">
+          Sources
+        </div>
+       </div>
+       </div>
+        </header>
+
+          <h1>LOGO</h1>
+
+        <div class="container">
+          <h2>Top 10 Games in 1980</h2>  
+          <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+        
+            <div class="carousel-inner">
+              <div class="item active">
+              Game 1
+              </div>
+        
+              <div class="item">
+              Game 2
+              </div>
+            
+              <div class="item">
+              Game 3
+              </div>
+            </div>
+        
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="recently-released">
+          Recently Released 
+
+          <div class="games">
+        { product.map(product=>{
+          return (
+            <li key={product.id}>
+              name: {product.name} <img src={product.imageUrl}/>
+            </li>
+          )
+        })}
+        </div>
+        </div>
+
+        <div class="upcoming-releases">
+          Upcoming Releases 
+         
+        </div>
+        
+        <div class="spotlight">
+          Spotlight 
+        </div>
+
+        {/* <h1>Grace Shopper</h1> */}
         {
           auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignIn />
         }
