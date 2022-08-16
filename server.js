@@ -15,7 +15,7 @@ function createRandomGames(){
 
 Array.from({length: 50}).forEach(()=> gamesArray.push(createRandomGames()));
 
-console.log("hello world");
+// console.log("hello world");
 
 const setUp = async()=> {
   try {
@@ -26,12 +26,12 @@ const setUp = async()=> {
     const bar = await Product.create({ name: 'bar' }); 
 
     // faker test
-    const bazz = await Product.create({ name: `${faker.commerce.product()}` }); 
+    const bazz = await Product.create({ name: `${faker.commerce.product()}` });
 
     await lucy.addToCart({ product: foo, quantity: 3 });
     await lucy.addToCart({ product: bar, quantity: 4 });
     await lucy.addToCart({ product: bazz, quantity: 1 });
-    
+
     // generate 50 fake games (name + description)
     await Promise.all( gamesArray.map( game => Product.create(game)));
 
