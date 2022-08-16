@@ -5,6 +5,7 @@ import { Link, Route } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Cart from './Cart';
+import Genre from './Genre'
 import igdb from 'igdb-api-node';
 
 const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
@@ -47,21 +48,22 @@ class App extends React.Component{
       <main>
         <header>
         <div class="topnav">
-          <a href="#home">Home</a>
-          <a href="#genre">Genre</a>
-          <a href="#platform">Platform</a>
-          <a href="#games">Games A-Z</a>
-          <a href="#popular">Popular</a>
+          <a href="home">Home</a>
+          <Link to='/genre'>Genre</Link>
+    
+
+          <a href="platform">Platform</a>
+          <a href="games">Games A-Z</a>
+          <a href="popular">Popular</a>
       
         <div class="topnav-right">
-          <a href="#myaccount">My Account</a>
-          <a href="#signin">Sign In</a>
-          <a href="#cart">Cart</a>
+          <a href="myaccount">My Account</a>
+          <a href="signin">Sign In</a>
+          <a href="cart">Cart</a>
           {/* <form class="example" action="/action_page.php" style="margin:auto;max-width:200px;"> */}
             {/* <input type="text" placeholder="Search.." name="search2"> */}
           {/* </form> */}
         </div>
-      
         <div class="footer">
           <a href="instagram">Instagram</a>
           <a href="facebook">Facebook</a>
@@ -128,6 +130,7 @@ class App extends React.Component{
 
         <div class="upcoming-releases">
           Upcoming Releases 
+         
          
         </div>
         
