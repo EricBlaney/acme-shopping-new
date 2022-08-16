@@ -5,36 +5,19 @@ import { Link, Route } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Cart from './Cart';
-import Genre from './Genre'
+
+
 import igdb from 'igdb-api-node';
 
 const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
 
+
 class App extends React.Component{
-  constructor(){
-    super()
-      this.state = {
-        games: [],      
-    }
-  }
 
   componentDidMount(){
     this.props.fetchProducts();
     this.props.exchangeToken();
-    this.generateVideoGames();
-
   }
-
-    // api test query - 10 Zelda games + their covers/summary/screenshots
-    async generateVideoGames (){
-      const zeldaGames = await client
-        .fields('name,summary,cover.url,screenshots.*')
-        .limit(10)
-        .search('zelda')
-        .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
-        // console.log(zeldaGames.data)
-      this.setState({games: zeldaGames.data})
-    }
 
   componentDidUpdate(prevProps){
     if(!prevProps.auth.id && this.props.auth.id){
@@ -42,10 +25,10 @@ class App extends React.Component{
     }
   }
   render(){
-    const { auth, logout, cart, product } = this.props;
+    const { auth, logout, cart, zeldaGames  } = this.props;
     return (
-
       <main>
+
         <header>
         <div class="topnav">
           <a href="home">Home</a>
@@ -139,6 +122,9 @@ class App extends React.Component{
         </div>
 
         {/* <h1>Grace Shopper</h1> */}
+
+        <h1>Grace Shopper</h1>
+
         {
           auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignIn />
         }
@@ -148,6 +134,7 @@ class App extends React.Component{
         {
           auth.id ? <Link to='/cart'>Cart ({cart.lineItems.length})</Link>: null
         }
+        
         {
           auth.id ? (
             <Fragment>
@@ -164,7 +151,7 @@ class App extends React.Component{
         }
 
         {auth.id ? (<ul>
-        { product.map(product=>{
+        { zeldaGames.map(product=>{
           return (
             <li key={product.id}>
               name: {product.name} <img src={product.imageUrl}/>
@@ -172,7 +159,8 @@ class App extends React.Component{
           )
         })}
         </ul>): null}
-
+       
+        
       </main>
     );
 
@@ -188,11 +176,20 @@ const mapDispatch = (dispatch)=> {
   };
 };
 const mapStateToProps = ({auth, product, cart}) => {
-  // product = product.filter(product => product.rating > 90);
+  const zeldaGames = product.filter(product => product.theme === 'zeldaGames');
+  const marioGames = product.filter(product => product.theme === 'marioGames');
+  const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
+  const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
+  const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
+  const thisYearsGames1990 = product.filter(product => product.theme === 'thisYearsGames1990');
+  const thisYearsGames1992 = product.filter(product => product.theme === 'thisYearsGames1992');
+  const thisYearsGames1994 = product.filter(product => product.theme === 'thisYearsGames1994');
+
     return {
       auth,
-      product,
+      zeldaGames,
       cart
     }
   };
+
 export default connect(mapStateToProps, mapDispatch)(App);

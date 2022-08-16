@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './Cart.css'; // npm install css-loader -D
-// import css-loader from 'css-loader';
+import './Cart.css'; // npm install css-loader style-loader -D
 import { Link } from 'react-router-dom'
 import { deleteCart, updateQuality } from './store'
 
