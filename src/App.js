@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { fetchProducts, fetchCart, exchangeToken, logout } from './store';
 import { Link, Route } from 'react-router-dom';
 import SignIn from './SignIn';
-import SignUp from './SignUp';
 import Cart from './Cart';
-import Container from './Container';
+import SignUpContainer from './SignUp/SignUpContainer';
+import SignInContainer from './SignIn/SignInContainer';
 
 class App extends React.Component{
   componentDidMount(){
@@ -19,19 +19,16 @@ class App extends React.Component{
     }
   }
 
-  onSubmit(ev) {
-    ev.preventDefault(ev);
-        
-  }
 
   render(){
     const { auth, logout, cart, product } = this.props;
-    const triggerText = 'Sign Up'
+    const signUpTriggerText = 'Sign Up';
+    const signInTriggerText = 'Sign In';
     return (
       <main>
         <h1>Grace Shopper</h1>
         {
-          auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignIn />
+          auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignInContainer triggerText={signInTriggerText} />
         }
         {/* <div id="sign-up">
           {auth.id ? null : <Link to='/signUp'>Sign Up</Link>}
@@ -48,12 +45,7 @@ class App extends React.Component{
         }
         {
           auth.id ? null : (
-            // <Fragment>
-            //   <Route path='/signUp' component={ Container } />
-            // </Fragment>
-
-              <Container triggerText={triggerText} onSubmit={this.onSubmit}/>
-
+              <SignUpContainer triggerText={signUpTriggerText} />
           ) 
         }
         {auth.id ? (<ul>
