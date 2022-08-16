@@ -11,14 +11,14 @@ const setUp = async()=> {
 
 // General / Landing Page Queries
 
-//     const thisMonthGames1989 = await client
-//       .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
-//       .limit(10)
-//       .where('release_dates.date < 652165260 & release_dates.date > 649486860& total_rating > 50')
-//       .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
-//       thisMonthGames1989.data.map(game=>{
-//         Product.create({theme: 'thisMonthGames1989', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
-//     });
+    const thisMonthGames1989 = await client
+      .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+      .limit(10)
+      .where('release_dates.date < 652165260 & release_dates.date > 649486860& total_rating > 50')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      thisMonthGames1989.data.map(game=>{
+        Product.create({theme: 'thisMonthGames1989', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
+    });
 
 //     const thisYearsGames1985 = await client
 //       .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')

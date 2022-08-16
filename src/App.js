@@ -25,15 +25,15 @@ class App extends React.Component{
     }
   }
   render(){
-    const { auth, logout, cart, zeldaGames  } = this.props;
+    const { auth, logout, cart, zeldaGames, thisMonthGames1989  } = this.props;
     return (
       <main>
 
         <header>
         <div class="topnav">
           <a href="home">Home</a>
-          <Link to='/genre'>Genre</Link>
-    
+          {/* <Link to='/genre'>Genre</Link>
+     */}
 
           <a href="platform">Platform</a>
           <a href="games">Games A-Z</a>
@@ -73,7 +73,14 @@ class App extends React.Component{
         
             <div class="carousel-inner">
               <div class="item active">
-              Game 1
+              { thisMonthGames1989.map(product=>{
+          return (
+            <li key={product.id}>
+               <div class="picture"><img src={product.imageUrl}width="170" 
+     height="170" /></div><div class='name'>{product.name}</div> 
+            </li>
+          )
+        }).slice(0,1)}
               </div>
         
               <div class="item">
@@ -100,14 +107,14 @@ class App extends React.Component{
           Recently Released 
 
           <div class="games">
-        { product.map(product=>{
+        { zeldaGames.map(product=>{
           return (
             <li key={product.id}>
                <div class="picture"><img src={product.imageUrl}width="170" 
      height="170" /></div><div class='name'>{product.name}</div> 
             </li>
           )
-        })}
+        }).slice(0,5)}
         </div>
         </div>
 
@@ -188,6 +195,7 @@ const mapStateToProps = ({auth, product, cart}) => {
     return {
       auth,
       zeldaGames,
+      thisMonthGames1989,
       cart
     }
   };
