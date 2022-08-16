@@ -74,14 +74,14 @@ const setUp = async()=> {
       Product.create({theme: 'zeldaGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
    });
 
-  const marioGames = await client
-    .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
-    .limit(10)
-    .search('mario')
-    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
-    marioGames.data.map(game=>{
-      Product.create({theme: 'marioGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
-  });
+  // const marioGames = await client
+  //   .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+  //   .limit(10)
+  //   .search('mario')
+  //   .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
+  //   marioGames.data.map(game=>{
+  //     Product.create({theme: 'marioGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
+  // });
 
 //   Platform-specific Queries
 

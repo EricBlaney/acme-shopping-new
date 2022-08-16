@@ -19,7 +19,7 @@ class App extends React.Component{
     }
   }
   render(){
-    const { auth, logout, cart, zeldaGames } = this.props;
+    const { auth, logout, cart, zeldaGames  } = this.props;
     return (
       <main>
         <h1>Grace Shopper</h1>
