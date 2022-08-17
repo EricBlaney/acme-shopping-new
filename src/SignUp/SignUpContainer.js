@@ -4,6 +4,10 @@ import TriggerButton from './TriggerButton';
 
 export class SignUpContainer extends React.Component {
     state = { isShown: false };
+    componentDidMount() {
+      this.showModal();
+    }
+
     showModal = () => {
       this.setState({ isShown: true }, () => {
       this.closeButton.focus();
@@ -29,8 +33,8 @@ export class SignUpContainer extends React.Component {
     };
     render() {
     return (
-      <React.Fragment>
-      <TriggerButton
+      <React.Fragment >
+      <TriggerButton 
         showModal={this.showModal}
         buttonRef={(n) => (this.TriggerButton = n)}
         triggerText={this.props.triggerText}

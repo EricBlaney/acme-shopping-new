@@ -11,6 +11,9 @@ export const Modal = ({
     closeModal,
     onSubmit
    }) => {
+
+
+    
    return ReactDOM.createPortal(
    <FocusTrap>
      <aside
@@ -39,7 +42,8 @@ export const Modal = ({
        </button>
    <div className="modal-body">
       <SignUp onSubmit={onSubmit} />
-     </div>
+    
+      </div>
       </div>
       </aside>
     </FocusTrap>,
