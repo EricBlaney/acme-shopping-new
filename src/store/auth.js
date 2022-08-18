@@ -43,30 +43,6 @@ export const login = (credentials)=> {
   };
 };
 
-export const createUser = (user) => {
-  return async(dispatch)=> {
-    try{
-      await axios.post('/api/users', user);
-      let response = await axios.post('/api/sessions', user);
-      const { token } = response.data;
-      window.localStorage.setItem('token', token); 
-      response = await axios.get('/api/sessions', {
-        headers: {
-          authorization: token
-        }
-      });
-      const auth = response.data;
-          dispatch({ auth, type: 'SET_AUTH' });
-    }
-    catch(error) {
-      if (error.response.data.includes("Cannot add duplicate email!")) {
-        alert('Cannot add duplicate email')
-      } else {
-        console.log(error);
-      }
-    }
-    }
-  };
 
 
 export default auth;
