@@ -46,7 +46,7 @@ class SingleGame extends React.Component{
                                 <div className='singlePrice'>{`$${product.price}`}</div> 
                                 <button className='btn'>Add To Cart</button>     
                                 <br></br>
-                          <div className='singleSummary'>{product.summary}</div>
+                                <div className='singleSummary'>{product.summary.substring(0,300)}</div>
                               </div>
                           </div>
                     </li>
