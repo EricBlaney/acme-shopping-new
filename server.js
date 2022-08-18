@@ -87,15 +87,15 @@ const setUp = async()=> {
 
 //   Platform-specific Queries
 
-    //   const topNESGames = await client
-    //   .fields('name,cover.url,total_rating')
-    //   .limit(10)
-    //   .where('release_dates.platform = 18 & total_rating > 80')
-    //   .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
-    //   console.log(topNESGames.data)
-    //   topNESGames.data.map(game=>{
-    //     Product.create({theme: 'topNESGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`})
-    // });
+      const topNESGames = await client
+      .fields('name,cover.url,total_rating')
+      .limit(10)
+      .where('release_dates.platform = 18 & total_rating > 80')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      console.log(topNESGames.data)
+      topNESGames.data.map(game=>{
+        Product.create({theme: 'topNESGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`})
+    });
 
     //   const topSNESGames = await client
     //   .fields('name,cover.url,total_rating')
@@ -192,19 +192,19 @@ const setUp = async()=> {
 
 // Queries to get all platform ids + genre ids
 
-    // const platformIds = await client
-    // .fields('name')
-    // .limit(200)
-    // .sort('id')
-    // .request('http://0.0.0.0:8080/https://api.igdb.com/v4/platforms')
-    // console.log(platformIds.data); 
+    const platformIds = await client
+    .fields('name')
+    .limit(200)
+    .sort('id')
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/platforms')
+    console.log(platformIds.data); 
 
-    // const genreIds = await client
-    // .fields('name')
-    // .limit(50)
-    // .sort('id')
-    // .request('http://0.0.0.0:8080/https://api.igdb.com/v4/genres')
-    // console.log(genreIds.data); 
+    const genreIds = await client
+    .fields('name')
+    .limit(50)
+    .sort('id')
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/genres')
+    console.log(genreIds.data); 
 
     await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com'});
     await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});

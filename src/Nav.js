@@ -6,6 +6,7 @@ import SignInContainer from './SignIn/SignInContainer';
 import auth from './store/auth';
 import { logout } from './store';
 
+
 class Nav extends Component {
     
 
@@ -19,7 +20,7 @@ class Nav extends Component {
         <header>
         <div class="topnav">
             <NavLink exact to='/'>Home</NavLink>
-            <NavLink exact to='/api/genre'>Genre</NavLink>
+            <NavLink exact to='/api/genre'>Genre </NavLink>
             <NavLink exact to='/api/platform'>Platform </NavLink>
             <NavLink exact to='/api/games'>Games A-Z</NavLink>
             <NavLink exact to='/api/popular'>Popular</NavLink>

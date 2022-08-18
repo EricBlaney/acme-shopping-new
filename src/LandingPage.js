@@ -51,8 +51,8 @@ class LandingPage extends React.Component{
         </div>
         </div>
         
-        <div class="games-from-1990">
-          Games from 1990 
+        <div class="games-from-1989">
+          Games from 1989 
           <div class="games">
         { thisMonthGames1989.map(product=>{
           return (
@@ -63,7 +63,8 @@ class LandingPage extends React.Component{
         }).slice(0,5)}
         </div>
         </div>
-        </div>) : null}
+        </div>
+        ) : null}
 
         {
           auth.id ? <Link to='/cart'>Cart ({cart.lineItems.length})</Link>: null
