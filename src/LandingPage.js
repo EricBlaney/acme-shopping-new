@@ -2,8 +2,6 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts, fetchCart, exchangeToken, logout } from './store';
 import { Link, Route } from 'react-router-dom';
-import SignUpContainer from './SignUp/SignUpContainer';
-import SignInContainer from './SignIn/SignInContainer';
 import Cart from './Cart';
 
 class LandingPage extends React.Component{
@@ -19,12 +17,10 @@ class LandingPage extends React.Component{
     }
   }
   render(){
-    const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In';
+
     const { auth, logout, cart, zeldaGames, thisMonthGames1989  } = this.props;
     return (
       <main>
-
           <h1>LOGO</h1>
       { auth.id ? (
         <div>
@@ -98,7 +94,7 @@ class LandingPage extends React.Component{
         {
           auth.id ? <Link to='/cart'>Cart ({cart.lineItems.length})</Link>: null
         }
-        
+
         {
           auth.id ? (
             <Fragment>
@@ -106,14 +102,7 @@ class LandingPage extends React.Component{
             </Fragment>
           ): null 
         }
-        {
-          auth.id ? <button onClick={ logout }>Logout { auth.username }</button>: <SignInContainer triggerText={signInTriggerText} />
-        }
-                {
-          auth.id ? null : (
-              <SignUpContainer triggerText={signUpTriggerText} />
-          ) 
-        }
+
       
       </main>
     );
