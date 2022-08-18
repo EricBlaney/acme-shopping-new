@@ -54,9 +54,9 @@ class App extends React.Component{
        </div>
         </header>
 
-          <h1>LOGO</h1>
+        <h1>LOGO</h1>
 
-     
+
 
         <div class="zeldaGames">
           Zelda Games
@@ -64,7 +64,7 @@ class App extends React.Component{
         { zeldaGames.map(product=>{
           return (
             <li key={product.id}>
-               <div class="picture"><img src={product.imageUrl}width="170" height="170" /></div><div class='name'>{product.name}</div> 
+               <div class="picture"><img src={product.imageUrl}width="170" height="170" /></div><div class='name'>{product.name} <div class="cart">add</div> </div> 
             </li>
           )
         }).slice(0,5)}
