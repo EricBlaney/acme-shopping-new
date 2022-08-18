@@ -27,6 +27,16 @@ app.get('/api/products', async(req,res,next)=>{
   }catch(er){
     next(er);
   }
+});
+
+app.get('/api/products/:id', async(req,res,next)=>{
+  try{
+    const game = await Product.findByPk(req.params.id);
+    res.status(200).send(game);
+
+  }catch(er){
+    next(er);
+  }
 })
 
 app.use((err, req, res, next)=> {
