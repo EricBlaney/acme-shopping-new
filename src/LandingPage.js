@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 
+
 class LandingPage extends React.Component{
 
   componentDidMount(){
@@ -22,9 +23,7 @@ class LandingPage extends React.Component{
     const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990 } = this.props;
     return (
       <main>
-      <div className='logo'>
-      <h1>LOGO</h1>
-      </div>
+
       { auth.id ? (
         <div>
         <div>

@@ -6,6 +6,7 @@ import SignInContainer from './SignIn/SignInContainer';
 import { fetchProducts } from './store';
 import { logout } from './store';
 
+
 class Nav extends Component {
     componentDidMount(){
         this.props.fetchProducts();
@@ -32,10 +33,8 @@ class Nav extends Component {
         }
             { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
             <NavLink to='/cart'>Cart</NavLink>
-          {/* <form className="example" action="/action_page.php" style="margin:auto;max-width:200px;"> */}
-            {/* <input type="text" placeholder="Search.." name="search2"> */}
-          {/* </form> */}
         </div>
+        
         <div className="footer">
           <a href="instagram">Instagram</a>
           <a href="facebook">Facebook</a>
@@ -54,7 +53,7 @@ class Nav extends Component {
 
 const mapState = ({ auth }) => {
     return {
-        auth,
+        auth
     }
 };
 
