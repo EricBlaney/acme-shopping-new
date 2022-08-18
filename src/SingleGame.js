@@ -31,11 +31,9 @@ class SingleGame extends React.Component{
       <div className="singlegame">
 
         { [game].map(product=>{
-          console.log(product.imageUrl)
           if(product.imageUrl.length > 10) {
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
-          console.log(product.imageUrl)
           return (
                   <div key={product.id}>
                     <li className='product'>
@@ -46,7 +44,7 @@ class SingleGame extends React.Component{
                                 <div className='singlePrice'>{`$${product.price}`}</div> 
                                 <button className='btn'>Add To Cart</button>     
                                 <br></br>
-                                <div className='singleSummary'>{product.summary.substring(0,300)}</div>
+                                <div className='singleSummary'>{product.summary.substring(0,600)}</div>
                               </div>
                           </div>
                     </li>
