@@ -31,10 +31,13 @@ class LandingPage extends React.Component{
         <h2>Top Games of August 1989!</h2>
         <div className="games">
         { thisMonthGames1989.map(product=>{
+          if(product.imageUrl.length > 10) {
+          product.imageUrl = product.imageUrl.substring(44, 100)
+          }
           return (
             <li>
             <Link key={product.id} to={`/api/product/${product.id}`}>
-               <div className="picture"><img src={product.imageUrl}width="170" 
+               <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
      height="170" /></div><div className='name'>{product.name}</div>
             </Link>
             <div className='price'>{`$${product.price}`}</div> 
@@ -49,10 +52,13 @@ class LandingPage extends React.Component{
         <h2>Top Games of 1990!</h2>
         <div className="games">
         { thisYearsGames1990.map(product=>{
+          if(product.imageUrl.length > 10) {
+          product.imageUrl = product.imageUrl.substring(44, 100)
+          }
           return (
             <li>
             <Link key={product.id} to={`/api/product/${product.id}`}>
-               <div className="picture"><img src={product.imageUrl}width="170" 
+               <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
      height="170" /></div><div className='name'>{product.name}</div> 
             </Link>
             <div className='price'>{`$${product.price}`}</div> 
@@ -67,10 +73,13 @@ class LandingPage extends React.Component{
         <h2>Top Games of 1992!</h2>
         <div className="games">
         { thisYearsGames1992.map(product=>{
+          if(product.imageUrl.length > 10) {
+          product.imageUrl = product.imageUrl.substring(44, 100)
+          }
           return (
             <li>
             <Link key={product.id} to={`/api/product/${product.id}`}>
-               <div className="picture"><img src={product.imageUrl}width="170" 
+               <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
      height="170" /></div><div className='name'>{product.name}</div> 
             </Link>
             <div className='price'>{`$${product.price}`}</div> 

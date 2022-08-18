@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCart, exchangeToken, logout } from './store';
+import './SingleGame.css';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 
@@ -26,27 +27,35 @@ class SingleGame extends React.Component{
       </div>
 
       { auth.id ? (
-        <div>
-          <div className="games">
+        
+      <div className="singlegame">
 
         { [game].map(product=>{
+          console.log(product.imageUrl)
+          if(product.imageUrl.length > 10) {
+          product.imageUrl = product.imageUrl.substring(44, 100)
+          }
+          console.log(product.imageUrl)
           return (
-            <div key={product.id}>
-            <li >
-               <div className="picture"><img src={product.imageUrl}width="170" 
-     height="170" /></div><div className='name'>{product.name}</div> 
-         <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-
-            </div>
-          )
+                  <div key={product.id}>
+                    <li className='product'>
+                      <div className="product-img"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`} width="170" height="170" /></div> 
+                          <div className='productlisting'>
+                              <div className='content'>
+                                <div className='singleName'>{product.name}</div>
+                                <div className='singlePrice'>{`$${product.price}`}</div> 
+                                <button className='btn'>Add To Cart</button>     
+                                <br></br>
+                          <div className='singleSummary'>{product.summary}</div>
+                              </div>
+                          </div>
+                    </li>
+                  </div>
+                  )
         })}
         </div>
     
-        </div>) : null}
+       ) : null}
         
         {
           auth.id ? null : <SignInContainer triggerText={signInTriggerText} />
