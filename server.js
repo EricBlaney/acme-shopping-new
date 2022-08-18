@@ -11,6 +11,7 @@ const setUp = async()=> {
 
 // General / Landing Page Queries
 
+
 //     const thisMonthGames1989 = await client
 //       .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
 //       .limit(10)
@@ -19,6 +20,7 @@ const setUp = async()=> {
 //       thisMonthGames1989.data.map(game=>{
 //         Product.create({theme: 'thisMonthGames1989', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
 //     });
+
 
 //     const thisYearsGames1985 = await client
 //       .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
@@ -38,14 +40,14 @@ const setUp = async()=> {
 //         Product.create({theme: 'thisYearsGames1987', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
 //     });
 
-//     const thisYearsGames1990 = await client
-//     .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
-//     .limit(10)
-//     .where('release_dates.date < 662706000 & release_dates.date > 631170000 & total_rating > 80')
-//     .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
-//     thisYearsGames1990.data.map(game=>{
-//       Product.create({theme: 'thisYearsGames1990', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
-//   });
+    const thisYearsGames1990 = await client
+    .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+    .limit(10)
+    .where('release_dates.date < 662706000 & release_dates.date > 631170000 & total_rating > 80')
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+    thisYearsGames1990.data.map(game=>{
+      Product.create({theme: 'thisYearsGames1990', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
+  });
 
 //   const thisYearsGames1992 = await client
 //     .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
@@ -74,14 +76,14 @@ const setUp = async()=> {
       Product.create({theme: 'zeldaGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
    });
 
-  // const marioGames = await client
-  //   .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
-  //   .limit(10)
-  //   .search('mario')
-  //   .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
-  //   marioGames.data.map(game=>{
-  //     Product.create({theme: 'marioGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
-  // });
+  const marioGames = await client
+    .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+    .limit(10)
+    .search('mario')
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
+    marioGames.data.map(game=>{
+      Product.create({theme: 'marioGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`})
+  });
 
 //   Platform-specific Queries
 

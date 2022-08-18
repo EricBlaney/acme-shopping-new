@@ -18,78 +18,52 @@ class LandingPage extends React.Component{
   }
   render(){
 
-    const { auth, logout, cart, zeldaGames, thisMonthGames1989  } = this.props;
+    const { auth, logout, cart, zeldaGames, thisMonthGames1989,marioGames  } = this.props;
     return (
       <main>
           <h1>LOGO</h1>
       { auth.id ? (
         <div>
-        <div className="container">
-          <h2>Top 10 Games from 1989</h2>  
-          <div id="myCarousel" className="carousel slide" data-ride="carousel">
-        
-            <ol className="carousel-indicators">
-              <li data-target="#myCarousel" data-slide-to="0" className="active"></li>
-              <li data-target="#myCarousel" data-slide-to="1"></li>
-              <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-        
-            <div className="carousel-inner">
-              <div className="item active">
-              { thisMonthGames1989.map(product=>{
-          return (
-            <li key={product.id}>
-               <div className="picture"><img src={product.imageUrl}width="170" 
-     height="170" /></div><div className='name'>{product.name}</div> 
-            </li>
-          )
-        }).slice(0,1)}
-              </div>
-        
-              <div className="item">
-              Game 2
-              </div>
-            
-              <div className="item">
-              Game 3
-              </div>
-            </div>
-        
-            <a className="left carousel-control" href="#myCarousel" data-slide="prev">
-              <span className="glyphicon glyphicon-chevron-left"></span>
-              <span className="sr-only">Previous</span>
-            </a>
-            <a className="right carousel-control" href="#myCarousel" data-slide="next">
-              <span className="glyphicon glyphicon-chevron-right"></span>
-              <span className="sr-only">Next</span>
-            </a>
-          </div>
-        </div>
-
-        <div className="recently-released">
-          Recently Released 
-
-          <div className="games">
+          <div class="zeldaGames">
+          Zelda Games
+          <div class="games">
         { zeldaGames.map(product=>{
           return (
             <li key={product.id}>
-               <div className="picture"><img src={product.imageUrl}width="170" 
-     height="170" /></div><div className='name'>{product.name}</div> 
+               <div class="picture"><img src={product.imageUrl}width="170" height="170" /></div><div class='name'>{product.name} </div> 
             </li>
           )
         }).slice(0,5)}
         </div>
         </div>
+        
 
-        <div className="upcoming-releases">
-          Upcoming Releases 
-         
-         
+        <div class="mario-games">
+          Mario Games 
+          <div class="games">
+        { marioGames.map(product=>{
+          return (
+            <li key={product.id}>
+               <div class="picture"><img src={product.imageUrl}width="170" height="170" /></div><div class='name'>{product.name}</div> 
+            </li>
+          )
+        }).slice(0,5)}
+        </div>
         </div>
         
-        <div className="spotlight">
-          Spotlight 
-        </div> </div>) : null}
+        <div class="games-from-1990">
+          Games from 1990 
+          <div class="games">
+        { thisMonthGames1989.map(product=>{
+          return (
+            <li key={product.id}>
+               <div class="picture"><img src={product.imageUrl}width="170" height="170" /></div><div class='name'>{product.name}</div> 
+            </li>
+          )
+        }).slice(0,5)}
+        </div>
+        </div>
+        </div>) : null}
 
         {
           auth.id ? <Link to='/cart'>Cart ({cart.lineItems.length})</Link>: null
@@ -132,6 +106,7 @@ const mapStateToProps = ({auth, product, cart}) => {
       auth,
       zeldaGames,
       thisMonthGames1989,
+      marioGames,
       cart
     }
   };

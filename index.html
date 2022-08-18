@@ -3,9 +3,12 @@
     <title>My App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 <style>
+
+
   @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
   @import url('https://fonts.googleapis.com/css2?family=Silkscreen');
 
@@ -19,18 +22,18 @@
   }
 
   body {
-  margin: 0;
   font-family:'Silkscreen', regular;
+  background-image:url('https://www.gizmodo.com.au/wp-content/uploads/sites/2/2020/04/22/ctdb8olk4rqkjv1kmryx.gif?quality=80&resize=720,405'); background-repeat:repeat;
 }
 
   .topnav {
   overflow: hidden;
-  background-color: #637081;
+  /* background-color: #637081; */
 }
 
 .topnav a {
   float: left;
-  color: white;
+  color: black;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -49,6 +52,7 @@
 
 .topnav-right {
   float: right;
+  
 }
 
 h1 {
@@ -60,7 +64,7 @@ h1 {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #637081;
+  background-color: white;
   color: white;
   text-align: left;
   text-transform: uppercase;
@@ -74,37 +78,24 @@ h1 {
   font-size: 15px;
 }
 
-.top-ten-games li {
-  background-color: lightgrey;
-  width: 300px;
-  padding: 40px;
-  margin: 20px;
-}
-
-.top-ten-games {
-  background: #eee;
-  color: #000;
-  margin: 0;
-  padding: 0;
-}
-
 h2 {
   padding: 14px 16px;
   font-size: 20px;
 }
 
-.recently-released {
-  padding: 50px 16px;
+.zeldaGames {
+  padding: 20px 16px;
+  font-size: 20px;
+
+}
+
+.mario-games{
+  padding: 20px 16px;
   font-size: 20px;
 }
 
-.upcoming-releases {
-  padding: 50px 16px;
-  font-size: 20px;
-}
-
-.spotlight {
-  padding: 50px 16px;
+.games-from-1990 {
+  padding: 20px 16px;
   font-size: 20px;
 }
 
@@ -122,17 +113,15 @@ form.example input[type=text] {
 }
 
 .games li{
-  /* background: #accbe1;
-  color: #000;
+  /* background: white; */
   margin: 5;
-  padding: 5; */
+  padding: 5;
 display: block;
 width: 18%;
 align-items: center;
 margin-left: auto;
   margin-right: auto;
   flex-wrap: wrap;
-
 }
 
 .games {
@@ -151,12 +140,10 @@ margin-left: auto;
   display: block;
   margin-left: 0;
   margin-right: 0;
-
+  width: 50%;
+flex-wrap: wrap;
 }
 
-.container {
-width: 25%
-}
 
 </style>
 
