@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCart, exchangeToken, logout } from './store';
+import { fetchCart, addCart, exchangeToken, logout } from './store';
 import './SingleGame.css';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
@@ -21,7 +21,7 @@ class SingleGame extends React.Component{
     const signInTriggerText = 'Sign In';
     const { auth, logout, cart, game  } = this.props;
     return (
-           <main>
+      <main>
 
           { auth.id ? (
             
@@ -60,17 +60,17 @@ class SingleGame extends React.Component{
                 <SignUpContainer triggerText={signUpTriggerText} />
             ) 
           }
-      
       </main>
     );
-
   }
 }
+
 const mapDispatch = (dispatch)=> {
   return {
     exchangeToken: ()=> dispatch(exchangeToken()),
     logout: ()=> dispatch(logout()),
     fetchCart: ()=> dispatch(fetchCart()),
+    addCart: (product, quantity) => dispatch(addCart(product, quantity))
   };
 };
 
