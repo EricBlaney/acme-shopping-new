@@ -3977,7 +3977,8 @@ class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
       }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "singlePrice"
       }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "btn"
+        className: "btn",
+        onClick: () => this.props.addCart(product, 1)
       }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "singleSummary"
       }, product.summary.substring(0, 600))))));
@@ -48428,9 +48429,6 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
       path: "/updatemyaccount",
       exact: true,
       component: _UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
-      path: "/api/product/:id",
-      component: _SingleGame__WEBPACK_IMPORTED_MODULE_3__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/search/:term?",
       component: _Search_SearchResults__WEBPACK_IMPORTED_MODULE_11__["default"]
