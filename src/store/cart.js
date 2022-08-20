@@ -1,5 +1,6 @@
 import axios from 'axios';
-const { faker } = require('@faker-js/faker');
+// const { faker } = require('@faker-js/faker');
+
 const cart = (state = { lineItems: [ ] }, action)=> {
   if(action.type === 'SET_CART'){
     state = action.cart;
@@ -19,6 +20,26 @@ const cart = (state = { lineItems: [ ] }, action)=> {
   return state;
 };
 
+
+//connected part
+export const addCart = (product, quantity) => {
+  return async(dispatch) => {
+    const response = await axios.put('/api/orders/cart', {
+      product,
+      quantity
+    }, 
+    {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
+    if (response.status === 200){
+      alert('Added to cart successfully!')
+    }
+  }
+}
+
+//updated the fetchCart function from faker to api
 export const fetchCart = ()=> {
   return async(dispatch)=> {
     const response = await axios.get('/api/orders/cart', {
@@ -26,41 +47,44 @@ export const fetchCart = ()=> {
         authorization: window.localStorage.getItem('token')
       }
     });
-    const cart = [];
-    for (let i = 0; i < 10; i++) {
-      cart.push({
-        product: {
-          id: faker.datatype.uuid(),
-          name: faker.commerce.productName(),
-          description: faker.commerce.productDescription(),
-          imageUrl: faker.image.business(),
-        },
-        quantity: faker.datatype.number(10)
-      })
+    dispatch({ type: 'SET_CART', cart: response.data});
+  };
+};
+ 
+
+//updated deleteCart and updateQuality function to connect the product data
+export const deleteCart = (product) => {
+  return async(dispatch)=> {
+    const response = await axios.destory('/api/orders/cart', {
+      product,
+      quantity: 0
+  }, 
+    {
+    headers: {
+      authorization: window.localStorage.getItem('token')
     }
-    dispatch({ type: 'SET_CART', cart: {
-        createdAt: "2022-08-15T15:10:19.454Z",
-        id: 2,
-        isCart: true,
-        lineItems: cart,
-        updatedAt: "2022-08-15T15:10:19.454Z",
-        userId: 1,
-      } || response.data });
+  });
+  if (response.status === 200){
+    dispatch({ type: 'DELETE _CART', cart: response.data})
+  }
 
-  };
-};
 
-export const deleteCart = (id) => {
-  return async(dispatch)=> {
-    dispatch({ type: 'DELETE_CART', id});
-  };
-};
+  export const updateQuality = (product, quantity) => {
+    return async(dispatch)=> {
+      const response = await axios.put('/api/orders/cart', {
+        product,
+        quantity
+      }, {
+        headers: {
+          authorization: window.localStorage.getItem('token')
+        }
+      });
+      if (response.status === 200) {
+        dispatch({ type: 'UPDATE_QUALITY', id: product.id, quantity});
+      }
+    };
+  }
 
-export const updateQuality = (id, num) => {
-  return async(dispatch)=> {
-    dispatch({ type: 'UPDATE_QUALITY', id, num});
-  };
-}
 
 
 export default cart;

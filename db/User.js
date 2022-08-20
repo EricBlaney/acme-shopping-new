@@ -35,19 +35,19 @@ User.addHook('beforeSave', async(user)=> {
   user.password = await bcrypt.hash(user.password, 5);
 });
 
-User.addHook('beforeSave', async(student) =>{
-  try{
-      const result = await User.findAll({
-          where:{
-              email: student.email
-          }
-      });
-      if(result.length >= 1){
-          throw new Error('Cannot add duplicate email!')
-      }
-} catch(er){
-  throw er
-}});
+// User.addHook('beforeSave', async(student) =>{
+//   try{
+//       const result = await User.findAll({
+//           where:{
+//               email: student.email
+//           }
+//       });
+//       if(result.length >= 1){
+//           throw new Error('Cannot add duplicate email!')
+//       }
+// } catch(er){
+//   throw er
+// }});
 
 User.prototype.createOrderFromCart = async function(){
   const cart = await this.getCart();
