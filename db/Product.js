@@ -1,9 +1,14 @@
 const { DATE } = require('sequelize');
 const conn = require('./conn');
 const { Sequelize } = conn;
-const { STRING, TEXT } = Sequelize;
+const { STRING, TEXT, UUID, UUIDV4, INTEGER } = Sequelize;
 
 const Product = conn.define('product', {
+  id: {
+    type: UUID,
+    defaultValue: UUIDV4,
+    primaryKey: true
+  },
   name: {
     type: STRING
   },
@@ -18,6 +23,9 @@ const Product = conn.define('product', {
   },
   releaseDate:{
     type: DATE
+  },
+  price: {
+    type: INTEGER
   },
   theme: {
     type: STRING

@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 <style>
 
 
@@ -21,12 +24,12 @@
 
   body {
   font-family:'Silkscreen', regular;
-  background-image:url('https://www.gizmodo.com.au/wp-content/uploads/sites/2/2020/04/22/ctdb8olk4rqkjv1kmryx.gif?quality=80&resize=720,405'); background-repeat:repeat;
+  background-color: #CEE5F2;
 }
 
   .topnav {
   overflow: hidden;
-  /* background-color: #637081; */
+  background-color: #637081;
 }
 
 .topnav a {
@@ -34,6 +37,7 @@
   color: black;
   text-align: center;
   padding: 14px 16px;
+  padding-bottom: 2rem;
   text-decoration: none;
   font-size: 12px;
   text-transform: uppercase;
@@ -53,8 +57,16 @@
   
 }
 
+.logo {
+  margin-top: -2.5rem;
+  height: 200px;
+  background-image:url('https://www.gizmodo.com.au/wp-content/uploads/sites/2/2020/04/22/ctdb8olk4rqkjv1kmryx.gif?quality=80&resize=720,405'); background-repeat:repeat;
+}
+
 h1 {
-  text-align: center
+  text-align: center;
+  padding-top: 7rem;
+
 }
 
 .footer {
@@ -114,10 +126,10 @@ form.example input[type=text] {
 
   margin: 5;
   padding: 5;
-display: block;
-width: 18%;
-align-items: center;
-margin-left: auto;
+  display: block;
+  width: 18%;
+  align-items: center;
+  margin-left: auto;
   margin-right: auto;
   flex-wrap: wrap;
 }
@@ -125,21 +137,39 @@ margin-left: auto;
 .games {
   display: flex;
   flex-wrap: wrap;
+  
+
 }
 
 .name {
   display: block;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
   font-size: 15px;
 }
 
+.price {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15px;
+}
+
+.addtocart {
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .picture {
   display: block;
-  margin-left: 0;
-  margin-right: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 50%;
-flex-wrap: wrap;
+ flex-wrap: wrap;
 }
 
 

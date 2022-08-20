@@ -1,13 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts, fetchCart, exchangeToken, logout } from './store';
-import { Link, Route } from 'react-router-dom';
-import Cart from './Cart';
+import { fetchCart, exchangeToken, logout } from './store';
+import { Link } from 'react-router-dom';
+import SignUpContainer from './SignUp/SignUpContainer';
+import SignInContainer from './SignIn/SignInContainer';
 
 class LandingPage extends React.Component{
 
   componentDidMount(){
-    this.props.fetchProducts();
     this.props.exchangeToken();
   }
 
@@ -17,67 +17,79 @@ class LandingPage extends React.Component{
     }
   }
   render(){
-
-    const { auth, logout, cart, zeldaGames, thisMonthGames1989,marioGames  } = this.props;
+    const signUpTriggerText = 'Sign Up';
+    const signInTriggerText = 'Sign In';
+    const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990 } = this.props;
     return (
       <main>
-          <h1>LOGO</h1>
+      <div className='logo'>
+      <h1>LOGO</h1>
+      </div>
       { auth.id ? (
         <div>
-          <div class="zeldaGames">
-          Zelda Games
-          <div class="games">
-        { zeldaGames.map(product=>{
-          return (
-            <li key={product.id}>
-               <div class="picture"><img src={product.imageUrl}width="170" height="170" /></div><div class='name'>{product.name} </div> 
-            </li>
-          )
-        }).slice(0,5)}
-        </div>
-        </div>
-        
-
-        <div class="mario-games">
-          Mario Games 
-          <div class="games">
-        { marioGames.map(product=>{
-          return (
-            <li key={product.id}>
-               <div class="picture"><img src={product.imageUrl}width="170" height="170" /></div><div class='name'>{product.name}</div> 
-            </li>
-          )
-        }).slice(0,5)}
-        </div>
-        </div>
-        
-        <div class="games-from-1989">
-          Games from 1989 
-          <div class="games">
+        <div>
+        <h2>Top Games of August 1989!</h2>
+        <div className="games">
         { thisMonthGames1989.map(product=>{
           return (
-            <li key={product.id}>
-               <div class="picture"><img src={product.imageUrl}width="170" height="170" /></div><div class='name'>{product.name}</div> 
+            <li>
+            <Link key={product.id} to={`/api/product/${product.id}`}>
+               <div className="picture"><img src={product.imageUrl}width="170" 
+     height="170" /></div><div className='name'>{product.name}</div>
+            </Link>
+            <div className='price'>{`$${product.price}`}</div> 
+            <button className='addtocart'>Add To Cart</button>
             </li>
           )
         }).slice(0,5)}
         </div>
         </div>
+
+        <div>
+        <h2>Top Games of 1990!</h2>
+        <div className="games">
+        { thisYearsGames1990.map(product=>{
+          return (
+            <li>
+            <Link key={product.id} to={`/api/product/${product.id}`}>
+               <div className="picture"><img src={product.imageUrl}width="170" 
+     height="170" /></div><div className='name'>{product.name}</div> 
+            </Link>
+            <div className='price'>{`$${product.price}`}</div> 
+            <button className='addtocart'>Add To Cart</button>
+            </li>
+          )
+        }).slice(0,5)}
         </div>
-        ) : null}
+        </div>
 
+        <div>
+        <h2>Top Games of 1992!</h2>
+        <div className="games">
+        { thisYearsGames1992.map(product=>{
+          return (
+            <li>
+            <Link key={product.id} to={`/api/product/${product.id}`}>
+               <div className="picture"><img src={product.imageUrl}width="170" 
+     height="170" /></div><div className='name'>{product.name}</div> 
+            </Link>
+            <div className='price'>{`$${product.price}`}</div> 
+            <button className='addtocart'>Add To Cart</button>
+            </li>
+          )
+        }).slice(0,5)}
+        </div>
+        </div>
+        </div> ) : null } 
+        
         {
-          auth.id ? <Link to='/cart'>Cart ({cart.lineItems.length})</Link>: null
+          auth.id ? null : <SignInContainer triggerText={signInTriggerText} />
         }
-
-        {
-          auth.id ? (
-            <Fragment>
-              <Route path='/cart' component={ Cart } />
-            </Fragment>
-          ): null 
+                {
+          auth.id ? null : (
+              <SignUpContainer triggerText={signUpTriggerText} />
+          ) 
         }
-
       
       </main>
     );
@@ -89,13 +101,11 @@ const mapDispatch = (dispatch)=> {
     exchangeToken: ()=> dispatch(exchangeToken()),
     logout: ()=> dispatch(logout()),
     fetchCart: ()=> dispatch(fetchCart()),
-    fetchProducts: ()=> dispatch(fetchProducts()),
-
   };
 };
 const mapStateToProps = ({auth, product, cart}) => {
-  const zeldaGames = product.filter(product => product.theme === 'zeldaGames');
-  const marioGames = product.filter(product => product.theme === 'marioGames');
+  {/* const zeldaGames = product.filter(product => product.theme === 'zeldaGames'); */}
+  {/* const marioGames = product.filter(product => product.theme === 'marioGames'); */}
   const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
   const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
   const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
@@ -105,9 +115,9 @@ const mapStateToProps = ({auth, product, cart}) => {
 
     return {
       auth,
-      zeldaGames,
       thisMonthGames1989,
-      marioGames,
+      thisYearsGames1990,
+      thisYearsGames1992,
       cart
     }
   };

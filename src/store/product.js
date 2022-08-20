@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const products = (state = [], action)=> {
+const product = (state = [], action)=> {
   if(action.type === 'SET_PRODUCTS'){
     state = action.products;
   }
@@ -16,4 +16,4 @@ export const fetchProducts = ()=> {
 };
 
 
-export default products;
+export default product;
