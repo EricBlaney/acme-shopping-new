@@ -48363,30 +48363,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-<<<<<<< HEAD
-/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Nav */ "./src/Nav.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var _SingleGame__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SingleGame */ "./src/SingleGame.js");
-/* harmony import */ var _MyAccount__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MyAccount */ "./src/MyAccount.js");
-/* harmony import */ var _UpdateMyAccount__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./UpdateMyAccount */ "./src/UpdateMyAccount.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-=======
 /* harmony import */ var _SingleGame__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleGame */ "./src/SingleGame.js");
 /* harmony import */ var _MyAccount__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MyAccount */ "./src/MyAccount.js");
 /* harmony import */ var _UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UpdateMyAccount */ "./src/UpdateMyAccount.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Nav */ "./src/Nav.js");
->>>>>>> 726a2e44a1549be9479a3c2f66f401d5b6638546
-/* harmony import */ var _LandingPage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./LandingPage */ "./src/LandingPage.js");
-/* harmony import */ var _Cart__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Cart */ "./src/Cart.js");
-/* harmony import */ var _Search_Search__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Search/Search */ "./src/Search/Search.js");
-/* harmony import */ var _Search_SearchResults__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Search/SearchResults */ "./src/Search/SearchResults.js");
-/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
-/* harmony import */ var _Platform__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Platform */ "./src/Platform.js");
-/* harmony import */ var _Genre__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Genre */ "./src/Genre.js");
+/* harmony import */ var _LandingPage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LandingPage */ "./src/LandingPage.js");
+/* harmony import */ var _Cart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Cart */ "./src/Cart.js");
+/* harmony import */ var _Search_Search__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Search/Search */ "./src/Search/Search.js");
+/* harmony import */ var _Search_SearchResults__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Search/SearchResults */ "./src/Search/SearchResults.js");
+/* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
+/* harmony import */ var _Platform__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Platform */ "./src/Platform.js");
+/* harmony import */ var _Genre__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Genre */ "./src/Genre.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
+/* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Nav */ "./src/Nav.js");
 
 
 
@@ -48406,51 +48396,33 @@ __webpack_require__.r(__webpack_exports__);
 
 class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
   render() {
-<<<<<<< HEAD
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Nav__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-=======
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Nav__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
->>>>>>> 726a2e44a1549be9479a3c2f66f401d5b6638546
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Nav__WEBPACK_IMPORTED_MODULE_14__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
       className: "logo"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h1", null, "LOGO"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
-      component: _Search_Search__WEBPACK_IMPORTED_MODULE_10__["default"]
+      component: _Search_Search__WEBPACK_IMPORTED_MODULE_8__["default"]
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/cart",
       exact: true,
-      component: _Cart__WEBPACK_IMPORTED_MODULE_9__["default"]
+      component: _Cart__WEBPACK_IMPORTED_MODULE_7__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/",
       exact: true,
-      component: _LandingPage__WEBPACK_IMPORTED_MODULE_8__["default"]
+      component: _LandingPage__WEBPACK_IMPORTED_MODULE_6__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/api/product/:id",
       exact: true,
-<<<<<<< HEAD
-      component: _SingleGame__WEBPACK_IMPORTED_MODULE_5__["default"]
-=======
       component: _SingleGame__WEBPACK_IMPORTED_MODULE_3__["default"]
->>>>>>> 726a2e44a1549be9479a3c2f66f401d5b6638546
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/api/genre",
       exact: true,
-      component: _Genre__WEBPACK_IMPORTED_MODULE_14__["default"]
+      component: _Genre__WEBPACK_IMPORTED_MODULE_12__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/api/platform",
       exact: true,
-      component: _Platform__WEBPACK_IMPORTED_MODULE_13__["default"]
+      component: _Platform__WEBPACK_IMPORTED_MODULE_11__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/myaccount",
       exact: true,
-<<<<<<< HEAD
-      component: _MyAccount__WEBPACK_IMPORTED_MODULE_6__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
-      path: "/updatemyaccount",
-      exact: true,
-      component: _UpdateMyAccount__WEBPACK_IMPORTED_MODULE_7__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
-      path: "/api/product/:id",
-      component: _SingleGame__WEBPACK_IMPORTED_MODULE_5__["default"]
-=======
       component: _MyAccount__WEBPACK_IMPORTED_MODULE_4__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/updatemyaccount",
@@ -48459,10 +48431,9 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/api/product/:id",
       component: _SingleGame__WEBPACK_IMPORTED_MODULE_3__["default"]
->>>>>>> 726a2e44a1549be9479a3c2f66f401d5b6638546
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/search/:term?",
-      component: _Search_SearchResults__WEBPACK_IMPORTED_MODULE_11__["default"]
+      component: _Search_SearchResults__WEBPACK_IMPORTED_MODULE_9__["default"]
     }));
   }
 
@@ -48471,11 +48442,7 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
 const App = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(null)(_App);
 const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(document.querySelector('#root'));
 root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
-<<<<<<< HEAD
-  store: _store__WEBPACK_IMPORTED_MODULE_4__["default"]
-=======
-  store: _store__WEBPACK_IMPORTED_MODULE_6__["default"]
->>>>>>> 726a2e44a1549be9479a3c2f66f401d5b6638546
+  store: _store__WEBPACK_IMPORTED_MODULE_13__["default"]
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(App, null))));
 })();
 

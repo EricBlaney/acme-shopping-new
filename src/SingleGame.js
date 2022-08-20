@@ -1,10 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-import { fetchCart, exchangeToken, logout } from './store';
-=======
 import { fetchCart, addCart, exchangeToken, logout } from './store';
->>>>>>> 726a2e44a1549be9479a3c2f66f401d5b6638546
 import './SingleGame.css';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';

@@ -12,6 +12,8 @@ import SearchResults from './Search/SearchResults'
 import './index.css';
 import Platform from './Platform'
 import Genre from './Genre'
+import store from './store'
+import Nav from './Nav'
 
 
 
