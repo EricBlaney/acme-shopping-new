@@ -1,10 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCart, exchangeToken, logout } from './store';
-<<<<<<< HEAD
-=======
 import './SingleGame.css';
->>>>>>> 7fb25251fd4fdf846d11c4698b2469f3d9b331bf
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 
@@ -24,44 +21,6 @@ class SingleGame extends React.Component{
     const signInTriggerText = 'Sign In';
     const { auth, logout, cart, game  } = this.props;
     return (
-<<<<<<< HEAD
-        <main>
-    <div className='logo'>
-      <h1>LOGO</h1>
-      </div>
-
-      { auth.id ? (
-        <div>
-          <div className="games">
-
-        { [game].map(product=>{
-          return (
-            <div key={product.id}>
-            <li >
-               <div className="picture"><img src={product.imageUrl}width="170" 
-     height="170" /></div><div className='name'>{product.name}</div> 
-         <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-
-            </div>
-          )
-        })}
-        </div>
-    
-        </div>) : null}
-        
-        {
-          auth.id ? null : <SignInContainer triggerText={signInTriggerText} />
-        }
-                {
-          auth.id ? null : (
-              <SignUpContainer triggerText={signUpTriggerText} />
-          ) 
-        }
-=======
            <main>
 
           { auth.id ? (
@@ -101,7 +60,6 @@ class SingleGame extends React.Component{
                 <SignUpContainer triggerText={signUpTriggerText} />
             ) 
           }
->>>>>>> 7fb25251fd4fdf846d11c4698b2469f3d9b331bf
       
       </main>
     );
@@ -115,6 +73,7 @@ const mapDispatch = (dispatch)=> {
     fetchCart: ()=> dispatch(fetchCart()),
   };
 };
+
 const mapStateToProps = ({auth, product, cart}, { match }) => {
     const id = match.params.id;
     let game = product.find(game => game.id === id)
