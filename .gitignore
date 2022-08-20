@@ -2,3 +2,4 @@
 node_modules
 dist
 dist/main.js.map
+dist/main.js
