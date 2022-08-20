@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import { fetchCart, exchangeToken, logout } from './store';
+=======
+import { fetchCart, addCart, exchangeToken, logout } from './store';
+>>>>>>> 726a2e44a1549be9479a3c2f66f401d5b6638546
 import './SingleGame.css';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
@@ -21,7 +25,7 @@ class SingleGame extends React.Component{
     const signInTriggerText = 'Sign In';
     const { auth, logout, cart, game  } = this.props;
     return (
-           <main>
+      <main>
 
           { auth.id ? (
             
@@ -60,19 +64,20 @@ class SingleGame extends React.Component{
                 <SignUpContainer triggerText={signUpTriggerText} />
             ) 
           }
-      
       </main>
     );
-
   }
 }
+
 const mapDispatch = (dispatch)=> {
   return {
     exchangeToken: ()=> dispatch(exchangeToken()),
     logout: ()=> dispatch(logout()),
     fetchCart: ()=> dispatch(fetchCart()),
+    addCart: (product, quantity) => dispatch(addCart(product, quantity))
   };
 };
+
 const mapStateToProps = ({auth, product, cart}, { match }) => {
     const id = match.params.id;
     let game = product.find(game => game.id === id)

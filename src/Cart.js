@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './Cart.css'; // npm install css-loader style-loader -D
 import { Link } from 'react-router-dom'
-import { deleteCart, updateQuality } from './store'
+import { deleteCart, updateQuantity, fetchCart } from './store'
 
-const Cart = ({ cart, deleteCart, updateQuality })=> {
+const Cart = ({ cart, deleteCart, updateQuantity, getCart })=> {
+  useEffect(() => {
+    getCart();
+  }, [])
+
   return (
     <div className="cart-container">
       <ul className="cart-list">
@@ -15,13 +19,13 @@ const Cart = ({ cart, deleteCart, updateQuality })=> {
               <img className="cart-image" src={lineItem.product.imageUrl} />
               <div>
                 <div className="cart-name">{ lineItem.product.name }</div>
-                <div className="cart-desc">{ lineItem.product.description }</div>
+                <div className="cart-desc">{ lineItem.product.summary.length > 200 ? lineItem.product.summary.slice(0, 200) + '...' : lineItem.product.summary }</div>
                 <div className="cart-quantity">
-                  <span className="quantity-minus" onClick={() => updateQuality(lineItem.product.id, -1)}>-</span>
+                  <span className="quantity-minus" onClick={() => updateQuantity(lineItem.product, lineItem.quantity - 1)}>-</span>
                   <span className="quantity-num">{ lineItem.quantity }</span>
-                  <span className="quantity-plus" onClick={() => updateQuality(lineItem.product.id, 1)}>+</span>
+                  <span className="quantity-plus" onClick={() => updateQuantity(lineItem.product, lineItem.quantity + 1)}>+</span>
                 </div>
-                <div className="cart-delete" onClick={() => deleteCart(lineItem.product.id)}>delete</div>
+                <div className="cart-delete" onClick={() => deleteCart(lineItem.product)}>delete</div>
               </div>
             </li>
               )
@@ -37,9 +41,11 @@ const Cart = ({ cart, deleteCart, updateQuality })=> {
 
 const mapDispatch = (dispatch)=> {
   return {
-    deleteCart: (id)=> dispatch(deleteCart(id)),
-    updateQuality: (id, num)=> dispatch(updateQuality(id, num)),
+    deleteCart: (product)=> dispatch(deleteCart(product)),
+    updateQuantity: (product, num)=> dispatch(updateQuantity(product, num)),
+    getCart: ()=> dispatch(fetchCart()),
   };
 };
 
 export default connect(state => state, mapDispatch)(Cart);
+

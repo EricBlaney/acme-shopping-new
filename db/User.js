@@ -58,6 +58,7 @@ User.addHook('beforeCreate', async(user) =>{
   throw er
 }});
 
+
 User.prototype.createOrderFromCart = async function(){
   const cart = await this.getCart();
   cart.isCart = false;

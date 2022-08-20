@@ -1,8 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
-import Nav from './Nav';
-import store from './store';
 import SingleGame from './SingleGame';
 import MyAccount from './MyAccount';
 import UpdateMyAccount from './UpdateMyAccount';
