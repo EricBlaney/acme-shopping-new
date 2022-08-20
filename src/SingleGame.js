@@ -73,6 +73,7 @@ const mapDispatch = (dispatch)=> {
     fetchCart: ()=> dispatch(fetchCart()),
   };
 };
+
 const mapStateToProps = ({auth, product, cart}, { match }) => {
     const id = match.params.id;
     let game = product.find(game => game.id === id)
