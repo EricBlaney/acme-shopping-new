@@ -48429,9 +48429,6 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
       exact: true,
       component: _UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
-      path: "/api/product/:id",
-      component: _SingleGame__WEBPACK_IMPORTED_MODULE_3__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
       path: "/search/:term?",
       component: _Search_SearchResults__WEBPACK_IMPORTED_MODULE_11__["default"]
     }));

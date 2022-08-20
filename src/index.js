@@ -36,7 +36,6 @@ class _App extends Component{
         <Route path='/api/platform' exact component={ Platform }/>
         <Route path='/myaccount' exact component={ MyAccount }/>
         <Route path='/updatemyaccount' exact component={ UpdateMyAccount }/>
-        <Route path='/api/product/:id' component={ SingleGame }/>
         <Route path='/search/:term?' component={ SearchResults }/>
         </div>
         )
