@@ -21,50 +21,45 @@ class SingleGame extends React.Component{
     const signInTriggerText = 'Sign In';
     const { auth, logout, cart, game  } = this.props;
     return (
-        <main>
-    <div className='logo'>
-      <h1>LOGO</h1>
-      </div>
+           <main>
 
-      { auth.id ? (
-        
-      <div className="singlegame">
+          { auth.id ? (
+            
+          <div className="singlegame">
 
-        { [game].map(product=>{
-          console.log(product.imageUrl)
-          if(product.imageUrl.length > 10) {
-          product.imageUrl = product.imageUrl.substring(44, 100)
-          }
-          console.log(product.imageUrl)
-          return (
-                  <div key={product.id}>
-                    <li className='product'>
-                      <div className="product-img"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`} width="170" height="170" /></div> 
-                          <div className='productlisting'>
-                              <div className='content'>
-                                <div className='singleName'>{product.name}</div>
-                                <div className='singlePrice'>{`$${product.price}`}</div> 
-                                <button className='btn'>Add To Cart</button>     
-                                <br></br>
-                                <div className='singleSummary'>{product.summary.substring(0,300)}</div>
+            { [game].map(product=>{
+              if(product.imageUrl.length > 10) {
+              product.imageUrl = product.imageUrl.substring(44, 100)
+              }
+              return (
+                      <div key={product.id}>
+                        <li className='product'>
+                          <div className="product-img"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`} width="170" height="170" /></div> 
+                              <div className='productlisting'>
+                                  <div className='content'>
+                                    <div className='singleName'>{product.name}</div>
+                                    <div className='singlePrice'>{`$${product.price}`}</div> 
+                                    <button className='btn'>Add To Cart</button>     
+                                    <br></br>
+                                    <div className='singleSummary'>{product.summary.substring(0,600)}</div>
+                                  </div>
                               </div>
-                          </div>
-                    </li>
-                  </div>
-                  )
-        })}
-        </div>
-    
-       ) : null}
+                        </li>
+                      </div>
+                      )
+            })}
+            </div>
         
-        {
-          auth.id ? null : <SignInContainer triggerText={signInTriggerText} />
-        }
-                {
-          auth.id ? null : (
-              <SignUpContainer triggerText={signUpTriggerText} />
-          ) 
-        }
+          ) : null}
+        
+          {
+            auth.id ? null : <SignInContainer triggerText={signInTriggerText} />
+          }
+                  {
+            auth.id ? null : (
+                <SignUpContainer triggerText={signUpTriggerText} />
+            ) 
+          }
       
       </main>
     );
