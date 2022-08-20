@@ -1,5 +1,4 @@
 import axios from 'axios';
-// const { faker } = require('@faker-js/faker');
 
 const cart = (state = { lineItems: [ ] }, action)=> {
   if(action.type === 'SET_CART'){
@@ -10,9 +9,9 @@ const cart = (state = { lineItems: [ ] }, action)=> {
       ...state,
       lineItems
     };
-  } else if (action.type === 'UPDATE_QUALITY') {
+  } else if (action.type === 'UPDATE_QUANTITY') {
     const lineItem = state.lineItems.find(item => item.product.id === action.id);
-    lineItem.quantity += action.num;
+    lineItem.quantity = action.quantity;
     state = {
       ...state
     };
@@ -20,26 +19,22 @@ const cart = (state = { lineItems: [ ] }, action)=> {
   return state;
 };
 
-
-//connected part
 export const addCart = (product, quantity) => {
-  return async(dispatch) => {
+  return async (dispatch) => {
     const response = await axios.put('/api/orders/cart', {
       product,
       quantity
-    }, 
-    {
+    }, {
       headers: {
         authorization: window.localStorage.getItem('token')
       }
     });
-    if (response.status === 200){
-      alert('Added to cart successfully!')
+    if (response.status === 200) {
+      alert('Added to cart successfully')
     }
   }
 }
 
-//updated the fetchCart function from faker to api
 export const fetchCart = ()=> {
   return async(dispatch)=> {
     const response = await axios.get('/api/orders/cart', {
@@ -50,41 +45,38 @@ export const fetchCart = ()=> {
     dispatch({ type: 'SET_CART', cart: response.data});
   };
 };
- 
 
-//updated deleteCart and updateQuality function to connect the product data
 export const deleteCart = (product) => {
   return async(dispatch)=> {
-    const response = await axios.destory('/api/orders/cart', {
+    const response = await axios.put('/api/orders/cart', {
       product,
       quantity: 0
-  }, 
-    {
-    headers: {
-      authorization: window.localStorage.getItem('token')
-    }
-  });
-  if (response.status === 200){
-    dispatch({ type: 'DELETE _CART', cart: response.data})
-  }
-
-
-  export const updateQuality = (product, quantity) => {
-    return async(dispatch)=> {
-      const response = await axios.put('/api/orders/cart', {
-        product,
-        quantity
-      }, {
-        headers: {
-          authorization: window.localStorage.getItem('token')
-        }
-      });
-      if (response.status === 200) {
-        dispatch({ type: 'UPDATE_QUALITY', id: product.id, quantity});
+    }, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
       }
-    };
-  }
+    });
+    if (response.status === 200) {
+      dispatch({type: 'DELETE_CART', id: product.id});
+    }
+  };
+};
 
+export const updateQuantity = (product, quantity) => {
+  return async(dispatch)=> {
+    const response = await axios.put('/api/orders/cart', {
+      product,
+      quantity
+    }, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
+    if (response.status === 200) {
+      dispatch({ type: 'UPDATE_QUANTITY', id: product.id, quantity});
+    }
+  };
+}
 
 
 export default cart;

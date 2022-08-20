@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCart, exchangeToken, logout } from './store';
+import { fetchCart, addCart, exchangeToken, logout } from './store';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 
@@ -33,10 +33,10 @@ class SingleGame extends React.Component{
           return (
             <div key={product.id}>
             <li >
-               <div className="picture"><img src={product.imageUrl}width="170" 
-     height="170" /></div><div className='name'>{product.name}</div> 
-         <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
+               <div className="picture"><img src={product.imageUrl}width="170"
+     height="170" /></div><div className='name'>{product.name}</div>
+         <div className='price'>{`$${product.price}`}</div>
+            <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
             <br></br>
      <div>{product.summary}</div>
             </li>
@@ -45,18 +45,18 @@ class SingleGame extends React.Component{
           )
         })}
         </div>
-    
+
         </div>) : null}
-        
+
         {
           auth.id ? null : <SignInContainer triggerText={signInTriggerText} />
         }
                 {
           auth.id ? null : (
               <SignUpContainer triggerText={signUpTriggerText} />
-          ) 
+          )
         }
-      
+
       </main>
     );
 
@@ -67,6 +67,7 @@ const mapDispatch = (dispatch)=> {
     exchangeToken: ()=> dispatch(exchangeToken()),
     logout: ()=> dispatch(logout()),
     fetchCart: ()=> dispatch(fetchCart()),
+    addCart: (product, quantity) => dispatch(addCart(product, quantity))
   };
 };
 const mapStateToProps = ({auth, product, cart}, { match }) => {
