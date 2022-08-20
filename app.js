@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const { User, Product } = require('./db');
 const path = require('path');
+const { useStore } = require('react-redux');
 app.use(express.json());
 app.use('/dist', express.static('dist'));
 
@@ -61,7 +62,37 @@ app.get('/api/users', async(req,res,next) => {
     next(ex);
   }
 })
+app.get('/api/users/:id', async(req,res,next) => {
+  try{
+    res.status(200).send(await useStore.findByPk(req.params.id))
+  }
+  catch(ex){
+    next(ex);
+  }
+})
 
+app.delete('/api/users/:id', async(req,res,next) => {
+  try{
+    const user = await User.findByPk(req.params.id);
+    await user.destroy();
+    res.sendStatus(204);
+  }
+  catch{ex}{
+    next(ex);
+  }
+})
+
+app.put('/api/users', async(req,res,next) => {
+  try{
+    const user = await User.findByPk(req.body.id);
+    console.log(user);
+    await user.update(req.body);
+    res.status(200).send(user);
+  }
+  catch(ex){
+    next(ex);
+  }
+})
 
 
 

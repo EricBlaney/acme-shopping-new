@@ -5,6 +5,8 @@ import { Provider, connect } from 'react-redux';
 import Nav from './Nav';
 import store from './store';
 import SingleGame from './SingleGame';
+import MyAccount from './MyAccount';
+import UpdateMyAccount from './UpdateMyAccount';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import Cart from './Cart';
 import './index.css';
@@ -17,6 +19,8 @@ class _App extends Component{
         <Route path='/cart' exact component={ Cart }/>
         <Route path='/' exact component={ LandingPage }/>
         <Route path='/api/product/:id' exact component={ SingleGame }/>
+        <Route path='/myaccount' exact component={ MyAccount }/>
+        <Route path='/updatemyaccount' exact component={ UpdateMyAccount }/>
         {/* <Route path='/signin' component={ SignInContainer } /> */}
         {/* <Route path='/signup' component= { SignUpContainer } /> */}
         </div>
