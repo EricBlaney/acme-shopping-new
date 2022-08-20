@@ -17,9 +17,6 @@ class Platform extends Component {
     return (
     <div>
         <main>
-        <div className='logo'>
-      <h1>LOGO</h1>
-      </div>
       <h2>Top NES Games</h2>
             <ul>
             { topNESGames.map(product=>{
