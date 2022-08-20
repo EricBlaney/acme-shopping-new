@@ -1,6 +1,8 @@
 import { createRoot } from 'react-dom/client';
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
+import MyAccount from './MyAccount';
+import UpdateMyAccount from './UpdateMyAccount';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import store from './store';
 import Nav from './Nav';
@@ -23,9 +25,10 @@ class _App extends Component{
             </div>
         <Route path='/cart' exact component={ Cart }/>
         <Route path='/' exact component={ LandingPage }/>
+        <Route path='/api/product/:id' exact component={ SingleGame }/>
+        <Route path='/myaccount' exact component={ MyAccount }/>
+        <Route path='/updatemyaccount' exact component={ UpdateMyAccount }/>
         <Route path='/api/product/:id' component={ SingleGame }/>
-        {/* <Route path='/signin' component={ SignInContainer } /> */}
-        {/* <Route path='/signup' component= { SignUpContainer } /> */}
         <Route path='/search/:term?' component={ SearchResults }/>
         </div>
         )

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createUser, login } from '../store';
 import { connect } from 'react-redux';
 import SignIn from '../SignIn/index.js';
+
 class SignUp extends Component{
   constructor(){
     super();
@@ -54,18 +55,19 @@ class SignUp extends Component{
         {!username ? "Missing Username" : ""} <br></br>
         {!password ? "Missing Password" : ""} <br></br>
         {this.submitButton() || !email ? "Invalid Email" : ""}
-
+        
       </form>
       <button onClick={renderSignIn}> Already a user?  Sign in.</button>
       {showSignIn ? <SignIn onSubmit={onSubmit} /> : null}
-
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-    return state
+    return {
+      ...state
+    }
 }
 
 const mapDispatch = (dispatch)=> {

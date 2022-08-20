@@ -3,6 +3,12 @@ const user = (state = [], action)=> {
   if(action.type === 'CREATE_USER'){
     state = action.user;
   }
+  if(action.type === 'UPDATE_USER'){
+    state = action.user;
+  }
+  if(action.type === 'DELETE_USER') {
+    state = [];
+  }
   return state;
 };
 
@@ -22,6 +28,31 @@ export const createUser = (credentials) => {
     }
     }
   };
+
+export const updateUser = (user) => {
+    return async(dispatch) => {
+      try{
+        await axios.put(`/api/users`, user);
+        dispatch({type: "UPDATE_USER", user})
+      }
+      catch(ex){
+        console.log(ex)
+      }
+    }
+}
+
+export const deleteUser = (user) => {
+  return async(dispatch) => {
+      await axios.delete(`/api/users/${user.id}`);
+      dispatch({ type: 'DELETE_user', user})
+  }
+}
+
+export const loadUser = (user) => {
+  return async(dispatch) => {
+    await axios.get(``)
+  }
+}
 
 
 export default user;
