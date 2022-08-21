@@ -35,7 +35,13 @@ class SingleGame extends React.Component{
                                   <div className='content'>
                                     <div className='singleName'>{product.name}</div>
                                     <div className='singlePrice'>{`$${product.price}`}</div> 
-                                    <button className='btn' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>     
+                                    <div></div>
+                                    <div className='heart-cart'>
+                                      <button className='btn' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                                      <div className="heart-wrapper">
+                                        <div className="heart" onClick={()=>{}}></div>
+                                      </div>
+                                    </div>     
                                     <br></br>
                                     <div className='singleSummary'>{product.summary.substring(0,600)}</div>
                                   </div>
