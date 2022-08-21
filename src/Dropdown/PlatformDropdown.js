@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { platformDropdown } from "./NavItems";
 import { Link } from "react-router-dom";
+import './dropdown.css'
 
-function platformDropDown() {
+function Dropdown() {
     const [dropdown, setDropdown] = useState(false);
   
     return (
@@ -29,4 +30,4 @@ function platformDropDown() {
     );
   }
   
-  export default platformDropDown;
+  export default Dropdown;

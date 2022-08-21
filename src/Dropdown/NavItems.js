@@ -1,7 +1,42 @@
-export const genreDropdown = [
+export const platformDropdown = [
     {
       id: 1,
-      title: "Fight Games",
+      title: "NES Games",
+      path: "./topNESGames",
+      cName: "submenu-item",
+    },
+    {
+      id: 2,
+      title: "SNES Games",
+      path: "./topSNESGames",
+      cName: "submenu-item",
+    },
+    {
+      id: 3,
+      title: "PlayStation Games",
+      path: "./topPlayStationGames",
+      cName: "submenu-item",
+    },
+    {
+      id: 4,
+      title: "Xbox Games",
+      path: "./topXboxGames",
+      cName: "submenu-item",
+    },
+    {
+        id: 5,
+        title: "Sega Genesis Games",
+        path: "./topSegaGenesisGames",
+        cName: "submenu-item",
+      },
+      
+  ];
+
+
+  export const genreDropdown = [
+    {
+      id: 1,
+      title: "Fighting Games",
       path: "./topFightingGames",
       cName: "submenu-item",
     },
@@ -29,37 +64,5 @@ export const genreDropdown = [
         path: "./topPlatformGames",
         cName: "submenu-item",
       },
-  ];
-
-  export const platformDropdown = [
-    {
-      id: 1,
-      title: "NES",
-      path: "./topNESGames",
-      cName: "submenu-item",
-    },
-    {
-      id: 2,
-      title: "SNES",
-      path: "./topSNESGames",
-      cName: "submenu-item",
-    },
-    {
-      id: 3,
-      title: "Play station",
-      path: "./topPlayStationGames",
-      cName: "submenu-item",
-    },
-    {
-      id: 4,
-      title: "XBox",
-      path: "./topXboxGames",
-      cName: "submenu-item",
-    },
-    {
-        id: 5,
-        title: "Sega Genesis",
-        path: "./topSegaGenesisGames",
-        cName: "submenu-item",
-      },
+      
   ];

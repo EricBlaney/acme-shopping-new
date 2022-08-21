@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { genreDropdown } from "./NavItems";
 import { Link } from "react-router-dom";
+import './dropdown.css'
 
-function genreDropDown() {
+function Dropdown() {
     const [dropdown, setDropdown] = useState(false);
   
     return (
@@ -29,4 +30,4 @@ function genreDropDown() {
     );
   }
   
-  export default genreDropDown;
+  export default Dropdown;

@@ -14,6 +14,9 @@ import Platform from './Platform'
 import Genre from './Genre'
 import store from './store'
 import Nav from './Nav'
+import GamesbyYear from './GamesbyYear';
+import Console from './Console'
+
 
 
 
@@ -34,9 +37,10 @@ class _App extends Component{
         <Route path='/api/product/:id' exact component={ SingleGame }/>
         <Route path='/api/genre' exact component={ Genre }/>
         <Route path='/api/platform' exact component={ Platform }/>
+        <Route path='/api/gamesbyyear' exact component={ GamesbyYear }/>
+        <Route path='/api/console' exact component={ Console }/>
         <Route path='/myaccount' exact component={ MyAccount }/>
         <Route path='/updatemyaccount' exact component={ UpdateMyAccount }/>
-        <Route path='/api/product/:id' component={ SingleGame }/>
         <Route path='/search/:term?' component={ SearchResults }/>
         </div>
         )

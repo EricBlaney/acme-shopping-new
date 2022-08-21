@@ -1,0 +1,41 @@
+
+
+.services-submenu {
+    width: 10rem;
+    position: absolute;
+    top: 67px;
+    list-style: none;
+    text-align: start;
+  }
+  
+
+.platform-submenu li {
+    background: rgb(0, 212, 212);
+    cursor: pointer;
+  }
+  
+  .platform-submenu li a:hover {
+    background: rgb(0, 175, 175);
+  }
+  
+  .platform-submenu.clicked {
+    display: none;
+  }
+  
+  .genre-submenu li {
+    background: rgb(0, 212, 212);
+    cursor: pointer;
+  }
+  
+  .genre-submenu li a:hover {
+    background: rgb(0, 175, 175);
+  }
+  
+  .genre-submenu.clicked {
+    display: none;
+  }
+  .submenu-item {
+    display: block;
+    text-decoration: none;
+    color: white;
+  }
