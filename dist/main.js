@@ -4342,21 +4342,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "deleteUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.deleteUser),
 /* harmony export */   "exchangeToken": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_0__.exchangeToken),
 /* harmony export */   "fetchCart": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.fetchCart),
-/* harmony export */   "fetchProducts": () => (/* reexport safe */ _product__WEBPACK_IMPORTED_MODULE_3__.fetchProducts),
+/* harmony export */   "fetchProducts": () => (/* reexport safe */ _product__WEBPACK_IMPORTED_MODULE_4__.fetchProducts),
 /* harmony export */   "loadUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.loadUser),
 /* harmony export */   "login": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_0__.login),
 /* harmony export */   "logout": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_0__.logout),
 /* harmony export */   "updateQuantity": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.updateQuantity),
 /* harmony export */   "updateUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.updateUser)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth */ "./src/store/auth.js");
 /* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cart */ "./src/store/cart.js");
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user */ "./src/store/user.js");
-/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./product */ "./src/store/product.js");
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wishlist__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./wishlist */ "./src/store/wishlist.js");
+/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./product */ "./src/store/product.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
+/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -4364,13 +4365,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_5__.combineReducers)({
+
+const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_6__.combineReducers)({
   auth: _auth__WEBPACK_IMPORTED_MODULE_0__["default"],
   cart: _cart__WEBPACK_IMPORTED_MODULE_1__["default"],
-  product: _product__WEBPACK_IMPORTED_MODULE_3__["default"],
-  user: _user__WEBPACK_IMPORTED_MODULE_2__["default"]
+  product: _product__WEBPACK_IMPORTED_MODULE_4__["default"],
+  user: _user__WEBPACK_IMPORTED_MODULE_2__["default"],
+  wishlist: _wishlist__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
-const store = (0,redux__WEBPACK_IMPORTED_MODULE_5__.createStore)(reducer, (0,redux__WEBPACK_IMPORTED_MODULE_5__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_6__["default"], (redux_logger__WEBPACK_IMPORTED_MODULE_4___default())));
+const store = (0,redux__WEBPACK_IMPORTED_MODULE_6__.createStore)(reducer, (0,redux__WEBPACK_IMPORTED_MODULE_6__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_7__["default"], (redux_logger__WEBPACK_IMPORTED_MODULE_5___default())));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 
@@ -4498,6 +4501,43 @@ const loadUser = user => {
   };
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (user);
+
+/***/ }),
+
+/***/ "./src/store/wishlist.js":
+/*!*******************************!*\
+  !*** ./src/store/wishlist.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "fetchWishList": () => (/* binding */ fetchWishList)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const wishlist = (state = [], action) => {
+  if (action.type === 'SET_WISHLIST') {
+    state = action.wishlist;
+  }
+
+  return state;
+};
+
+const fetchWishList = () => {
+  return async dispatch => {
+    const response = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/wishlist')).data;
+    dispatch({
+      type: 'SET_WISHLIST',
+      wishlist: response
+    });
+  };
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (wishlist);
 
 /***/ }),
 
