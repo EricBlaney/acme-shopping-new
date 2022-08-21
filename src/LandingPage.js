@@ -24,8 +24,8 @@ class LandingPage extends React.Component{
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
           return (
-            <li>
-            <Link key={product.id} to={`/api/product/${product.id}`}>
+            <li key={product.id}>
+            <Link to={`/api/product/${product.id}`}>
             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
             height="170" /></div><div className='name'>{product.name}</div>
             </Link>
@@ -45,8 +45,8 @@ class LandingPage extends React.Component{
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
           return (
-            <li>
-            <Link key={product.id} to={`/api/product/${product.id}`}>
+            <li key={product.id}>
+            <Link to={`/api/product/${product.id}`}>
             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
             height="170" /></div><div className='name'>{product.name}</div> 
             </Link>
@@ -66,8 +66,8 @@ class LandingPage extends React.Component{
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
           return (
-            <li>
-            <Link key={product.id} to={`/api/product/${product.id}`}>
+            <li key={product.id}>
+            <Link to={`/api/product/${product.id}`}>
             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
             height="170" /></div><div className='name'>{product.name}</div> 
             </Link>
