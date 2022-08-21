@@ -1,8 +1,9 @@
 import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
+import { addCart } from '../store'
 import React from 'react';
 
-const SearchResults = ({product}) => {
+const SearchResults = ({product, addCart}) => {
     return (
         <div>
             <h2>Search Results</h2>
@@ -18,7 +19,7 @@ const SearchResults = ({product}) => {
                          height="170" /></div><div className='name'>{product.name}</div>
                         </Link>
                         <div className='price'>{`$${product.price}`}</div> 
-                        <button className='addtocart'>Add To Cart</button>
+                        <button className='addtocart' onClick={() => addCart(product, 1)}>Add To Cart</button>
                         </li>
                     )
                 })
@@ -35,4 +36,9 @@ const mapState = ({product}, {match}) => {
     }
 }
 
-export default connect(mapState)(SearchResults)
+export default connect(mapState, (dispatch)=>{
+    return {
+        addCart: (product, quantity) => dispatch(addCart(product, quantity))
+    }
+
+})(SearchResults)
