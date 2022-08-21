@@ -144,6 +144,7 @@ User.prototype.addToWishList = async function({ product }){
   let wishlistitem = await conn.models.wishListItem.findOne({
     where: {
       productId: product.id,
+      wishListId: wishlist.id
     }
   });
   if(!wishlistitem){
@@ -156,10 +157,10 @@ User.authenticate = async function(credentials){
   const user = await this.findOne({
     where: {
       username: credentials.username
-    } 
+    }
   });
   if(user && await bcrypt.compare(credentials.password, user.password)){
-    return jwt.sign({ id: user.id}, process.env.JWT);
+    return jwt.sign({ id: user.id }, process.env.JWT);
   }
   else {
     const error = new Error('Bad Credentials');

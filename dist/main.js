@@ -2821,12 +2821,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  componentDidUpdate(prevProps) {
-    if (!prevProps.auth.id && this.props.auth.id) {
-      this.props.fetchCart();
-    }
-  }
-
   render() {
     const {
       auth,
@@ -2918,7 +2912,6 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
 
 const mapDispatch = dispatch => {
   return {
-    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchCart)()),
     addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity))
   };
 };
@@ -2969,17 +2962,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  constructor() {
-    super();
-    this.state = {};
+  componentDidMount() {
+    this.props.getWishList();
   }
 
-  componentDidMount() {
-    try {
+  componentDidUpdate(prevProps) {
+    if (!prevProps.auth.id && this.props.auth.id) {
       this.props.getWishList();
-      console.log(this.props);
-    } catch (ex) {
-      console.log(ex);
     }
   }
 
@@ -3024,7 +3013,7 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
 }
 
 const mapState = state => {
-  console.log(state);
+  console.log(state.wishlist);
   const user = state.auth || {};
   return {
     auth: state.auth,
@@ -3081,6 +3070,12 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
     this.props.fetchProducts();
     this.props.exchangeToken();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.auth.id && this.props.auth.id) {
+      this.props.fetchCart();
+    }
   }
 
   render() {
@@ -3149,6 +3144,7 @@ const mapState = ({
 
 const mapDispatch = dispatch => {
   return {
+    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.fetchCart)()),
     exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
     fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.fetchProducts)()),
     logout: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.logout)())

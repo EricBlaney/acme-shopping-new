@@ -14,7 +14,6 @@ function randomCondition(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-
 const setUp = async()=> {
   try {
     await conn.sync({ force: true });
@@ -190,12 +189,19 @@ const setUp = async()=> {
 //     const topPlatformGames = await client
 //     .fields('name, cover.url, total_rating')
 //     .limit(10)
-//     .where('(release_dates.platform = (7,18,19,11,29) & genres = 8) & total_rating > 60')
+    // .where('(release_dates.platform = (7,18,19,11,29) & genres = 8) & total_rating > 60')
 //     .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
 //     console.log(topPlatformGames.data)
 //     topPlatformGames.data.map(game=>{
 //         Product.create({theme: 'topPlatformGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
 //     });
+
+// Console Queries
+
+await Promise.all ([
+  Product.create({theme: 'consoles', name: 'Nintendo Entertainment System', summary: 'The history of NES the Nintendo Entertainment System -NES- spans the 1982 development of the Family Computer, to the 1985 launch of the NES, to Nintendos rise to global dominance based upon this platform throughout the late 1980s. The Family Computer or Famicom was developed in 1982 and launched in 1983 in Japan. Following the North American video game crash of 1983, the Famicom was adapted into the NES which was brazenly launched in North America in 1985. Transitioning the company from its arcade game history into this combined global 8-bit home video game console platform, the Famicom and NES continued to aggressively compete with the next-generation 16-bit consoles including the 1988 Sega Genesis. The platform was succeeded by the Super Famicom in 1990 and the Super Nintendo Entertainment System in 1991, but its support and production continued until 1995. Interest in the NES has been renewed by collectors and emulators, including Nintendos own Virtual Console platform.', imageUrl: '', condition: `${randomCondition(arr)}`}),
+  Product.create({theme: 'consoles', name: 'Super Nintendo Entertainment System', summary: 'The Super Nintendo Entertainment System, also known as the SNES, was a 16-bit console developed by Nintendo in the 1990s. Also known as the Super Famicom in Japan, the SNES was Nintendos second home console and followed the success of the NES. The console introduced advanced graphics and sound capabilities as well as a variety of enhancement chips integrated in game cartridges that helped keep it competitive in the marketspace as more consoles began to populate it.', imageUrl: '', condition: `${randomCondition(arr)}`})
+])
 
 // Queries to get all platform ids + genre ids
 
