@@ -18,7 +18,7 @@ import Genre from './Genre'
 class _App extends Component{
     render(){
         return(
-        <div>
+        <div id="main-body">
         <Nav/>
             <div className='logo'>
                 <h1>LOGO</h1>
