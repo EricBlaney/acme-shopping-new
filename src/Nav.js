@@ -1,21 +1,17 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
-import auth from './store/auth';
+import {exchangeToken, logout} from './store/auth';
 import { fetchProducts } from './store';
-import { logout } from './store';
 import GenreDropdown from './Dropdown/GenreDropdown';
 import PlatformDropDown from './Dropdown/PlatformDropdown';
-
-
-
-
 
 class Nav extends Component {
     componentDidMount(){
         this.props.fetchProducts();
+        this.props.exchangeToken();
     }
 
     render() {
@@ -71,6 +67,7 @@ const mapState = ({ auth }) => {
 
 const mapDispatch = (dispatch) => {
     return {
+        exchangeToken: ()=> dispatch(exchangeToken()),
         fetchProducts: ()=> dispatch(fetchProducts()),
         logout: () => dispatch(logout())
     }

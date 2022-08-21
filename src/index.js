@@ -15,16 +15,11 @@ import './index.css';
 import Platform from './Platform'
 import Genre from './Genre'
 
-
-
 class _App extends Component{
     render(){
         return(
         <div>
         <Nav/>
-        
-       
-     
             <div className='logo'>
                 <h1>LOGO</h1>
                 <Route component={ Search }/>

@@ -2824,21 +2824,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SignUp/SignUpContainer */ "./src/SignUp/SignUpContainer.js");
-/* harmony import */ var _SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SignIn/SignInContainer */ "./src/SignIn/SignInContainer.js");
-
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
 
 
 
 class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  componentDidMount() {
-    this.props.exchangeToken();
-  }
-
   componentDidUpdate(prevProps) {
     if (!prevProps.auth.id && this.props.auth.id) {
       this.props.fetchCart();
@@ -2846,8 +2838,6 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
   }
 
   render() {
-    const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In';
     const {
       auth,
       thisMonthGames1989,
@@ -2861,7 +2851,7 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         product.imageUrl = product.imageUrl.substring(44, 100);
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         key: product.id,
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -2885,7 +2875,7 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         product.imageUrl = product.imageUrl.substring(44, 100);
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         key: product.id,
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -2909,7 +2899,7 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         product.imageUrl = product.imageUrl.substring(44, 100);
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         key: product.id,
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -2926,19 +2916,13 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         className: "addtocart",
         onClick: () => this.props.addCart(product, 1)
       }, "Add To Cart"));
-    }).slice(0, 5)))) : null, auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      triggerText: signInTriggerText
-    }), auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      triggerText: signUpTriggerText
-    }));
+    }).slice(0, 5)))) : null);
   }
 
 }
 
 const mapDispatch = dispatch => {
   return {
-    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
-    logout: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.logout)()),
     fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchCart)()),
     addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity))
   };
@@ -2949,12 +2933,6 @@ const mapStateToProps = ({
   product,
   cart
 }) => {
-  {
-    /* const zeldaGames = product.filter(product => product.theme === 'zeldaGames'); */
-  }
-  {
-    /* const marioGames = product.filter(product => product.theme === 'marioGames'); */
-  }
   const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
   const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
   const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
@@ -3073,10 +3051,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
     this.props.fetchProducts();
+    this.props.exchangeToken();
   }
 
   render() {
@@ -3145,8 +3123,9 @@ const mapState = ({
 
 const mapDispatch = dispatch => {
   return {
+    exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
     fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.fetchProducts)()),
-    logout: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.logout)())
+    logout: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.logout)())
   };
 };
 
@@ -3837,7 +3816,6 @@ class SignUp extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.setState({
       showSignIn: true
     });
-    console.log(this.state.showSignIn);
   }
 
   submitButton() {
@@ -3860,7 +3838,9 @@ class SignUp extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       email,
       showSignIn
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, showSignIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_index_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      onSubmit: onSubmit
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
       onSubmit: onSubmit
     }, "Sign-Up ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
       name: "username",
@@ -3877,11 +3857,9 @@ class SignUp extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       onChange: onChange
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       disabled: this.submitButton() || !username || !password || !email
-    }, "Create User"), !username ? "Missing Username" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), !password ? "Missing Password" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), this.submitButton() || !email ? "Invalid Email" : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    }, "Create User"), !username ? "Missing Username" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), !password ? "Missing Password" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), this.submitButton() || !email ? "Invalid Email" : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       onClick: renderSignIn
-    }, " Already a user?  Sign in."), showSignIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_index_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      onSubmit: onSubmit
-    }) : null);
+    }, " Already a user?  Sign in."))));
   }
 
 }
@@ -3932,10 +3910,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  componentDidMount() {
-    this.props.exchangeToken();
-  }
-
   componentDidUpdate(prevProps) {
     if (!prevProps.auth.id && this.props.auth.id) {
       this.props.fetchCart();
@@ -3977,7 +3951,8 @@ class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
       }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "singlePrice"
       }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "btn"
+        className: "btn",
+        onClick: () => this.props.addCart(product, 1)
       }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "singleSummary"
       }, product.summary.substring(0, 600))))));
@@ -3992,8 +3967,6 @@ class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
 
 const mapDispatch = dispatch => {
   return {
-    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
-    logout: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.logout)()),
     fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchCart)()),
     addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity))
   };
@@ -4173,9 +4146,9 @@ const auth = (state = {}, action) => {
 
 const logout = () => {
   return dispatch => {
-    if (typeof undefined.props.googleReducer.accessToken !== 'undefined') {} else {
-      window.localStorage.removeItem('token');
-    }
+    // if (typeof this.props.googleReducer.accessToken !== 'undefined') {
+    // } else {
+    window.localStorage.removeItem('token'); // }
 
     dispatch({
       type: 'SET_AUTH',
