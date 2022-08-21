@@ -1,33 +1,55 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateUser, deleteUser, fetchWishList } from './store'
+import { fetchWishList, exchangeToken } from './store'
 import { Link, NavLink } from 'react-router-dom';
 
 class MyAccount extends React.Component{
     constructor(){
         super();
         this.state = {
+            username: '',
+            email: '',
+            street: '',
+            city: '',
+            zipcode: '',
+            avatar: ''
         };
       }
     componentDidMount() {
         try{
             this.props.getWishList();
-            console.log(this.props)
+            console.log(this.props);
+            this.props.exchangeToken();
         }
         catch(ex){
             console.log(ex);
         }
     }
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.auth !== prevState){
+        return { id: nextProps.auth.id,
+        username: nextProps.auth.username, 
+        email: nextProps.auth.email,
+        street: nextProps.auth.street || '',
+        city: nextProps.auth.city || '',
+        zipcode: nextProps.auth.zipcode || '',
+        avatar: nextProps.auth.avatar  || ''
+        };
+        }
+        else return null;
+      }
     render() {
         const {auth, wishlist} = this.props;
-    
+        const {avatar, username, email, street, city, zipcode} = this.state;
         return(
-            <main>
+            <main className='user-details'>
             <h1>
-            {auth.username}'s Profile
+            {username}'s Profile
             </h1>
-            <h2>{auth.username}'s details:</h2>
-            <div>Email: {auth.email}</div>
+            { avatar ? <img src={avatar} className="avatar"/> : null}
+            <h2>{username}'s details:</h2>
+            <div>Email: {email}</div>
             <div>Address: {auth.street || "None Listed"}</div>
             <div>City: {auth.city || "None listed."}</div>
             <div>Zipcode: {auth.zipcode || 'None listed.'}</div>
@@ -67,7 +89,7 @@ class MyAccount extends React.Component{
 }
 
 const mapState = (state) => {
-    console.log(state)
+
     const user = state.auth || {};
     return {
         auth: state.auth,
@@ -78,10 +100,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
     return{
+        exchangeToken: () => dispatch(exchangeToken()),
         getWishList: ()=> dispatch(fetchWishList()),
-        addCart: (product, quantity) => dispatch(addCart(product, quantity)),
-        updateUser: (user) =>  dispatch(updateUser(user)),
-        deleteUser: (user) => dispatch(deleteUser(user))
+        addCart: (product, quantity) => dispatch(addCart(product, quantity))
     }
 }
 

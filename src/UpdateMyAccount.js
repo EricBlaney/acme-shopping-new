@@ -11,12 +11,21 @@ class UpdateMyAccount extends React.Component{
           email: '',
           street: '',
           city: '',
-          zipcode: ''
+          zipcode: '',
+          avatar: ''
         };
         this.onChange = this.onChange.bind(this);
         this.updateUser = this.updateUser.bind(this);
       }
     componentDidMount() {
+        this.el.addEventListener('change', (ev) => {
+            const file = ev.target.files[0];
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                this.setState({avatar: reader.result})
+            });
+            reader.readAsDataURL(file);
+        })
         try{
             this.props.exchangeToken();
         }
@@ -25,13 +34,14 @@ class UpdateMyAccount extends React.Component{
         }
     }
     static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.auth.username !== prevState.username){
+        if(nextProps.auth.id !== prevState.id){
         return { id: nextProps.auth.id,
         username: nextProps.auth.username, 
         email: nextProps.auth.email,
         street: nextProps.auth.street || '',
         city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || ''
+        zipcode: nextProps.auth.zipcode || '',
+        avatar: nextProps.auth.avatar  || ''
         };
         }
         else return null;
@@ -46,11 +56,14 @@ class UpdateMyAccount extends React.Component{
     }
     render() {
         const {updateUser, onChange} = this;
-        const {username, email, street, city, zipcode} = this.state;
+        const {avatar, username, email, street, city, zipcode} = this.state;
         
         return(
             <form onSubmit={ updateUser }>
             Update {this.state.username}'s details: <br></br>
+            Avatar: 
+            <input type='file' ref={ el => this.el = el }/>
+            { avatar ? <img src={avatar} className="avatar"/> : null}
             Username: 
             <input name='username' onChange={ onChange } value={ username }/>
             Email:

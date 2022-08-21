@@ -35,6 +35,9 @@ const User = conn.define('user', {
   },
   zipcode:{
     type: Sequelize.STRING
+  },
+  avatar: {
+    type: Sequelize.TEXT
   }
 });
 
@@ -51,7 +54,7 @@ User.addHook('beforeCreate', async(user) =>{
           }
       });
       if(result.length >= 1 ){
-          throw new Error('Cannot add duplicate email!')
+          throw 'Cannot add duplicate email!'
       }
 } catch(er){
   throw er
