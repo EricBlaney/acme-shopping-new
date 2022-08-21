@@ -25,8 +25,10 @@ class SingleGame extends Component {
                               <div className='productlisting'>
                                   <div className='content'>
                                     <div className='singleName'>{product.name}</div>
-                                    <div className='singlePrice'>{`$${product.price}`}</div> 
-                                    <div></div>
+                                    <div className="price-condition">
+                                    <div className='singlePrice'>{`$${product.price}  |`}</div> 
+                                    <div className='condition'>Condition: {`${product.condition}`}</div> 
+                                    </div>
                                     <div className='heart-cart'>
                                       <button className='btn' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                                       <div className="heart-wrapper" onClick={ () => this.props.addToWishList(product)}>
@@ -42,7 +44,7 @@ class SingleGame extends Component {
                       )
             })}
             </div>
-          ) : null}
+          ) : null }
       </main>
     );
   }

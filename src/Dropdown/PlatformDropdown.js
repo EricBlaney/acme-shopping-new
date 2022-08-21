@@ -14,13 +14,13 @@ function platformDropDown() {
           {platformDropdown.map((item) => {
             return (
               <li key={item.id}>
-                <Link
+                {/* <Link
                   to={item.path}
                   className={item.cName}
                   onClick={() => setDropdown(false)}
                 >
                   {item.title}
-                </Link>
+                </Link> */}
               </li>
             );
           })}

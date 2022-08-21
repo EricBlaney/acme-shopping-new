@@ -6,6 +6,15 @@ const igdb = require('igdb-api-node').default;
 
 const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
 
+// Random Condition Generator
+
+const arr = ['poor', 'fair', 'good', 'excellent'];
+
+function randomCondition(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+
 const setUp = async()=> {
   try {
     await conn.sync({ force: true });
@@ -17,7 +26,7 @@ const setUp = async()=> {
       .where('release_dates.date < 652165260 & release_dates.date > 649486860& total_rating > 50')
       .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
       thisMonthGames1989.data.map(game=>{
-        Product.create({theme: 'thisMonthGames1989', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`})
+        Product.create({theme: 'thisMonthGames1989', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
     });
     
 
