@@ -4,7 +4,6 @@ const { Sequelize } = conn;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-
 const User = conn.define('user', {
   id: {
     type: Sequelize.UUID,
@@ -65,29 +64,6 @@ User.prototype.createOrderFromCart = async function(){
   return cart.save();
 }
 
-User.prototype.addToCart = async function({ product, quantity}){
-  const cart = await this.getCart();
-  let lineItem = await conn.models.lineItem.findOne({
-    where: {
-      productId: product.id,
-      orderId: cart.id
-    }
-  });
-  if(lineItem){
-    lineItem.quantity = quantity;
-    if(lineItem.quantity){
-      await lineItem.save();
-    }
-    else {
-      await lineItem.destroy();
-    }
-  }
-  else {
-    await conn.models.lineItem.create({ productId: product.id, quantity, orderId: cart.id });
-  }
-  return this.getCart();
-}
-
 User.prototype.getCart = async function(){
   let order = await conn.models.order.findOne({
     where: {
@@ -110,6 +86,72 @@ User.prototype.getCart = async function(){
   return order;
 }
 
+User.prototype.addToCart = async function({ product, quantity }){
+  const cart = await this.getCart(); 
+  let lineItem = await conn.models.lineItem.findOne({
+    where: {
+      productId: product.id,
+      orderId: cart.id
+    }
+  });
+  if(lineItem){
+    lineItem.quantity = quantity;
+    if(lineItem.quantity){
+      await lineItem.save();
+    }
+    else {
+      await lineItem.destroy();
+    }
+  }
+  else {
+    await conn.models.lineItem.create({ productId: product.id, quantity, orderId: cart.id });
+  }
+  return this.getCart();
+};
+
+User.prototype.createWishListFromWishListItems = async function(){
+  const wishlist = await this.getWishList();
+  wishlist.isWishList = false;
+  return wishlist.save();
+};
+
+User.prototype.getWishList = async function(){
+  let wishlist = await conn.models.wishList.findOne({
+    where: {
+      userId: this.id,
+    },
+    include: [
+      {
+        model: conn.models.wishListItem,
+        include: [ conn.models.product ]
+      }
+    ]
+  });
+  if(!wishlist){
+    wishlist = await conn.models.wishList.create({ userId: this.id });
+    console.log(wishlist)
+    wishlist = await conn.models.wishList.findByPk( wishlist.id, {
+      include: [ conn.models.wishListItem ]
+    });
+  }
+  return wishlist;
+}
+
+User.prototype.addToWishList = async function({ product }){
+  const wishlist = await this.getWishList();
+  console.log(wishlist)
+
+  let wishlistitem = await conn.models.wishListItem.findOne({
+    where: {
+      productId: product.id,
+    }
+  });
+  if(!wishlistitem){
+    await conn.models.wishListItem.create({ productId: product.id, wishListId: wishlist.id });
+  }
+  return this.getWishList();
+}
+
 User.authenticate = async function(credentials){
   const user = await this.findOne({
     where: {
@@ -125,7 +167,6 @@ User.authenticate = async function(credentials){
     throw error;
   }
 }
-
 
 User.findByToken = async function findByToken(token){
   try {

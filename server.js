@@ -11,8 +11,6 @@ const setUp = async()=> {
     await conn.sync({ force: true });
 
 // General / Landing Page Queries
-
-
     const thisMonthGames1989 = await client
       .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
       .limit(10)

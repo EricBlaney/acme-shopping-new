@@ -21,6 +21,8 @@ app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/sessions', require('./routes/sessions'));
 
+// Product Routes
+
 app.get('/api/products', async(req,res,next)=>{
   try{
     res.status(200).send(await Product.findAll())
@@ -38,12 +40,41 @@ app.get('/api/products/:id', async(req,res,next)=>{
   }catch(er){
     next(er);
   }
-})
-
-app.use((err, req, res, next)=> {
-  console.log(err);
-  res.status(err.status || 500).send({ error: err });
 });
+
+// WishList Routes
+
+app.post('/', isLoggedIn, async(req, res, next)=> {
+  try {
+    res.send(await req.user.createWishListFromWishListItems());
+  }
+  catch(ex){
+    next(ex);
+  }
+
+});
+
+app.put('/api/wishlist', isLoggedIn, async(req, res, next)=> {
+  try {
+    console.log(req.body)
+    res.send(await req.user.addToWishList(req.body));
+  }
+  catch(ex){
+    console.log(ex)
+    next(ex);
+  }
+});
+
+app.get('/api/wishlist', isLoggedIn, async(req, res, next)=> {
+  try {
+    res.send(await req.user.getWishList());
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+// User Routes
 
 app.post('/api/users', async(req,res,next) => {
   try{
@@ -52,7 +83,7 @@ app.post('/api/users', async(req,res,next) => {
   catch(ex){
     next(ex);
   }
-})
+});
 
 app.get('/api/users', async(req,res,next) => {
   try{
@@ -61,7 +92,8 @@ app.get('/api/users', async(req,res,next) => {
   catch(ex){
     next(ex);
   }
-})
+});
+
 app.get('/api/users/:id', async(req,res,next) => {
   try{
     res.status(200).send(await useStore.findByPk(req.params.id))
@@ -69,7 +101,7 @@ app.get('/api/users/:id', async(req,res,next) => {
   catch(ex){
     next(ex);
   }
-})
+});
 
 app.delete('/api/users/:id', async(req,res,next) => {
   try{
@@ -80,7 +112,7 @@ app.delete('/api/users/:id', async(req,res,next) => {
   catch{ex}{
     next(ex);
   }
-})
+});
 
 app.put('/api/users', async(req,res,next) => {
   try{
@@ -92,7 +124,12 @@ app.put('/api/users', async(req,res,next) => {
   catch(ex){
     next(ex);
   }
-})
+});
+
+app.use((err, req, res, next)=> {
+  console.log(err);
+  res.status(err.status || 500).send({ error: err });
+});
 
 
 
