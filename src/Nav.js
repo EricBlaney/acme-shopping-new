@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
@@ -42,7 +42,7 @@ class Nav extends Component {
             <NavLink exact to='/myaccount'>My Account </NavLink>
             
         {
-          auth.id ? <button onClick={ logout }>Logout</button> : <SignInContainer triggerText={signInTriggerText} />
+          auth.id ? <Link exact to='/'><button onClick={ logout }>Logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
         }
             { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
             <NavLink to='/cart'>Cart</NavLink>
