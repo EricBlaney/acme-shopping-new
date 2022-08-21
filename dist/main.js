@@ -3070,6 +3070,7 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
     this.props.fetchProducts();
     this.props.exchangeToken();
+    this.props.fetchCart();
   }
 
   componentDidUpdate(prevProps) {
