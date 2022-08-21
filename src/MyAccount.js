@@ -4,20 +4,16 @@ import { updateUser, deleteUser, fetchWishList } from './store'
 import { Link, NavLink } from 'react-router-dom';
 
 class MyAccount extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-        };
-      }
-    componentDidMount() {
-        try{
-            this.props.getWishList();
-            console.log(this.props)
-        }
-        catch(ex){
-            console.log(ex);
-        }
+    componentDidMount(){
+        this.props.getWishList();
     }
+
+    componentDidUpdate(prevProps){
+        if(!prevProps.auth.id && this.props.auth.id){
+          this.props.getWishList();
+        }
+      }
+   
     render() {
         const {auth, wishlist} = this.props;
     
@@ -67,7 +63,7 @@ class MyAccount extends React.Component{
 }
 
 const mapState = (state) => {
-    console.log(state)
+    console.log(state.wishlist)
     const user = state.auth || {};
     return {
         auth: state.auth,

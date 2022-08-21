@@ -8,13 +8,14 @@
 }
 
 .singleGame {
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
     margin-top: 7rem;
+    margin: 10rem;
 }
 
 .product{
-    position: relative;
+    /* position: relative; */
     width: 1000px;
     min-width: 350px;
     min-height: 500px;
@@ -23,7 +24,6 @@
     justify-content: center;
     align-items: center;
 }
-
 
 .product-img{
     width: 40%;
@@ -42,7 +42,7 @@
     user-select: none;
 }
 
-.productlisting{
+ .productlisting{
     width: 60%;
     min-height: 500px;
     height: auto;
@@ -54,7 +54,7 @@
     opacity: 0;
     transform: translateY(50px);
     animation: fade-in 1s forwards 1;
-}
+} 
 
 @keyframes fade-in{
     100%{
@@ -95,13 +95,13 @@
     text-align: center;
     background: black;
     margin: 0;
-  } */
+  } */ 
   
-  .heart-wrapper {
+   .heart-wrapper {
     /* position: absolute; */
-    top: 50%;
+    /* top: 50%; */
     left: 0;
-    width: 100%;
+    /* width: 100%; */
     margin-top: 1.3rem;
     margin-left: 5rem;
     font-size: 5px;
@@ -166,3 +166,16 @@
   .heart-cart {
     display: flex;
   }
+
+  .price-condition {
+    display: flex;
+    align-items: center;
+  }
+
+  .condition {
+    padding: 1rem;
+    padding-bottom: 2.5rem;
+    padding-left: 2rem;
+  }
+
+  

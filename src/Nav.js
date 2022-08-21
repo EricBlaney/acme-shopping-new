@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 import {exchangeToken, logout} from './store/auth';
-import { fetchProducts } from './store';
+import { fetchProducts, fetchCart } from './store';
 import GenreDropdown from './Dropdown/GenreDropdown';
 import PlatformDropDown from './Dropdown/PlatformDropdown';
 
@@ -13,6 +13,12 @@ class Nav extends Component {
         this.props.fetchProducts();
         this.props.exchangeToken();
     }
+
+    componentDidUpdate(prevProps){
+        if(!prevProps.auth.id && this.props.auth.id){
+          this.props.fetchCart();
+        }
+      }
 
     render() {
         const {logout, auth} = this.props;
@@ -67,6 +73,7 @@ const mapState = ({ auth }) => {
 
 const mapDispatch = (dispatch) => {
     return {
+        fetchCart: ()=> dispatch(fetchCart()),
         exchangeToken: ()=> dispatch(exchangeToken()),
         fetchProducts: ()=> dispatch(fetchProducts()),
         logout: () => dispatch(logout())
