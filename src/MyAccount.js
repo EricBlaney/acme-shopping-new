@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateUser, deleteUser, fetchWishList } from './store'
+import { updateUser, deleteUser, fetchWishList, addCart } from './store'
 import { Link, NavLink } from 'react-router-dom';
 
 class MyAccount extends React.Component{
@@ -49,7 +49,7 @@ class MyAccount extends React.Component{
                                     height="170" /></div><div className='name'>{wishListItem.product.name}</div> 
                                 </Link>
                                 <div className='price'>{`$${wishListItem.product.price}`}</div>
-                                <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                                <button className='addtocart' onClick={() => this.props.addCart(wishListItem.product, 1)}>Add To Cart</button>
                             </li>
                             </div>
                         )

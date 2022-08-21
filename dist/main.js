@@ -3005,7 +3005,7 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
         className: "price"
       }, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "addtocart",
-        onClick: () => this.props.addCart(product, 1)
+        onClick: () => this.props.addCart(wishListItem.product, 1)
       }, "Add To Cart")));
     }) : 'You have nothing in your Wish List! Go add something!'));
   }
@@ -3025,7 +3025,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getWishList: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchWishList)()),
-    addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+    addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity)),
     updateUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.updateUser)(user)),
     deleteUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deleteUser)(user))
   };
