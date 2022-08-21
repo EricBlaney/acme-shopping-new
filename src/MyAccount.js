@@ -25,7 +25,11 @@ class MyAccount extends React.Component{
             console.log(ex);
         }
     }
-
+    componentDidUpdate(prevProps){
+        if(!prevProps.auth.id && this.props.auth.id){
+          this.props.getWishList();
+        }
+    }
     static getDerivedStateFromProps(nextProps, prevState){
         if(nextProps.auth !== prevState){
         return { id: nextProps.auth.id,
@@ -75,7 +79,7 @@ class MyAccount extends React.Component{
                                     height="170" /></div><div className='name'>{wishListItem.product.name}</div> 
                                 </Link>
                                 <div className='price'>{`$${wishListItem.product.price}`}</div>
-                                <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                                <button className='addtocart' onClick={() => this.props.addCart(wishListItem.product, 1)}>Add To Cart</button>
                             </li>
                             </div>
                         )
@@ -89,7 +93,7 @@ class MyAccount extends React.Component{
 }
 
 const mapState = (state) => {
-
+    console.log(state)
     const user = state.auth || {};
     return {
         auth: state.auth,

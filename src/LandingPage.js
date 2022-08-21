@@ -5,11 +5,6 @@ import { Link } from 'react-router-dom';
 
 class LandingPage extends React.Component{
 
-  componentDidUpdate(prevProps){
-    if(!prevProps.auth.id && this.props.auth.id){
-      this.props.fetchCart();
-    }
-  }
   render(){
     const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990 } = this.props;
     return (
@@ -88,7 +83,6 @@ class LandingPage extends React.Component{
 
 const mapDispatch = (dispatch)=> {
   return {
-    fetchCart: ()=> dispatch(fetchCart()),
     addCart: (product, quantity) => dispatch(addCart(product, quantity))
   };
 };

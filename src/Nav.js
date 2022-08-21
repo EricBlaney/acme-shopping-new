@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 import {exchangeToken, logout} from './store/auth';
-import { fetchProducts } from './store';
+import { fetchProducts, fetchCart } from './store';
 import GenreDropdown from './Dropdown/GenreDropdown';
 import PlatformDropDown from './Dropdown/PlatformDropdown';
 
@@ -12,7 +12,15 @@ class Nav extends Component {
     componentDidMount(){
         this.props.fetchProducts();
         this.props.exchangeToken();
+        this.props.fetchCart();
+
     }
+
+    componentDidUpdate(prevProps){
+        if(!prevProps.auth.id && this.props.auth.id){
+          this.props.fetchCart();
+        }
+      }
 
     render() {
         const {logout, auth} = this.props;
@@ -34,7 +42,7 @@ class Nav extends Component {
             <NavLink exact to='/myaccount'>My Account </NavLink>
             
         {
-          auth.id ? <button onClick={ logout }>Logout</button> : <SignInContainer triggerText={signInTriggerText} />
+          auth.id ? <Link exact to='/'><button onClick={ logout }>Logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
         }
             { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
             <NavLink to='/cart'>Cart</NavLink>
@@ -67,6 +75,7 @@ const mapState = ({ auth }) => {
 
 const mapDispatch = (dispatch) => {
     return {
+        fetchCart: ()=> dispatch(fetchCart()),
         exchangeToken: ()=> dispatch(exchangeToken()),
         fetchProducts: ()=> dispatch(fetchProducts()),
         logout: () => dispatch(logout())

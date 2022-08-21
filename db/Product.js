@@ -29,6 +29,9 @@ const Product = conn.define('product', {
   },
   theme: {
     type: STRING
+  },
+  condition: {
+    type: STRING
   }
 });
 
