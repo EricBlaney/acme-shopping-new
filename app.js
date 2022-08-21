@@ -21,6 +21,8 @@ app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/sessions', require('./routes/sessions'));
 
+// Product Routes
+
 app.get('/api/products', async(req,res,next)=>{
   try{
     res.status(200).send(await Product.findAll())
@@ -40,10 +42,19 @@ app.get('/api/products/:id', async(req,res,next)=>{
   }
 })
 
-app.use((err, req, res, next)=> {
-  console.log(err);
-  res.status(err.status || 500).send({ error: err });
-});
+// WishList Routes
+
+app.get('/api/wishlist', async(req,res,next)=>{
+  try{
+    const wishlist = await WishListItem.findAll();
+    res.status(200).send(wishlist);
+
+  }catch(er){
+    next(er);
+  }
+})
+
+// User Routes
 
 app.post('/api/users', async(req,res,next) => {
   try{
@@ -93,6 +104,11 @@ app.put('/api/users', async(req,res,next) => {
     next(ex);
   }
 })
+
+app.use((err, req, res, next)=> {
+  console.log(err);
+  res.status(err.status || 500).send({ error: err });
+});
 
 
 
