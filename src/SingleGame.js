@@ -1,15 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCart, addCart, exchangeToken, logout } from './store';
+import { fetchCart, addCart } from './store';
 import './SingleGame.css';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 
 class SingleGame extends React.Component{
-
-  componentDidMount(){
-    this.props.exchangeToken();
-  }
 
   componentDidUpdate(prevProps){
     if(!prevProps.auth.id && this.props.auth.id){
@@ -39,7 +35,13 @@ class SingleGame extends React.Component{
                                   <div className='content'>
                                     <div className='singleName'>{product.name}</div>
                                     <div className='singlePrice'>{`$${product.price}`}</div> 
-                                    <button className='btn' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>     
+                                    <div></div>
+                                    <div className='heart-cart'>
+                                      <button className='btn' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                                      <div className="heart-wrapper">
+                                        <div className="heart" onClick={()=>{}}></div>
+                                      </div>
+                                    </div>     
                                     <br></br>
                                     <div className='singleSummary'>{product.summary.substring(0,600)}</div>
                                   </div>
@@ -67,8 +69,6 @@ class SingleGame extends React.Component{
 
 const mapDispatch = (dispatch)=> {
   return {
-    exchangeToken: ()=> dispatch(exchangeToken()),
-    logout: ()=> dispatch(logout()),
     fetchCart: ()=> dispatch(fetchCart()),
     addCart: (product, quantity) => dispatch(addCart(product, quantity))
   };

@@ -2824,21 +2824,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SignUp/SignUpContainer */ "./src/SignUp/SignUpContainer.js");
-/* harmony import */ var _SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SignIn/SignInContainer */ "./src/SignIn/SignInContainer.js");
-
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
 
 
 
 class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  componentDidMount() {
-    this.props.exchangeToken();
-  }
-
   componentDidUpdate(prevProps) {
     if (!prevProps.auth.id && this.props.auth.id) {
       this.props.fetchCart();
@@ -2846,8 +2838,6 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
   }
 
   render() {
-    const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In';
     const {
       auth,
       thisMonthGames1989,
@@ -2861,8 +2851,9 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         product.imageUrl = product.imageUrl.substring(44, 100);
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-        key: product.id,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -2885,8 +2876,9 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         product.imageUrl = product.imageUrl.substring(44, 100);
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-        key: product.id,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -2909,8 +2901,9 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         product.imageUrl = product.imageUrl.substring(44, 100);
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-        key: product.id,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -2926,19 +2919,13 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         className: "addtocart",
         onClick: () => this.props.addCart(product, 1)
       }, "Add To Cart"));
-    }).slice(0, 5)))) : null, auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      triggerText: signInTriggerText
-    }), auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      triggerText: signUpTriggerText
-    }));
+    }).slice(0, 5)))) : null);
   }
 
 }
 
 const mapDispatch = dispatch => {
   return {
-    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
-    logout: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.logout)()),
     fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchCart)()),
     addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity))
   };
@@ -2949,12 +2936,6 @@ const mapStateToProps = ({
   product,
   cart
 }) => {
-  {
-    /* const zeldaGames = product.filter(product => product.theme === 'zeldaGames'); */
-  }
-  {
-    /* const marioGames = product.filter(product => product.theme === 'marioGames'); */
-  }
   const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
   const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
   const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
@@ -3073,10 +3054,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
     this.props.fetchProducts();
+    this.props.exchangeToken();
   }
 
   render() {
@@ -3145,8 +3126,9 @@ const mapState = ({
 
 const mapDispatch = dispatch => {
   return {
+    exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
     fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.fetchProducts)()),
-    logout: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.logout)())
+    logout: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.logout)())
   };
 };
 
@@ -3313,40 +3295,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
 
 const SearchResults = ({
-  product
+  product,
+  addCart
 }) => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, "Search Results"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("ul", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("h2", null, "Search Results"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("ul", {
     className: "searchResults"
   }, product.map(product => {
     if (product.imageUrl.length > 10) {
       product.imageUrl = product.imageUrl.substring(44, 100);
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("li", {
-      className: "indsearch"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-      key: product.id,
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("li", {
+      className: "indsearch",
+      key: product.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
       to: `/api/product/${product.id}`
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "picture"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("img", {
       src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
       width: "170",
       height: "170"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "name"
-    }, product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    }, product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "price"
-    }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
-      className: "addtocart"
+    }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("button", {
+      className: "addtocart",
+      onClick: () => addCart(product, 1)
     }, "Add To Cart"));
   })));
 };
@@ -3363,7 +3349,11 @@ const mapState = ({
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapState)(SearchResults));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapState, dispatch => {
+  return {
+    addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_1__.addCart)(product, quantity))
+  };
+})(SearchResults));
 
 /***/ }),
 
@@ -3837,7 +3827,6 @@ class SignUp extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.setState({
       showSignIn: true
     });
-    console.log(this.state.showSignIn);
   }
 
   submitButton() {
@@ -3860,7 +3849,9 @@ class SignUp extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       email,
       showSignIn
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, showSignIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_index_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      onSubmit: onSubmit
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
       onSubmit: onSubmit
     }, "Sign-Up ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
       name: "username",
@@ -3877,11 +3868,9 @@ class SignUp extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       onChange: onChange
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       disabled: this.submitButton() || !username || !password || !email
-    }, "Create User"), !username ? "Missing Username" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), !password ? "Missing Password" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), this.submitButton() || !email ? "Invalid Email" : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    }, "Create User"), !username ? "Missing Username" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), !password ? "Missing Password" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), this.submitButton() || !email ? "Invalid Email" : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       onClick: renderSignIn
-    }, " Already a user?  Sign in."), showSignIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_index_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      onSubmit: onSubmit
-    }) : null);
+    }, " Already a user?  Sign in."))));
   }
 
 }
@@ -3932,10 +3921,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  componentDidMount() {
-    this.props.exchangeToken();
-  }
-
   componentDidUpdate(prevProps) {
     if (!prevProps.auth.id && this.props.auth.id) {
       this.props.fetchCart();
@@ -3976,10 +3961,24 @@ class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
         className: "singleName"
       }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "singlePrice"
+<<<<<<< HEAD
+      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "heart-cart"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "btn",
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "heart-wrapper"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "heart",
+        onClick: () => {}
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+=======
       }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "btn",
         onClick: () => this.props.addCart(product, 1)
       }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+>>>>>>> 441118a6d869c7dbb15266f9b267ded35cfd49b0
         className: "singleSummary"
       }, product.summary.substring(0, 600))))));
     })) : null, auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3993,8 +3992,6 @@ class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
 
 const mapDispatch = dispatch => {
   return {
-    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
-    logout: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.logout)()),
     fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchCart)()),
     addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity))
   };
@@ -4174,9 +4171,9 @@ const auth = (state = {}, action) => {
 
 const logout = () => {
   return dispatch => {
-    if (typeof undefined.props.googleReducer.accessToken !== 'undefined') {} else {
-      window.localStorage.removeItem('token');
-    }
+    // if (typeof this.props.googleReducer.accessToken !== 'undefined') {
+    // } else {
+    window.localStorage.removeItem('token'); // }
 
     dispatch({
       type: 'SET_AUTH',
@@ -4559,7 +4556,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n\n.product-img{\n    width: 40%;\n    height: 500px;\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n.productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n}\n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n", "",{"version":3,"sources":["webpack://./src/SingleGame.css"],"names":[],"mappings":"AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;AAC1B;;AAEA;IACI,aAAa;IACb,uBAAuB;IACvB,gBAAgB;AACpB;;AAEA;IACI,kBAAkB;IAClB,aAAa;IACb,gBAAgB;IAChB,iBAAiB;IACjB,YAAY;IACZ,aAAa;IACb,uBAAuB;IACvB,mBAAmB;AACvB;;;AAGA;IACI,UAAU;IACV,aAAa;IACb,gBAAgB;IAChB,kBAAkB;IAClB,UAAU;IACV,4BAA4B;IAC5B,gCAAgC;AACpC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,gBAAgB;IAChB,iBAAiB;AACrB;;AAEA;IACI,UAAU;IACV,iBAAiB;IACjB,YAAY;IACZ,mBAAmB;IACnB,aAAa;IACb,aAAa;IACb,uBAAuB;IACvB,cAAc;IACd,UAAU;IACV,2BAA2B;IAC3B,gCAAgC;AACpC;;AAEA;IACI;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;;AAGA;IACI,oBAAoB;IACpB,eAAe;IACf,0BAA0B;AAC9B;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,YAAY;IACZ,0BAA0B;IAC1B,eAAe;IACf,kBAAkB;IAClB,eAAe;IACf,mBAAmB;AACvB;;AAEA;IACI,yBAAyB;AAC7B","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap');\n\n*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n\n.product-img{\n    width: 40%;\n    height: 500px;\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n.productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n}\n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n\n.product-img{\n    width: 40%;\n    height: 500px;\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n.productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n}\n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */\n  \n  .heart-wrapper {\n    /* position: absolute; */\n    top: 50%;\n    left: 0;\n    width: 100%;\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }", "",{"version":3,"sources":["webpack://./src/SingleGame.css"],"names":[],"mappings":"AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;AAC1B;;AAEA;IACI,aAAa;IACb,uBAAuB;IACvB,gBAAgB;AACpB;;AAEA;IACI,kBAAkB;IAClB,aAAa;IACb,gBAAgB;IAChB,iBAAiB;IACjB,YAAY;IACZ,aAAa;IACb,uBAAuB;IACvB,mBAAmB;AACvB;;;AAGA;IACI,UAAU;IACV,aAAa;IACb,gBAAgB;IAChB,kBAAkB;IAClB,UAAU;IACV,4BAA4B;IAC5B,gCAAgC;AACpC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,gBAAgB;IAChB,iBAAiB;AACrB;;AAEA;IACI,UAAU;IACV,iBAAiB;IACjB,YAAY;IACZ,mBAAmB;IACnB,aAAa;IACb,aAAa;IACb,uBAAuB;IACvB,cAAc;IACd,UAAU;IACV,2BAA2B;IAC3B,gCAAgC;AACpC;;AAEA;IACI;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;;AAGA;IACI,oBAAoB;IACpB,eAAe;IACf,0BAA0B;AAC9B;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,YAAY;IACZ,0BAA0B;IAC1B,eAAe;IACf,kBAAkB;IAClB,eAAe;IACf,mBAAmB;AACvB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;;;;KAIK;;EAEH;IACE,wBAAwB;IACxB,QAAQ;IACR,OAAO;IACP,WAAW;IACX,kBAAkB;IAClB,iBAAiB;IACjB,cAAc;EAChB;;EAEA;IACE,2BAA2B;IAC3B,UAAU;IACV,WAAW;IACX,aAAa;IACb,mBAAmB;IACnB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;qBAqCiB;IACjB;;IAEA;IACA,kCAAkC;IAClC;;AAEJ;IACI,KAAK,mBAAmB,EAAE;IAC1B,MAAM,qBAAqB,EAAE;IAC7B,OAAO,mBAAmB,EAAE;AAChC;;EAEE;IACE,aAAa;EACf","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap');\n\n*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n\n.product-img{\n    width: 40%;\n    height: 500px;\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n.productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n}\n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */\n  \n  .heart-wrapper {\n    /* position: absolute; */\n    top: 50%;\n    left: 0;\n    width: 100%;\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
