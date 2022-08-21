@@ -12,6 +12,8 @@ class Nav extends Component {
     componentDidMount(){
         this.props.fetchProducts();
         this.props.exchangeToken();
+        this.props.fetchCart();
+
     }
 
     componentDidUpdate(prevProps){
