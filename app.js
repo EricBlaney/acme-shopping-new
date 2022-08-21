@@ -3,9 +3,9 @@ const app = express();
 const { User, Product } = require('./db');
 const path = require('path');
 const { useStore } = require('react-redux');
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 app.use('/dist', express.static('dist'));
-
 const isLoggedIn = async(req, res, next)=> {
   try {
     req.user = await User.findByToken(req.headers.authorization);
@@ -17,7 +17,6 @@ const isLoggedIn = async(req, res, next)=> {
 };
 
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));
-
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/sessions', require('./routes/sessions'));
 

@@ -44,7 +44,8 @@ class Nav extends Component {
         {
           auth.id ? <Link exact to='/'><button onClick={ logout }>Logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
         }
-            { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
+            
+        { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
             
         </div>
         
