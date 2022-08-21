@@ -1,21 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCart, addCart } from './store';
+import { addCart, addToWishList } from './store';
 import './SingleGame.css';
-import SignUpContainer from './SignUp/SignUpContainer';
-import SignInContainer from './SignIn/SignInContainer';
 
-class SingleGame extends React.Component{
+class SingleGame extends Component {
 
-  componentDidUpdate(prevProps){
-    if(!prevProps.auth.id && this.props.auth.id){
-      this.props.fetchCart();
-    }
-  }
   render(){
-    const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In';
-    const { auth, logout, cart, game  } = this.props;
+    const { auth, game  } = this.props;
     return (
       <main>
 
@@ -38,8 +29,8 @@ class SingleGame extends React.Component{
                                     <div></div>
                                     <div className='heart-cart'>
                                       <button className='btn' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-                                      <div className="heart-wrapper">
-                                        <div className="heart" onClick={()=>{}}></div>
+                                      <div className="heart-wrapper" onClick={ () => this.props.addToWishList(product)}>
+                                        <div className='heart'></div>
                                       </div>
                                     </div>     
                                     <br></br>
@@ -51,17 +42,7 @@ class SingleGame extends React.Component{
                       )
             })}
             </div>
-        
           ) : null}
-        
-          {
-            auth.id ? null : <SignInContainer triggerText={signInTriggerText} />
-          }
-                  {
-            auth.id ? null : (
-                <SignUpContainer triggerText={signUpTriggerText} />
-            ) 
-          }
       </main>
     );
   }
@@ -69,8 +50,8 @@ class SingleGame extends React.Component{
 
 const mapDispatch = (dispatch)=> {
   return {
-    fetchCart: ()=> dispatch(fetchCart()),
-    addCart: (product, quantity) => dispatch(addCart(product, quantity))
+    addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+    addToWishList: (product) => dispatch(addToWishList(product))
   };
 };
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const user = (state = [], action)=> {
   if(action.type === 'CREATE_USER'){
     state = action.user;
@@ -9,7 +10,7 @@ const user = (state = [], action)=> {
   if(action.type === 'DELETE_USER') {
     state = [];
   }
-  return state;
+  return state; 
 };
 
 export const createUser = (credentials) => {

@@ -84,13 +84,15 @@ class LandingPage extends React.Component{
     );
 
   }
-}
+};
+
 const mapDispatch = (dispatch)=> {
   return {
     fetchCart: ()=> dispatch(fetchCart()),
     addCart: (product, quantity) => dispatch(addCart(product, quantity))
   };
 };
+
 const mapStateToProps = ({auth, product, cart}) => {
   const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
   const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');

@@ -40,19 +40,39 @@ app.get('/api/products/:id', async(req,res,next)=>{
   }catch(er){
     next(er);
   }
-})
+});
 
 // WishList Routes
 
-app.get('/api/wishlist', async(req,res,next)=>{
-  try{
-    const wishlist = await WishListItem.findAll();
-    res.status(200).send(wishlist);
-
-  }catch(er){
-    next(er);
+app.post('/', isLoggedIn, async(req, res, next)=> {
+  try {
+    res.send(await req.user.createWishListFromWishListItems());
   }
-})
+  catch(ex){
+    next(ex);
+  }
+
+});
+
+app.put('/api/wishlist', isLoggedIn, async(req, res, next)=> {
+  try {
+    console.log(req.body)
+    res.send(await req.user.addToWishList(req.body));
+  }
+  catch(ex){
+    console.log(ex)
+    next(ex);
+  }
+});
+
+app.get('/api/wishlist', isLoggedIn, async(req, res, next)=> {
+  try {
+    res.send(await req.user.getWishList());
+  }
+  catch(ex){
+    next(ex);
+  }
+});
 
 // User Routes
 
@@ -63,7 +83,7 @@ app.post('/api/users', async(req,res,next) => {
   catch(ex){
     next(ex);
   }
-})
+});
 
 app.get('/api/users', async(req,res,next) => {
   try{
@@ -72,7 +92,8 @@ app.get('/api/users', async(req,res,next) => {
   catch(ex){
     next(ex);
   }
-})
+});
+
 app.get('/api/users/:id', async(req,res,next) => {
   try{
     res.status(200).send(await useStore.findByPk(req.params.id))
@@ -80,7 +101,7 @@ app.get('/api/users/:id', async(req,res,next) => {
   catch(ex){
     next(ex);
   }
-})
+});
 
 app.delete('/api/users/:id', async(req,res,next) => {
   try{
@@ -91,7 +112,7 @@ app.delete('/api/users/:id', async(req,res,next) => {
   catch{ex}{
     next(ex);
   }
-})
+});
 
 app.put('/api/users', async(req,res,next) => {
   try{
@@ -103,7 +124,7 @@ app.put('/api/users', async(req,res,next) => {
   catch(ex){
     next(ex);
   }
-})
+});
 
 app.use((err, req, res, next)=> {
   console.log(err);
