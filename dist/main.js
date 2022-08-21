@@ -3961,6 +3961,7 @@ class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
         className: "singleName"
       }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "singlePrice"
+<<<<<<< HEAD
       }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "heart-cart"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
@@ -3972,6 +3973,12 @@ class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
         className: "heart",
         onClick: () => {}
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+=======
+      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "btn",
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+>>>>>>> 441118a6d869c7dbb15266f9b267ded35cfd49b0
         className: "singleSummary"
       }, product.summary.substring(0, 600))))));
     })) : null, auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_5__["default"], {
