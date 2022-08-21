@@ -40,12 +40,12 @@ class Nav extends Component {
             <NavLink exact to='/api/popular'>Popular</NavLink>
         <div className="topnav-right">
             <NavLink exact to='/myaccount'>My Account </NavLink>
-            
+            <NavLink to='/cart'>Cart</NavLink>
         {
           auth.id ? <Link exact to='/'><button onClick={ logout }>Logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
         }
             { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
-            <NavLink to='/cart'>Cart</NavLink>
+            
         </div>
         
         <div className="footer">
