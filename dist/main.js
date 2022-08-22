@@ -3061,7 +3061,6 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "card"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-        className: "link",
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -3069,7 +3068,7 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
         width: "170",
         height: "170"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: () => this.props.addCart(product, 1)
@@ -3088,7 +3087,6 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "card"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-        className: "link",
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -3096,7 +3094,7 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
         width: "170",
         height: "170"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: () => this.props.addCart(product, 1)
@@ -3115,7 +3113,6 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "card"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-        className: "link",
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -3123,7 +3120,7 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
         width: "170",
         height: "170"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: () => this.props.addCart(product, 1)
@@ -3308,20 +3305,7 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       exact: true,
       to: "/api/gamesbyyear"
-    }, "Games By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/api/gamesbyyear"
-    }, "Games By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    }, "By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "dropdown-content"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
       href: "#"
@@ -3337,7 +3321,7 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       exact: true,
       to: "/myaccount"
-    }, "My Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+    }, " Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       to: "/cart"
     }, "Cart"), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
       to: "/"
