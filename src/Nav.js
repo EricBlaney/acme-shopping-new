@@ -4,16 +4,22 @@ import { connect } from 'react-redux';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import auth from './store/auth';
 import { use } from 'chai';
 import {exchangeToken, logout} from './store/auth';
 import { fetchProducts, fetchCart } from './store';
 
 =======
+=======
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 import {exchangeToken, logout} from './store/auth';
 import { fetchProducts, fetchCart } from './store';
 import GenreDropdown from './Dropdown/GenreDropdown';
 import PlatformDropDown from './Dropdown/PlatformDropdown';
+<<<<<<< HEAD
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
+=======
 >>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 
 class Nav extends Component {

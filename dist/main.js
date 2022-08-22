@@ -2686,6 +2686,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 =======
 /* harmony import */ var _NavItems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavItems */ "./src/Dropdown/NavItems.js");
+<<<<<<< HEAD
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
+=======
 >>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 
 
@@ -2768,6 +2771,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 =======
 /* harmony import */ var _NavItems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavItems */ "./src/Dropdown/NavItems.js");
+<<<<<<< HEAD
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
+=======
 >>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 
 
@@ -3422,7 +3428,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
     this.props.fetchProducts();
@@ -3509,9 +3514,15 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       exact: true,
       to: "/myaccount"
 <<<<<<< HEAD
+<<<<<<< HEAD
     }, "My Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       to: "/cart"
     }, "Cart"), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+=======
+    }, "My Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.NavLink, {
+      to: "/cart"
+    }, "Cart"), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Link, {
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 =======
     }, "My Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.NavLink, {
       to: "/cart"
@@ -3553,9 +3564,15 @@ const mapState = ({
 const mapDispatch = dispatch => {
   return {
 <<<<<<< HEAD
+<<<<<<< HEAD
     fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchCart)()),
     exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
     fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchProducts)()),
+=======
+    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.fetchCart)()),
+    exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
+    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.fetchProducts)()),
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 =======
     fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.fetchCart)()),
     exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
@@ -4493,15 +4510,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
 /* harmony import */ var _SingleGame_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleGame.css */ "./src/SingleGame.css");
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+
+
 
 >>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
+
+<<<<<<< HEAD
 
 
 
 <<<<<<< HEAD
 
+=======
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 =======
 >>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 class SingleGame extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
@@ -5059,6 +5085,7 @@ const createUser = credentials => {
       });
     } catch (error) {
       console.log(error.response);
+<<<<<<< HEAD
 
       if (error.response.data.includes('Cannot add duplicate email')) {
         alert('Cannot add duplicate email');
@@ -14800,6 +14827,8 @@ const createUser = credentials => {
       });
     } catch (error) {
       console.log(error.response);
+=======
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 
       if (error.response.data.includes('Cannot add duplicate email')) {
         alert('Cannot add duplicate email');
@@ -14886,6 +14915,90 @@ module.exports = {
   getConstructorName: getConstructorName,
 };
 
+
+/***/ }),
+
+/***/ "./src/store/wishlist.js":
+/*!*******************************!*\
+  !*** ./src/store/wishlist.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addToWishList": () => (/* binding */ addToWishList),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "deleteFromWishList": () => (/* binding */ deleteFromWishList),
+/* harmony export */   "fetchWishList": () => (/* binding */ fetchWishList)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const wishlist = (state = {
+  wishListItems: []
+}, action) => {
+  if (action.type === 'SET_WISHLIST') {
+    console.log(action.wishlist);
+    state = action.wishlist;
+  } else if (action.type === 'DELETE_WISHLISTITEM') {
+    const wishListItems = state.wishListItems.filter(item => item.product.id !== action.id);
+    state = { ...state,
+      wishListItems
+    };
+  }
+
+  return state;
+};
+
+const addToWishList = product => {
+  return async dispatch => {
+    const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().put('/api/wishlist', {
+      product
+    }, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
+
+    if (response.status === 200) {
+      alert('Added to wishlist successfully');
+    }
+  };
+};
+const fetchWishList = () => {
+  return async dispatch => {
+    const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/wishlist', {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
+    dispatch({
+      type: 'SET_WISHLIST',
+      wishlist: response.data
+    });
+  };
+};
+const deleteFromWishList = product => {
+  return async dispatch => {
+    const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().put('/api/wishlist', {
+      product
+    }, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
+
+    if (response.status === 200) {
+      dispatch({
+        type: 'DELETE_WISHLISTITEM',
+        id: product.id
+      });
+    }
+  };
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (wishlist);
 
 /***/ }),
 
@@ -61009,7 +61122,11 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
       id: "main-body"
 <<<<<<< HEAD
+<<<<<<< HEAD
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Nav__WEBPACK_IMPORTED_MODULE_14__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+=======
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Nav__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 =======
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Nav__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
 >>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
@@ -61060,6 +61177,9 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
 =======
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+<<<<<<< HEAD
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
+=======
 >>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
       path: "/search/:term?",
       component: _Search_SearchResults__WEBPACK_IMPORTED_MODULE_9__["default"]

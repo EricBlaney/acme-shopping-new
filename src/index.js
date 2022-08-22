@@ -19,9 +19,12 @@ import GamesbyYear from './GamesbyYear';
 import Console from './Console'
 import topFightingGames from './topFightingGames';
 
+<<<<<<< HEAD
 =======
 >>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 
+=======
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 class _App extends Component{
     render(){
         return(
