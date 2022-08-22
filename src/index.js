@@ -24,7 +24,6 @@ class _App extends Component{
         <div id="main-body">
             <Nav/>
             <div className='logo'>
-                <h1>LOGO</h1>
                 <Route component={ Search }/>
              </div>
             <Route path='/cart' exact component={ Cart }/>
