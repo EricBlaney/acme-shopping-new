@@ -125,6 +125,10 @@ app.put('/api/users', async(req,res,next) => {
   }
 });
 
+// Admin Routes
+
+
+
 app.use((err, req, res, next)=> {
   console.log(err);
   res.status(err.status || 500).send({ error: err });

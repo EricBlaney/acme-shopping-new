@@ -3,6 +3,7 @@ const { Sequelize } = conn;
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { BOOLEAN } = require('sequelize');
 
 const User = conn.define('user', {
   id: {
@@ -38,6 +39,10 @@ const User = conn.define('user', {
   },
   avatar: {
     type: Sequelize.TEXT
+  },
+  isAdmin: {
+    type: BOOLEAN,
+    defaultValue: false
   }
 });
 
@@ -160,6 +165,23 @@ User.authenticate = async function(credentials){
   const user = await this.findOne({
     where: {
       username: credentials.username
+    }
+  });
+  if(user && await bcrypt.compare(credentials.password, user.password)){
+    return jwt.sign({ id: user.id }, process.env.JWT);
+  }
+  else {
+    const error = new Error('Bad Credentials');
+    error.status = 401;
+    throw error;
+  }
+}
+
+User.adminAuthenticate = async function(credentials){
+  const user = await this.findOne({
+    where: {
+      username: credentials.username,
+      isAdmin: true
     }
   });
   if(user && await bcrypt.compare(credentials.password, user.password)){
