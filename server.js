@@ -222,7 +222,7 @@ const consoles = await Promise.all ([
     // .request('http://0.0.0.0:8080/https://api.igdb.com/v4/genres')
     // console.log(genreIds.data); 
 
-    await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com'});
+    await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com', isAdmin: true});
     await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});
 
     const port = process.env.PORT || 3000;

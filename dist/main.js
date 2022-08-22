@@ -4538,6 +4538,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _SignInAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../SignInAdmin */ "./src/SignInAdmin/index.js");
+
 
 
 
@@ -4547,10 +4549,12 @@ class SignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     super();
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      showAdminSignIn: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.renderAdminSignIn = this.renderAdminSignIn.bind(this);
   }
 
   onChange(ev) {
@@ -4564,16 +4568,26 @@ class SignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.props.login(this.state);
   }
 
+  renderAdminSignIn() {
+    this.setState({
+      showAdminSignIn: true
+    });
+  }
+
   render() {
     const {
       onChange,
-      onSubmit
+      onSubmit,
+      renderAdminSignIn
     } = this;
     const {
       username,
-      password
+      password,
+      showAdminSignIn
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, showAdminSignIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignInAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      onSubmit: onSubmit
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
       onSubmit: onSubmit
     }, "Sign-In: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
       name: "username",
@@ -4584,7 +4598,9 @@ class SignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       name: "password",
       value: password,
       onChange: onChange
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Login"));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: renderAdminSignIn
+    }, " Admin? Click here to sign in.")));
   }
 
 }
@@ -4598,6 +4614,100 @@ const mapDispatch = dispatch => {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(null, mapDispatch)(SignIn));
+
+/***/ }),
+
+/***/ "./src/SignInAdmin/index.js":
+/*!**********************************!*\
+  !*** ./src/SignInAdmin/index.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _SignIn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../SignIn */ "./src/SignIn/index.js");
+
+
+
+
+
+class AdminSignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor() {
+    super();
+    this.state = {
+      username: '',
+      password: '',
+      showSignIn: false
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.renderSignIn = this.renderSignIn.bind(this);
+  }
+
+  onChange(ev) {
+    this.setState({
+      [ev.target.name]: ev.target.value
+    });
+  }
+
+  onSubmit(ev) {
+    ev.preventDefault();
+    this.props.login(this.state);
+  }
+
+  renderSignIn() {
+    this.setState({
+      showSignIn: true
+    });
+  }
+
+  render() {
+    const {
+      onChange,
+      onSubmit,
+      renderSignIn
+    } = this;
+    const {
+      username,
+      password,
+      showSignIn
+    } = this.state;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, showSignIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      onSubmit: onSubmit
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+      onSubmit: onSubmit
+    }, "Admin Sign-In: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      name: "username",
+      onChange: onChange,
+      value: username
+    }), "Password:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "password",
+      name: "password",
+      value: password,
+      onChange: onChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: renderSignIn
+    }, " Not an admin? Click here.")));
+  }
+
+}
+
+const mapDispatch = dispatch => {
+  return {
+    login: credentials => {
+      dispatch((0,_store__WEBPACK_IMPORTED_MODULE_1__.login)(credentials));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(null, mapDispatch)(AdminSignIn));
 
 /***/ }),
 

@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { login } from '../store';
 import { connect } from 'react-redux';
-import SignInAdmin from '../SignInAdmin'
-class SignIn extends Component{
+import SignIn from '../SignIn';
+
+class AdminSignIn extends Component{
   constructor(){
     super();
     this.state = {
       username: '',
       password: '',
-      showAdminSignIn: false
-
+      showSignIn: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.renderAdminSignIn = this.renderAdminSignIn.bind(this)
-
+    this.renderSignIn = this.renderSignIn.bind(this)
   }
   onChange(ev){
     this.setState({ [ev.target.name]: ev.target.value });
@@ -24,26 +23,24 @@ class SignIn extends Component{
     this.props.login(this.state);
   }
 
-  renderAdminSignIn() {
-    this.setState({showAdminSignIn: true});
+  renderSignIn() {
+    this.setState({showSignIn: true});
   }
 
   render(){
-    const { onChange, onSubmit, renderAdminSignIn } = this;
-    const { username, password, showAdminSignIn } = this.state;
+    const { onChange, onSubmit, renderSignIn } = this;
+    const { username, password, showSignIn } = this.state;
     return (
       <div>
-
-      { showAdminSignIn ? <SignInAdmin onSubmit={onSubmit} /> :
+      { showSignIn ? <SignIn onSubmit={onSubmit}/> : 
       <form onSubmit={ onSubmit }>
-        Sign-In: <br></br>
+        Admin Sign-In: <br></br>
         Username: 
         <input name='username' onChange={ onChange } value={ username }/>
         Password:
         <input type='password' name='password' value={ password } onChange={ onChange }/>
         <button>Login</button>
-        <button onClick={renderAdminSignIn}> Admin? Click here to sign in.</button>
-
+        <button onClick={renderSignIn}> Not an admin? Click here.</button>
       </form>
       }
       </div>
@@ -59,4 +56,4 @@ const mapDispatch = (dispatch)=> {
   };
 };
 
-export default connect(null, mapDispatch)(SignIn);
+export default connect(null, mapDispatch)(AdminSignIn);

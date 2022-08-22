@@ -3,6 +3,7 @@ const { Sequelize } = conn;
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { BOOLEAN } = require('sequelize');
 
 const User = conn.define('user', {
   id: {
@@ -38,6 +39,10 @@ const User = conn.define('user', {
   },
   avatar: {
     type: Sequelize.TEXT
+  },
+  isAdmin: {
+    type: BOOLEAN,
+    defaultValue: false
   }
 });
 
