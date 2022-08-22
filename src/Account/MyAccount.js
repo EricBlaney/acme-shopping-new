@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList, exchangeToken } from './store'
+import { fetchWishList, exchangeToken } from '../store'
 import { Link, NavLink } from 'react-router-dom';
 
 class MyAccount extends React.Component{

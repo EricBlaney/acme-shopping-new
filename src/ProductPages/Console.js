@@ -1,24 +1,25 @@
 import React, {Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from './store';
+import { fetchProducts } from '../store';
 import { Link } from 'react-router-dom';
 
 
-class topFightingGames extends Component {
+class Console extends Component {
+
 
     componentDidMount(){
         this.props.fetchProducts();
     }
 
     render() {
-        const {  topFightingGames } = this.props;
+        const { consoles } = this.props;
 
     return (
     <div>
         <main>
-        <h2>Top Fighting Games</h2>
+      <h2>Consoles</h2>
             <ul>
-            { topFightingGames.map(product=>{
+            { consoles.map(product=>{
           return (
             <li>
                 <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
@@ -30,24 +31,22 @@ class topFightingGames extends Component {
           )
         })}
             </ul>
-            </main>
 
-            </div>
-
-            
+           
+        </main>
+    </div>
 
 )
 }
 
 }
 
-const mapStateToProps = ({ product })=> {
-    const topFightingGames = product.filter(product => product.theme === 'topFightingGames');
-  
+const mapStateToProps = ({ product})=> {
+    const consoles = product.filter(product => product.theme === 'consoles');
+   
 
     return {
-        topFightingGames,
-      
+      consoles
     };
   }
 
@@ -56,5 +55,5 @@ const mapStateToProps = ({ product })=> {
         fetchProducts: ()=> dispatch(fetchProducts()),
     }
 };
-  export default connect(mapStateToProps,mapDispatch)(topFightingGames)
 
+export default connect(mapStateToProps, mapDispatch)(Console)

@@ -46,17 +46,17 @@ class LandingPage extends React.Component{
             
             <div className="wrapper" key={product.id}>
                       
-            <div className="card">
-            <Link to={`/api/product/${product.id}`}>
-            <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-            height="170" /></div> </Link>
-            <div className='info'>
-              <h3>{product.name}</h3>
-              <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-            </div>
-            </div>
-           
+              <div className="card">
+                <Link to={`/api/product/${product.id}`}>
+                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                height="170" /></div> </Link>
+                  <div className='info'>
+                    <h3>{product.name}</h3>
+                    <p>{`$${product.price}`}</p>
+                    <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                  </div>
+              </div>
+            
             </div>
            
 
@@ -73,19 +73,16 @@ class LandingPage extends React.Component{
           }
           return (
             <div className="wrapper" key={product.id}>
-            <div className="card">
-            <Link className='link' to={`/api/product/${product.id}`}>
-            <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-            height="170" /></div>  
-             </Link>
-
-            <div className='info'>
-              <h3>{product.name}</h3>
-  
-              <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-            </div>
-            </div>
+              <div className="card">
+                  <Link to={`/api/product/${product.id}`}>
+                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                  height="170" /></div> </Link>
+                    <div className='info'>
+                      <h3>{product.name}</h3>
+                      <p>{`$${product.price}`}</p>
+                      <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                    </div>
+                </div>
             </div>   
           )
         })}
@@ -100,19 +97,16 @@ class LandingPage extends React.Component{
           }
           return (
             <div className="wrapper" key={product.id}>
-            <div className="card">
-            <Link className='link' to={`/api/product/${product.id}`}>
-            <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-            height="170" /></div>  
-             </Link>
-
-            <div className='info'>
-              <h3>{product.name}</h3>
-  
-              <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-            </div>
-            </div>
+              <div className="card">
+                  <Link to={`/api/product/${product.id}`}>
+                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                  height="170" /></div> </Link>
+                    <div className='info'>
+                      <h3>{product.name}</h3>
+                      <p>{`$${product.price}`}</p>
+                      <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                    </div>
+                </div>
             </div>   
           )
         })}
@@ -128,19 +122,16 @@ class LandingPage extends React.Component{
           }
           return (
             <div className="wrapper" key={product.id}>
-            <div className="card" >
-            <Link className='link' to={`/api/product/${product.id}`}>
-            <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-            height="170" /></div>  
-             </Link>
-
-            <div className='info'>
-              <h3>{product.name}</h3>
-  
-              <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-            </div>
-            </div>
+              <div className="card">
+                  <Link to={`/api/product/${product.id}`}>
+                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                  height="170" /></div> </Link>
+                    <div className='info'>
+                      <h3>{product.name}</h3>
+                      <p>{`$${product.price}`}</p>
+                      <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                    </div>
+                </div>
             </div>   
           )
         })}
@@ -155,16 +146,15 @@ class LandingPage extends React.Component{
           return (
             <div className="wrapper" key={product.id}>
               <div className="card">
-              <Link className='link' to={`/api/product/${product.id}`}>
-
+                <Link className='link' to={`/api/product/${product.id}`}>
                 <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
                 height="170" /></div> 
                 </Link>
-                <div className='info'>
-                  <h3>{product.name}</h3>
-                  <p>{`$${product.price}`}</p>
-                  <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-                </div>
+                  <div className='info'>
+                    <h3>{product.name}</h3>
+                    <p>{`$${product.price}`}</p>
+                    <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                  </div>
               </div>
             </div>
           )
@@ -180,8 +170,7 @@ class LandingPage extends React.Component{
           return (
             <div className="wrapper" key={product.id}>
               <div className="card">
-              <Link className='link' to={`/api/product/${product.id}`}>
-
+                <Link className='link' to={`/api/product/${product.id}`}>
                 <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
                 height="170" /></div> 
                 </Link>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addCart, addToWishList } from './store';
+import { addCart, addToWishList } from '../store';
 import './SingleGame.css';
 
 class SingleGame extends Component {
@@ -19,7 +19,7 @@ class SingleGame extends Component {
               product.imageUrl = product.imageUrl.substring(44, 100)
               }
               return (
-                      <div key={product.id}>
+                      <div key={product.id} className='singlecard'>
                         <li className='product'>
                           <div className="product-img"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`} width="170" height="170" /></div> 
                               <div className='productlisting'>

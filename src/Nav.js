@@ -57,17 +57,8 @@ class Nav extends Component {
   </div>
 </div>
 
-            <div className="dropdown">
-<NavLink exact to='/api/gamesbyyear'>Games By Year</NavLink>  
-  <div className="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div>
-
         <div className="dropdown">
-<NavLink exact to='/api/gamesbyyear'>Games By Year</NavLink>
+<NavLink exact to='/api/gamesbyyear'>By Year</NavLink>
   <div className="dropdown-content">
     <a href="#">Link 1</a>
     <a href="#">Link 2</a>
@@ -78,10 +69,10 @@ class Nav extends Component {
 
             <NavLink exact to='/api/console'>Console</NavLink>
         <div className="topnav-right">
-            <NavLink exact to='/myaccount'>My Account </NavLink>
+            <NavLink exact to='/myaccount'> Account </NavLink>
             <NavLink to='/cart'>Cart</NavLink>
         {
-          auth.id ? <Link exact to='/'><button onClick={ logout }>Logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
+          auth.id ? <Link to='/'><button onClick={ logout }>Logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
         }
             
         { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }

@@ -2588,6 +2588,291 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./src/Account/MyAccount.js":
+/*!**********************************!*\
+  !*** ./src/Account/MyAccount.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+
+class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
+  constructor() {
+    super();
+    this.state = {
+      username: '',
+      email: '',
+      street: '',
+      city: '',
+      zipcode: '',
+      avatar: ''
+    };
+  }
+
+  componentDidMount() {
+    try {
+      this.props.getWishList();
+      console.log(this.props);
+      this.props.exchangeToken();
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.auth.id && this.props.auth.id) {
+      this.props.getWishList();
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.auth !== prevState) {
+      return {
+        id: nextProps.auth.id,
+        username: nextProps.auth.username,
+        email: nextProps.auth.email,
+        street: nextProps.auth.street || '',
+        city: nextProps.auth.city || '',
+        zipcode: nextProps.auth.zipcode || '',
+        avatar: nextProps.auth.avatar || ''
+      };
+    } else return null;
+  }
+
+  render() {
+    const {
+      auth,
+      wishlist
+    } = this.props;
+    const {
+      avatar,
+      username,
+      email,
+      street,
+      city,
+      zipcode
+    } = this.state;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
+      className: "user-details"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: avatar,
+      className: "avatar"
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", auth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", auth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", auth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
+      exact: true,
+      to: "/updatemyaccount"
+    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "games"
+    }, wishlist ? wishlist.wishListItems.map(wishListItem => {
+      if (wishListItem.product.imageUrl.length > 10) {
+        wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100);
+      }
+
+      ;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "games",
+        key: wishListItem.product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        to: `/api/product/${wishListItem.product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`,
+        width: "170",
+        height: "170"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "name"
+      }, wishListItem.product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "price"
+      }, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "addtocart",
+        onClick: () => this.props.addCart(wishListItem.product, 1)
+      }, "Add To Cart")));
+    }) : 'You have nothing in your Wish List! Go add something!'));
+  }
+
+}
+
+const mapState = state => {
+  console.log(state);
+  const user = state.auth || {};
+  return {
+    auth: state.auth,
+    user: user,
+    wishlist: state.wishlist
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
+    getWishList: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchWishList)()),
+    addCart: (product, quantity) => dispatch(addCart(product, quantity))
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(MyAccount));
+
+/***/ }),
+
+/***/ "./src/Account/UpdateMyAccount.js":
+/*!****************************************!*\
+  !*** ./src/Account/UpdateMyAccount.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
+
+
+
+
+class UpdateMyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
+  constructor() {
+    super();
+    this.state = {
+      id: '',
+      username: '',
+      email: '',
+      street: '',
+      city: '',
+      zipcode: '',
+      avatar: ''
+    };
+    this.onChange = this.onChange.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+  }
+
+  componentDidMount() {
+    this.el.addEventListener('change', ev => {
+      const file = ev.target.files[0];
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        this.setState({
+          avatar: reader.result
+        });
+      });
+      reader.readAsDataURL(file);
+    });
+
+    try {
+      this.props.exchangeToken();
+    } catch (ex) {
+      console.log(ex);
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.auth.id !== prevState.id) {
+      return {
+        id: nextProps.auth.id,
+        username: nextProps.auth.username,
+        email: nextProps.auth.email,
+        street: nextProps.auth.street || '',
+        city: nextProps.auth.city || '',
+        zipcode: nextProps.auth.zipcode || '',
+        avatar: nextProps.auth.avatar || ''
+      };
+    } else return null;
+  }
+
+  onChange(ev) {
+    this.setState({
+      [ev.target.name]: ev.target.value
+    });
+  }
+
+  updateUser(ev) {
+    ev.preventDefault();
+    this.props.updateUser(this.state);
+  }
+
+  render() {
+    const {
+      updateUser,
+      onChange
+    } = this;
+    const {
+      avatar,
+      username,
+      email,
+      street,
+      city,
+      zipcode
+    } = this.state;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+      onSubmit: updateUser
+    }, "Update ", this.state.username, "'s details: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Avatar:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "file",
+      ref: el => this.el = el
+    }), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: avatar,
+      className: "avatar"
+    }) : null, "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      name: "username",
+      onChange: onChange,
+      value: username
+    }), "Email:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      name: "email",
+      onChange: onChange,
+      value: email
+    }), "Street Address:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      name: "street",
+      onChange: onChange,
+      value: street
+    }), "City:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      name: "city",
+      onChange: onChange,
+      value: city
+    }), "Zipcode:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      name: "zipcode",
+      onChange: onChange,
+      value: zipcode
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      type: "submit",
+      disabled: !username || !email
+    }, "Update"));
+  }
+
+}
+
+const mapState = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
+    updateUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.updateUser)(user)),
+    deleteUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deleteUser)(user))
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(UpdateMyAccount));
+
+/***/ }),
+
 /***/ "./src/Cart.js":
 /*!*********************!*\
   !*** ./src/Cart.js ***!
@@ -2667,10 +2952,10 @@ const mapDispatch = dispatch => {
 
 /***/ }),
 
-/***/ "./src/Console.js":
-/*!************************!*\
-  !*** ./src/Console.js ***!
-  \************************/
+/***/ "./src/LandingPage.js":
+/*!****************************!*\
+  !*** ./src/LandingPage.js ***!
+  \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2682,6 +2967,423 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _LandingPage_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LandingPage.css */ "./src/LandingPage.css");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
+
+
+
+
+
+
+ //Carousel responsiveness
+
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: {
+      max: 4000,
+      min: 3000
+    },
+    items: 5
+  },
+  desktop: {
+    breakpoint: {
+      max: 3000,
+      min: 1024
+    },
+    items: 4
+  },
+  tablet: {
+    breakpoint: {
+      max: 1024,
+      min: 464
+    },
+    items: 2
+  },
+  mobile: {
+    breakpoint: {
+      max: 464,
+      min: 0
+    },
+    items: 1
+  }
+};
+
+class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
+  render() {
+    const {
+      auth,
+      thisMonthGames1989,
+      thisYearsGames1992,
+      thisYearsGames1990,
+      thisYearsGames1994,
+      thisYearsGames1985,
+      thisYearsGames1987
+    } = this.props;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of August 1989!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      responsive: responsive,
+      ssr: true
+    }, thisMonthGames1989.map(product => {
+      if (product.imageUrl.length > 10) {
+        product.imageUrl = product.imageUrl.substring(44, 100);
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wrapper",
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+        to: `/api/product/${product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
+        width: "170",
+        height: "170"
+      })), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"))));
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of 1985!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      responsive: responsive,
+      ssr: true
+    }, thisYearsGames1985.map(product => {
+      if (product.imageUrl.length > 10) {
+        product.imageUrl = product.imageUrl.substring(44, 100);
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wrapper",
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+        to: `/api/product/${product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
+        width: "170",
+        height: "170"
+      })), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"))));
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of 1987!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      responsive: responsive,
+      ssr: true
+    }, thisYearsGames1987.map(product => {
+      if (product.imageUrl.length > 10) {
+        product.imageUrl = product.imageUrl.substring(44, 100);
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wrapper",
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+        to: `/api/product/${product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
+        width: "170",
+        height: "170"
+      })), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"))));
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of 1990!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      responsive: responsive,
+      ssr: true
+    }, thisYearsGames1990.map(product => {
+      if (product.imageUrl.length > 10) {
+        product.imageUrl = product.imageUrl.substring(44, 100);
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wrapper",
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+        to: `/api/product/${product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
+        width: "170",
+        height: "170"
+      })), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"))));
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of 1992!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      responsive: responsive,
+      ssr: true
+    }, thisYearsGames1992.map(product => {
+      if (product.imageUrl.length > 10) {
+        product.imageUrl = product.imageUrl.substring(44, 100);
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wrapper",
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+        className: "link",
+        to: `/api/product/${product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
+        width: "170",
+        height: "170"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"))));
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of 1994!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      responsive: responsive,
+      ssr: true
+    }, thisYearsGames1994.map(product => {
+      if (product.imageUrl.length > 10) {
+        product.imageUrl = product.imageUrl.substring(44, 100);
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wrapper",
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+        className: "link",
+        to: `/api/product/${product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
+        width: "170",
+        height: "170"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"))));
+    }))) : null);
+  }
+
+}
+
+;
+
+const mapDispatch = dispatch => {
+  return {
+    addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity))
+  };
+};
+
+const mapStateToProps = ({
+  auth,
+  product,
+  cart
+}) => {
+  const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
+  const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
+  const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
+  const thisYearsGames1990 = product.filter(product => product.theme === 'thisYearsGames1990');
+  const thisYearsGames1992 = product.filter(product => product.theme === 'thisYearsGames1992');
+  const thisYearsGames1994 = product.filter(product => product.theme === 'thisYearsGames1994');
+  return {
+    auth,
+    thisYearsGames1985,
+    thisYearsGames1987,
+    thisMonthGames1989,
+    thisYearsGames1990,
+    thisYearsGames1992,
+    thisYearsGames1994,
+    cart
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatch)(LandingPage));
+
+/***/ }),
+
+/***/ "./src/Nav.js":
+/*!********************!*\
+  !*** ./src/Nav.js ***!
+  \********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SignUp/SignUpContainer */ "./src/SignUp/SignUpContainer.js");
+/* harmony import */ var _SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SignIn/SignInContainer */ "./src/SignIn/SignInContainer.js");
+/* harmony import */ var _store_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/auth */ "./src/store/auth.js");
+/* harmony import */ var chai__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! chai */ "./node_modules/chai/index.mjs");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
+
+
+
+
+
+
+
+
+
+
+class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  componentDidMount() {
+    this.props.fetchProducts();
+    this.props.exchangeToken();
+    this.props.fetchCart();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.auth.id && this.props.auth.id) {
+      this.props.fetchCart();
+    }
+  }
+
+  render() {
+    const {
+      logout,
+      auth
+    } = this.props;
+    const signUpTriggerText = 'Sign Up';
+    const signInTriggerText = 'Sign In';
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "topnav"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+      exact: true,
+      to: "/"
+    }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "dropdown"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+      exact: true,
+      to: "/api/genre"
+    }, " By Genre "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "dropdown-content"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+      to: `/api/genre/topFightingGames`
+    }, "  Top Fighting Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "dropdown"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+      exact: true,
+      to: "/api/platform"
+    }, " By Platform "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "dropdown-content"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "dropdown"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+      exact: true,
+      to: "/api/gamesbyyear"
+    }, "By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "dropdown-content"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+      exact: true,
+      to: "/api/console"
+    }, "Console"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "topnav-right"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+      exact: true,
+      to: "/myaccount"
+    }, " Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+      to: "/cart"
+    }, "Cart"), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+      to: "/"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: logout
+    }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      triggerText: signInTriggerText
+    }), auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      triggerText: signUpTriggerText
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "footer"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "https://www.instagram.com/fsseniorproject/"
+    }, "Instagram"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "https://www.facebook.com/profile.php?id=100085008934837"
+    }, "Facebook"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "https://twitter.com/fullstack2022"
+    }, "Twitter"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "contact"
+    }, "Contact"))))));
+  }
+
+}
+
+;
+
+const mapState = ({
+  auth
+}) => {
+  return {
+    auth
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchCart)()),
+    exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
+    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchProducts)()),
+    logout: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.logout)())
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Nav));
+
+/***/ }),
+
+/***/ "./src/ProductPages/Console.js":
+/*!*************************************!*\
+  !*** ./src/ProductPages/Console.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
@@ -2731,10 +3433,10 @@ const mapDispatch = dispatch => {
 
 /***/ }),
 
-/***/ "./src/GamesbyYear.js":
-/*!****************************!*\
-  !*** ./src/GamesbyYear.js ***!
-  \****************************/
+/***/ "./src/ProductPages/GamesbyYear.js":
+/*!*****************************************!*\
+  !*** ./src/ProductPages/GamesbyYear.js ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2745,7 +3447,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
@@ -2847,10 +3549,10 @@ const mapDispatch = dispatch => {
 
 /***/ }),
 
-/***/ "./src/Genre.js":
-/*!**********************!*\
-  !*** ./src/Genre.js ***!
-  \**********************/
+/***/ "./src/ProductPages/Genre.js":
+/*!***********************************!*\
+  !*** ./src/ProductPages/Genre.js ***!
+  \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2861,7 +3563,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
@@ -3079,10 +3781,10 @@ const mapDispatch = dispatch => {
 
 /***/ }),
 
-/***/ "./src/LandingPage.js":
-/*!****************************!*\
-  !*** ./src/LandingPage.js ***!
-  \****************************/
+/***/ "./src/ProductPages/Platform.js":
+/*!**************************************!*\
+  !*** ./src/ProductPages/Platform.js ***!
+  \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -3093,580 +3795,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _LandingPage_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LandingPage.css */ "./src/LandingPage.css");
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
-/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
-
-
-
-
-
-
- //Carousel responsiveness
-
-const responsive = {
-  superLargeDesktop: {
-    breakpoint: {
-      max: 4000,
-      min: 3000
-    },
-    items: 5
-  },
-  desktop: {
-    breakpoint: {
-      max: 3000,
-      min: 1024
-    },
-    items: 4
-  },
-  tablet: {
-    breakpoint: {
-      max: 1024,
-      min: 464
-    },
-    items: 2
-  },
-  mobile: {
-    breakpoint: {
-      max: 464,
-      min: 0
-    },
-    items: 1
-  }
-};
-
-class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  render() {
-    const {
-      auth,
-      thisMonthGames1989,
-      thisYearsGames1992,
-      thisYearsGames1990,
-      thisYearsGames1994,
-      thisYearsGames1985,
-      thisYearsGames1987
-    } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of August 1989!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      responsive: responsive,
-      ssr: true
-    }, thisMonthGames1989.map(product => {
-      if (product.imageUrl.length > 10) {
-        product.imageUrl = product.imageUrl.substring(44, 100);
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "wrapper",
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-        to: `/api/product/${product.id}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "picture"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
-        width: "170",
-        height: "170"
-      })), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        onClick: () => this.props.addCart(product, 1)
-      }, "Add To Cart"))));
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of 1985!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      responsive: responsive,
-      ssr: true
-    }, thisYearsGames1985.map(product => {
-      if (product.imageUrl.length > 10) {
-        product.imageUrl = product.imageUrl.substring(44, 100);
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "wrapper",
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-        className: "link",
-        to: `/api/product/${product.id}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "picture"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
-        width: "170",
-        height: "170"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        onClick: () => this.props.addCart(product, 1)
-      }, "Add To Cart"))));
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of 1987!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      responsive: responsive,
-      ssr: true
-    }, thisYearsGames1987.map(product => {
-      if (product.imageUrl.length > 10) {
-        product.imageUrl = product.imageUrl.substring(44, 100);
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "wrapper",
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-        className: "link",
-        to: `/api/product/${product.id}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "picture"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
-        width: "170",
-        height: "170"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        onClick: () => this.props.addCart(product, 1)
-      }, "Add To Cart"))));
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of 1990!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      responsive: responsive,
-      ssr: true
-    }, thisYearsGames1990.map(product => {
-      if (product.imageUrl.length > 10) {
-        product.imageUrl = product.imageUrl.substring(44, 100);
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "wrapper",
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-        className: "link",
-        to: `/api/product/${product.id}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "picture"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
-        width: "170",
-        height: "170"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        onClick: () => this.props.addCart(product, 1)
-      }, "Add To Cart"))));
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of 1992!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      responsive: responsive,
-      ssr: true
-    }, thisYearsGames1992.map(product => {
-      if (product.imageUrl.length > 10) {
-        product.imageUrl = product.imageUrl.substring(44, 100);
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "wrapper",
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-        className: "link",
-        to: `/api/product/${product.id}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "picture"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
-        width: "170",
-        height: "170"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        onClick: () => this.props.addCart(product, 1)
-      }, "Add To Cart"))));
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Top Games of 1994!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      responsive: responsive,
-      ssr: true
-    }, thisYearsGames1994.map(product => {
-      if (product.imageUrl.length > 10) {
-        product.imageUrl = product.imageUrl.substring(44, 100);
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "wrapper",
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
-        className: "link",
-        to: `/api/product/${product.id}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "picture"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
-        width: "170",
-        height: "170"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        onClick: () => this.props.addCart(product, 1)
-      }, "Add To Cart"))));
-    }))) : null);
-  }
-
-}
-
-;
-
-const mapDispatch = dispatch => {
-  return {
-    addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity))
-  };
-};
-
-const mapStateToProps = ({
-  auth,
-  product,
-  cart
-}) => {
-  const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
-  const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
-  const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
-  const thisYearsGames1990 = product.filter(product => product.theme === 'thisYearsGames1990');
-  const thisYearsGames1992 = product.filter(product => product.theme === 'thisYearsGames1992');
-  const thisYearsGames1994 = product.filter(product => product.theme === 'thisYearsGames1994');
-  return {
-    auth,
-    thisYearsGames1985,
-    thisYearsGames1987,
-    thisMonthGames1989,
-    thisYearsGames1990,
-    thisYearsGames1992,
-    thisYearsGames1994,
-    cart
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatch)(LandingPage));
-
-/***/ }),
-
-/***/ "./src/MyAccount.js":
-/*!**************************!*\
-  !*** ./src/MyAccount.js ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-
-
-
-
-class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  constructor() {
-    super();
-    this.state = {
-      username: '',
-      email: '',
-      street: '',
-      city: '',
-      zipcode: '',
-      avatar: ''
-    };
-  }
-
-  componentDidMount() {
-    try {
-      this.props.getWishList();
-      console.log(this.props);
-      this.props.exchangeToken();
-    } catch (ex) {
-      console.log(ex);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.auth.id && this.props.auth.id) {
-      this.props.getWishList();
-    }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.auth !== prevState) {
-      return {
-        id: nextProps.auth.id,
-        username: nextProps.auth.username,
-        email: nextProps.auth.email,
-        street: nextProps.auth.street || '',
-        city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || '',
-        avatar: nextProps.auth.avatar || ''
-      };
-    } else return null;
-  }
-
-  render() {
-    const {
-      auth,
-      wishlist
-    } = this.props;
-    const {
-      avatar,
-      username,
-      email,
-      street,
-      city,
-      zipcode
-    } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
-      className: "user-details"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-      src: avatar,
-      className: "avatar"
-    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", auth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", auth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", auth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
-      exact: true,
-      to: "/updatemyaccount"
-    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "games"
-    }, wishlist ? wishlist.wishListItems.map(wishListItem => {
-      if (wishListItem.product.imageUrl.length > 10) {
-        wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100);
-      }
-
-      ;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "games",
-        key: wishListItem.product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        to: `/api/product/${wishListItem.product.id}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "picture"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`,
-        width: "170",
-        height: "170"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "name"
-      }, wishListItem.product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price"
-      }, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "addtocart",
-        onClick: () => this.props.addCart(wishListItem.product, 1)
-      }, "Add To Cart")));
-    }) : 'You have nothing in your Wish List! Go add something!'));
-  }
-
-}
-
-const mapState = state => {
-  console.log(state);
-  const user = state.auth || {};
-  return {
-    auth: state.auth,
-    user: user,
-    wishlist: state.wishlist
-  };
-};
-
-const mapDispatch = dispatch => {
-  return {
-    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
-    getWishList: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchWishList)()),
-    addCart: (product, quantity) => dispatch(addCart(product, quantity))
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(MyAccount));
-
-/***/ }),
-
-/***/ "./src/Nav.js":
-/*!********************!*\
-  !*** ./src/Nav.js ***!
-  \********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SignUp/SignUpContainer */ "./src/SignUp/SignUpContainer.js");
-/* harmony import */ var _SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SignIn/SignInContainer */ "./src/SignIn/SignInContainer.js");
-/* harmony import */ var _store_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/auth */ "./src/store/auth.js");
-/* harmony import */ var chai__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! chai */ "./node_modules/chai/index.mjs");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-
-
-
-
-
-
-
-
-
-
-class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-  componentDidMount() {
-    this.props.fetchProducts();
-    this.props.exchangeToken();
-    this.props.fetchCart();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.auth.id && this.props.auth.id) {
-      this.props.fetchCart();
-    }
-  }
-
-  render() {
-    const {
-      logout,
-      auth
-    } = this.props;
-    const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In';
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "topnav"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/"
-    }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/api/genre"
-    }, " By Genre "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
-      to: `/api/genre/topFightingGames`
-    }, "  Top Fighting Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/api/platform"
-    }, " By Platform "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/api/gamesbyyear"
-    }, "Games By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/api/gamesbyyear"
-    }, "Games By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/api/console"
-    }, "Console"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "topnav-right"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/myaccount"
-    }, "My Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      to: "/cart"
-    }, "Cart"), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
-      exact: true,
-      to: "/"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-      onClick: logout
-    }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      triggerText: signInTriggerText
-    }), auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      triggerText: signUpTriggerText
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "footer"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "https://www.instagram.com/fsseniorproject/"
-    }, "Instagram"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "https://www.facebook.com/profile.php?id=100085008934837"
-    }, "Facebook"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "https://twitter.com/fullstack2022"
-    }, "Twitter"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "contact"
-    }, "Contact"))))));
-  }
-
-}
-
-;
-
-const mapState = ({
-  auth
-}) => {
-  return {
-    auth
-  };
-};
-
-const mapDispatch = dispatch => {
-  return {
-    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchCart)()),
-    exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
-    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchProducts)()),
-    logout: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.logout)())
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Nav));
-
-/***/ }),
-
-/***/ "./src/Platform.js":
-/*!*************************!*\
-  !*** ./src/Platform.js ***!
-  \*************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
@@ -3913,6 +4042,172 @@ const mapDispatch = dispatch => {
 //     }
 //   };
 // export default connect(mapStateToProps, mapDispatch)(Platform);
+
+/***/ }),
+
+/***/ "./src/ProductPages/SingleGame.js":
+/*!****************************************!*\
+  !*** ./src/ProductPages/SingleGame.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
+/* harmony import */ var _SingleGame_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleGame.css */ "./src/ProductPages/SingleGame.css");
+
+
+
+
+
+class SingleGame extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  render() {
+    const {
+      auth,
+      game
+    } = this.props;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "singlegame"
+    }, [game].map(product => {
+      if (product.imageUrl.length > 10) {
+        product.imageUrl = product.imageUrl.substring(44, 100);
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        key: product.id,
+        className: "singlecard"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        className: "product"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "product-img"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
+        width: "170",
+        height: "170"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "productlisting"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "content"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "singleName"
+      }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "price-condition"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "singlePrice"
+      }, `$${product.price}  |`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "condition"
+      }, "Condition: ", `${product.condition}`)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "heart-cart"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "btn",
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "heart-wrapper",
+        onClick: () => this.props.addToWishList(product)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "heart"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "singleSummary"
+      }, product.summary.substring(0, 600))))));
+    })) : null);
+  }
+
+}
+
+const mapDispatch = dispatch => {
+  return {
+    addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity)),
+    addToWishList: product => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addToWishList)(product))
+  };
+};
+
+const mapStateToProps = ({
+  auth,
+  product,
+  cart
+}, {
+  match
+}) => {
+  const id = match.params.id;
+  let game = product.find(game => game.id === id);
+  return {
+    auth,
+    cart,
+    game
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatch)(SingleGame));
+
+/***/ }),
+
+/***/ "./src/ProductPages/topFightingGames.js":
+/*!**********************************************!*\
+  !*** ./src/ProductPages/topFightingGames.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+
+class topFightingGames extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  componentDidMount() {
+    this.props.fetchProducts();
+  }
+
+  render() {
+    const {
+      topFightingGames
+    } = this.props;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Top Fighting Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, topFightingGames.map(product => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: product.imageUrl
+      }), " ", product.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "price"
+      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "addtocart"
+      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, product.summary));
+    }))));
+  }
+
+}
+
+const mapStateToProps = ({
+  product
+}) => {
+  const topFightingGames = product.filter(product => product.theme === 'topFightingGames');
+  return {
+    topFightingGames
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchProducts)())
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatch)(topFightingGames));
 
 /***/ }),
 
@@ -4599,253 +4894,6 @@ const mapDispatch = dispatch => {
 
 /***/ }),
 
-/***/ "./src/SingleGame.js":
-/*!***************************!*\
-  !*** ./src/SingleGame.js ***!
-  \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var _SingleGame_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleGame.css */ "./src/SingleGame.css");
-
-
-
-
-
-class SingleGame extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-  render() {
-    const {
-      auth,
-      game
-    } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "singlegame"
-    }, [game].map(product => {
-      if (product.imageUrl.length > 10) {
-        product.imageUrl = product.imageUrl.substring(44, 100);
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-        className: "product"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "product-img"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
-        width: "170",
-        height: "170"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "productlisting"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "singleName"
-      }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price-condition"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "singlePrice"
-      }, `$${product.price}  |`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "condition"
-      }, "Condition: ", `${product.condition}`)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "heart-cart"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "btn",
-        onClick: () => this.props.addCart(product, 1)
-      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "heart-wrapper",
-        onClick: () => this.props.addToWishList(product)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "heart"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "singleSummary"
-      }, product.summary.substring(0, 600))))));
-    })) : null);
-  }
-
-}
-
-const mapDispatch = dispatch => {
-  return {
-    addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity)),
-    addToWishList: product => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addToWishList)(product))
-  };
-};
-
-const mapStateToProps = ({
-  auth,
-  product,
-  cart
-}, {
-  match
-}) => {
-  const id = match.params.id;
-  let game = product.find(game => game.id === id);
-  return {
-    auth,
-    cart,
-    game
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatch)(SingleGame));
-
-/***/ }),
-
-/***/ "./src/UpdateMyAccount.js":
-/*!********************************!*\
-  !*** ./src/UpdateMyAccount.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-
-
-
-
-class UpdateMyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  constructor() {
-    super();
-    this.state = {
-      id: '',
-      username: '',
-      email: '',
-      street: '',
-      city: '',
-      zipcode: '',
-      avatar: ''
-    };
-    this.onChange = this.onChange.bind(this);
-    this.updateUser = this.updateUser.bind(this);
-  }
-
-  componentDidMount() {
-    this.el.addEventListener('change', ev => {
-      const file = ev.target.files[0];
-      const reader = new FileReader();
-      reader.addEventListener('load', () => {
-        this.setState({
-          avatar: reader.result
-        });
-      });
-      reader.readAsDataURL(file);
-    });
-
-    try {
-      this.props.exchangeToken();
-    } catch (ex) {
-      console.log(ex);
-    }
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.auth.id !== prevState.id) {
-      return {
-        id: nextProps.auth.id,
-        username: nextProps.auth.username,
-        email: nextProps.auth.email,
-        street: nextProps.auth.street || '',
-        city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || '',
-        avatar: nextProps.auth.avatar || ''
-      };
-    } else return null;
-  }
-
-  onChange(ev) {
-    this.setState({
-      [ev.target.name]: ev.target.value
-    });
-  }
-
-  updateUser(ev) {
-    ev.preventDefault();
-    this.props.updateUser(this.state);
-  }
-
-  render() {
-    const {
-      updateUser,
-      onChange
-    } = this;
-    const {
-      avatar,
-      username,
-      email,
-      street,
-      city,
-      zipcode
-    } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-      onSubmit: updateUser
-    }, "Update ", this.state.username, "'s details: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Avatar:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      type: "file",
-      ref: el => this.el = el
-    }), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-      src: avatar,
-      className: "avatar"
-    }) : null, "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      name: "username",
-      onChange: onChange,
-      value: username
-    }), "Email:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      name: "email",
-      onChange: onChange,
-      value: email
-    }), "Street Address:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      name: "street",
-      onChange: onChange,
-      value: street
-    }), "City:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      name: "city",
-      onChange: onChange,
-      value: city
-    }), "Zipcode:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-      name: "zipcode",
-      onChange: onChange,
-      value: zipcode
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-      type: "submit",
-      disabled: !username || !email
-    }, "Update"));
-  }
-
-}
-
-const mapState = state => {
-  return {
-    auth: state.auth
-  };
-};
-
-const mapDispatch = dispatch => {
-  return {
-    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
-    updateUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.updateUser)(user)),
-    deleteUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deleteUser)(user))
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(UpdateMyAccount));
-
-/***/ }),
-
 /***/ "./src/store/auth.js":
 /*!***************************!*\
   !*** ./src/store/auth.js ***!
@@ -5296,70 +5344,6 @@ const deleteFromWishList = product => {
   };
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (wishlist);
-
-/***/ }),
-
-/***/ "./src/topFightingGames.js":
-/*!*********************************!*\
-  !*** ./src/topFightingGames.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-
-
-
-
-class topFightingGames extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-  componentDidMount() {
-    this.props.fetchProducts();
-  }
-
-  render() {
-    const {
-      topFightingGames
-    } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Top Fighting Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, topFightingGames.map(product => {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: product.imageUrl
-      }), " ", product.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price"
-      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "addtocart"
-      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, product.summary));
-    }))));
-  }
-
-}
-
-const mapStateToProps = ({
-  product
-}) => {
-  const topFightingGames = product.filter(product => product.theme === 'topFightingGames');
-  return {
-    topFightingGames
-  };
-};
-
-const mapDispatch = dispatch => {
-  return {
-    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchProducts)())
-  };
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatch)(topFightingGames));
 
 /***/ }),
 
@@ -15017,6 +15001,34 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n* {\n    box-sizing: border-bo
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/ProductPages/SingleGame.css":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/ProductPages/SingleGame.css ***!
+  \*******************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap);"]);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n}\n\n/* .singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n    margin: 10rem;\n} */\n\n.singlecard {\n    display: flex;\n    justify-content: center;\n    padding-top: 5rem;\n\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: stretch;\n}\n\n.product-img{\n    width: 40%;\n    /* height: 500px; */\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n .productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n} \n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */ \n  \n   .heart-wrapper {\n    /* position: absolute; */\n    /* top: 50%; */\n    left: 0;\n    width: 100%;\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }\n\n  .price-condition {\n    display: flex;\n    align-items: center;\n  }\n\n  .condition {\n    padding: 1rem;\n    padding-bottom: 2.5rem;\n    padding-left: 2rem;\n  }\n\n  ", "",{"version":3,"sources":["webpack://./src/ProductPages/SingleGame.css"],"names":[],"mappings":"AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;;AAE1B;;AAEA;;;;;GAKG;;AAEH;IACI,aAAa;IACb,uBAAuB;IACvB,iBAAiB;;AAErB;;AAEA;IACI,kBAAkB;IAClB,aAAa;IACb,gBAAgB;IAChB,iBAAiB;IACjB,YAAY;IACZ,aAAa;IACb,uBAAuB;IACvB,oBAAoB;AACxB;;AAEA;IACI,UAAU;IACV,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB;IAClB,UAAU;IACV,4BAA4B;IAC5B,gCAAgC;AACpC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,gBAAgB;IAChB,iBAAiB;AACrB;;CAEC;IACG,UAAU;IACV,iBAAiB;IACjB,YAAY;IACZ,mBAAmB;IACnB,aAAa;IACb,aAAa;IACb,uBAAuB;IACvB,cAAc;IACd,UAAU;IACV,2BAA2B;IAC3B,gCAAgC;AACpC;;AAEA;IACI;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;;AAGA;IACI,oBAAoB;IACpB,eAAe;IACf,0BAA0B;AAC9B;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,YAAY;IACZ,0BAA0B;IAC1B,eAAe;IACf,kBAAkB;IAClB,eAAe;IACf,mBAAmB;AACvB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;;;;KAIK;;GAEF;IACC,wBAAwB;IACxB,cAAc;IACd,OAAO;IACP,WAAW;IACX,kBAAkB;IAClB,iBAAiB;IACjB,cAAc;EAChB;;EAEA;IACE,2BAA2B;IAC3B,UAAU;IACV,WAAW;IACX,aAAa;IACb,mBAAmB;IACnB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;qBAqCiB;IACjB;;IAEA;IACA,kCAAkC;IAClC;;AAEJ;IACI,KAAK,mBAAmB,EAAE;IAC1B,MAAM,qBAAqB,EAAE;IAC7B,OAAO,mBAAmB,EAAE;AAChC;;EAEE;IACE,aAAa;EACf;;EAEA;IACE,aAAa;IACb,mBAAmB;EACrB;;EAEA;IACE,aAAa;IACb,sBAAsB;IACtB,kBAAkB;EACpB","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap');\n\n*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n}\n\n/* .singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n    margin: 10rem;\n} */\n\n.singlecard {\n    display: flex;\n    justify-content: center;\n    padding-top: 5rem;\n\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: stretch;\n}\n\n.product-img{\n    width: 40%;\n    /* height: 500px; */\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n .productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n} \n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */ \n  \n   .heart-wrapper {\n    /* position: absolute; */\n    /* top: 50%; */\n    left: 0;\n    width: 100%;\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }\n\n  .price-condition {\n    display: flex;\n    align-items: center;\n  }\n\n  .condition {\n    padding: 1rem;\n    padding-bottom: 2.5rem;\n    padding-left: 2rem;\n  }\n\n  "],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/Search/Search.css":
 /*!*********************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/Search/Search.css ***!
@@ -15038,34 +15050,6 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, ".searchbar {\n    padding-left: 1rem;\n    margin-left: 2rem;\n    margin-top: 5rem;\n  }\n  \n  .searchResults {\n    display: flex;\n    flex-wrap: wrap;\n  }\n  \n  .indsearch {\n    padding: 1rem;\n    width: 250px;\n  }", "",{"version":3,"sources":["webpack://./src/Search/Search.css"],"names":[],"mappings":"AAAA;IACI,kBAAkB;IAClB,iBAAiB;IACjB,gBAAgB;EAClB;;EAEA;IACE,aAAa;IACb,eAAe;EACjB;;EAEA;IACE,aAAa;IACb,YAAY;EACd","sourcesContent":[".searchbar {\n    padding-left: 1rem;\n    margin-left: 2rem;\n    margin-top: 5rem;\n  }\n  \n  .searchResults {\n    display: flex;\n    flex-wrap: wrap;\n  }\n  \n  .indsearch {\n    padding: 1rem;\n    width: 250px;\n  }"],"sourceRoot":""}]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/SingleGame.css":
-/*!******************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/SingleGame.css ***!
-  \******************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-// Imports
-
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
-___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap);"]);
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n}\n\n.singleGame {\n    /* display: flex;\n    justify-content: center; */\n    margin-top: 7rem;\n    margin: 10rem;\n}\n\n.product{\n    /* position: relative; */\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.product-img{\n    width: 40%;\n    height: 500px;\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n .productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n} \n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */ \n  \n   .heart-wrapper {\n    /* position: absolute; */\n    /* top: 50%; */\n    left: 0;\n    /* width: 100%; */\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }\n\n  .price-condition {\n    display: flex;\n    align-items: center;\n  }\n\n  .condition {\n    padding: 1rem;\n    padding-bottom: 2.5rem;\n    padding-left: 2rem;\n  }\n\n  ", "",{"version":3,"sources":["webpack://./src/SingleGame.css"],"names":[],"mappings":"AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;;AAE1B;;AAEA;IACI;8BAC0B;IAC1B,gBAAgB;IAChB,aAAa;AACjB;;AAEA;IACI,wBAAwB;IACxB,aAAa;IACb,gBAAgB;IAChB,iBAAiB;IACjB,YAAY;IACZ,aAAa;IACb,uBAAuB;IACvB,mBAAmB;AACvB;;AAEA;IACI,UAAU;IACV,aAAa;IACb,gBAAgB;IAChB,kBAAkB;IAClB,UAAU;IACV,4BAA4B;IAC5B,gCAAgC;AACpC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,gBAAgB;IAChB,iBAAiB;AACrB;;CAEC;IACG,UAAU;IACV,iBAAiB;IACjB,YAAY;IACZ,mBAAmB;IACnB,aAAa;IACb,aAAa;IACb,uBAAuB;IACvB,cAAc;IACd,UAAU;IACV,2BAA2B;IAC3B,gCAAgC;AACpC;;AAEA;IACI;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;;AAGA;IACI,oBAAoB;IACpB,eAAe;IACf,0BAA0B;AAC9B;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,YAAY;IACZ,0BAA0B;IAC1B,eAAe;IACf,kBAAkB;IAClB,eAAe;IACf,mBAAmB;AACvB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;;;;KAIK;;GAEF;IACC,wBAAwB;IACxB,cAAc;IACd,OAAO;IACP,iBAAiB;IACjB,kBAAkB;IAClB,iBAAiB;IACjB,cAAc;EAChB;;EAEA;IACE,2BAA2B;IAC3B,UAAU;IACV,WAAW;IACX,aAAa;IACb,mBAAmB;IACnB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;qBAqCiB;IACjB;;IAEA;IACA,kCAAkC;IAClC;;AAEJ;IACI,KAAK,mBAAmB,EAAE;IAC1B,MAAM,qBAAqB,EAAE;IAC7B,OAAO,mBAAmB,EAAE;AAChC;;EAEE;IACE,aAAa;EACf;;EAEA;IACE,aAAa;IACb,mBAAmB;EACrB;;EAEA;IACE,aAAa;IACb,sBAAsB;IACtB,kBAAkB;EACpB","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap');\n\n*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n}\n\n.singleGame {\n    /* display: flex;\n    justify-content: center; */\n    margin-top: 7rem;\n    margin: 10rem;\n}\n\n.product{\n    /* position: relative; */\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.product-img{\n    width: 40%;\n    height: 500px;\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n .productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n} \n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */ \n  \n   .heart-wrapper {\n    /* position: absolute; */\n    /* top: 50%; */\n    left: 0;\n    /* width: 100%; */\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }\n\n  .price-condition {\n    display: flex;\n    align-items: center;\n  }\n\n  .condition {\n    padding: 1rem;\n    padding-bottom: 2.5rem;\n    padding-left: 2rem;\n  }\n\n  "],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -59114,6 +59098,61 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./src/ProductPages/SingleGame.css":
+/*!*****************************************!*\
+  !*** ./src/ProductPages/SingleGame.css ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./SingleGame.css */ "./node_modules/css-loader/dist/cjs.js!./src/ProductPages/SingleGame.css");
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+
+      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+    
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
 /***/ "./src/Search/Search.css":
 /*!*******************************!*\
   !*** ./src/Search/Search.css ***!
@@ -59165,61 +59204,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_Search_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_Search_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_Search_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
-
-
-/***/ }),
-
-/***/ "./src/SingleGame.css":
-/*!****************************!*\
-  !*** ./src/SingleGame.css ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../node_modules/css-loader/dist/cjs.js!./SingleGame.css */ "./node_modules/css-loader/dist/cjs.js!./src/SingleGame.css");
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-var options = {};
-
-options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
-options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
-
-      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
-    
-options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
-options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
-
-
-
-
-       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
 /***/ }),
@@ -61484,9 +61468,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _SingleGame__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleGame */ "./src/SingleGame.js");
-/* harmony import */ var _MyAccount__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MyAccount */ "./src/MyAccount.js");
-/* harmony import */ var _UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UpdateMyAccount */ "./src/UpdateMyAccount.js");
+/* harmony import */ var _ProductPages_SingleGame__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProductPages/SingleGame */ "./src/ProductPages/SingleGame.js");
+/* harmony import */ var _Account_MyAccount__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Account/MyAccount */ "./src/Account/MyAccount.js");
+/* harmony import */ var _Account_UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Account/UpdateMyAccount */ "./src/Account/UpdateMyAccount.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _LandingPage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LandingPage */ "./src/LandingPage.js");
@@ -61494,13 +61478,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Search_Search__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Search/Search */ "./src/Search/Search.js");
 /* harmony import */ var _Search_SearchResults__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Search/SearchResults */ "./src/Search/SearchResults.js");
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./index.css */ "./src/index.css");
-/* harmony import */ var _Platform__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Platform */ "./src/Platform.js");
-/* harmony import */ var _Genre__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Genre */ "./src/Genre.js");
+/* harmony import */ var _ProductPages_Platform__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ProductPages/Platform */ "./src/ProductPages/Platform.js");
+/* harmony import */ var _ProductPages_Genre__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ProductPages/Genre */ "./src/ProductPages/Genre.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
 /* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Nav */ "./src/Nav.js");
-/* harmony import */ var _GamesbyYear__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./GamesbyYear */ "./src/GamesbyYear.js");
-/* harmony import */ var _Console__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Console */ "./src/Console.js");
-/* harmony import */ var _topFightingGames__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./topFightingGames */ "./src/topFightingGames.js");
+/* harmony import */ var _ProductPages_GamesbyYear__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ProductPages/GamesbyYear */ "./src/ProductPages/GamesbyYear.js");
+/* harmony import */ var _ProductPages_Console__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ProductPages/Console */ "./src/ProductPages/Console.js");
+/* harmony import */ var _ProductPages_topFightingGames__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./ProductPages/topFightingGames */ "./src/ProductPages/topFightingGames.js");
 
 
 
@@ -61540,35 +61524,35 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/product/:id",
       exact: true,
-      component: _SingleGame__WEBPACK_IMPORTED_MODULE_3__["default"]
+      component: _ProductPages_SingleGame__WEBPACK_IMPORTED_MODULE_3__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/genre",
       exact: true,
-      component: _Genre__WEBPACK_IMPORTED_MODULE_12__["default"]
+      component: _ProductPages_Genre__WEBPACK_IMPORTED_MODULE_12__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/genre/topFightingGames",
       exact: true,
-      component: _topFightingGames__WEBPACK_IMPORTED_MODULE_17__["default"]
+      component: _ProductPages_topFightingGames__WEBPACK_IMPORTED_MODULE_17__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/platform",
       exact: true,
-      component: _Platform__WEBPACK_IMPORTED_MODULE_11__["default"]
+      component: _ProductPages_Platform__WEBPACK_IMPORTED_MODULE_11__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/gamesbyyear",
       exact: true,
-      component: _GamesbyYear__WEBPACK_IMPORTED_MODULE_15__["default"]
+      component: _ProductPages_GamesbyYear__WEBPACK_IMPORTED_MODULE_15__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/console",
       exact: true,
-      component: _Console__WEBPACK_IMPORTED_MODULE_16__["default"]
+      component: _ProductPages_Console__WEBPACK_IMPORTED_MODULE_16__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/myaccount",
       exact: true,
-      component: _MyAccount__WEBPACK_IMPORTED_MODULE_4__["default"]
+      component: _Account_MyAccount__WEBPACK_IMPORTED_MODULE_4__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/updatemyaccount",
       exact: true,
-      component: _UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__["default"]
+      component: _Account_UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/search/:term?",
       component: _Search_SearchResults__WEBPACK_IMPORTED_MODULE_9__["default"]
