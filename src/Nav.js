@@ -7,8 +7,6 @@ import auth from './store/auth';
 import { use } from 'chai';
 import {exchangeToken, logout} from './store/auth';
 import { fetchProducts, fetchCart } from './store';
-import GenreDropdown from './Dropdown/GenreDropdown';
-import PlatformDropDown from './Dropdown/PlatformDropdown';
 
 class Nav extends Component {
 
@@ -40,9 +38,9 @@ class Nav extends Component {
 
             <NavLink exact to='/'>Home</NavLink>
              
-            <div class="dropdown">
-            <NavLink exact to='/api/genre'>Genre </NavLink>
-  <div class="dropdown-content">
+            <div className="dropdown">
+            <NavLink exact to='/api/genre'> By Genre </NavLink>
+  <div className="dropdown-content">
   <Link to={`/api/genre/topFightingGames`}>  Top Fighting Games
 </Link>
 
@@ -50,27 +48,27 @@ class Nav extends Component {
     <a href="#">Link 3</a>
   </div>
 </div>
-             <div class="dropdown">
-  <NavLink exact to='/api/platform'>Platform </NavLink>
-  <div class="dropdown-content">
+             <div className="dropdown">
+  <NavLink exact to='/api/platform'> By Platform </NavLink>
+  <div className="dropdown-content">
     <a href="#">Link 1</a>
     <a href="#">Link 2</a>
     <a href="#">Link 3</a>
   </div>
 </div>
 
-            <div class="dropdown">
+            <div className="dropdown">
 <NavLink exact to='/api/gamesbyyear'>Games By Year</NavLink>  
-  <div class="dropdown-content">
+  <div className="dropdown-content">
     <a href="#">Link 1</a>
     <a href="#">Link 2</a>
     <a href="#">Link 3</a>
   </div>
 </div>
 
-        <div class="dropdown">
+        <div className="dropdown">
 <NavLink exact to='/api/gamesbyyear'>Games By Year</NavLink>
-  <div class="dropdown-content">
+  <div className="dropdown-content">
     <a href="#">Link 1</a>
     <a href="#">Link 2</a>
     <a href="#">Link 3</a>
