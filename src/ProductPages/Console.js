@@ -2,11 +2,31 @@ import React, {Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store';
 import { Link } from 'react-router-dom';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
+//Carousel responsiveness
+
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
 class Console extends Component {
-
-
     componentDidMount(){
         this.props.fetchProducts();
     }
@@ -18,19 +38,27 @@ class Console extends Component {
     <div>
         <main>
       <h2>Consoles</h2>
-            <ul>
-            { consoles.map(product=>{
+      <Carousel responsive={responsive} ssr={true}>
+        
+        { consoles.map(product=>{
+  
           return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
+            <div className="wrapper" key={product.id}>
+              <div className="card">
+                  <Link to={`/api/product/${product.id}`}>
+                  <div className="picture"><img src={product.imageUrl}width="170" 
+                  height="170" /></div> </Link>
+                    <div className='info'>
+                      <h3>{product.name}</h3>
+                      <p>{`$${product.price}`}</p>
+                      <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                    </div>
+                </div>
+            </div>   
           )
         })}
-            </ul>
+        </Carousel>
+
 
            
         </main>
@@ -43,8 +71,6 @@ class Console extends Component {
 
 const mapStateToProps = ({ product})=> {
     const consoles = product.filter(product => product.theme === 'consoles');
-   
-
     return {
       consoles
     };
