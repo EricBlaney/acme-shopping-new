@@ -17,7 +17,7 @@ import Nav from './Nav'
 import GamesbyYear from './ProductPages/GamesbyYear';
 import Console from './ProductPages/Console'
 import topFightingGames from './ProductPages/topFightingGames';
-
+import PasswordReset from './PasswordReset';
 class _App extends Component{
     render(){
         return(
@@ -37,6 +37,7 @@ class _App extends Component{
             <Route path='/myaccount' exact component={ MyAccount }/>
             <Route path='/updatemyaccount' exact component={ UpdateMyAccount }/>
             <Route path='/search/:term?' component={ SearchResults }/>
+            <Route path='/passwordreset/:token/:username/:id' component={ PasswordReset }/>
         </div>
         )
     }
