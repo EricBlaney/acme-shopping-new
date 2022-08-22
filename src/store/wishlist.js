@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const wishlist = (state = { wishListItems: [ ] }, action)=> {
   if(action.type === 'SET_WISHLIST'){
-    console.log(action.wishlist)
     state = action.wishlist;
   } else if (action.type === 'DELETE_WISHLISTITEM') {
     const wishListItems = state.wishListItems.filter(item => item.product.id !== action.id)

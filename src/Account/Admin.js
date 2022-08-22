@@ -2,33 +2,31 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchWishList } from '../store'
 import { Link, NavLink } from 'react-router-dom';
-import Admin from './Admin';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 //Carousel responsiveness
 
 const responsive = {
-  superLargeDesktop: {
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 4
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
-};
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
 
-
-class MyAccount extends React.Component{
+class Admin extends React.Component{
     constructor(){
         super();
         this.state = {
@@ -40,55 +38,53 @@ class MyAccount extends React.Component{
             avatar: ''
         };
       }
+
     componentDidMount() {
         this.props.getWishList();
-   
     }
+
     componentDidUpdate(prevProps){
-        if(!prevProps.auth.id && this.props.auth.id){
+        if(!prevProps.adminAuth.id && this.props.adminAuth.id){
           this.props.getWishList();
         }
     }
+
     static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.auth !== prevState){
-        return { id: nextProps.auth.id,
-        username: nextProps.auth.username, 
-        email: nextProps.auth.email,
-        street: nextProps.auth.street || '',
-        city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || '',
-        avatar: nextProps.auth.avatar  || ''
+        if(nextProps.adminAuth !== prevState){
+        return { id: nextProps.adminAuth.id,
+        username: nextProps.adminAuth.username, 
+        email: nextProps.adminAuth.email,
+        street: nextProps.adminAuth.street || '',
+        city: nextProps.adminAuth.city || '',
+        zipcode: nextProps.adminAuth.zipcode || '',
+        avatar: nextProps.adminAuth.avatar  || ''
         };
         }
         else return null;
       }
 
     render() {
-        const {auth, wishlist, adminAuth} = this.props;
+        const {wishlist, adminAuth} = this.props;
         const {avatar, username, email, street, city, zipcode} = this.state;
         return(
             <div>
-            { adminAuth.isAdmin ? <Admin/> :
+    
+            <h1>
+            {username}'s Admin Profile
+            </h1>
+            { avatar ? <img src={avatar} className="avatar"/> : null}
+            <h2>{username}'s details:</h2>
+            <div>Email: {email}</div>
+            <div>Address: {adminAuth.street || "None Listed"}</div>
+            <div>City: {adminAuth.city || "None listed."}</div>
+            <div>Zipcode: {adminAuth.zipcode || 'None listed.'}</div>
+            <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+            <br></br>
+            Your Wish List:
+            <br></br>
+            <br></br>
 
-                <main className='user-details'>
-                    <h1>
-                    {username}'s Profile
-                    </h1>
-                    { avatar ? <img src={avatar} className="avatar"/> : null}
-                    <h2>{username}'s details:</h2>
-                    <div>Email: {email}</div>
-                    <div>Address: {auth.street || "None Listed"}</div>
-                    <div>City: {auth.city || "None listed."}</div>
-                    <div>Zipcode: {auth.zipcode || 'None listed.'}</div>
-                    <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
-                    <br></br>
-                    Your Wish List:
-                    <br></br>
-                    <br></br>
-
-
-
-                    {
+            {
                         wishlist ? 
                         <Carousel responsive={responsive} ssr={true}> 
                         { 
@@ -118,8 +114,8 @@ class MyAccount extends React.Component{
                         
                         : 'You have nothing in your Wish List! Go add something!'
                     }
-                </main> }
 
+            Admin Tools
             </div>
         )
     }
@@ -128,7 +124,6 @@ class MyAccount extends React.Component{
 const mapState = (state) => {
     const user = state.auth || {};
     return {
-        auth: state.auth,
         adminAuth: state.adminAuth,
         user: user,
         wishlist: state.wishlist
@@ -142,4 +137,4 @@ const mapDispatch = (dispatch) => {
     }
 }
 
-export default connect(mapState, mapDispatch)(MyAccount);
+export default connect(mapState, mapDispatch)(Admin);
