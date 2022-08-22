@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import { Link } from 'react-router-dom';
 import { addCart } from '../store'
 import React from 'react';
-import './Search.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -45,12 +44,12 @@ const SearchResults = ({searchResults, addCart}) => {
                     height="170" /></div>  
                     </Link>
 
-                    <div className='info'>
-                    <h3>{product.name}</h3>
-        
-                    <p>{`$${product.price}`}</p>
-                    <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-                    </div>
+                        <div className='info'>
+                            <h3>{product.name}</h3>
+                
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                        </div>
                     </div>
                     </div>   
                 )

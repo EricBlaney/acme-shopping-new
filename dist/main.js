@@ -2588,6 +2588,172 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./src/Account/Admin.js":
+/*!******************************!*\
+  !*** ./src/Account/Admin.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
+
+
+
+
+
+ //Carousel responsiveness
+
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: {
+      max: 4000,
+      min: 3000
+    },
+    items: 5
+  },
+  desktop: {
+    breakpoint: {
+      max: 3000,
+      min: 1024
+    },
+    items: 4
+  },
+  tablet: {
+    breakpoint: {
+      max: 1024,
+      min: 464
+    },
+    items: 2
+  },
+  mobile: {
+    breakpoint: {
+      max: 464,
+      min: 0
+    },
+    items: 1
+  }
+};
+
+class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
+  constructor() {
+    super();
+    this.state = {
+      username: '',
+      email: '',
+      street: '',
+      city: '',
+      zipcode: '',
+      avatar: ''
+    };
+  }
+
+  componentDidMount() {
+    this.props.getWishList();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.adminAuth.id && this.props.adminAuth.id) {
+      this.props.getWishList();
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.adminAuth !== prevState) {
+      return {
+        id: nextProps.adminAuth.id,
+        username: nextProps.adminAuth.username,
+        email: nextProps.adminAuth.email,
+        street: nextProps.adminAuth.street || '',
+        city: nextProps.adminAuth.city || '',
+        zipcode: nextProps.adminAuth.zipcode || '',
+        avatar: nextProps.adminAuth.avatar || ''
+      };
+    } else return null;
+  }
+
+  render() {
+    const {
+      wishlist,
+      adminAuth
+    } = this.props;
+    const {
+      avatar,
+      username,
+      email,
+      street,
+      city,
+      zipcode
+    } = this.state;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Admin Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: avatar,
+      className: "avatar"
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", adminAuth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", adminAuth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", adminAuth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.NavLink, {
+      exact: true,
+      to: "/updatemyaccount"
+    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), wishlist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      responsive: responsive,
+      ssr: true
+    }, wishlist.wishListItems.map(wishListItem => {
+      console.log(wishListItem.product);
+
+      if (wishListItem.product.imageUrl.length > 10) {
+        wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100);
+      }
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wrapper",
+        key: wishListItem.product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+        className: "link",
+        to: `/api/product/${wishListItem.product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`,
+        width: "170",
+        height: "170"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, wishListItem.product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"))));
+    })) : 'You have nothing in your Wish List! Go add something!', "Admin Tools");
+  }
+
+}
+
+const mapState = state => {
+  const user = state.auth || {};
+  return {
+    adminAuth: state.adminAuth,
+    user: user,
+    wishlist: state.wishlist
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    getWishList: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchWishList)()),
+    addCart: (product, quantity) => dispatch(addCart(product, quantity))
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Admin));
+
+/***/ }),
+
 /***/ "./src/Account/MyAccount.js":
 /*!**********************************!*\
   !*** ./src/Account/MyAccount.js ***!
@@ -2603,13 +2769,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _store_adminAuth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/adminAuth */ "./src/store/adminAuth.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _Admin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Admin */ "./src/Account/Admin.js");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
 
 
 
 
 
+
+ //Carousel responsiveness
+
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: {
+      max: 4000,
+      min: 3000
+    },
+    items: 5
+  },
+  desktop: {
+    breakpoint: {
+      max: 3000,
+      min: 1024
+    },
+    items: 4
+  },
+  tablet: {
+    breakpoint: {
+      max: 1024,
+      min: 464
+    },
+    items: 2
+  },
+  mobile: {
+    breakpoint: {
+      max: 464,
+      min: 0
+    },
+    items: 1
+  }
+};
 
 class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
   constructor() {
@@ -2625,12 +2826,7 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
   }
 
   componentDidMount() {
-    try {
-      this.props.getWishList();
-      console.log(this.props);
-    } catch (ex) {
-      console.log(ex);
-    }
+    this.props.getWishList();
   }
 
   componentDidUpdate(prevProps) {
@@ -2667,61 +2863,31 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
       city,
       zipcode
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, adminAuth.isAdmin === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
-      className: "user-details"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Admin Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-      src: avatar,
-      className: "avatar"
-    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", adminAuth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", adminAuth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", adminAuth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
-      exact: true,
-      to: "/updatemyaccount"
-    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "games"
-    }, wishlist ? wishlist.wishListItems.map(wishListItem => {
-      if (wishListItem.product.imageUrl.length > 10) {
-        wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100);
-      }
-
-      ;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "games",
-        key: wishListItem.product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-        to: `/api/product/${wishListItem.product.id}`
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "picture"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`,
-        width: "170",
-        height: "170"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "name"
-      }, wishListItem.product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price"
-      }, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "addtocart",
-        onClick: () => this.props.addCart(wishListItem.product, 1)
-      }, "Add To Cart")));
-    }) : 'You have nothing in your Wish List! Go add something!', "Admin Tools")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, adminAuth.isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Admin__WEBPACK_IMPORTED_MODULE_3__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
       className: "user-details"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
       src: avatar,
       className: "avatar"
-    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", auth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", auth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", auth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", auth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", auth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", auth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
       exact: true,
       to: "/updatemyaccount"
-    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "games"
-    }, wishlist ? wishlist.wishListItems.map(wishListItem => {
+    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), wishlist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      responsive: responsive,
+      ssr: true
+    }, wishlist.wishListItems.map(wishListItem => {
+      console.log(wishListItem.product);
+
       if (wishListItem.product.imageUrl.length > 10) {
         wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100);
       }
 
-      ;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "games",
+        className: "wrapper",
         key: wishListItem.product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+        className: "link",
         to: `/api/product/${wishListItem.product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -2729,21 +2895,17 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
         src: `//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`,
         width: "170",
         height: "170"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "name"
-      }, wishListItem.product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price"
-      }, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "addtocart",
-        onClick: () => this.props.addCart(wishListItem.product, 1)
-      }, "Add To Cart")));
-    }) : 'You have nothing in your Wish List! Go add something!')));
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, wishListItem.product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"))));
+    })) : 'You have nothing in your Wish List! Go add something!'));
   }
 
 }
 
 const mapState = state => {
-  console.log(state.adminAuth);
   const user = state.auth || {};
   return {
     auth: state.auth,
@@ -4262,8 +4424,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Search_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Search.css */ "./src/Search/Search.css");
-
 
 
 
@@ -4293,14 +4453,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Search_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Search.css */ "./src/Search/Search.css");
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
-/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
-
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
 
 
 
@@ -4343,7 +4501,7 @@ const SearchResults = ({
   searchResults,
   addCart
 }) => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("h2", null, "Search Results"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("h2", null, "Search Results"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__["default"], {
     responsive: responsive,
     ssr: true
   }, searchResults.map(product => {
@@ -4356,7 +4514,7 @@ const SearchResults = ({
       key: product.id
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "card"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
       className: "link",
       to: `/api/product/${product.id}`
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
@@ -5519,7 +5677,6 @@ const wishlist = (state = {
   wishListItems: []
 }, action) => {
   if (action.type === 'SET_WISHLIST') {
-    console.log(action.wishlist);
     state = action.wishlist;
   } else if (action.type === 'DELETE_WISHLISTITEM') {
     const wishListItems = state.wishListItems.filter(item => item.product.id !== action.id);
@@ -15257,33 +15414,6 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap);"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n}\n\n/* .singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n    margin: 10rem;\n} */\n\n.singlecard {\n    display: flex;\n    justify-content: center;\n    padding-top: 5rem;\n\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: stretch;\n}\n\n.product-img{\n    width: 40%;\n    /* height: 500px; */\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n .productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n} \n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */ \n  \n   .heart-wrapper {\n    /* position: absolute; */\n    /* top: 50%; */\n    left: 0;\n    width: 100%;\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }\n\n  .price-condition {\n    display: flex;\n    align-items: center;\n  }\n\n  .condition {\n    padding: 1rem;\n    padding-bottom: 2.5rem;\n    padding-left: 2rem;\n  }\n\n  ", "",{"version":3,"sources":["webpack://./src/ProductPages/SingleGame.css"],"names":[],"mappings":"AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;;AAE1B;;AAEA;;;;;GAKG;;AAEH;IACI,aAAa;IACb,uBAAuB;IACvB,iBAAiB;;AAErB;;AAEA;IACI,kBAAkB;IAClB,aAAa;IACb,gBAAgB;IAChB,iBAAiB;IACjB,YAAY;IACZ,aAAa;IACb,uBAAuB;IACvB,oBAAoB;AACxB;;AAEA;IACI,UAAU;IACV,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB;IAClB,UAAU;IACV,4BAA4B;IAC5B,gCAAgC;AACpC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,gBAAgB;IAChB,iBAAiB;AACrB;;CAEC;IACG,UAAU;IACV,iBAAiB;IACjB,YAAY;IACZ,mBAAmB;IACnB,aAAa;IACb,aAAa;IACb,uBAAuB;IACvB,cAAc;IACd,UAAU;IACV,2BAA2B;IAC3B,gCAAgC;AACpC;;AAEA;IACI;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;;AAGA;IACI,oBAAoB;IACpB,eAAe;IACf,0BAA0B;AAC9B;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,YAAY;IACZ,0BAA0B;IAC1B,eAAe;IACf,kBAAkB;IAClB,eAAe;IACf,mBAAmB;AACvB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;;;;KAIK;;GAEF;IACC,wBAAwB;IACxB,cAAc;IACd,OAAO;IACP,WAAW;IACX,kBAAkB;IAClB,iBAAiB;IACjB,cAAc;EAChB;;EAEA;IACE,2BAA2B;IAC3B,UAAU;IACV,WAAW;IACX,aAAa;IACb,mBAAmB;IACnB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;qBAqCiB;IACjB;;IAEA;IACA,kCAAkC;IAClC;;AAEJ;IACI,KAAK,mBAAmB,EAAE;IAC1B,MAAM,qBAAqB,EAAE;IAC7B,OAAO,mBAAmB,EAAE;AAChC;;EAEE;IACE,aAAa;EACf;;EAEA;IACE,aAAa;IACb,mBAAmB;EACrB;;EAEA;IACE,aAAa;IACb,sBAAsB;IACtB,kBAAkB;EACpB","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap');\n\n*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n}\n\n/* .singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n    margin: 10rem;\n} */\n\n.singlecard {\n    display: flex;\n    justify-content: center;\n    padding-top: 5rem;\n\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: stretch;\n}\n\n.product-img{\n    width: 40%;\n    /* height: 500px; */\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n .productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n} \n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */ \n  \n   .heart-wrapper {\n    /* position: absolute; */\n    /* top: 50%; */\n    left: 0;\n    width: 100%;\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }\n\n  .price-condition {\n    display: flex;\n    align-items: center;\n  }\n\n  .condition {\n    padding: 1rem;\n    padding-bottom: 2.5rem;\n    padding-left: 2rem;\n  }\n\n  "],"sourceRoot":""}]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/Search/Search.css":
-/*!*********************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/Search/Search.css ***!
-  \*********************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-// Imports
-
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, ".searchbar {\n    padding-left: 1rem;\n    margin-left: 2rem;\n    margin-top: 5rem;\n  }\n  \n  .searchResults {\n    display: flex;\n    flex-wrap: wrap;\n  }\n  \n  .indsearch {\n    padding: 1rem;\n    width: 250px;\n  }", "",{"version":3,"sources":["webpack://./src/Search/Search.css"],"names":[],"mappings":"AAAA;IACI,kBAAkB;IAClB,iBAAiB;IACjB,gBAAgB;EAClB;;EAEA;IACE,aAAa;IACb,eAAe;EACjB;;EAEA;IACE,aAAa;IACb,YAAY;EACd","sourcesContent":[".searchbar {\n    padding-left: 1rem;\n    margin-left: 2rem;\n    margin-top: 5rem;\n  }\n  \n  .searchResults {\n    display: flex;\n    flex-wrap: wrap;\n  }\n  \n  .indsearch {\n    padding: 1rem;\n    width: 250px;\n  }"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -59383,61 +59513,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_SingleGame_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
-
-
-/***/ }),
-
-/***/ "./src/Search/Search.css":
-/*!*******************************!*\
-  !*** ./src/Search/Search.css ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_Search_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./Search.css */ "./node_modules/css-loader/dist/cjs.js!./src/Search/Search.css");
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-var options = {};
-
-options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
-options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
-
-      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
-    
-options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
-options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_Search_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
-
-
-
-
-       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_Search_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_Search_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_Search_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
 /***/ }),
