@@ -29,6 +29,25 @@ const setUp = async()=> {
     });
     
 
+<<<<<<< HEAD
+    const thisYearsGames1985 = await client
+      .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+      .limit(10)
+      .where('release_dates.date < 504853200 & release_dates.date > 473403600 & total_rating > 80')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      thisYearsGames1985.data.map(game=>{
+        Product.create({theme: 'thisYearsGames1985', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+
+    const thisYearsGames1987 = await client
+      .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+      .limit(10)
+      .where('release_dates.date < 568011600 & release_dates.date > 536475600 & total_rating > 80')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      thisYearsGames1987.data.map(game=>{
+        Product.create({theme: 'thisYearsGames1987', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+=======
 //     const thisYearsGames1985 = await client
 //       .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
 //       .limit(10)
@@ -46,6 +65,7 @@ const setUp = async()=> {
 //       thisYearsGames1987.data.map(game=>{
 //         Product.create({theme: 'thisYearsGames1987', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
 //     });
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 
     const thisYearsGames1990 = await client
     .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
@@ -65,6 +85,142 @@ const setUp = async()=> {
       Product.create({theme: 'thisYearsGames1992', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
   });
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+  const thisYearsGames1994 = await client
+  .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+  .limit(10)
+  .where('release_dates.date < 788936400 & release_dates.date > 757400400 & total_rating > 80')
+  .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+  thisYearsGames1994.data.map(game=>{
+    Product.create({theme: 'thisYearsGames1994', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+});
+
+    const zeldaGames = await client
+    .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+    .limit(10)
+    .search('zelda') 
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
+    zeldaGames.data.map(game=>{
+      Product.create({theme: 'zeldaGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+   });
+
+  const marioGames = await client
+    .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+    .limit(10)
+    .search('mario')
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
+    marioGames.data.map(game=>{
+      Product.create({theme: 'marioGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+  });
+
+//   Platform-specific Queries
+
+      const topNESGames = await client
+      .fields('name,cover.url,total_rating')
+      .limit(10)
+      .where('release_dates.platform = 18 & total_rating > 80')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      console.log(topNESGames.data)
+      topNESGames.data.map(game=>{
+        Product.create({theme: 'topNESGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+
+      const topSNESGames = await client
+      .fields('name,cover.url,total_rating')
+      .limit(10)
+      .where('release_dates.platform = 19 & total_rating > 80')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      console.log(topSNESGames.data)
+      topSNESGames.data.map(game=>{
+        Product.create({theme: 'topSNESGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+
+      const topPlayStationGames = await client
+      .fields('name,cover.url,total_rating')
+      .limit(10)
+      .where('release_dates.platform = 7 & total_rating > 80')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      console.log(topPlayStationGames.data)
+      topPlayStationGames.data.map(game=>{
+        Product.create({theme: 'topPlayStationGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+
+      const topXboxGames = await client
+      .fields('name,cover.url,total_rating')
+      .limit(10)
+      .where('release_dates.platform = 11 & total_rating > 80')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      console.log(topXboxGames.data)
+      topXboxGames.data.map(game=>{
+        Product.create({theme: 'topXboxGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+
+      const topSegaGenesisGames = await client
+      .fields('name,cover.url,total_rating')
+      .limit(10)
+      .where('release_dates.platform = 29 & total_rating > 80')
+      .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+      console.log(topSegaGenesisGames.data)
+      topSegaGenesisGames.data.map(game=>{
+        Product.create({theme: 'topSegaGenesisGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, condition: `${randomCondition(arr)}`})
+    });
+  
+// //   Genre-specific Queries
+
+    const topFightingGames = await client
+    .fields('name, cover.url, total_rating')
+    .limit(10)
+    .where('(release_dates.platform = (7,18,19,11,29) & genres = 4) & total_rating > 60')
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+    console.log(topFightingGames.data)
+      topFightingGames.data.map(game=>{
+        Product.create({theme: 'topFightingGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+
+    const topRPGGames = await client
+    .fields('name, cover.url, total_rating')
+    .limit(10)
+    .where('(release_dates.platform = (7,18,19,11,29) & genres = 12) & total_rating > 60')
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+    console.log(topRPGGames.data)
+    topRPGGames.data.map(game=>{
+        Product.create({theme: 'topRPGGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+
+    const topSportsGames = await client
+    .fields('name, cover.url, total_rating')
+    .limit(10)
+    .where('(release_dates.platform = (7,18,19,11,29) & genres = 14) & total_rating > 60')
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+    console.log(topSportsGames.data)
+    topSportsGames.data.map(game=>{
+        Product.create({theme: 'topSportsGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+
+    const topAdventureGames = await client
+    .fields('name, cover.url, total_rating')
+    .limit(10)
+    .where('(release_dates.platform = (7,18,19,11,29) & genres = 31) & total_rating > 60')
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+    console.log(topAdventureGames.data)
+    topAdventureGames.data.map(game=>{
+        Product.create({theme: 'topAdventureGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+
+    const topPlatformGames = await client
+    .fields('name, cover.url, total_rating')
+    .limit(10)
+    .where('(release_dates.platform = (7,18,19,11,29) & genres = 8) & total_rating > 60')
+    .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+    console.log(topPlatformGames.data)
+    topPlatformGames.data.map(game=>{
+        Product.create({theme: 'topPlatformGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+    });
+
+// Console Queries
+
+=======
 //   const thisYearsGames1994 = await client
 //   .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
 //   .limit(10)
@@ -198,6 +354,142 @@ const setUp = async()=> {
 
 // Console Queries
 
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
+=======
+//   const thisYearsGames1994 = await client
+//   .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+//   .limit(10)
+//   .where('release_dates.date < 788936400 & release_dates.date > 757400400 & total_rating > 80')
+//   .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//   thisYearsGames1994.data.map(game=>{
+//     Product.create({theme: 'thisYearsGames1994', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+// });
+
+  //   const zeldaGames = await client
+  //   .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+  //   .limit(10)
+  //   .search('zelda') 
+  //   .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
+  //   zeldaGames.data.map(game=>{
+  //     Product.create({theme: 'zeldaGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+  //  });
+
+  // const marioGames = await client
+  //   .fields('name,summary,cover.url,total_rating,release_dates.date,screenshots.*')
+  //   .limit(10)
+  //   .search('mario')
+  //   .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games');
+  //   marioGames.data.map(game=>{
+  //     Product.create({theme: 'marioGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, releaseDate: `${new Date(game.release_dates[0].date * 1000)}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+  // });
+
+//   Platform-specific Queries
+
+//       const topNESGames = await client
+//       .fields('name,cover.url,total_rating')
+//       .limit(10)
+//       .where('release_dates.platform = 18 & total_rating > 80')
+//       .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//       console.log(topNESGames.data)
+//       topNESGames.data.map(game=>{
+//         Product.create({theme: 'topNESGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+//     });
+
+//       const topSNESGames = await client
+//       .fields('name,cover.url,total_rating')
+//       .limit(10)
+//       .where('release_dates.platform = 19 & total_rating > 80')
+//       .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//       console.log(topSNESGames.data)
+//       topSNESGames.data.map(game=>{
+//         Product.create({theme: 'topSNESGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+//     });
+
+//       const topPlayStationGames = await client
+//       .fields('name,cover.url,total_rating')
+//       .limit(10)
+//       .where('release_dates.platform = 7 & total_rating > 80')
+//       .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//       console.log(topPlayStationGames.data)
+//       topPlayStationGames.data.map(game=>{
+//         Product.create({theme: 'topPlayStationGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+//     });
+
+//       const topXboxGames = await client
+//       .fields('name,cover.url,total_rating')
+//       .limit(10)
+//       .where('release_dates.platform = 11 & total_rating > 80')
+//       .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//       console.log(topXboxGames.data)
+//       topXboxGames.data.map(game=>{
+//         Product.create({theme: 'topXboxGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+//     });
+
+//       const topSegaGenesisGames = await client
+//       .fields('name,cover.url,total_rating')
+//       .limit(10)
+//       .where('release_dates.platform = 29 & total_rating > 80')
+//       .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//       console.log(topSegaGenesisGames.data)
+//       topSegaGenesisGames.data.map(game=>{
+//         Product.create({theme: 'topSegaGenesisGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, condition: `${randomCondition(arr)}`})
+//     });
+  
+// //   Genre-specific Queries
+
+//     const topFightingGames = await client
+//     .fields('name, cover.url, total_rating')
+//     .limit(10)
+//     .where('(release_dates.platform = (7,18,19,11,29) & genres = 4) & total_rating > 60')
+//     .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//     console.log(topFightingGames.data)
+//       topFightingGames.data.map(game=>{
+//         Product.create({theme: 'topFightingGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+//     });
+
+//     const topRPGGames = await client
+//     .fields('name, cover.url, total_rating')
+//     .limit(10)
+//     .where('(release_dates.platform = (7,18,19,11,29) & genres = 12) & total_rating > 60')
+//     .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//     console.log(topRPGGames.data)
+//     topRPGGames.data.map(game=>{
+//         Product.create({theme: 'topRPGGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+//     });
+
+//     const topSportsGames = await client
+//     .fields('name, cover.url, total_rating')
+//     .limit(10)
+//     .where('(release_dates.platform = (7,18,19,11,29) & genres = 14) & total_rating > 60')
+//     .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//     console.log(topSportsGames.data)
+//     topSportsGames.data.map(game=>{
+//         Product.create({theme: 'topSportsGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+//     });
+
+//     const topAdventureGames = await client
+//     .fields('name, cover.url, total_rating')
+//     .limit(10)
+//     .where('(release_dates.platform = (7,18,19,11,29) & genres = 31) & total_rating > 60')
+//     .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//     console.log(topAdventureGames.data)
+//     topAdventureGames.data.map(game=>{
+//         Product.create({theme: 'topAdventureGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+//     });
+
+//     const topPlatformGames = await client
+//     .fields('name, cover.url, total_rating')
+//     .limit(10)
+    // .where('(release_dates.platform = (7,18,19,11,29) & genres = 8) & total_rating > 60')
+//     .request('http://0.0.0.0:8080/https://api.igdb.com/v4/games')
+//     console.log(topPlatformGames.data)
+//     topPlatformGames.data.map(game=>{
+//         Product.create({theme: 'topPlatformGames', name: `${game.name}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+//     });
+
+// Console Queries
+
+>>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 const consoles = await Promise.all ([
   Product.create({theme: 'consoles', name: 'Nintendo Entertainment System', summary: 'The history of NES the Nintendo Entertainment System -NES- spans the 1982 development of the Family Computer, to the 1985 launch of the NES, to Nintendos rise to global dominance based upon this platform throughout the late 1980s. The Family Computer or Famicom was developed in 1982 and launched in 1983 in Japan. Following the North American video game crash of 1983, the Famicom was adapted into the NES which was brazenly launched in North America in 1985. Transitioning the company from its arcade game history into this combined global 8-bit home video game console platform, the Famicom and NES continued to aggressively compete with the next-generation 16-bit consoles including the 1988 Sega Genesis. The platform was succeeded by the Super Famicom in 1990 and the Super Nintendo Entertainment System in 1991, but its support and production continued until 1995. Interest in the NES has been renewed by collectors and emulators, including Nintendos own Virtual Console platform.', imageUrl: 'https://en.wikipedia.org/wiki/Nintendo_Entertainment_System#/media/File:NES-Console-Set.jpg', condition: `${randomCondition(arr)}`, price: `300`}),
   Product.create({theme: 'consoles', name: 'Super Nintendo Entertainment System', summary: 'The Super Nintendo Entertainment System, also known as the SNES, was a 16-bit console developed by Nintendo in the 1990s. Also known as the Super Famicom in Japan, the SNES was Nintendos second home console and followed the success of the NES. The console introduced advanced graphics and sound capabilities as well as a variety of enhancement chips integrated in game cartridges that helped keep it competitive in the marketspace as more consoles began to populate it.', imageUrl: 'https://en.wikipedia.org/wiki/Super_Nintendo_Entertainment_System#/media/File:SNES-Mod1-Console-Set.jpg', condition: `${randomCondition(arr)}`, price: `400`}),
