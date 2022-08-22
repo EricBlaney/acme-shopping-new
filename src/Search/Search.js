@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import React from 'react';
+import './Search.css';
 
 const Search = ({ history }) => {
     return (
