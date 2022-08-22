@@ -3677,6 +3677,7 @@ const mapStateToProps = ({
 
 const mapDispatch = dispatch => {
   return {
+    addCart: (product, quantity) => dispatch(addCart(product, quantity)),
     fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchProducts)())
   };
 };
