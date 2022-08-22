@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+//new import
+import { createSelector } from 'reselect';
+import get from 'lodash/get';
+
+
 const cart = (state = { lineItems: [ ] }, action)=> {
   if(action.type === 'SET_CART'){
     state = action.cart;
@@ -76,7 +81,42 @@ export const updateQuantity = (product, quantity) => {
       dispatch({ type: 'UPDATE_QUANTITY', id: product.id, quantity});
     }
   };
-}
+};
 
+//add a purchase function to dispatch
+// export const purchase = (product) => {
+//   return async(dispatch)=> {
+//     const response = await axios.put('/api/orders/cart', {
+//       product,
+//       quantity
+//     }, {
+//       headers: {
+//         authorization: window.localStorage.getItem('token')
+//       }
+//     });
+//     if (response.status === 200) {
+//       dispatch({type: 'DELETE_CART', id: product.id});
+//     }
+//   };
+// };
+
+
+const items = state => get(state, 'checkout.items', []);
+
+const calcTotalPrice = ($items = []) => {
+  let total = 0;
+  $items.forEach((element) => {
+    total += get(element, 'product.price') || get(element, 'price');
+  });
+  return total;
+};
+
+export const getTotalPrice = createSelector(
+  items,
+  calcTotalPrice,
+);
+
+
+// export { getTotalPrice };
 
 export default cart;

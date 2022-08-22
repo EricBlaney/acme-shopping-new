@@ -2,9 +2,20 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './Cart.css'; // npm install css-loader style-loader -D
 import { Link } from 'react-router-dom'
-import { deleteCart, updateQuantity, fetchCart } from './store'
+import { deleteCart, updateQuantity, fetchCart, getTotalPrice} from './store'
 
-const Cart = ({ cart, deleteCart, updateQuantity, getCart })=> {
+//new import from here
+import { Card, Button } from 'antd';
+import get from 'lodash/get';
+import { array, number, func } from 'prop-types';
+import PurchaseButton from './Checkout/PurchaseButton';
+// import { getTotalPrice } from '../modules/selectors';
+
+const handleBuy = () => {
+  const { searchQuery } = props;
+}
+
+const Cart = ({ cart, deleteCart, updateQuantity, getCart, items, totalPrice })=> {
   useEffect(() => {
     getCart();
   }, [])
@@ -32,12 +43,34 @@ const Cart = ({ cart, deleteCart, updateQuantity, getCart })=> {
         })
       }
       </ul>
-      <div>
-        <Link to="/buy">Buy</Link>
-      </div>
+
+      {/* <div>
+        <Link to="../Checkout/PurchaseButton"><Button onClick={handleBuy}>Purchase</Button></Link>
+      </div> */}
+
+        <Card meta={<Button>Checkout</Button>} title="Total Price">
+          <div>
+            <h2>Total:</h2>
+            <h2>{`$${totalPrice}`}</h2>
+          </div>
+          <PurchaseButton price={totalPrice}>
+            <Button className="Checkout">Checkout</Button>
+          </PurchaseButton>
+        </Card>
     </div>
   );
 };
+
+Cart.propTypes = {
+  items: array,
+  totalPrice: number,
+};
+
+const mapStateToProps = state => ({
+  items: get(state, 'checkout.items'),
+  totalPrice: getTotalPrice(state),
+});
+
 
 const mapDispatch = (dispatch)=> {
   return {
@@ -47,5 +80,4 @@ const mapDispatch = (dispatch)=> {
   };
 };
 
-export default connect(state => state, mapDispatch)(Cart);
-
+export default connect(mapDispatch, mapStateToProps)(Cart);

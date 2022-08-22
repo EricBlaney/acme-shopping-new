@@ -17,6 +17,7 @@
   "dependencies": {
     "-": "^0.0.1",
     "@faker-js/faker": "^7.3.0",
+    "antd": "^4.22.7",
     "assert": "^2.0.0",
     "bcrypt": "^5.0.1",
     "cors-anywhere": "^0.4.4",
@@ -28,7 +29,9 @@
     "pg": "^8.7.3",
     "proxy-from-env": "^1.1.0",
     "redux-logger": "^3.0.6",
+    "reselect": "^4.1.6",
     "sequelize": "^6.21.3",
+    "stripe": "^10.3.0",
     "util": "^0.12.4"
   },
   "devDependencies": {

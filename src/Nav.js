@@ -9,9 +9,8 @@ import { logout } from './store';
 import GenreDropdown from './Dropdown/GenreDropdown';
 import PlatformDropDown from './Dropdown/PlatformDropdown';
 
-
-
-
+// import Badge from "@material-ui/core/Badge";
+// import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 class Nav extends Component {
     componentDidMount(){
@@ -35,7 +34,7 @@ class Nav extends Component {
             <NavLink exact to='/api/games'>Games A-Z</NavLink>
             <NavLink exact to='/api/popular'>Popular</NavLink>
         <div className="topnav-right">
-            <NavLink exact to='/myaccount'>My Account </NavLink>
+            <NavLink exact to='/myaccount'>My Account</NavLink>
             
         {
           auth.id ? <button onClick={ logout }>Logout</button> : <SignInContainer triggerText={signInTriggerText} />
@@ -55,7 +54,6 @@ class Nav extends Component {
        </div>
     
        </div>
-       
         </header>
         </nav>
         </main>
