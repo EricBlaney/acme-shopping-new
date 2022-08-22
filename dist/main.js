@@ -3677,6 +3677,7 @@ const mapStateToProps = ({
 
 const mapDispatch = dispatch => {
   return {
+    addCart: (product, quantity) => dispatch(addCart(product, quantity)),
     fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchProducts)())
   };
 };
@@ -4562,7 +4563,7 @@ const SearchResults = ({
     responsive: responsive,
     ssr: true
   }, searchResults.map(product => {
-    if (product.imageUrl.length > 10) {
+    if (product.imageUrl.length > 10 && product.theme !== 'consoles') {
       product.imageUrl = product.imageUrl.substring(44, 100);
     }
 
@@ -4576,7 +4577,11 @@ const SearchResults = ({
       to: `/api/product/${product.id}`
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "picture"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("img", {
+    }, product.theme === 'consoles' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("img", {
+      src: `${product.imageUrl}`,
+      width: "170",
+      height: "170"
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("img", {
       src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
       width: "170",
       height: "170"
