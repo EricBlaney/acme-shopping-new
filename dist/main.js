@@ -4433,7 +4433,7 @@ const Search = ({
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("input", {
     className: "searchbar",
     onChange: ev => ev.target.value ? history.push(`/search/${ev.target.value}`) : history.push('/'),
-    placeholder: "Enter Game Here"
+    placeholder: " Enter Game Here"
   });
 };
 
