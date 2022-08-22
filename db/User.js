@@ -164,7 +164,8 @@ User.prototype.addToWishList = async function({ product }){
 User.authenticate = async function(credentials){
   const user = await this.findOne({
     where: {
-      username: credentials.username
+      username: credentials.username,
+      isAdmin: false
     }
   });
   if(user && await bcrypt.compare(credentials.password, user.password)){

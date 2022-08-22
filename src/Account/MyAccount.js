@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchWishList, exchangeToken } from '../store'
 import { Link, NavLink } from 'react-router-dom';
+import adminAuth from '../store/adminAuth';
 
 class MyAccount extends React.Component{
     constructor(){
@@ -19,7 +20,6 @@ class MyAccount extends React.Component{
         try{
             this.props.getWishList();
             console.log(this.props);
-            this.props.exchangeToken();
         }
         catch(ex){
             console.log(ex);
@@ -43,10 +43,59 @@ class MyAccount extends React.Component{
         }
         else return null;
       }
+
     render() {
-        const {auth, wishlist} = this.props;
+        const {auth, wishlist, adminAuth} = this.props;
         const {avatar, username, email, street, city, zipcode} = this.state;
         return(
+            <div>
+            { adminAuth.isAdmin === true ? 
+
+                <main className='user-details'>
+            <h1>
+            {username}'s Admin Profile
+            </h1>
+            { avatar ? <img src={avatar} className="avatar"/> : null}
+            <h2>{username}'s details:</h2>
+            <div>Email: {email}</div>
+            <div>Address: {adminAuth.street || "None Listed"}</div>
+            <div>City: {adminAuth.city || "None listed."}</div>
+            <div>Zipcode: {adminAuth.zipcode || 'None listed.'}</div>
+            <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+            <br></br>
+            Your Wish List:
+            <br></br>
+            <br></br>
+
+            <div className="games">
+
+            {
+                wishlist ? wishlist.wishListItems.map(wishListItem=>{
+                    if(wishListItem.product.imageUrl.length > 10) {
+                        wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100)
+                        };
+
+                        return (
+                            <div className='games' key={wishListItem.product.id}>
+                            <li >
+                                <Link to={`/api/product/${wishListItem.product.id}`}>
+                                    <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`}width="170" 
+                                    height="170" /></div><div className='name'>{wishListItem.product.name}</div> 
+                                </Link>
+                                <div className='price'>{`$${wishListItem.product.price}`}</div>
+                                <button className='addtocart' onClick={() => this.props.addCart(wishListItem.product, 1)}>Add To Cart</button>
+                            </li>
+                            </div>
+                        )
+                
+                }) : 'You have nothing in your Wish List! Go add something!'
+            }
+
+            Admin Tools
+            </div>
+            </main>
+            
+            :
             <main className='user-details'>
             <h1>
             {username}'s Profile
@@ -87,16 +136,19 @@ class MyAccount extends React.Component{
                 }) : 'You have nothing in your Wish List! Go add something!'
             }
             </div>
-            </main>
+            </main> }
+
+            </div>
         )
     }
 }
 
 const mapState = (state) => {
-    console.log(state)
+    console.log(state.adminAuth)
     const user = state.auth || {};
     return {
         auth: state.auth,
+        adminAuth: state.adminAuth,
         user: user,
         wishlist: state.wishlist
     }
@@ -104,7 +156,6 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
     return{
-        exchangeToken: () => dispatch(exchangeToken()),
         getWishList: ()=> dispatch(fetchWishList()),
         addCart: (product, quantity) => dispatch(addCart(product, quantity))
     }

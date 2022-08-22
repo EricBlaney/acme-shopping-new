@@ -2603,7 +2603,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _store_adminAuth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/adminAuth */ "./src/store/adminAuth.js");
+
 
 
 
@@ -2626,7 +2628,6 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
     try {
       this.props.getWishList();
       console.log(this.props);
-      this.props.exchangeToken();
     } catch (ex) {
       console.log(ex);
     }
@@ -2655,7 +2656,8 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
   render() {
     const {
       auth,
-      wishlist
+      wishlist,
+      adminAuth
     } = this.props;
     const {
       avatar,
@@ -2665,12 +2667,12 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
       city,
       zipcode
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, adminAuth.isAdmin === true ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
       className: "user-details"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Admin Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
       src: avatar,
       className: "avatar"
-    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", auth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", auth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", auth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", adminAuth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", adminAuth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", adminAuth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
       exact: true,
       to: "/updatemyaccount"
     }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -2684,7 +2686,7 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "games",
         key: wishListItem.product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
         to: `/api/product/${wishListItem.product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -2700,16 +2702,52 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
         className: "addtocart",
         onClick: () => this.props.addCart(wishListItem.product, 1)
       }, "Add To Cart")));
-    }) : 'You have nothing in your Wish List! Go add something!'));
+    }) : 'You have nothing in your Wish List! Go add something!', "Admin Tools")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
+      className: "user-details"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: avatar,
+      className: "avatar"
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", auth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", auth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", auth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.NavLink, {
+      exact: true,
+      to: "/updatemyaccount"
+    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "games"
+    }, wishlist ? wishlist.wishListItems.map(wishListItem => {
+      if (wishListItem.product.imageUrl.length > 10) {
+        wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100);
+      }
+
+      ;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "games",
+        key: wishListItem.product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+        to: `/api/product/${wishListItem.product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`,
+        width: "170",
+        height: "170"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "name"
+      }, wishListItem.product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "price"
+      }, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "addtocart",
+        onClick: () => this.props.addCart(wishListItem.product, 1)
+      }, "Add To Cart")));
+    }) : 'You have nothing in your Wish List! Go add something!')));
   }
 
 }
 
 const mapState = state => {
-  console.log(state);
+  console.log(state.adminAuth);
   const user = state.auth || {};
   return {
     auth: state.auth,
+    adminAuth: state.adminAuth,
     user: user,
     wishlist: state.wishlist
   };
@@ -2717,7 +2755,6 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
     getWishList: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchWishList)()),
     addCart: (product, quantity) => dispatch(addCart(product, quantity))
   };
@@ -5004,6 +5041,82 @@ const mapDispatch = dispatch => {
 
 /***/ }),
 
+/***/ "./src/store/adminAuth.js":
+/*!********************************!*\
+  !*** ./src/store/adminAuth.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "adminExchangeToken": () => (/* binding */ adminExchangeToken),
+/* harmony export */   "adminLogin": () => (/* binding */ adminLogin),
+/* harmony export */   "adminLogout": () => (/* binding */ adminLogout),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const adminAuth = (state = {}, action) => {
+  if (action.type === 'SET_ADMINAUTH') {
+    state = action.adminAuth;
+  }
+
+  return state;
+};
+
+const adminLogout = () => {
+  return dispatch => {
+    window.localStorage.removeItem('token');
+    dispatch({
+      type: 'SET_ADMINAUTH',
+      adminAuth: {}
+    });
+  };
+};
+const adminExchangeToken = () => {
+  return async dispatch => {
+    const token = window.localStorage.getItem('token');
+
+    if (token) {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/sessions', {
+        headers: {
+          authorization: token
+        }
+      });
+      const adminAuth = response.data;
+      dispatch({
+        adminAuth,
+        type: 'SET_ADMINAUTH'
+      });
+    }
+  };
+};
+const adminLogin = credentials => {
+  return async dispatch => {
+    let response = await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/sessions/admin', credentials);
+    const {
+      token
+    } = response.data;
+    window.localStorage.setItem('token', token);
+    response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/sessions', {
+      headers: {
+        authorization: token
+      }
+    });
+    const adminAuth = response.data;
+    dispatch({
+      adminAuth,
+      type: 'SET_ADMINAUTH'
+    });
+  };
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (adminAuth);
+
+/***/ }),
+
 /***/ "./src/store/auth.js":
 /*!***************************!*\
   !*** ./src/store/auth.js ***!
@@ -5013,7 +5126,6 @@ const mapDispatch = dispatch => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "adminLogin": () => (/* binding */ adminLogin),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "exchangeToken": () => (/* binding */ exchangeToken),
 /* harmony export */   "login": () => (/* binding */ login),
@@ -5026,6 +5138,10 @@ __webpack_require__.r(__webpack_exports__);
 const auth = (state = {}, action) => {
   if (action.type === 'SET_AUTH') {
     state = action.auth;
+  }
+
+  if (action.type === 'SET_ADMINAUTH') {
+    state = action.adminAuth;
   }
 
   return state;
@@ -5061,25 +5177,6 @@ const exchangeToken = () => {
 const login = credentials => {
   return async dispatch => {
     let response = await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/sessions', credentials);
-    const {
-      token
-    } = response.data;
-    window.localStorage.setItem('token', token);
-    response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/sessions', {
-      headers: {
-        authorization: token
-      }
-    });
-    const auth = response.data;
-    dispatch({
-      auth,
-      type: 'SET_AUTH'
-    });
-  };
-};
-const adminLogin = credentials => {
-  return async dispatch => {
-    let response = await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/sessions/admin', credentials);
     const {
       token
     } = response.data;
@@ -5222,7 +5319,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "addCart": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.addCart),
 /* harmony export */   "addToWishList": () => (/* reexport safe */ _wishlist__WEBPACK_IMPORTED_MODULE_3__.addToWishList),
-/* harmony export */   "adminLogin": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_0__.adminLogin),
+/* harmony export */   "adminExchangeToken": () => (/* reexport safe */ _adminAuth__WEBPACK_IMPORTED_MODULE_8__.adminExchangeToken),
+/* harmony export */   "adminLogin": () => (/* reexport safe */ _adminAuth__WEBPACK_IMPORTED_MODULE_8__.adminLogin),
+/* harmony export */   "adminLogout": () => (/* reexport safe */ _adminAuth__WEBPACK_IMPORTED_MODULE_8__.adminLogout),
 /* harmony export */   "createUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.createUser),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "deleteCart": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.deleteCart),
@@ -5247,6 +5346,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _adminAuth__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./adminAuth */ "./src/store/adminAuth.js");
+
 
 
 
@@ -5257,6 +5358,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_6__.combineReducers)({
   auth: _auth__WEBPACK_IMPORTED_MODULE_0__["default"],
+  adminAuth: _auth__WEBPACK_IMPORTED_MODULE_0__["default"],
   cart: _cart__WEBPACK_IMPORTED_MODULE_1__["default"],
   product: _product__WEBPACK_IMPORTED_MODULE_4__["default"],
   user: _user__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -5264,6 +5366,7 @@ const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_6__.combineReducers)({
 });
 const store = (0,redux__WEBPACK_IMPORTED_MODULE_6__.createStore)(reducer, (0,redux__WEBPACK_IMPORTED_MODULE_6__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_7__["default"], (redux_logger__WEBPACK_IMPORTED_MODULE_5___default())));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
+
 
 
 
