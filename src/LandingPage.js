@@ -1,24 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCart, exchangeToken, logout, addCart } from './store'
+import { fetchCart, addCart } from './store'
 import { Link } from 'react-router-dom';
-import SignUpContainer from './SignUp/SignUpContainer';
-import SignInContainer from './SignIn/SignInContainer';
 
 class LandingPage extends React.Component{
 
-  componentDidMount(){
-    this.props.exchangeToken();
-  }
-
-  componentDidUpdate(prevProps){
-    if(!prevProps.auth.id && this.props.auth.id){
-      this.props.fetchCart();
-    }
-  }
   render(){
-    const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In';
     const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990 } = this.props;
     return (
       <main>
@@ -32,8 +19,8 @@ class LandingPage extends React.Component{
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
           return (
-            <li>
-            <Link key={product.id} to={`/api/product/${product.id}`}>
+            <li key={product.id}>
+            <Link to={`/api/product/${product.id}`}>
             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
             height="170" /></div><div className='name'>{product.name}</div>
             </Link>
@@ -53,8 +40,8 @@ class LandingPage extends React.Component{
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
           return (
-            <li>
-            <Link key={product.id} to={`/api/product/${product.id}`}>
+            <li key={product.id}>
+            <Link to={`/api/product/${product.id}`}>
             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
             height="170" /></div><div className='name'>{product.name}</div> 
             </Link>
@@ -74,8 +61,8 @@ class LandingPage extends React.Component{
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
           return (
-            <li>
-            <Link key={product.id} to={`/api/product/${product.id}`}>
+            <li key={product.id}>
+            <Link to={`/api/product/${product.id}`}>
             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
             height="170" /></div><div className='name'>{product.name}</div> 
             </Link>
@@ -88,31 +75,19 @@ class LandingPage extends React.Component{
         </div>
         </div> ) : null }
 
-        {
-          auth.id ? null : <SignInContainer triggerText={signInTriggerText} />
-        }
-                {
-          auth.id ? null : (
-              <SignUpContainer triggerText={signUpTriggerText} />
-          )
-        }
-
       </main>
     );
 
   }
-}
+};
+
 const mapDispatch = (dispatch)=> {
   return {
-    exchangeToken: ()=> dispatch(exchangeToken()),
-    logout: ()=> dispatch(logout()),
-    fetchCart: ()=> dispatch(fetchCart()),
     addCart: (product, quantity) => dispatch(addCart(product, quantity))
   };
 };
+
 const mapStateToProps = ({auth, product, cart}) => {
-  {/* const zeldaGames = product.filter(product => product.theme === 'zeldaGames'); */}
-  {/* const marioGames = product.filter(product => product.theme === 'marioGames'); */}
   const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
   const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
   const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');

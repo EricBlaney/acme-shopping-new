@@ -16,18 +16,14 @@ import store from './store'
 import Nav from './Nav'
 import GamesbyYear from './GamesbyYear';
 import Console from './Console'
-
-
+import topFightingGames from './topFightingGames';
 
 
 class _App extends Component{
     render(){
         return(
-        <div>
+        <div id="main-body">
         <Nav/>
-        
-       
-     
             <div className='logo'>
                 <h1>LOGO</h1>
                 <Route component={ Search }/>
@@ -36,6 +32,8 @@ class _App extends Component{
         <Route path='/' exact component={ LandingPage }/>
         <Route path='/api/product/:id' exact component={ SingleGame }/>
         <Route path='/api/genre' exact component={ Genre }/>
+        <Route path='/api/genre/topFightingGames' exact component={ topFightingGames }/>
+
         <Route path='/api/platform' exact component={ Platform }/>
         <Route path='/api/gamesbyyear' exact component={ GamesbyYear }/>
         <Route path='/api/console' exact component={ Console }/>

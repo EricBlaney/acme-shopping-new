@@ -28,8 +28,8 @@ class SignUp extends Component{
   }
   renderSignIn() {
     this.setState({showSignIn: true});
-    console.log(this.state.showSignIn);
   }
+  
   submitButton(){
     if (this.state.email.toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/) ) {
         return false
@@ -41,26 +41,29 @@ class SignUp extends Component{
   render(){
     const { onChange, onSubmit, renderSignIn} = this;
     const { username, password, email, showSignIn } = this.state;
-    return (
+    return(
+     <div>
+
+      { showSignIn ? <SignIn onSubmit={onSubmit} /> :
       <div>
-      <form onSubmit={ onSubmit }>
-        Sign-Up <br></br>
-        Username:
-        <input name='username' onChange={ onChange } value={ username }/>
-        Email:
-        <input name='email' value={email} onChange={onChange}/>
-        Password:
-        <input type='password' name='password' value={ password } onChange={ onChange }/>
-        <button disabled={this.submitButton() || !username || !password || !email}>Create User</button>
-        {!username ? "Missing Username" : ""} <br></br>
-        {!password ? "Missing Password" : ""} <br></br>
-        {this.submitButton() || !email ? "Invalid Email" : ""}
-        
-      </form>
-      <button onClick={renderSignIn}> Already a user?  Sign in.</button>
-      {showSignIn ? <SignIn onSubmit={onSubmit} /> : null}
-      </div>
-    );
+        <form onSubmit={ onSubmit }>
+          Sign-Up <br></br>
+          Username:
+          <input name='username' onChange={ onChange } value={ username }/>
+          Email:
+          <input name='email' value={email} onChange={onChange}/>
+          Password:
+          <input type='password' name='password' value={ password } onChange={ onChange }/>
+          <button disabled={this.submitButton() || !username || !password || !email}>Create User</button>
+          {!username ? "Missing Username" : ""} <br></br>
+          {!password ? "Missing Password" : ""} <br></br>
+          {this.submitButton() || !email ? "Invalid Email" : ""}
+          <button onClick={renderSignIn}> Already a user?  Sign in.</button>
+        </form>
+      </div> }
+
+     </div>
+    )
   }
 }
 

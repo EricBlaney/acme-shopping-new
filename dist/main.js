@@ -2695,53 +2695,9 @@ class Console extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   render() {
     const {
-      thisYearsGames1994,
-      thisYearsGames1992,
-      thisYearsGames1990,
-      thisYearsGames1987,
-      thisYearsGames1985
+      consoles
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Games from 1994"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, thisYearsGames1994.map(product => {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: product.imageUrl
-      }), " ", product.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price"
-      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "addtocart"
-      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, product.summary));
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Games from 1992"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, thisYearsGames1992.map(product => {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: product.imageUrl
-      }), " ", product.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price"
-      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "addtocart"
-      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, product.summary));
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Games from 1990"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, thisYearsGames1990.map(product => {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: product.imageUrl
-      }), " ", product.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price"
-      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "addtocart"
-      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, product.summary));
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Games from 1987"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, thisYearsGames1987.map(product => {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: product.imageUrl
-      }), " ", product.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price"
-      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "addtocart"
-      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, product.summary));
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Games from 1985"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, thisYearsGames1985.map(product => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Consoles"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, consoles.map(product => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         key: product.id
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
@@ -2759,17 +2715,9 @@ class Console extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 const mapStateToProps = ({
   product
 }) => {
-  const thisYearsGames1994 = product.filter(product => product.theme === 'thisYearsGames1994');
-  const thisYearsGames1992 = product.filter(product => product.theme === 'thisYearsGames1992');
-  const thisYearsGames1990 = product.filter(product => product.theme === 'thisYearsGames1990');
-  const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
-  const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
+  const consoles = product.filter(product => product.theme === 'consoles');
   return {
-    thisYearsGames1994,
-    thisYearsGames1992,
-    thisYearsGames1990,
-    thisYearsGames1987,
-    thisYearsGames1985
+    consoles
   };
 };
 
@@ -2780,155 +2728,6 @@ const mapDispatch = dispatch => {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatch)(Console));
-
-/***/ }),
-
-/***/ "./src/Dropdown/Genredropdown.js":
-/*!***************************************!*\
-  !*** ./src/Dropdown/Genredropdown.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _NavItems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavItems */ "./src/Dropdown/NavItems.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _dropdown_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dropdown.css */ "./src/Dropdown/dropdown.css");
-
-
-
-
-
-function Dropdown() {
-  const [dropdown, setDropdown] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
-    className: dropdown ? "genre-submenu clicked" : "genre-submenu",
-    onClick: () => setDropdown(!dropdown)
-  }, _NavItems__WEBPACK_IMPORTED_MODULE_1__.genreDropdown.map(item => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-      key: item.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-      to: item.path,
-      className: item.cName,
-      onClick: () => setDropdown(false)
-    }, item.title));
-  })));
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Dropdown);
-
-/***/ }),
-
-/***/ "./src/Dropdown/NavItems.js":
-/*!**********************************!*\
-  !*** ./src/Dropdown/NavItems.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "genreDropdown": () => (/* binding */ genreDropdown),
-/* harmony export */   "platformDropdown": () => (/* binding */ platformDropdown)
-/* harmony export */ });
-const platformDropdown = [{
-  id: 1,
-  title: "NES Games",
-  path: "./topNESGames",
-  cName: "submenu-item"
-}, {
-  id: 2,
-  title: "SNES Games",
-  path: "./topSNESGames",
-  cName: "submenu-item"
-}, {
-  id: 3,
-  title: "PlayStation Games",
-  path: "./topPlayStationGames",
-  cName: "submenu-item"
-}, {
-  id: 4,
-  title: "Xbox Games",
-  path: "./topXboxGames",
-  cName: "submenu-item"
-}, {
-  id: 5,
-  title: "Sega Genesis Games",
-  path: "./topSegaGenesisGames",
-  cName: "submenu-item"
-}];
-const genreDropdown = [{
-  id: 1,
-  title: "Fighting Games",
-  path: "./topFightingGames",
-  cName: "submenu-item"
-}, {
-  id: 2,
-  title: "RPG Games",
-  path: "./topRPGGames",
-  cName: "submenu-item"
-}, {
-  id: 3,
-  title: "Sports Games",
-  path: "./topSportsGames",
-  cName: "submenu-item"
-}, {
-  id: 4,
-  title: "Adventure Games",
-  path: "./topAdventureGames",
-  cName: "submenu-item"
-}, {
-  id: 5,
-  title: "Platform Games",
-  path: "./topPlatformGames",
-  cName: "submenu-item"
-}];
-
-/***/ }),
-
-/***/ "./src/Dropdown/Platformdropdown.js":
-/*!******************************************!*\
-  !*** ./src/Dropdown/Platformdropdown.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _NavItems__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavItems */ "./src/Dropdown/NavItems.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _dropdown_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dropdown.css */ "./src/Dropdown/dropdown.css");
-
-
-
-
-
-function Dropdown() {
-  const [dropdown, setDropdown] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", {
-    className: dropdown ? "platform-submenu clicked" : "platform-submenu",
-    onClick: () => setDropdown(!dropdown)
-  }, _NavItems__WEBPACK_IMPORTED_MODULE_1__.platformDropdown.map(item => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-      key: item.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-      to: item.path,
-      className: item.cName,
-      onClick: () => setDropdown(false)
-    }, item.title));
-  })));
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Dropdown);
 
 /***/ }),
 
@@ -3295,30 +3094,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SignUp/SignUpContainer */ "./src/SignUp/SignUpContainer.js");
-/* harmony import */ var _SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SignIn/SignInContainer */ "./src/SignIn/SignInContainer.js");
-
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
 
 
 
 class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  componentDidMount() {
-    this.props.exchangeToken();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.auth.id && this.props.auth.id) {
-      this.props.fetchCart();
-    }
-  }
-
   render() {
-    const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In';
     const {
       auth,
       thisMonthGames1989,
@@ -3332,8 +3115,9 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         product.imageUrl = product.imageUrl.substring(44, 100);
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-        key: product.id,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -3356,8 +3140,9 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         product.imageUrl = product.imageUrl.substring(44, 100);
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-        key: product.id,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -3380,8 +3165,9 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         product.imageUrl = product.imageUrl.substring(44, 100);
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-        key: product.id,
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: `/api/product/${product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
@@ -3397,20 +3183,15 @@ class LandingPage extends (react__WEBPACK_IMPORTED_MODULE_0___default().Componen
         className: "addtocart",
         onClick: () => this.props.addCart(product, 1)
       }, "Add To Cart"));
-    }).slice(0, 5)))) : null, auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      triggerText: signInTriggerText
-    }), auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      triggerText: signUpTriggerText
-    }));
+    }).slice(0, 5)))) : null);
   }
 
 }
 
+;
+
 const mapDispatch = dispatch => {
   return {
-    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
-    logout: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.logout)()),
-    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchCart)()),
     addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity))
   };
 };
@@ -3420,12 +3201,6 @@ const mapStateToProps = ({
   product,
   cart
 }) => {
-  {
-    /* const zeldaGames = product.filter(product => product.theme === 'zeldaGames'); */
-  }
-  {
-    /* const marioGames = product.filter(product => product.theme === 'marioGames'); */
-  }
   const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
   const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
   const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
@@ -3469,43 +3244,114 @@ __webpack_require__.r(__webpack_exports__);
 class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      username: '',
+      email: '',
+      street: '',
+      city: '',
+      zipcode: '',
+      avatar: ''
+    };
   }
 
   componentDidMount() {
     try {
+      this.props.getWishList();
+      console.log(this.props);
       this.props.exchangeToken();
     } catch (ex) {
       console.log(ex);
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (!prevProps.auth.id && this.props.auth.id) {
+      this.props.getWishList();
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.auth !== prevState) {
+      return {
+        id: nextProps.auth.id,
+        username: nextProps.auth.username,
+        email: nextProps.auth.email,
+        street: nextProps.auth.street || '',
+        city: nextProps.auth.city || '',
+        zipcode: nextProps.auth.zipcode || '',
+        avatar: nextProps.auth.avatar || ''
+      };
+    } else return null;
+  }
+
   render() {
     const {
-      auth
+      auth,
+      wishlist
     } = this.props;
-    console.log(this.props.auth);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, auth.username, "'s Profile"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, auth.username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", auth.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", auth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", auth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", auth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
+    const {
+      avatar,
+      username,
+      email,
+      street,
+      city,
+      zipcode
+    } = this.state;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
+      className: "user-details"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: avatar,
+      className: "avatar"
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", auth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", auth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", auth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, {
       exact: true,
       to: "/updatemyaccount"
-    }, "Edit account details"));
+    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "games"
+    }, wishlist ? wishlist.wishListItems.map(wishListItem => {
+      if (wishListItem.product.imageUrl.length > 10) {
+        wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100);
+      }
+
+      ;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "games",
+        key: wishListItem.product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        to: `/api/product/${wishListItem.product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`,
+        width: "170",
+        height: "170"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "name"
+      }, wishListItem.product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "price"
+      }, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "addtocart",
+        onClick: () => this.props.addCart(wishListItem.product, 1)
+      }, "Add To Cart")));
+    }) : 'You have nothing in your Wish List! Go add something!'));
   }
 
 }
 
 const mapState = state => {
+  console.log(state);
   const user = state.auth || {};
   return {
     auth: state.auth,
-    user: user
+    user: user,
+    wishlist: state.wishlist
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
-    updateUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.updateUser)(user)),
-    deleteUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deleteUser)(user))
+    getWishList: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchWishList)()),
+    addCart: (product, quantity) => dispatch(addCart(product, quantity))
   };
 };
 
@@ -3526,17 +3372,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SignUp/SignUpContainer */ "./src/SignUp/SignUpContainer.js");
 /* harmony import */ var _SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SignIn/SignInContainer */ "./src/SignIn/SignInContainer.js");
 /* harmony import */ var _store_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/auth */ "./src/store/auth.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var chai__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! chai */ "./node_modules/chai/index.mjs");
-/* harmony import */ var _Dropdown_Platformdropdown__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Dropdown/Platformdropdown */ "./src/Dropdown/Platformdropdown.js");
-/* harmony import */ var _Dropdown_Genredropdown__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Dropdown/Genredropdown */ "./src/Dropdown/Genredropdown.js");
-
-
+/* harmony import */ var chai__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! chai */ "./node_modules/chai/index.mjs");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
 
 
 
@@ -3548,15 +3390,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-  constructor() {
-    super();
-    this.state = {
-      showPlatform: false
-    };
-  }
-
   componentDidMount() {
     this.props.fetchProducts();
+    this.props.exchangeToken();
+    this.props.fetchCart();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.auth.id && this.props.auth.id) {
+      this.props.fetchCart();
+    }
   }
 
   render() {
@@ -3565,57 +3408,94 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       auth
     } = this.props;
     const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In'; // const [dropdown, setDropdown] = useState(false);
-
+    const signInTriggerText = 'Sign In';
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "topnav"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       exact: true,
       to: "/"
-    }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink, {
+    }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      class: "dropdown"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       exact: true,
       to: "/api/genre"
-    }, "Genre", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Dropdown_Genredropdown__WEBPACK_IMPORTED_MODULE_8__["default"], null), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink, {
+    }, "Genre "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      class: "dropdown-content"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+      to: `/api/genre/topFightingGames`
+    }, "  Top Fighting Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      class: "dropdown"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       exact: true,
-      to: "/api/platform",
-      onMouseEnter: () => setDropdown(true),
-      onMouseLeave: () => setDropdown(false)
-    }, "Platform",
-    /*#__PURE__*/
-
-    /*dropdown &&*/
-    react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Dropdown_Platformdropdown__WEBPACK_IMPORTED_MODULE_7__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink, {
+      to: "/api/platform"
+    }, "Platform "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      class: "dropdown-content"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      class: "dropdown"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       exact: true,
       to: "/api/gamesbyyear"
-    }, "Games By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink, {
+    }, "Games By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      class: "dropdown-content"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      class: "dropdown"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+      exact: true,
+      to: "/api/gamesbyyear"
+    }, "Games By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      class: "dropdown-content"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "#"
+    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       exact: true,
       to: "/api/console"
     }, "Console"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "topnav-right"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       exact: true,
       to: "/myaccount"
-    }, "My Account "), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    }, "My Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+      to: "/cart"
+    }, "Cart"), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+      exact: true,
+      to: "/"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       onClick: logout
-    }, "Logout") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
       triggerText: signInTriggerText
     }), auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_2__["default"], {
       triggerText: signUpTriggerText
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink, {
-      to: "/cart"
-    }, "Cart")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "footer"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "instagram"
+      href: "https://www.instagram.com/fsseniorproject/"
     }, "Instagram"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "facebook"
+      href: "https://www.facebook.com/profile.php?id=100085008934837"
     }, "Facebook"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "twitter"
+      href: "https://twitter.com/fullstack2022"
     }, "Twitter"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
       href: "contact"
-    }, "Contact"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "footer-right"
-    }, "Sources"))))));
+    }, "Contact"))))));
   }
 
 }
@@ -3632,8 +3512,10 @@ const mapState = ({
 
 const mapDispatch = dispatch => {
   return {
-    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.fetchProducts)()),
-    logout: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.logout)())
+    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchCart)()),
+    exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
+    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchProducts)()),
+    logout: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.logout)())
   };
 };
 
@@ -3948,40 +3830,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
 
 const SearchResults = ({
-  product
+  product,
+  addCart
 }) => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, "Search Results"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("ul", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("h2", null, "Search Results"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("ul", {
     className: "searchResults"
   }, product.map(product => {
     if (product.imageUrl.length > 10) {
       product.imageUrl = product.imageUrl.substring(44, 100);
     }
 
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("li", {
-      className: "indsearch"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-      key: product.id,
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("li", {
+      className: "indsearch",
+      key: product.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
       to: `/api/product/${product.id}`
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "picture"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("img", {
       src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
       width: "170",
       height: "170"
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "name"
-    }, product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    }, product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("div", {
       className: "price"
-    }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
-      className: "addtocart"
+    }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default().createElement("button", {
+      className: "addtocart",
+      onClick: () => addCart(product, 1)
     }, "Add To Cart"));
   })));
 };
@@ -3998,7 +3884,11 @@ const mapState = ({
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapState)(SearchResults));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapState, dispatch => {
+  return {
+    addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_1__.addCart)(product, quantity))
+  };
+})(SearchResults));
 
 /***/ }),
 
@@ -4472,7 +4362,6 @@ class SignUp extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.setState({
       showSignIn: true
     });
-    console.log(this.state.showSignIn);
   }
 
   submitButton() {
@@ -4495,7 +4384,9 @@ class SignUp extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       email,
       showSignIn
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, showSignIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_index_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      onSubmit: onSubmit
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
       onSubmit: onSubmit
     }, "Sign-Up ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
       name: "username",
@@ -4512,11 +4403,9 @@ class SignUp extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       onChange: onChange
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       disabled: this.submitButton() || !username || !password || !email
-    }, "Create User"), !username ? "Missing Username" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), !password ? "Missing Password" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), this.submitButton() || !email ? "Invalid Email" : ""), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    }, "Create User"), !username ? "Missing Username" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), !password ? "Missing Password" : "", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), this.submitButton() || !email ? "Invalid Email" : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       onClick: renderSignIn
-    }, " Already a user?  Sign in."), showSignIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_index_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      onSubmit: onSubmit
-    }) : null);
+    }, " Already a user?  Sign in."))));
   }
 
 }
@@ -4557,33 +4446,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
 /* harmony import */ var _SingleGame_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleGame.css */ "./src/SingleGame.css");
-/* harmony import */ var _SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SignUp/SignUpContainer */ "./src/SignUp/SignUpContainer.js");
-/* harmony import */ var _SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./SignIn/SignInContainer */ "./src/SignIn/SignInContainer.js");
 
 
 
 
 
-
-
-class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
-  componentDidMount() {
-    this.props.exchangeToken();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.auth.id && this.props.auth.id) {
-      this.props.fetchCart();
-    }
-  }
-
+class SingleGame extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   render() {
-    const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In';
     const {
       auth,
-      logout,
-      cart,
       game
     } = this.props;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4610,28 +4481,33 @@ class SingleGame extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "singleName"
       }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "price-condition"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "singlePrice"
-      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      }, `$${product.price}  |`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "condition"
+      }, "Condition: ", `${product.condition}`)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "heart-cart"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "btn",
         onClick: () => this.props.addCart(product, 1)
-      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "heart-wrapper",
+        onClick: () => this.props.addToWishList(product)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "heart"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "singleSummary"
       }, product.summary.substring(0, 600))))));
-    })) : null, auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      triggerText: signInTriggerText
-    }), auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      triggerText: signUpTriggerText
-    }));
+    })) : null);
   }
 
 }
 
 const mapDispatch = dispatch => {
   return {
-    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)()),
-    logout: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.logout)()),
-    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchCart)()),
-    addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity))
+    addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity)),
+    addToWishList: product => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addToWishList)(product))
   };
 };
 
@@ -4683,13 +4559,25 @@ class UpdateMyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Comp
       email: '',
       street: '',
       city: '',
-      zipcode: ''
+      zipcode: '',
+      avatar: ''
     };
     this.onChange = this.onChange.bind(this);
     this.updateUser = this.updateUser.bind(this);
   }
 
   componentDidMount() {
+    this.el.addEventListener('change', ev => {
+      const file = ev.target.files[0];
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        this.setState({
+          avatar: reader.result
+        });
+      });
+      reader.readAsDataURL(file);
+    });
+
     try {
       this.props.exchangeToken();
     } catch (ex) {
@@ -4698,14 +4586,15 @@ class UpdateMyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Comp
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.auth.username !== prevState.username) {
+    if (nextProps.auth.id !== prevState.id) {
       return {
         id: nextProps.auth.id,
         username: nextProps.auth.username,
         email: nextProps.auth.email,
         street: nextProps.auth.street || '',
         city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || ''
+        zipcode: nextProps.auth.zipcode || '',
+        avatar: nextProps.auth.avatar || ''
       };
     } else return null;
   }
@@ -4727,6 +4616,7 @@ class UpdateMyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Comp
       onChange
     } = this;
     const {
+      avatar,
       username,
       email,
       street,
@@ -4735,7 +4625,13 @@ class UpdateMyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Comp
     } = this.state;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
       onSubmit: updateUser
-    }, "Update ", this.state.username, "'s details: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    }, "Update ", this.state.username, "'s details: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Avatar:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "file",
+      ref: el => this.el = el
+    }), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: avatar,
+      className: "avatar"
+    }) : null, "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
       name: "username",
       onChange: onChange,
       value: username
@@ -4809,10 +4705,7 @@ const auth = (state = {}, action) => {
 
 const logout = () => {
   return dispatch => {
-    if (typeof undefined.props.googleReducer.accessToken !== 'undefined') {} else {
-      window.localStorage.removeItem('token');
-    }
-
+    window.localStorage.removeItem('token');
     dispatch({
       type: 'SET_AUTH',
       auth: {}
@@ -4981,27 +4874,31 @@ const updateQuantity = (product, quantity) => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "addCart": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.addCart),
+/* harmony export */   "addToWishList": () => (/* reexport safe */ _wishlist__WEBPACK_IMPORTED_MODULE_3__.addToWishList),
 /* harmony export */   "createUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.createUser),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "deleteCart": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.deleteCart),
+/* harmony export */   "deleteFromWishList": () => (/* reexport safe */ _wishlist__WEBPACK_IMPORTED_MODULE_3__.deleteFromWishList),
 /* harmony export */   "deleteUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.deleteUser),
 /* harmony export */   "exchangeToken": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_0__.exchangeToken),
 /* harmony export */   "fetchCart": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.fetchCart),
-/* harmony export */   "fetchProducts": () => (/* reexport safe */ _product__WEBPACK_IMPORTED_MODULE_3__.fetchProducts),
+/* harmony export */   "fetchProducts": () => (/* reexport safe */ _product__WEBPACK_IMPORTED_MODULE_4__.fetchProducts),
+/* harmony export */   "fetchWishList": () => (/* reexport safe */ _wishlist__WEBPACK_IMPORTED_MODULE_3__.fetchWishList),
 /* harmony export */   "loadUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.loadUser),
 /* harmony export */   "login": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_0__.login),
 /* harmony export */   "logout": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_0__.logout),
 /* harmony export */   "updateQuantity": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.updateQuantity),
 /* harmony export */   "updateUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.updateUser)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth */ "./src/store/auth.js");
 /* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cart */ "./src/store/cart.js");
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user */ "./src/store/user.js");
-/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./product */ "./src/store/product.js");
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
-/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wishlist__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./wishlist */ "./src/store/wishlist.js");
+/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./product */ "./src/store/product.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
+/* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -5009,14 +4906,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_5__.combineReducers)({
+
+const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_6__.combineReducers)({
   auth: _auth__WEBPACK_IMPORTED_MODULE_0__["default"],
   cart: _cart__WEBPACK_IMPORTED_MODULE_1__["default"],
-  product: _product__WEBPACK_IMPORTED_MODULE_3__["default"],
-  user: _user__WEBPACK_IMPORTED_MODULE_2__["default"]
+  product: _product__WEBPACK_IMPORTED_MODULE_4__["default"],
+  user: _user__WEBPACK_IMPORTED_MODULE_2__["default"],
+  wishlist: _wishlist__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
-const store = (0,redux__WEBPACK_IMPORTED_MODULE_5__.createStore)(reducer, (0,redux__WEBPACK_IMPORTED_MODULE_5__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_6__["default"], (redux_logger__WEBPACK_IMPORTED_MODULE_4___default())));
+const store = (0,redux__WEBPACK_IMPORTED_MODULE_6__.createStore)(reducer, (0,redux__WEBPACK_IMPORTED_MODULE_6__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_7__["default"], (redux_logger__WEBPACK_IMPORTED_MODULE_5___default())));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
+
 
 
 
@@ -5105,9 +5005,9 @@ const createUser = credentials => {
         user
       });
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response);
 
-      if (error.response.data.includes("Cannot add duplicate email!")) {
+      if (error.response.data.includes('Cannot add duplicate email')) {
         alert('Cannot add duplicate email');
       } else {
         console.log(error);
@@ -5143,6 +5043,154 @@ const loadUser = user => {
   };
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (user);
+
+/***/ }),
+
+/***/ "./src/store/wishlist.js":
+/*!*******************************!*\
+  !*** ./src/store/wishlist.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addToWishList": () => (/* binding */ addToWishList),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "deleteFromWishList": () => (/* binding */ deleteFromWishList),
+/* harmony export */   "fetchWishList": () => (/* binding */ fetchWishList)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const wishlist = (state = {
+  wishListItems: []
+}, action) => {
+  if (action.type === 'SET_WISHLIST') {
+    console.log(action.wishlist);
+    state = action.wishlist;
+  } else if (action.type === 'DELETE_WISHLISTITEM') {
+    const wishListItems = state.wishListItems.filter(item => item.product.id !== action.id);
+    state = { ...state,
+      wishListItems
+    };
+  }
+
+  return state;
+};
+
+const addToWishList = product => {
+  return async dispatch => {
+    const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().put('/api/wishlist', {
+      product
+    }, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
+
+    if (response.status === 200) {
+      alert('Added to wishlist successfully');
+    }
+  };
+};
+const fetchWishList = () => {
+  return async dispatch => {
+    const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/wishlist', {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
+    dispatch({
+      type: 'SET_WISHLIST',
+      wishlist: response.data
+    });
+  };
+};
+const deleteFromWishList = product => {
+  return async dispatch => {
+    const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().put('/api/wishlist', {
+      product
+    }, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
+
+    if (response.status === 200) {
+      dispatch({
+        type: 'DELETE_WISHLISTITEM',
+        id: product.id
+      });
+    }
+  };
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (wishlist);
+
+/***/ }),
+
+/***/ "./src/topFightingGames.js":
+/*!*********************************!*\
+  !*** ./src/topFightingGames.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+
+
+class topFightingGames extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  componentDidMount() {
+    this.props.fetchProducts();
+  }
+
+  render() {
+    const {
+      topFightingGames
+    } = this.props;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Top Fighting Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, topFightingGames.map(product => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: product.imageUrl
+      }), " ", product.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "price"
+      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "addtocart"
+      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, product.summary));
+    }))));
+  }
+
+}
+
+const mapStateToProps = ({
+  product
+}) => {
+  const topFightingGames = product.filter(product => product.theme === 'topFightingGames');
+  return {
+    topFightingGames
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchProducts)())
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatch)(topFightingGames));
 
 /***/ }),
 
@@ -14737,33 +14785,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".cart-list {\n    padding: 10px;\n    
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./src/Dropdown/dropdown.css":
-/*!*************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./src/Dropdown/dropdown.css ***!
-  \*************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-// Imports
-
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n.services-submenu {\n    width: 10rem;\n    position: absolute;\n    top: 67px;\n    list-style: none;\n    text-align: start;\n  }\n  \n\n.platform-submenu li {\n    background: rgb(0, 212, 212);\n    cursor: pointer;\n  }\n  \n  .platform-submenu li a:hover {\n    background: rgb(0, 175, 175);\n  }\n  \n  .platform-submenu.clicked {\n    display: none;\n  }\n  \n  .genre-submenu li {\n    background: rgb(0, 212, 212);\n    cursor: pointer;\n  }\n  \n  .genre-submenu li a:hover {\n    background: rgb(0, 175, 175);\n  }\n  \n  .genre-submenu.clicked {\n    display: none;\n  }\n  .submenu-item {\n    display: block;\n    text-decoration: none;\n    color: white;\n  }", "",{"version":3,"sources":["webpack://./src/Dropdown/dropdown.css"],"names":[],"mappings":";;AAEA;IACI,YAAY;IACZ,kBAAkB;IAClB,SAAS;IACT,gBAAgB;IAChB,iBAAiB;EACnB;;;AAGF;IACI,4BAA4B;IAC5B,eAAe;EACjB;;EAEA;IACE,4BAA4B;EAC9B;;EAEA;IACE,aAAa;EACf;;EAEA;IACE,4BAA4B;IAC5B,eAAe;EACjB;;EAEA;IACE,4BAA4B;EAC9B;;EAEA;IACE,aAAa;EACf;EACA;IACE,cAAc;IACd,qBAAqB;IACrB,YAAY;EACd","sourcesContent":["\n\n.services-submenu {\n    width: 10rem;\n    position: absolute;\n    top: 67px;\n    list-style: none;\n    text-align: start;\n  }\n  \n\n.platform-submenu li {\n    background: rgb(0, 212, 212);\n    cursor: pointer;\n  }\n  \n  .platform-submenu li a:hover {\n    background: rgb(0, 175, 175);\n  }\n  \n  .platform-submenu.clicked {\n    display: none;\n  }\n  \n  .genre-submenu li {\n    background: rgb(0, 212, 212);\n    cursor: pointer;\n  }\n  \n  .genre-submenu li a:hover {\n    background: rgb(0, 175, 175);\n  }\n  \n  .genre-submenu.clicked {\n    display: none;\n  }\n  .submenu-item {\n    display: block;\n    text-decoration: none;\n    color: white;\n  }"],"sourceRoot":""}]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/SingleGame.css":
 /*!******************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/SingleGame.css ***!
@@ -14785,7 +14806,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n\n.product-img{\n    width: 40%;\n    height: 500px;\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n.productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n}\n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n", "",{"version":3,"sources":["webpack://./src/SingleGame.css"],"names":[],"mappings":"AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;AAC1B;;AAEA;IACI,aAAa;IACb,uBAAuB;IACvB,gBAAgB;AACpB;;AAEA;IACI,kBAAkB;IAClB,aAAa;IACb,gBAAgB;IAChB,iBAAiB;IACjB,YAAY;IACZ,aAAa;IACb,uBAAuB;IACvB,mBAAmB;AACvB;;;AAGA;IACI,UAAU;IACV,aAAa;IACb,gBAAgB;IAChB,kBAAkB;IAClB,UAAU;IACV,4BAA4B;IAC5B,gCAAgC;AACpC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,gBAAgB;IAChB,iBAAiB;AACrB;;AAEA;IACI,UAAU;IACV,iBAAiB;IACjB,YAAY;IACZ,mBAAmB;IACnB,aAAa;IACb,aAAa;IACb,uBAAuB;IACvB,cAAc;IACd,UAAU;IACV,2BAA2B;IAC3B,gCAAgC;AACpC;;AAEA;IACI;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;;AAGA;IACI,oBAAoB;IACpB,eAAe;IACf,0BAA0B;AAC9B;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,YAAY;IACZ,0BAA0B;IAC1B,eAAe;IACf,kBAAkB;IAClB,eAAe;IACf,mBAAmB;AACvB;;AAEA;IACI,yBAAyB;AAC7B","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap');\n\n*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\n.singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n\n.product-img{\n    width: 40%;\n    height: 500px;\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n.productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n}\n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n}\n\n.singleGame {\n    /* display: flex;\n    justify-content: center; */\n    margin-top: 7rem;\n    margin: 10rem;\n}\n\n.product{\n    /* position: relative; */\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.product-img{\n    width: 40%;\n    height: 500px;\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n .productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n} \n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */ \n  \n   .heart-wrapper {\n    /* position: absolute; */\n    /* top: 50%; */\n    left: 0;\n    /* width: 100%; */\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }\n\n  .price-condition {\n    display: flex;\n    align-items: center;\n  }\n\n  .condition {\n    padding: 1rem;\n    padding-bottom: 2.5rem;\n    padding-left: 2rem;\n  }\n\n  ", "",{"version":3,"sources":["webpack://./src/SingleGame.css"],"names":[],"mappings":"AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;;AAE1B;;AAEA;IACI;8BAC0B;IAC1B,gBAAgB;IAChB,aAAa;AACjB;;AAEA;IACI,wBAAwB;IACxB,aAAa;IACb,gBAAgB;IAChB,iBAAiB;IACjB,YAAY;IACZ,aAAa;IACb,uBAAuB;IACvB,mBAAmB;AACvB;;AAEA;IACI,UAAU;IACV,aAAa;IACb,gBAAgB;IAChB,kBAAkB;IAClB,UAAU;IACV,4BAA4B;IAC5B,gCAAgC;AACpC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,gBAAgB;IAChB,iBAAiB;AACrB;;CAEC;IACG,UAAU;IACV,iBAAiB;IACjB,YAAY;IACZ,mBAAmB;IACnB,aAAa;IACb,aAAa;IACb,uBAAuB;IACvB,cAAc;IACd,UAAU;IACV,2BAA2B;IAC3B,gCAAgC;AACpC;;AAEA;IACI;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;;AAGA;IACI,oBAAoB;IACpB,eAAe;IACf,0BAA0B;AAC9B;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,YAAY;IACZ,0BAA0B;IAC1B,eAAe;IACf,kBAAkB;IAClB,eAAe;IACf,mBAAmB;AACvB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;;;;KAIK;;GAEF;IACC,wBAAwB;IACxB,cAAc;IACd,OAAO;IACP,iBAAiB;IACjB,kBAAkB;IAClB,iBAAiB;IACjB,cAAc;EAChB;;EAEA;IACE,2BAA2B;IAC3B,UAAU;IACV,WAAW;IACX,aAAa;IACb,mBAAmB;IACnB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;qBAqCiB;IACjB;;IAEA;IACA,kCAAkC;IAClC;;AAEJ;IACI,KAAK,mBAAmB,EAAE;IAC1B,MAAM,qBAAqB,EAAE;IAC7B,OAAO,mBAAmB,EAAE;AAChC;;EAEE;IACE,aAAa;EACf;;EAEA;IACE,aAAa;IACb,mBAAmB;EACrB;;EAEA;IACE,aAAa;IACb,sBAAsB;IACtB,kBAAkB;EACpB","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap');\n\n*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n}\n\n.singleGame {\n    /* display: flex;\n    justify-content: center; */\n    margin-top: 7rem;\n    margin: 10rem;\n}\n\n.product{\n    /* position: relative; */\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n\n.product-img{\n    width: 40%;\n    height: 500px;\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n .productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n} \n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */ \n  \n   .heart-wrapper {\n    /* position: absolute; */\n    /* top: 50%; */\n    left: 0;\n    /* width: 100%; */\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }\n\n  .price-condition {\n    display: flex;\n    align-items: center;\n  }\n\n  .condition {\n    padding: 1rem;\n    padding-bottom: 2.5rem;\n    padding-left: 2rem;\n  }\n\n  "],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14812,7 +14833,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body {\n    margin: 0;\n    padding: 0;\n    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif; */\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    box-sizing: border-box;\n  }\n  \n  *,\n  *:before,\n  *:after {\n    box-sizing: inherit;\n  }\n  ol{\n    list-style-type: none;\n  }\n  li{\n    list-style-type: none;\n  }\n  .App {\n    width: 90%;\n    max-width: 700px;\n    margin: 2em auto;\n  }\n  \n  .modal-cover {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 10;\n    transform: translateZ(0);\n    background-color: rgba(0, 0, 0, 0.8);\n  }\n  \n  .modal-area {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    padding: 2.5em 1.5em 1.5em 1.5em;\n    background-color: #ffffff;\n    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n  }\n  \n  @media screen and (min-width: 500px) {\n    /* Center the Modal! */\n    .modal-area {\n      left: 50%;\n      top: 50%;\n      height: auto;\n      transform: translate(-50%, -50%);\n      max-width: 30em;\n      max-height: calc(100% - 1em);\n    }\n  }\n  \n  ._modal-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.5em;\n    line-height: 1;\n    background: #f6f6f7;\n    border: 0;\n    box-shadow: 0;\n    cursor: pointer;\n  }\n  \n  ._modal-close-icon {\n    width: 25px;\n    height: 25px;\n    fill: transparent;\n    stroke: black;\n    stroke-linecap: round;\n    stroke-width: 2;\n  }\n  \n  .modal-body {\n    padding-top: 0.25em;\n  }\n  ._hide-visual {\n    border: 0 !important;\n    clip: rect(0 0 0 0) !important;\n    height: 1px !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    padding: 0 !important;\n    position: absolute !important;\n    width: 1px !important;\n    white-space: nowrap !important;\n  }\n  \n  .scroll-lock {\n    overflow: hidden;\n    margin-right: 17px;\n  }\n  ", "",{"version":3,"sources":["webpack://./src/index.css"],"names":[],"mappings":"AAAA;IACI,SAAS;IACT,UAAU;IACV;;mBAEe;IACf,mCAAmC;IACnC,kCAAkC;IAClC,sBAAsB;EACxB;;EAEA;;;IAGE,mBAAmB;EACrB;EACA;IACE,qBAAqB;EACvB;EACA;IACE,qBAAqB;EACvB;EACA;IACE,UAAU;IACV,gBAAgB;IAChB,gBAAgB;EAClB;;EAEA;IACE,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,WAAW;IACX,wBAAwB;IACxB,oCAAoC;EACtC;;EAEA;IACE,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,gCAAgC;IAChC,yBAAyB;IACzB,2CAA2C;IAC3C,gBAAgB;IAChB,iCAAiC;EACnC;;EAEA;IACE,sBAAsB;IACtB;MACE,SAAS;MACT,QAAQ;MACR,YAAY;MACZ,gCAAgC;MAChC,eAAe;MACf,4BAA4B;IAC9B;EACF;;EAEA;IACE,kBAAkB;IAClB,MAAM;IACN,QAAQ;IACR,cAAc;IACd,cAAc;IACd,mBAAmB;IACnB,SAAS;IACT,aAAa;IACb,eAAe;EACjB;;EAEA;IACE,WAAW;IACX,YAAY;IACZ,iBAAiB;IACjB,aAAa;IACb,qBAAqB;IACrB,eAAe;EACjB;;EAEA;IACE,mBAAmB;EACrB;EACA;IACE,oBAAoB;IACpB,8BAA8B;IAC9B,sBAAsB;IACtB,uBAAuB;IACvB,2BAA2B;IAC3B,qBAAqB;IACrB,6BAA6B;IAC7B,qBAAqB;IACrB,8BAA8B;EAChC;;EAEA;IACE,gBAAgB;IAChB,kBAAkB;EACpB","sourcesContent":["body {\n    margin: 0;\n    padding: 0;\n    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif; */\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    box-sizing: border-box;\n  }\n  \n  *,\n  *:before,\n  *:after {\n    box-sizing: inherit;\n  }\n  ol{\n    list-style-type: none;\n  }\n  li{\n    list-style-type: none;\n  }\n  .App {\n    width: 90%;\n    max-width: 700px;\n    margin: 2em auto;\n  }\n  \n  .modal-cover {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 10;\n    transform: translateZ(0);\n    background-color: rgba(0, 0, 0, 0.8);\n  }\n  \n  .modal-area {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    padding: 2.5em 1.5em 1.5em 1.5em;\n    background-color: #ffffff;\n    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n  }\n  \n  @media screen and (min-width: 500px) {\n    /* Center the Modal! */\n    .modal-area {\n      left: 50%;\n      top: 50%;\n      height: auto;\n      transform: translate(-50%, -50%);\n      max-width: 30em;\n      max-height: calc(100% - 1em);\n    }\n  }\n  \n  ._modal-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.5em;\n    line-height: 1;\n    background: #f6f6f7;\n    border: 0;\n    box-shadow: 0;\n    cursor: pointer;\n  }\n  \n  ._modal-close-icon {\n    width: 25px;\n    height: 25px;\n    fill: transparent;\n    stroke: black;\n    stroke-linecap: round;\n    stroke-width: 2;\n  }\n  \n  .modal-body {\n    padding-top: 0.25em;\n  }\n  ._hide-visual {\n    border: 0 !important;\n    clip: rect(0 0 0 0) !important;\n    height: 1px !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    padding: 0 !important;\n    position: absolute !important;\n    width: 1px !important;\n    white-space: nowrap !important;\n  }\n  \n  .scroll-lock {\n    overflow: hidden;\n    margin-right: 17px;\n  }\n  "],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\n    margin: 0;\n    padding: 0;\n    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif; */\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    box-sizing: border-box;\n  }\n  \n   *,\n  *:before,\n  *:after {\n    box-sizing: inherit;\n  }\n  ol{\n    list-style-type: none;\n  }\n  li{\n    list-style-type: none;\n  }\n  .App {\n    width: 90%;\n    max-width: 700px;\n    margin: 2em auto;\n  }\n  \n  .modal-cover {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 10;\n    transform: translateZ(0);\n    background-color: rgba(0, 0, 0, 0.8);\n  } \n  \n  .modal-area {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    padding: 2.5em 1.5em 1.5em 1.5em;\n    background-color: #ffffff;\n    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n  }\n  \n  @media screen and (min-width: 500px) {\n    /* Center the Modal! */\n    .modal-area {\n      left: 50%;\n      top: 50%;\n      height: auto;\n      transform: translate(-50%, -50%);\n      max-width: 30em;\n      max-height: calc(100% - 1em);\n    }\n  }\n  \n  ._modal-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.5em;\n    line-height: 1;\n    background: #f6f6f7;\n    border: 0;\n    box-shadow: 0;\n    cursor: pointer;\n  }\n  \n  ._modal-close-icon {\n    width: 25px;\n    height: 25px;\n    fill: transparent;\n    stroke: black;\n    stroke-linecap: round;\n    stroke-width: 2;\n  }\n  \n  .modal-body {\n    padding-top: 0.25em;\n  }\n  ._hide-visual {\n    border: 0 !important;\n    clip: rect(0 0 0 0) !important;\n    height: 1px !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    padding: 0 !important;\n    position: absolute !important;\n    width: 1px !important;\n    white-space: nowrap !important;\n  }\n  \n  /* .scroll-lock {\n    overflow: hidden;\n    margin-right: 17px;\n  } */\n  ", "",{"version":3,"sources":["webpack://./src/index.css"],"names":[],"mappings":"AAAA;IACI,SAAS;IACT,UAAU;IACV;;mBAEe;IACf,mCAAmC;IACnC,kCAAkC;IAClC,sBAAsB;EACxB;;GAEC;;;IAGC,mBAAmB;EACrB;EACA;IACE,qBAAqB;EACvB;EACA;IACE,qBAAqB;EACvB;EACA;IACE,UAAU;IACV,gBAAgB;IAChB,gBAAgB;EAClB;;EAEA;IACE,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,WAAW;IACX,wBAAwB;IACxB,oCAAoC;EACtC;;EAEA;IACE,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,gCAAgC;IAChC,yBAAyB;IACzB,2CAA2C;IAC3C,gBAAgB;IAChB,iCAAiC;EACnC;;EAEA;IACE,sBAAsB;IACtB;MACE,SAAS;MACT,QAAQ;MACR,YAAY;MACZ,gCAAgC;MAChC,eAAe;MACf,4BAA4B;IAC9B;EACF;;EAEA;IACE,kBAAkB;IAClB,MAAM;IACN,QAAQ;IACR,cAAc;IACd,cAAc;IACd,mBAAmB;IACnB,SAAS;IACT,aAAa;IACb,eAAe;EACjB;;EAEA;IACE,WAAW;IACX,YAAY;IACZ,iBAAiB;IACjB,aAAa;IACb,qBAAqB;IACrB,eAAe;EACjB;;EAEA;IACE,mBAAmB;EACrB;EACA;IACE,oBAAoB;IACpB,8BAA8B;IAC9B,sBAAsB;IACtB,uBAAuB;IACvB,2BAA2B;IAC3B,qBAAqB;IACrB,6BAA6B;IAC7B,qBAAqB;IACrB,8BAA8B;EAChC;;EAEA;;;KAGG","sourcesContent":["body {\n    margin: 0;\n    padding: 0;\n    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif; */\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    box-sizing: border-box;\n  }\n  \n   *,\n  *:before,\n  *:after {\n    box-sizing: inherit;\n  }\n  ol{\n    list-style-type: none;\n  }\n  li{\n    list-style-type: none;\n  }\n  .App {\n    width: 90%;\n    max-width: 700px;\n    margin: 2em auto;\n  }\n  \n  .modal-cover {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 10;\n    transform: translateZ(0);\n    background-color: rgba(0, 0, 0, 0.8);\n  } \n  \n  .modal-area {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    padding: 2.5em 1.5em 1.5em 1.5em;\n    background-color: #ffffff;\n    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n  }\n  \n  @media screen and (min-width: 500px) {\n    /* Center the Modal! */\n    .modal-area {\n      left: 50%;\n      top: 50%;\n      height: auto;\n      transform: translate(-50%, -50%);\n      max-width: 30em;\n      max-height: calc(100% - 1em);\n    }\n  }\n  \n  ._modal-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.5em;\n    line-height: 1;\n    background: #f6f6f7;\n    border: 0;\n    box-shadow: 0;\n    cursor: pointer;\n  }\n  \n  ._modal-close-icon {\n    width: 25px;\n    height: 25px;\n    fill: transparent;\n    stroke: black;\n    stroke-linecap: round;\n    stroke-width: 2;\n  }\n  \n  .modal-body {\n    padding-top: 0.25em;\n  }\n  ._hide-visual {\n    border: 0 !important;\n    clip: rect(0 0 0 0) !important;\n    height: 1px !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    padding: 0 !important;\n    position: absolute !important;\n    width: 1px !important;\n    white-space: nowrap !important;\n  }\n  \n  /* .scroll-lock {\n    overflow: hidden;\n    margin-right: 17px;\n  } */\n  "],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -58498,61 +58519,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./src/Dropdown/dropdown.css":
-/*!***********************************!*\
-  !*** ./src/Dropdown/dropdown.css ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_dropdown_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./dropdown.css */ "./node_modules/css-loader/dist/cjs.js!./src/Dropdown/dropdown.css");
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-var options = {};
-
-options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
-options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
-
-      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
-    
-options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
-options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_dropdown_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
-
-
-
-
-       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_dropdown_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_dropdown_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_dropdown_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
-
-
-/***/ }),
-
 /***/ "./src/SingleGame.css":
 /*!****************************!*\
   !*** ./src/SingleGame.css ***!
@@ -60789,8 +60755,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SingleGame__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleGame */ "./src/SingleGame.js");
 /* harmony import */ var _MyAccount__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MyAccount */ "./src/MyAccount.js");
 /* harmony import */ var _UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UpdateMyAccount */ "./src/UpdateMyAccount.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _LandingPage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LandingPage */ "./src/LandingPage.js");
 /* harmony import */ var _Cart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Cart */ "./src/Cart.js");
 /* harmony import */ var _Search_Search__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Search/Search */ "./src/Search/Search.js");
@@ -60802,6 +60768,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Nav__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Nav */ "./src/Nav.js");
 /* harmony import */ var _GamesbyYear__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./GamesbyYear */ "./src/GamesbyYear.js");
 /* harmony import */ var _Console__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Console */ "./src/Console.js");
+/* harmony import */ var _topFightingGames__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./topFightingGames */ "./src/topFightingGames.js");
+
 
 
 
@@ -60823,47 +60791,53 @@ __webpack_require__.r(__webpack_exports__);
 
 class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Nav__WEBPACK_IMPORTED_MODULE_14__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+      id: "main-body"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Nav__WEBPACK_IMPORTED_MODULE_14__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
       className: "logo"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h1", null, "LOGO"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h1", null, "LOGO"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       component: _Search_Search__WEBPACK_IMPORTED_MODULE_8__["default"]
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/cart",
       exact: true,
       component: _Cart__WEBPACK_IMPORTED_MODULE_7__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/",
       exact: true,
       component: _LandingPage__WEBPACK_IMPORTED_MODULE_6__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/product/:id",
       exact: true,
       component: _SingleGame__WEBPACK_IMPORTED_MODULE_3__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/genre",
       exact: true,
       component: _Genre__WEBPACK_IMPORTED_MODULE_12__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+      path: "/api/genre/topFightingGames",
+      exact: true,
+      component: _topFightingGames__WEBPACK_IMPORTED_MODULE_17__["default"]
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/platform",
       exact: true,
       component: _Platform__WEBPACK_IMPORTED_MODULE_11__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/gamesbyyear",
       exact: true,
       component: _GamesbyYear__WEBPACK_IMPORTED_MODULE_15__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/api/console",
       exact: true,
       component: _Console__WEBPACK_IMPORTED_MODULE_16__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/myaccount",
       exact: true,
       component: _MyAccount__WEBPACK_IMPORTED_MODULE_4__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/updatemyaccount",
       exact: true,
       component: _UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
       path: "/search/:term?",
       component: _Search_SearchResults__WEBPACK_IMPORTED_MODULE_9__["default"]
     }));
@@ -60875,7 +60849,7 @@ const App = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(null)(_App);
 const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(document.querySelector('#root'));
 root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
   store: _store__WEBPACK_IMPORTED_MODULE_13__["default"]
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(App, null))));
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(App, null))));
 })();
 
 /******/ })()

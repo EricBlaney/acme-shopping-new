@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 const user = (state = [], action)=> {
   if(action.type === 'CREATE_USER'){
     state = action.user;
@@ -9,7 +10,7 @@ const user = (state = [], action)=> {
   if(action.type === 'DELETE_USER') {
     state = [];
   }
-  return state;
+  return state; 
 };
 
 export const createUser = (credentials) => {
@@ -19,8 +20,8 @@ export const createUser = (credentials) => {
         dispatch({ type: 'CREATE_USER', user });
     }
     catch(error) {
-        console.log(error.response.data);
-      if (error.response.data.includes("Cannot add duplicate email!")) {
+        console.log(error.response);
+      if (error.response.data.includes('Cannot add duplicate email')) {
         alert('Cannot add duplicate email')
       } else {
         console.log(error);

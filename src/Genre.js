@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 class Genre extends Component {
 
-
     componentDidMount(){
         this.props.fetchProducts();
     }

@@ -4,7 +4,6 @@ const { Sequelize } = conn;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-
 const User = conn.define('user', {
   id: {
     type: Sequelize.UUID,
@@ -36,6 +35,9 @@ const User = conn.define('user', {
   },
   zipcode:{
     type: Sequelize.STRING
+  },
+  avatar: {
+    type: Sequelize.TEXT
   }
 });
 
@@ -52,7 +54,7 @@ User.addHook('beforeCreate', async(user) =>{
           }
       });
       if(result.length >= 1 ){
-          throw new Error('Cannot add duplicate email!')
+          throw 'Cannot add duplicate email!'
       }
 } catch(er){
   throw er
@@ -63,29 +65,6 @@ User.prototype.createOrderFromCart = async function(){
   const cart = await this.getCart();
   cart.isCart = false;
   return cart.save();
-}
-
-User.prototype.addToCart = async function({ product, quantity}){
-  const cart = await this.getCart();
-  let lineItem = await conn.models.lineItem.findOne({
-    where: {
-      productId: product.id,
-      orderId: cart.id
-    }
-  });
-  if(lineItem){
-    lineItem.quantity = quantity;
-    if(lineItem.quantity){
-      await lineItem.save();
-    }
-    else {
-      await lineItem.destroy();
-    }
-  }
-  else {
-    await conn.models.lineItem.create({ productId: product.id, quantity, orderId: cart.id });
-  }
-  return this.getCart();
 }
 
 User.prototype.getCart = async function(){
@@ -110,14 +89,81 @@ User.prototype.getCart = async function(){
   return order;
 }
 
+User.prototype.addToCart = async function({ product, quantity }){
+  const cart = await this.getCart(); 
+  let lineItem = await conn.models.lineItem.findOne({
+    where: {
+      productId: product.id,
+      orderId: cart.id
+    }
+  });
+  if(lineItem){
+    lineItem.quantity = quantity;
+    if(lineItem.quantity){
+      await lineItem.save();
+    }
+    else {
+      await lineItem.destroy();
+    }
+  }
+  else {
+    await conn.models.lineItem.create({ productId: product.id, quantity, orderId: cart.id });
+  }
+  return this.getCart();
+};
+
+User.prototype.createWishListFromWishListItems = async function(){
+  const wishlist = await this.getWishList();
+  wishlist.isWishList = false;
+  return wishlist.save();
+};
+
+User.prototype.getWishList = async function(){
+  let wishlist = await conn.models.wishList.findOne({
+    where: {
+      userId: this.id,
+    },
+    include: [
+      {
+        model: conn.models.wishListItem,
+        include: [ conn.models.product ]
+      }
+    ]
+  });
+  if(!wishlist){
+    wishlist = await conn.models.wishList.create({ userId: this.id });
+    console.log(wishlist)
+    wishlist = await conn.models.wishList.findByPk( wishlist.id, {
+      include: [ conn.models.wishListItem ]
+    });
+  }
+  return wishlist;
+}
+
+User.prototype.addToWishList = async function({ product }){
+  const wishlist = await this.getWishList();
+  console.log(wishlist)
+
+  let wishlistitem = await conn.models.wishListItem.findOne({
+    where: {
+      productId: product.id,
+      wishListId: wishlist.id
+    }
+  });
+  if(!wishlistitem){
+    await conn.models.wishListItem.create({ productId: product.id, wishListId: wishlist.id });
+  }
+  return this.getWishList();
+}
+
 User.authenticate = async function(credentials){
   const user = await this.findOne({
     where: {
       username: credentials.username
-    } 
+    }
   });
   if(user && await bcrypt.compare(credentials.password, user.password)){
-    return jwt.sign({ id: user.id}, process.env.JWT);
+    return jwt.sign({ id: user.id }, process.env.JWT);
   }
   else {
     const error = new Error('Bad Credentials');
@@ -125,7 +171,6 @@ User.authenticate = async function(credentials){
     throw error;
   }
 }
-
 
 User.findByToken = async function findByToken(token){
   try {

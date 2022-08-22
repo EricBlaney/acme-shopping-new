@@ -8,11 +8,7 @@ const auth = (state = {}, action)=> {
 
 export const logout = ()=> {
   return (dispatch)=> {
-    if (typeof this.props.googleReducer.accessToken !== 'undefined') {
-
-    } else {
       window.localStorage.removeItem('token');
-    }
     dispatch({ type: 'SET_AUTH', auth: {}});
 
   };
