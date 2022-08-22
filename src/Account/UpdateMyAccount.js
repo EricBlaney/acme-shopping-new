@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateUser, deleteUser, exchangeToken} from './store'
+import { updateUser, deleteUser, exchangeToken} from '../store'
 
 class UpdateMyAccount extends React.Component{
     constructor(){

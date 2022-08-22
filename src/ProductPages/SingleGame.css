@@ -7,27 +7,34 @@
 
 }
 
-.singleGame {
-    /* display: flex;
-    justify-content: center; */
+/* .singleGame {
+    display: flex;
+    justify-content: center;
     margin-top: 7rem;
     margin: 10rem;
+} */
+
+.singlecard {
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
+
 }
 
 .product{
-    /* position: relative; */
+    position: relative;
     width: 1000px;
     min-width: 350px;
     min-height: 500px;
     height: auto;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
 }
 
 .product-img{
     width: 40%;
-    height: 500px;
+    /* height: 500px; */
     background: #fff;
     position: relative;
     opacity: 0;
@@ -101,7 +108,7 @@
     /* position: absolute; */
     /* top: 50%; */
     left: 0;
-    /* width: 100%; */
+    width: 100%;
     margin-top: 1.3rem;
     margin-left: 5rem;
     font-size: 5px;
