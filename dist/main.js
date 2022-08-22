@@ -3574,6 +3574,110 @@ const mapDispatch = dispatch => {
 
 /***/ }),
 
+/***/ "./src/PasswordReset.js":
+/*!******************************!*\
+  !*** ./src/PasswordReset.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+
+class PasswordReset extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor() {
+    super();
+    this.state = {
+      userId: '',
+      username: '',
+      token: '',
+      password: '',
+      success: false
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      userId: this.props.id,
+      username: this.props.username,
+      token: this.props.token
+    });
+  }
+
+  onChange(ev) {
+    this.setState({
+      [ev.target.name]: ev.target.value
+    });
+  }
+
+  async onSubmit(ev) {
+    ev.preventDefault();
+
+    try {
+      await axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/passwordReset', this.state);
+      this.setState({
+        success: true
+      });
+    } catch (ex) {
+      alert("Password reset link invalid.");
+      console.log(ex);
+    }
+  }
+
+  render() {
+    const {
+      onChange,
+      onSubmit
+    } = this;
+    const {
+      username,
+      password
+    } = this.state;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, this.state.success ? "Thank you for resetting your password" : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+      onSubmit: onSubmit
+    }, "Change Password for ", username, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Password:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "password",
+      name: "password",
+      value: password,
+      onChange: onChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      type: "submit"
+    }, "Change Password")));
+  }
+
+}
+
+const mapState = () => {
+  const {
+    token,
+    username,
+    id
+  } = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.useParams)();
+  return {
+    token,
+    username,
+    id
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, null)(PasswordReset));
+
+/***/ }),
+
 /***/ "./src/ProductPages/Console.js":
 /*!*************************************!*\
   !*** ./src/ProductPages/Console.js ***!
@@ -4796,6 +4900,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _SignInAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../SignInAdmin */ "./src/SignInAdmin/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -4812,6 +4919,8 @@ class SignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.renderAdminSignIn = this.renderAdminSignIn.bind(this);
+    this.updatepassword = this.updatepassword.bind(this);
+    this.flag_email_input = this.flag_email_input.bind(this);
   }
 
   onChange(ev) {
@@ -4831,16 +4940,43 @@ class SignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
   }
 
+  async updatepassword(ev) {
+    try {
+      ev.preventDefault();
+      await axios__WEBPACK_IMPORTED_MODULE_4___default().post('/api/passwordResetRequest', this.state);
+      this.setState({
+        password_email_sent: true
+      });
+      this.setState({
+        password_reset: false
+      });
+    } catch (ex) {
+      alert("No user found with that email");
+      console.log(ex);
+    }
+  }
+
+  flag_email_input() {
+    this.setState({
+      password_reset: true
+    });
+  }
+
   render() {
     const {
       onChange,
       onSubmit,
-      renderAdminSignIn
+      renderAdminSignIn,
+      updatepassword,
+      flag_email_input
     } = this;
     const {
       username,
       password,
-      showAdminSignIn
+      showAdminSignIn,
+      password_reset,
+      password_email_sent,
+      email
     } = this.state;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, showAdminSignIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignInAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], {
       onSubmit: onSubmit
@@ -4857,7 +4993,16 @@ class SignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       onChange: onChange
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       onClick: renderAdminSignIn
-    }, " Admin? Click here to sign in.")));
+    }, " Admin? Click here to sign in.")), password_email_sent ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Check your email to continue with password reset.") : null, password_reset ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+      onSubmit: updatepassword
+    }, "Password Reset: What is the email associated with your account? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Email:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      name: "email",
+      onChange: onChange,
+      value: email
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Reset Password")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      className: "reset-password",
+      onClick: flag_email_input
+    }, "Forgot your password? Reset here."));
   }
 
 }
@@ -61842,8 +61987,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProductPages_SingleGame__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProductPages/SingleGame */ "./src/ProductPages/SingleGame.js");
 /* harmony import */ var _Account_MyAccount__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Account/MyAccount */ "./src/Account/MyAccount.js");
 /* harmony import */ var _Account_UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Account/UpdateMyAccount */ "./src/Account/UpdateMyAccount.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _LandingPage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LandingPage */ "./src/LandingPage.js");
 /* harmony import */ var _Cart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Cart */ "./src/Cart.js");
 /* harmony import */ var _Search_Search__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Search/Search */ "./src/Search/Search.js");
@@ -61856,6 +62001,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProductPages_GamesbyYear__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ProductPages/GamesbyYear */ "./src/ProductPages/GamesbyYear.js");
 /* harmony import */ var _ProductPages_Console__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ProductPages/Console */ "./src/ProductPages/Console.js");
 /* harmony import */ var _ProductPages_topFightingGames__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./ProductPages/topFightingGames */ "./src/ProductPages/topFightingGames.js");
+/* harmony import */ var _PasswordReset__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./PasswordReset */ "./src/PasswordReset.js");
+
 
 
 
@@ -61882,51 +62029,54 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
       id: "main-body"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_Nav__WEBPACK_IMPORTED_MODULE_14__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
       className: "logo"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       component: _Search_Search__WEBPACK_IMPORTED_MODULE_8__["default"]
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/cart",
       exact: true,
       component: _Cart__WEBPACK_IMPORTED_MODULE_7__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/",
       exact: true,
       component: _LandingPage__WEBPACK_IMPORTED_MODULE_6__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/api/product/:id",
       exact: true,
       component: _ProductPages_SingleGame__WEBPACK_IMPORTED_MODULE_3__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/api/genre",
       exact: true,
       component: _ProductPages_Genre__WEBPACK_IMPORTED_MODULE_12__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/api/genre/topFightingGames",
       exact: true,
       component: _ProductPages_topFightingGames__WEBPACK_IMPORTED_MODULE_17__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/api/platform",
       exact: true,
       component: _ProductPages_Platform__WEBPACK_IMPORTED_MODULE_11__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/api/gamesbyyear",
       exact: true,
       component: _ProductPages_GamesbyYear__WEBPACK_IMPORTED_MODULE_15__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/api/console",
       exact: true,
       component: _ProductPages_Console__WEBPACK_IMPORTED_MODULE_16__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/myaccount",
       exact: true,
       component: _Account_MyAccount__WEBPACK_IMPORTED_MODULE_4__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/updatemyaccount",
       exact: true,
       component: _Account_UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/search/:term?",
       component: _Search_SearchResults__WEBPACK_IMPORTED_MODULE_9__["default"]
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
+      path: "/passwordreset/:token/:username/:id",
+      component: _PasswordReset__WEBPACK_IMPORTED_MODULE_18__["default"]
     }));
   }
 
@@ -61936,7 +62086,7 @@ const App = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(null)(_App);
 const root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_0__.createRoot)(document.querySelector('#root'));
 root.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
   store: _store__WEBPACK_IMPORTED_MODULE_13__["default"]
-}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(App, null))));
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_20__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(App, null))));
 })();
 
 /******/ })()

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { login } from '../store';
 import { connect } from 'react-redux';
-import SignInAdmin from '../SignInAdmin'
+import SignInAdmin from '../SignInAdmin';
+import axios from 'axios';
 class SignIn extends Component{
   constructor(){
     super();
@@ -13,7 +14,9 @@ class SignIn extends Component{
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.renderAdminSignIn = this.renderAdminSignIn.bind(this)
+    this.renderAdminSignIn = this.renderAdminSignIn.bind(this);
+    this.updatepassword = this.updatepassword.bind(this);
+    this.flag_email_input = this.flag_email_input.bind(this);
 
   }
   onChange(ev){
@@ -27,10 +30,25 @@ class SignIn extends Component{
   renderAdminSignIn() {
     this.setState({showAdminSignIn: true});
   }
+  async updatepassword(ev) {
+    try{
+      ev.preventDefault();
+      await axios.post('/api/passwordResetRequest', this.state);
+      this.setState({password_email_sent: true});
+      this.setState({password_reset: false})
+    }
+    catch(ex){
+      alert("No user found with that email")
+      console.log(ex);
+    }
+}
+flag_email_input(){
+  this.setState({password_reset: true})
+}
 
   render(){
-    const { onChange, onSubmit, renderAdminSignIn } = this;
-    const { username, password, showAdminSignIn } = this.state;
+    const { onChange, onSubmit, renderAdminSignIn, updatepassword, flag_email_input } = this;
+    const { username, password, showAdminSignIn, password_reset, password_email_sent, email } = this.state;
     return (
       <div>
 
@@ -46,6 +64,15 @@ class SignIn extends Component{
 
       </form>
       }
+            { password_email_sent ? <div>Check your email to continue with password reset.</div> : null }
+      { password_reset ? 
+      <form onSubmit={ updatepassword }>
+      Password Reset: What is the email associated with your account? <br></br>
+      Email:
+      <input name='email' onChange={ onChange } value={ email }/>
+      <button>Reset Password</button>
+      </form>
+      : <a className="reset-password" onClick={flag_email_input}>Forgot your password? Reset here.</a> }
       </div>
     );
   }
