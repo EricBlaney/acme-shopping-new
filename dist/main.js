@@ -4659,7 +4659,7 @@ class AdminSignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   onSubmit(ev) {
     ev.preventDefault();
-    this.props.login(this.state);
+    this.props.adminLogin(this.state);
   }
 
   renderSignIn() {
@@ -4701,8 +4701,8 @@ class AdminSignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 const mapDispatch = dispatch => {
   return {
-    login: credentials => {
-      dispatch((0,_store__WEBPACK_IMPORTED_MODULE_1__.login)(credentials));
+    adminLogin: credentials => {
+      dispatch((0,_store__WEBPACK_IMPORTED_MODULE_1__.adminLogin)(credentials));
     }
   };
 };
@@ -5013,6 +5013,7 @@ const mapDispatch = dispatch => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "adminLogin": () => (/* binding */ adminLogin),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "exchangeToken": () => (/* binding */ exchangeToken),
 /* harmony export */   "login": () => (/* binding */ login),
@@ -5060,6 +5061,25 @@ const exchangeToken = () => {
 const login = credentials => {
   return async dispatch => {
     let response = await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/sessions', credentials);
+    const {
+      token
+    } = response.data;
+    window.localStorage.setItem('token', token);
+    response = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/sessions', {
+      headers: {
+        authorization: token
+      }
+    });
+    const auth = response.data;
+    dispatch({
+      auth,
+      type: 'SET_AUTH'
+    });
+  };
+};
+const adminLogin = credentials => {
+  return async dispatch => {
+    let response = await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/sessions/admin', credentials);
     const {
       token
     } = response.data;
@@ -5202,6 +5222,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "addCart": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.addCart),
 /* harmony export */   "addToWishList": () => (/* reexport safe */ _wishlist__WEBPACK_IMPORTED_MODULE_3__.addToWishList),
+/* harmony export */   "adminLogin": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_0__.adminLogin),
 /* harmony export */   "createUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.createUser),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "deleteCart": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.deleteCart),

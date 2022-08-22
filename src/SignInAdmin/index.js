@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { login } from '../store';
+import { adminLogin } from '../store';
 import { connect } from 'react-redux';
 import SignIn from '../SignIn';
 
@@ -20,7 +20,7 @@ class AdminSignIn extends Component{
   }
   onSubmit(ev){
     ev.preventDefault();
-    this.props.login(this.state);
+    this.props.adminLogin(this.state);
   }
 
   renderSignIn() {
@@ -50,8 +50,8 @@ class AdminSignIn extends Component{
 
 const mapDispatch = (dispatch)=> {
   return {
-    login: (credentials)=> {
-      dispatch(login(credentials));
+    adminLogin: (credentials)=> {
+      dispatch(adminLogin(credentials));
     }
   };
 };

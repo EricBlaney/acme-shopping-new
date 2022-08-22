@@ -28,9 +28,25 @@ export const exchangeToken = ()=> {
     }
   };
 };
+
 export const login = (credentials)=> {
   return async(dispatch)=> {
     let response = await axios.post('/api/sessions', credentials);
+    const { token } = response.data;
+    window.localStorage.setItem('token', token); 
+    response = await axios.get('/api/sessions', {
+      headers: {
+        authorization: token
+      }
+    });
+    const auth = response.data;
+    dispatch({ auth, type: 'SET_AUTH'});
+  };
+};
+
+export const adminLogin = (credentials)=> {
+  return async(dispatch)=> {
+    let response = await axios.post('/api/sessions/admin', credentials);
     const { token } = response.data;
     window.localStorage.setItem('token', token); 
     response = await axios.get('/api/sessions', {
