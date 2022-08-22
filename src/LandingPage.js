@@ -34,7 +34,7 @@ class LandingPage extends React.Component{
     return (
       <main>
       { auth.id ? (
-        <div>
+        <div className='row'>
         <h1>Top Games of August 1989!</h1>
         <Carousel responsive={responsive} ssr={true}>
         
