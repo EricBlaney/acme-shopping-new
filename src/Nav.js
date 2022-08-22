@@ -67,7 +67,7 @@ class Nav extends Component {
 </div>
           
 
-            <NavLink exact to='/api/console'>Console</NavLink>
+            <NavLink exact to='/api/console'>Consoles</NavLink>
         <div className="topnav-right">
             <NavLink exact to='/myaccount'> Account </NavLink>
             <NavLink to='/cart'>Cart</NavLink>
