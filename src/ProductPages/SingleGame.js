@@ -15,13 +15,13 @@ class SingleGame extends Component {
           <div className="singlegame">
 
             { [game].map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 10 && product.theme !== 'consoles') {
               product.imageUrl = product.imageUrl.substring(44, 100)
               }
               return (
                       <div key={product.id} className='singlecard'>
                         <li className='product'>
-                          <div className="product-img"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`} width="170" height="170" /></div> 
+                          <div className="product-img"> {product.theme === 'consoles' ? <img src={`${product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`} width="170" height="170" />}</div> 
                               <div className='productlisting'>
                                   <div className='content'>
                                     <div className='singleName'>{product.name}</div>

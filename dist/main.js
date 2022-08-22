@@ -2704,9 +2704,7 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
       responsive: responsive,
       ssr: true
     }, wishlist.wishListItems.map(wishListItem => {
-      console.log(wishListItem.product);
-
-      if (wishListItem.product.imageUrl.length > 10) {
+      if (wishListItem.product.imageUrl.length > 10 && wishListItem.product.theme !== 'consoles') {
         wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100);
       }
 
@@ -2720,7 +2718,11 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
         to: `/api/product/${wishListItem.product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      }, wishListItem.product.theme === 'consoles' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `${wishListItem.product.imageUrl}`,
+        width: "170",
+        height: "170"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: `//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`,
         width: "170",
         height: "170"
@@ -2875,9 +2877,7 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
       responsive: responsive,
       ssr: true
     }, wishlist.wishListItems.map(wishListItem => {
-      console.log(wishListItem.product);
-
-      if (wishListItem.product.imageUrl.length > 10) {
+      if (wishListItem.product.imageUrl.length > 10 && wishListItem.product.theme !== 'consoles') {
         wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100);
       }
 
@@ -2891,7 +2891,11 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
         to: `/api/product/${wishListItem.product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "picture"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      }, wishListItem.product.theme === 'consoles' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `${wishListItem.product.imageUrl}`,
+        width: "170",
+        height: "170"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: `//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`,
         width: "170",
         height: "170"
@@ -3585,11 +3589,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
 
 
 
 
+
+ //Carousel responsiveness
+
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: {
+      max: 4000,
+      min: 3000
+    },
+    items: 5
+  },
+  desktop: {
+    breakpoint: {
+      max: 3000,
+      min: 1024
+    },
+    items: 4
+  },
+  tablet: {
+    breakpoint: {
+      max: 1024,
+      min: 464
+    },
+    items: 2
+  },
+  mobile: {
+    breakpoint: {
+      max: 464,
+      min: 0
+    },
+    items: 1
+  }
+};
 
 class Console extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidMount() {
@@ -3600,16 +3639,28 @@ class Console extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       consoles
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Consoles"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, consoles.map(product => {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Consoles"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      responsive: responsive,
+      ssr: true
+    }, consoles.map(product => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "wrapper",
         key: product.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+        to: `/api/product/${product.id}`
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "picture"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: product.imageUrl
-      }), " ", product.name, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price"
-      }, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "addtocart"
-      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, product.summary));
+        src: product.imageUrl,
+        width: "170",
+        height: "170"
+      })), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: () => this.props.addCart(product, 1)
+      }, "Add To Cart"))));
     }))));
   }
 
@@ -4276,7 +4327,7 @@ class SingleGame extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "singlegame"
     }, [game].map(product => {
-      if (product.imageUrl.length > 10) {
+      if (product.imageUrl.length > 10 && product.theme !== 'consoles') {
         product.imageUrl = product.imageUrl.substring(44, 100);
       }
 
@@ -4287,7 +4338,11 @@ class SingleGame extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         className: "product"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "product-img"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      }, " ", product.theme === 'consoles' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: `${product.imageUrl}`,
+        width: "170",
+        height: "170"
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
         width: "170",
         height: "170"
