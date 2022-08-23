@@ -18,6 +18,19 @@ app.post('/', async(req, res, next)=> {
   }
 });
 
+app.post('/admin', async(req, res, next)=> {
+  try {
+    const credentials = {
+      username: req.body.username, 
+      password: req.body.password,
+    }
+      res.send({ token: await User.adminAuthenticate(credentials)});
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 app.get('/', isLoggedIn, async(req, res, next)=> {
   res.send(req.user);
 });

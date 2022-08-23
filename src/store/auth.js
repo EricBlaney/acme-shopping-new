@@ -3,6 +3,9 @@ const auth = (state = {}, action)=> {
   if(action.type === 'SET_AUTH'){
     state = action.auth;
   }
+  if(action.type === 'SET_ADMINAUTH'){
+    state = action.adminAuth;
+  }
   return state;
 };
 
@@ -28,6 +31,7 @@ export const exchangeToken = ()=> {
     }
   };
 };
+
 export const login = (credentials)=> {
   return async(dispatch)=> {
     let response = await axios.post('/api/sessions', credentials);
@@ -42,7 +46,6 @@ export const login = (credentials)=> {
     dispatch({ auth, type: 'SET_AUTH'});
   };
 };
-
 
 
 export default auth;

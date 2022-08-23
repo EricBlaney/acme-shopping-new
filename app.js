@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { User, Product } = require('./db');
+const { User, Product, Token } = require('./db');
 const path = require('path');
 const { useStore } = require('react-redux');
 app.use(express.json({limit: '50mb'}));
@@ -19,6 +19,8 @@ const isLoggedIn = async(req, res, next)=> {
 app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));
 app.use('/api/orders', require('./routes/orders'));
 app.use('/api/sessions', require('./routes/sessions'));
+app.use('/api/passwordReset', require('./routes/passwordReset'));
+app.use('/api/passwordResetRequest', require('./routes/passwordResetRequest'));
 
 // Product Routes
 
@@ -55,11 +57,9 @@ app.post('/', isLoggedIn, async(req, res, next)=> {
 
 app.put('/api/wishlist', isLoggedIn, async(req, res, next)=> {
   try {
-    console.log(req.body)
     res.send(await req.user.addToWishList(req.body));
   }
   catch(ex){
-    console.log(ex)
     next(ex);
   }
 });
@@ -116,7 +116,6 @@ app.delete('/api/users/:id', async(req,res,next) => {
 app.put('/api/users', async(req,res,next) => {
   try{
     const user = await User.findByPk(req.body.id);
-    console.log(user);
     await user.update(req.body);
     res.status(200).send(user);
   }
@@ -124,6 +123,21 @@ app.put('/api/users', async(req,res,next) => {
     next(ex);
   }
 });
+
+//Token Routes
+app.get('/api/tokens', async(req,res,next) => {
+  try{
+    const token = await Token.findOne({where: {userId: req.body.userId}})
+    res.send(token);
+  }
+  catch(error){
+    console.log(error);
+  }
+})
+
+// Admin Routes
+
+
 
 app.use((err, req, res, next)=> {
   console.log(err);

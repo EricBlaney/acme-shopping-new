@@ -7,3 +7,5 @@ before_script:
   - psql -c 'create database acme_db;' -U postgres
 env:
   - JWT=f00B@rBazz
+  - JWT_SECRET=mfefkuhio3k2rjkofn2mbikbkwjhnkj
+  - clientURL=localhost://3000
