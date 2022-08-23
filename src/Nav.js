@@ -3,24 +3,10 @@ import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import auth from './store/auth';
 import { use } from 'chai';
 import {exchangeToken, logout} from './store/auth';
 import { fetchProducts, fetchCart } from './store';
-
-=======
-=======
->>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
-import {exchangeToken, logout} from './store/auth';
-import { fetchProducts, fetchCart } from './store';
-import GenreDropdown from './Dropdown/GenreDropdown';
-import PlatformDropDown from './Dropdown/PlatformDropdown';
-<<<<<<< HEAD
->>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
-=======
->>>>>>> 43cab6856f510c083a7b92e16ee8e4916b834a7d
 
 class Nav extends Component {
 
@@ -42,98 +28,88 @@ class Nav extends Component {
         const signUpTriggerText = 'Sign Up';
         const signInTriggerText = 'Sign In';
 
+        return (
 
-    return (
-
-        <main>
-        <nav>
-        <header>
-        <div className="topnav">
-
-            <NavLink exact to='/'>Home</NavLink>
-             
-            <div class="dropdown">
-            <NavLink exact to='/api/genre'>Genre </NavLink>
-  <div class="dropdown-content">
-  <Link to={`/api/genre/topFightingGames`}>  Top Fighting Games
-</Link>
-
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div>
-             <div class="dropdown">
-  <NavLink exact to='/api/platform'>Platform </NavLink>
-  <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div>
-
-            <div class="dropdown">
-<NavLink exact to='/api/gamesbyyear'>Games By Year</NavLink>  
-  <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div>
-
-        <div class="dropdown">
-<NavLink exact to='/api/gamesbyyear'>Games By Year</NavLink>
-  <div class="dropdown-content">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div>
-          
-
-            <NavLink exact to='/api/console'>Console</NavLink>
-        <div className="topnav-right">
-            <NavLink exact to='/myaccount'>My Account </NavLink>
-            <NavLink to='/cart'>Cart</NavLink>
-        {
-          auth.id ? <Link exact to='/'><button onClick={ logout }>Logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
-        }
-            
-        { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
-            
-        </div>
-        
-        <div className="footer">
-
-          <a href="https://www.instagram.com/fsseniorproject/">Instagram</a>
-          <a href="https://www.facebook.com/profile.php?id=100085008934837">Facebook</a>
-          <a href="https://twitter.com/fullstack2022">Twitter</a>
-          <a href="contact">Contact</a>
-  
-       </div>
+            <main>
+            <nav>
+            <header>
+            <div className="topnav">
     
-       </div>
-       
-        </header>
-        </nav>
-        </main>
-    )
-}
-};
-
-const mapState = ({ auth }) => {
-    return {
-        auth,
+                <NavLink exact to='/'>Home</NavLink>
+                 
+                <div className="dropdown">
+                <NavLink exact to='/api/genre'> By Genre </NavLink>
+      <div className="dropdown-content">
+      <Link to={`/api/genre/topFightingGames`}>  Top Fighting Games
+    </Link>
+    
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
+                 <div className="dropdown">
+      <NavLink exact to='/api/platform'> By Platform </NavLink>
+      <div className="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
+    
+            <div className="dropdown">
+    <NavLink exact to='/api/gamesbyyear'>By Year</NavLink>
+      <div className="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+      </div>
+    </div>
+              
+    
+                <NavLink exact to='/api/console'>Consoles</NavLink>
+            <div className="topnav-right">
+                <NavLink exact to='/myaccount'> Account </NavLink>
+                <NavLink to='/cart'>Cart</NavLink>
+            {
+              auth.id ? <Link to='/'><button onClick={ logout }>Logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
+            }
+                
+            { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
+                
+            </div>
+            
+            <div className="footer">
+    
+              <a href="https://www.instagram.com/fsseniorproject/">Instagram</a>
+              <a href="https://www.facebook.com/profile.php?id=100085008934837">Facebook</a>
+              <a href="https://twitter.com/fullstack2022">Twitter</a>
+              <a href="contact">Contact</a>
+      
+           </div>
         
+           </div>
+           
+            </header>
+            </nav>
+            </main>
+        )
     }
-};
-
-const mapDispatch = (dispatch) => {
-    return {
-        fetchCart: ()=> dispatch(fetchCart()),
-        exchangeToken: ()=> dispatch(exchangeToken()),
-        fetchProducts: ()=> dispatch(fetchProducts()),
-        logout: () => dispatch(logout())
-    }
-};
-
-export default connect(mapState, mapDispatch)(Nav);
+    };
+    
+    const mapState = ({ auth }) => {
+        return {
+            auth,
+            
+        }
+    };
+    
+    const mapDispatch = (dispatch) => {
+        return {
+            fetchCart: ()=> dispatch(fetchCart()),
+            exchangeToken: ()=> dispatch(exchangeToken()),
+            fetchProducts: ()=> dispatch(fetchProducts()),
+            logout: () => dispatch(logout())
+        }
+    };
+    
+    export default connect(mapState, mapDispatch)(Nav);
