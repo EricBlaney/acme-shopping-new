@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 const user = (state = [], action)=> {
+  if (action.type === 'SET_USERS'){
+    return action.user
+  }
   if(action.type === 'CREATE_USER'){
     state = action.user;
   }
@@ -8,7 +11,7 @@ const user = (state = [], action)=> {
     state = action.user;
   }
   if(action.type === 'DELETE_USER') {
-    state = [];
+    return state.filter((user)=> user.id !== action.user.id)
   }
   return state; 
 };
@@ -30,6 +33,13 @@ export const createUser = (credentials) => {
     }
   };
 
+export const setUsers = () => {
+    return async(dispatch)=>{
+        const user = (await axios.get('/api/users')).data;
+        dispatch({type: "SET_USERS", user})
+    }
+};
+
 export const updateUser = (user) => {
     return async(dispatch) => {
       try{
@@ -43,9 +53,10 @@ export const updateUser = (user) => {
 }
 
 export const deleteUser = (user) => {
+  console.log(user)
   return async(dispatch) => {
       await axios.delete(`/api/users/${user.id}`);
-      dispatch({ type: 'DELETE_user', user})
+      dispatch({ type: 'DELETE_USER', user})
   }
 }
 

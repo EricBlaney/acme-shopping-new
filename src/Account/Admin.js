@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList } from '../store'
+import { fetchWishList, setUsers, deleteUser } from '../store'
 import { Link, NavLink } from 'react-router-dom';
+import './Admin.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
@@ -41,6 +42,7 @@ class Admin extends React.Component{
 
     componentDidMount() {
         this.props.getWishList();
+        this.props.setUsers();
     }
 
     componentDidUpdate(prevProps){
@@ -64,7 +66,7 @@ class Admin extends React.Component{
       }
 
     render() {
-        const {wishlist, adminAuth} = this.props;
+        const {wishlist, adminAuth, users, deleteUser} = this.props;
         const {avatar, username, email, street, city, zipcode} = this.state;
         return(
             <div>
@@ -73,12 +75,13 @@ class Admin extends React.Component{
             {username}'s Admin Profile
             </h1>
             { avatar ? <img src={avatar} className="avatar"/> : null}
-            <h2>{username}'s details:</h2>
+            <h3>{username}'s details:</h3>
             <div>Email: {email}</div>
             <div>Address: {adminAuth.street || "None Listed"}</div>
             <div>City: {adminAuth.city || "None listed."}</div>
             <div>Zipcode: {adminAuth.zipcode || 'None listed.'}</div>
             <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+            <br></br>
             <br></br>
             Your Wish List:
             <br></br>
@@ -112,18 +115,53 @@ class Admin extends React.Component{
                         
                         : 'You have nothing in your Wish List! Go add something!'
                     }
-
-            Admin Tools
+            <br></br>
+            <h3>Admin Tools</h3>
+            <br></br>
+            <h4>Current Users</h4>
+            <button>Create New User!</button>
+            <br></br>
+            <br></br>
+            <table>
+            <thead>
+                <tr>
+                    <th>Username </th>
+                    <th>Email</th>
+                    <th>Delete User</th>
+                    <th>Edit User</th>
+                </tr>
+                
+                </thead>
+                <tbody>
+                    {
+                    users.map(user=>{
+                        return(
+                           
+                                <tr key={user.id}>
+                                    <td>{user.username}</td>
+                                    <td>{user.email}</td>
+                                    <td><button onClick={()=>{ deleteUser(user) }}>X</button></td>
+                                    <td><button>X</button></td>
+                                </tr>
+                        )
+                    })
+                    }
+                </tbody>
+              
+                </table>
+                
             </div>
         )
     }
 }
 
 const mapState = (state) => {
+    const users = state.user;
     const user = state.auth || {};
     return {
         adminAuth: state.adminAuth,
         user: user,
+        users: users,
         wishlist: state.wishlist
     }
 }
@@ -131,7 +169,9 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
     return{
         getWishList: ()=> dispatch(fetchWishList()),
-        addCart: (product, quantity) => dispatch(addCart(product, quantity))
+        addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+        setUsers: ()=> dispatch(setUsers()),
+        deleteUser: (user)=> dispatch(deleteUser(user))
     }
 }
 
