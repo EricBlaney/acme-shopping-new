@@ -5,7 +5,7 @@ const user = (state = [], action)=> {
     return action.user
   }
   if(action.type === 'CREATE_USER'){
-    state = action.user;
+    return [action.user, ...state]
   }
   if(action.type === 'UPDATE_USER'){
     state = action.user;
@@ -53,7 +53,6 @@ export const updateUser = (user) => {
 }
 
 export const deleteUser = (user) => {
-  console.log(user)
   return async(dispatch) => {
       await axios.delete(`/api/users/${user.id}`);
       dispatch({ type: 'DELETE_USER', user})

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList, setUsers, deleteUser } from '../store'
+import { fetchWishList, setUsers, deleteUser, createUser } from '../store'
 import { Link, NavLink } from 'react-router-dom';
+import CreateUserContainer from './AdminModal/CreateUser/CreateUserContainer'
 import './Admin.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -36,8 +37,10 @@ class Admin extends React.Component{
             street: '',
             city: '',
             zipcode: '',
-            avatar: ''
+            avatar: '',
+            showCreateUser: false
         };
+        this.renderCreateUser = this.renderCreateUser.bind(this);
       }
 
     componentDidMount() {
@@ -50,6 +53,10 @@ class Admin extends React.Component{
           this.props.getWishList();
         }
     }
+
+    renderCreateUser() {
+        this.setState({showCreateUser: true});
+      }
 
     static getDerivedStateFromProps(nextProps, prevState){
         if(nextProps.adminAuth !== prevState){
@@ -66,10 +73,12 @@ class Admin extends React.Component{
       }
 
     render() {
-        const {wishlist, adminAuth, users, deleteUser} = this.props;
+        const {wishlist, adminAuth, users, deleteUser, renderCreateUser, onSubmit} = this.props;
         const {avatar, username, email, street, city, zipcode} = this.state;
+        const triggerText = 'Create User';
+
         return(
-            <div>
+            <div className='admin'>
     
             <h1>
             {username}'s Admin Profile
@@ -105,7 +114,7 @@ class Admin extends React.Component{
                                 <div className='info'>
                                     <h3>{wishListItem.product.name}</h3>
                                     <p>{`$${wishListItem.product.price}`}</p>
-                                    <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                                    <button onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                                 </div>
                             </div>
                             </div>   
@@ -119,7 +128,11 @@ class Admin extends React.Component{
             <h3>Admin Tools</h3>
             <br></br>
             <h4>Current Users</h4>
-            <button>Create New User!</button>
+            <div>
+
+            <CreateUserContainer triggerText={ triggerText } onSubmit={ onSubmit }/>
+            
+            </div>
             <br></br>
             <br></br>
             <table>
@@ -129,6 +142,7 @@ class Admin extends React.Component{
                     <th>Email</th>
                     <th>Delete User</th>
                     <th>Edit User</th>
+                    <th>User Type</th>
                 </tr>
                 
                 </thead>
@@ -142,6 +156,7 @@ class Admin extends React.Component{
                                     <td>{user.email}</td>
                                     <td><button onClick={()=>{ deleteUser(user) }}>X</button></td>
                                     <td><button>X</button></td>
+                                    <td>{user.isAdmin ? 'Admin' : 'User'}</td>
                                 </tr>
                         )
                     })
@@ -171,7 +186,10 @@ const mapDispatch = (dispatch) => {
         getWishList: ()=> dispatch(fetchWishList()),
         addCart: (product, quantity) => dispatch(addCart(product, quantity)),
         setUsers: ()=> dispatch(setUsers()),
-        deleteUser: (user)=> dispatch(deleteUser(user))
+        deleteUser: (user)=> dispatch(deleteUser(user)),
+        createUser: (user)=> {
+            dispatch(createUser(user));
+          },
     }
 }
 

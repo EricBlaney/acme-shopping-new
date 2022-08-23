@@ -1,4 +1,4 @@
-*{
+.admin{
     text-align: center;
 }
 table {
@@ -19,7 +19,7 @@ th {
 td {
     text-align: center;
     border: 1px solid black;
-    padding: 3rem;
+    padding: 1.5rem;
     padding-left: 5rem;
     padding-right: 5rem;
 }
