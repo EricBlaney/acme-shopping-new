@@ -11,8 +11,8 @@ module.exports = async (req, res) => {
             price_data: {
               currency: "usd",
               product_data: {
-                name: "Movie Store",
-                images: ["https://i.imgur.com/EHyR2nP.png"],
+                // name: "Movie Store",
+                // images: [`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`],
               },
               unit_amount: parseInt(totalAmount, 10) * 100,
             },

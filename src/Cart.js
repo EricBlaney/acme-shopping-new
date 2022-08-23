@@ -2,23 +2,19 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './Cart.css'; // npm install css-loader style-loader -D
 import { Link } from 'react-router-dom'
-import { deleteCart, updateQuantity, fetchCart, getTotalPrice} from './store'
+import { deleteCart, updateQuantity, fetchCart, checkout} from './store'
 
 //new import from here
 import { Card, Button } from 'antd';
-import get from 'lodash/get';
-import { array, number, func } from 'prop-types';
-import PurchaseButton from './Checkout/PurchaseButton';
-// import { getTotalPrice } from '../modules/selectors';
 
-const handleBuy = () => {
-  const { searchQuery } = props;
-}
-
-const Cart = ({ cart, deleteCart, updateQuantity, getCart, items, totalPrice })=> {
+const Cart = ({ cart, deleteCart, updateQuantity, getCart, checkout })=> {
   useEffect(() => {
     getCart();
   }, [])
+
+const totalPrice = cart.lineItems.reduce((total, item) => total += item.product.price, 0);
+console.log(totalPrice);
+
 
   return (
     <div className="cart-container">
@@ -53,23 +49,11 @@ const Cart = ({ cart, deleteCart, updateQuantity, getCart, items, totalPrice })=
             <h2>Total:</h2>
             <h2>{`$${totalPrice}`}</h2>
           </div>
-          <PurchaseButton price={totalPrice}>
-            <Button className="Checkout">Checkout</Button>
-          </PurchaseButton>
+          <Button style={{marginBottom: 50}} className="Checkout" onClick={checkout}>Checkout</Button>
         </Card>
     </div>
   );
 };
-
-Cart.propTypes = {
-  items: array,
-  totalPrice: number,
-};
-
-const mapStateToProps = state => ({
-  items: get(state, 'checkout.items'),
-  totalPrice: getTotalPrice(state),
-});
 
 
 const mapDispatch = (dispatch)=> {
@@ -77,7 +61,8 @@ const mapDispatch = (dispatch)=> {
     deleteCart: (product)=> dispatch(deleteCart(product)),
     updateQuantity: (product, num)=> dispatch(updateQuantity(product, num)),
     getCart: ()=> dispatch(fetchCart()),
+    checkout: () => dispatch(checkout()),
   };
 };
 
-export default connect(mapDispatch, mapStateToProps)(Cart);
+export default connect(state => state, mapDispatch)(Cart);

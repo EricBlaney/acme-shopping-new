@@ -1,10 +1,5 @@
 import axios from 'axios';
 
-//new import
-import { createSelector } from 'reselect';
-import get from 'lodash/get';
-
-
 const cart = (state = { lineItems: [ ] }, action)=> {
   if(action.type === 'SET_CART'){
     state = action.cart;
@@ -83,40 +78,31 @@ export const updateQuantity = (product, quantity) => {
   };
 };
 
-//add a purchase function to dispatch
-// export const purchase = (product) => {
-//   return async(dispatch)=> {
-//     const response = await axios.put('/api/orders/cart', {
-//       product,
-//       quantity
-//     }, {
-//       headers: {
-//         authorization: window.localStorage.getItem('token')
-//       }
-//     });
-//     if (response.status === 200) {
-//       dispatch({type: 'DELETE_CART', id: product.id});
-//     }
-//   };
-// };
 
-
-const items = state => get(state, 'checkout.items', []);
-
-const calcTotalPrice = ($items = []) => {
-  let total = 0;
-  $items.forEach((element) => {
-    total += get(element, 'product.price') || get(element, 'price');
-  });
-  return total;
-};
-
-export const getTotalPrice = createSelector(
-  items,
-  calcTotalPrice,
-);
-
-
-// export { getTotalPrice };
+export const checkout = () => {
+  return async(disptach, getState) => {
+    const line_items = getState().cart.lineItems;
+    const stripe_line_items = line_items.map(item => ({
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: item.product.name,
+          description: item.product.summary,
+          images:[ `https:${item.product.imageUrl}`]
+          },
+          unit_amount: item.product.price * 100
+        },
+        quantity: item.quantity
+    }))
+    const response = await axios.post('/api/orders/create-checkout-session', stripe_line_items, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
+    if (response.status === 200) {
+      window.location.href = response.data.url;
+    }
+  }
+}
 
 export default cart;
