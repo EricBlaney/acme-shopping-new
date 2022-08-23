@@ -2644,30 +2644,6 @@ const responsive = {
   }
 };
 
-<<<<<<< HEAD
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(state => state, mapDispatch)(Cart));
-
-/***/ }),
-
-/***/ "./src/Console.js":
-/*!************************!*\
-  !*** ./src/Console.js ***!
-  \************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-
-=======
 class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
   constructor() {
     super();
@@ -2680,20 +2656,16 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
       avatar: ''
     };
   }
->>>>>>> 4175dcf39d21925d4cea58ec4740edc4deac6c10
 
   componentDidMount() {
     this.props.getWishList();
   }
 
-<<<<<<< HEAD
-=======
   componentDidUpdate(prevProps) {
     if (!prevProps.adminAuth.id && this.props.adminAuth.id) {
       this.props.getWishList();
     }
   }
->>>>>>> 4175dcf39d21925d4cea58ec4740edc4deac6c10
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.adminAuth !== prevState) {
@@ -2798,16 +2770,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-<<<<<<< HEAD
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-=======
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _Admin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Admin */ "./src/Account/Admin.js");
 /* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
 /* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
->>>>>>> 4175dcf39d21925d4cea58ec4740edc4deac6c10
 
 
 
@@ -3960,13 +3927,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-<<<<<<< HEAD
-
-
-class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-=======
 class Genre extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
->>>>>>> 4175dcf39d21925d4cea58ec4740edc4deac6c10
   componentDidMount() {
     this.props.fetchProducts();
   }
@@ -3979,83 +3940,6 @@ class Genre extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       topAdventureGames,
       topPlatformGames
     } = this.props;
-<<<<<<< HEAD
-    const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In';
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "topnav"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/"
-    }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/api/genre"
-    }, " By Genre "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
-      to: `/api/genre/topFightingGames`
-    }, "  Top Fighting Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/api/platform"
-    }, " By Platform "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/api/gamesbyyear"
-    }, "By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "dropdown-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "#"
-    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/api/console"
-    }, "Consoles"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "topnav-right"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      exact: true,
-      to: "/myaccount"
-    }, " Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
-      to: "/cart"
-    }, "Cart"), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
-      to: "/"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-      onClick: logout
-    }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      triggerText: signInTriggerText
-    }), auth.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      triggerText: signUpTriggerText
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "footer"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "https://www.instagram.com/fsseniorproject/"
-    }, "Instagram"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "https://www.facebook.com/profile.php?id=100085008934837"
-    }, "Facebook"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "https://twitter.com/fullstack2022"
-    }, "Twitter"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-      href: "contact"
-    }, "Contact"))))));
-=======
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Top RPG Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, topFightingGames.map(product => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         key: product.id
@@ -4107,7 +3991,6 @@ class Genre extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         className: "addtocart"
       }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, product.summary));
     }))));
->>>>>>> 4175dcf39d21925d4cea58ec4740edc4deac6c10
   }
 
 }
@@ -4131,14 +4014,7 @@ const mapStateToProps = ({
 
 const mapDispatch = dispatch => {
   return {
-<<<<<<< HEAD
-    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchCart)()),
-    exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
-    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchProducts)()),
-    logout: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.logout)())
-=======
     fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchProducts)())
->>>>>>> 4175dcf39d21925d4cea58ec4740edc4deac6c10
   };
 };
 
@@ -5544,67 +5420,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "adminLogout": () => (/* binding */ adminLogout),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-<<<<<<< HEAD
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-/* harmony import */ var _SingleGame_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SingleGame.css */ "./src/SingleGame.css");
-
-
-
-
-
-class SingleGame extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-  render() {
-    const {
-      auth,
-      game
-    } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: "singlegame"
-    }, [game].map(product => {
-      if (product.imageUrl.length > 10) {
-        product.imageUrl = product.imageUrl.substring(44, 100);
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        key: product.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-        className: "product"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "product-img"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: `//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`,
-        width: "170",
-        height: "170"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "productlisting"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "singleName"
-      }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "price-condition"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "singlePrice"
-      }, `$${product.price}  |`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "condition"
-      }, "Condition: ", `${product.condition}`)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "heart-cart"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "btn",
-        onClick: () => this.props.addCart(product, 1)
-      }, "Add To Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "heart-wrapper",
-        onClick: () => this.props.addToWishList(product)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "heart"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "singleSummary"
-      }, product.summary.substring(0, 600))))));
-    })) : null);
-=======
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
@@ -5612,7 +5427,6 @@ class SingleGame extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 const adminAuth = (state = {}, action) => {
   if (action.type === 'SET_ADMINAUTH') {
     state = action.adminAuth;
->>>>>>> 4175dcf39d21925d4cea58ec4740edc4deac6c10
   }
 
   return state;
@@ -15695,8 +15509,6 @@ module.exports = {
 
 /***/ }),
 
-<<<<<<< HEAD
-=======
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/react-multi-carousel/lib/styles.css":
 /*!************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/react-multi-carousel/lib/styles.css ***!
@@ -15733,13 +15545,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, "@font-face{font-family:\"revicons\";fa
 
 /***/ }),
 
->>>>>>> 4175dcf39d21925d4cea58ec4740edc4deac6c10
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/Cart.css":
 /*!************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/Cart.css ***!
   \************************************************************/
-<<<<<<< HEAD
-=======
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -15767,7 +15576,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".cart-list {\n    padding: 10px;\n    
 /*!*******************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./src/LandingPage.css ***!
   \*******************************************************************/
->>>>>>> 4175dcf39d21925d4cea58ec4740edc4deac6c10
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -62262,13 +62070,8 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
       path: "/updatemyaccount",
       exact: true,
-<<<<<<< HEAD
-      component: _UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_18__.Route, {
-=======
       component: _Account_UpdateMyAccount__WEBPACK_IMPORTED_MODULE_5__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
->>>>>>> 4175dcf39d21925d4cea58ec4740edc4deac6c10
       path: "/search/:term?",
       component: _Search_SearchResults__WEBPACK_IMPORTED_MODULE_9__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
