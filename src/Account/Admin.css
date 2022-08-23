@@ -1,0 +1,25 @@
+.admin{
+    text-align: center;
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+tr {
+    border: 1px solid black
+}
+
+th {
+    border: 1px solid black;
+    padding: 3rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
+
+td {
+    text-align: center;
+    border: 1px solid black;
+    padding: 1.5rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}

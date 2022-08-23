@@ -223,7 +223,7 @@ const consoles = await Promise.all ([
     // console.log(genreIds.data); 
 
     await User.create({ username: 'fred', password: 'fred_pw', email: 'fred@gmail.com', isAdmin: true});
-    await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com'});
+    await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com', isAdmin: true});
     await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});
 
     const port = process.env.PORT || 3000;
