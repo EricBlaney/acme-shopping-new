@@ -10,6 +10,10 @@ const user = (state = [], action)=> {
   if(action.type === 'UPDATE_USER'){
     state = action.user;
   }
+  if(action.type === 'UPDATE_USERS'){
+    return state.map(user => user.id === action.user.id ? action.user : user)
+
+  }
   if(action.type === 'DELETE_USER') {
     return state.filter((user)=> user.id !== action.user.id)
   }
@@ -50,7 +54,19 @@ export const updateUser = (user) => {
         console.log(ex)
       }
     }
-}
+};
+
+export const updateUsers = (user) => {
+  return async(dispatch) => {
+    try{
+      await axios.put(`/api/users/${user.id}`, user);
+      dispatch({type: "UPDATE_USERS", user})
+    }
+    catch(ex){
+      console.log(ex)
+    }
+  }
+};
 
 export const deleteUser = (user) => {
   return async(dispatch) => {

@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList, setUsers, deleteUser, createUser } from '../store'
+import { fetchWishList, deleteUser, deleteProduct } from '../store'
 import { Link, NavLink } from 'react-router-dom';
 import CreateUserContainer from './AdminModal/CreateUser/CreateUserContainer'
+import Modals from './AdminModal/EditUser/Modals'
+import ProductModals from './AdminModal/EditProduct/ProductModals'
 import './Admin.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import product from '../store/product';
 
 //Carousel responsiveness
 
@@ -32,20 +35,24 @@ class Admin extends React.Component{
     constructor(){
         super();
         this.state = {
+            modalProduct: {},
+            modalUser: {},
             username: '',
             email: '',
             street: '',
             city: '',
             zipcode: '',
             avatar: '',
-            showCreateUser: false
+            isShowModal: false,
+            isShowProductModal: false
         };
-        this.renderCreateUser = this.renderCreateUser.bind(this);
-      }
+
+        this.handleClose = this.handleClose.bind(this);
+        this.handleShow = this.handleShow.bind(this);
+      };
 
     componentDidMount() {
         this.props.getWishList();
-        this.props.setUsers();
     }
 
     componentDidUpdate(prevProps){
@@ -53,10 +60,6 @@ class Admin extends React.Component{
           this.props.getWishList();
         }
     }
-
-    renderCreateUser() {
-        this.setState({showCreateUser: true});
-      }
 
     static getDerivedStateFromProps(nextProps, prevState){
         if(nextProps.adminAuth !== prevState){
@@ -72,31 +75,61 @@ class Admin extends React.Component{
         else return null;
       }
 
-    render() {
-        const {wishlist, adminAuth, users, deleteUser, renderCreateUser, onSubmit} = this.props;
-        const {avatar, username, email, street, city, zipcode} = this.state;
-        const triggerText = 'Create User';
+        // onChange(ev){
+        //     this.setState({ [ev.target.name]: ev.target.value });
+        // }
+    
+      handleShow = (user) =>{
+        this.setState({
+          modalUser: user,
+          isShowModal: true
+        })
+     }
 
+     handleShowProduct = (product) =>{
+        this.setState({
+          modalProduct: product,
+          isShowProductModal: true
+        })
+     }
+
+     handleClose = () =>{
+        this.setState({
+            isShowModal: false,
+            isShowProductModal: false
+
+        })
+     }
+
+    render() {
+        const {wishlist, products, thisUser, usersMap, deleteUser, deleteProduct, onSubmit} = this.props;
+        const { handleClose, handleShow, handleShowProduct } = this;
+        const triggerTextCreate = 'Create User';
+  
         return(
             <div className='admin'>
-    
-            <h1>
-            {username}'s Admin Profile
-            </h1>
-            { avatar ? <img src={avatar} className="avatar"/> : null}
-            <h3>{username}'s details:</h3>
-            <div>Email: {email}</div>
-            <div>Address: {adminAuth.street || "None Listed"}</div>
-            <div>City: {adminAuth.city || "None listed."}</div>
-            <div>Zipcode: {adminAuth.zipcode || 'None listed.'}</div>
-            <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+            {thisUser.map(user=>{
+                return(
+                <div key={user.id}>
+                    <h1> { user.username }'s Admin Profile </h1>
+                        { user.avatar ? <img src={user.avatar} className="avatar"/> : null}
+                        <h3>{user.username}'s details:</h3>
+                        <div>Email: {user.email}</div>
+                        <div>Address: {user.street || "None Listed"}</div>
+                        <div>City: {user.city || "None listed."}</div>
+                        <div>Zipcode: {user.zipcode || 'None listed.'}</div>
+                        <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+                </div>
+                )
+            })}
+            
             <br></br>
             <br></br>
             Your Wish List:
             <br></br>
             <br></br>
 
-            {
+                    {
                         wishlist ? 
                         <Carousel responsive={responsive} ssr={true}> 
                         { 
@@ -124,13 +157,14 @@ class Admin extends React.Component{
                         
                         : 'You have nothing in your Wish List! Go add something!'
                     }
+
             <br></br>
             <h3>Admin Tools</h3>
             <br></br>
             <h4>Current Users</h4>
             <div>
 
-            <CreateUserContainer triggerText={ triggerText } onSubmit={ onSubmit }/>
+            <CreateUserContainer onSubmit={ onSubmit } triggerText={ triggerTextCreate } />
             
             </div>
             <br></br>
@@ -148,36 +182,88 @@ class Admin extends React.Component{
                 </thead>
                 <tbody>
                     {
-                    users.map(user=>{
+                    usersMap.map(user=>{
                         return(
-                           
+                                
                                 <tr key={user.id}>
                                     <td>{user.username}</td>
                                     <td>{user.email}</td>
                                     <td><button onClick={()=>{ deleteUser(user) }}>X</button></td>
-                                    <td><button>X</button></td>
+                                    <td><button onClick={()=> handleShow(user)}>X</button> </td>
                                     <td>{user.isAdmin ? 'Admin' : 'User'}</td>
                                 </tr>
                         )
                     })
-                    }
+                    } 
                 </tbody>
               
                 </table>
                 
+                {this.state.isShowModal ? <Modals handleClose={ handleClose } isShowModal={this.state.isShowModal} user={this.state.modalUser}/> : null}
+
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+
+            <h4>Current Products</h4>
+            <div>
+
+            {/* <CreateUserContainer onSubmit={ onSubmit } triggerText={ triggerTextCreate } /> */}
+            
+            </div>
+            <br></br>
+            <br></br>
+            <table>
+            <thead>
+                <tr>
+                    <th>Game/Console Name </th>
+                    <th>Condition</th>
+                    <th>Price</th>
+                    <th>Delete Game</th>
+                    <th>Edit Game Summary</th>
+                </tr>
+                
+                </thead>
+                <tbody>
+                    {
+                    products.map(product=>{
+                        return(
+                                
+                                <tr key={product.id}>
+                                    <td>{product.name}</td>
+                                    <td>{product.condition}</td>
+                                    <td>${product.price}</td>
+                                    <td><button onClick={()=>{ deleteProduct(product) }}>X</button></td>
+                                    <td><button onClick={()=> handleShowProduct(product)}>X</button> </td>
+                                </tr>
+                        )
+                    })
+                    } 
+                </tbody>
+              
+                </table>
+                
+                {this.state.isShowProductModal ? <ProductModals handleClose={ handleClose } isShowModal={this.state.isShowProductModal} product={this.state.modalProduct}/> : null}
+
             </div>
         )
     }
 }
 
 const mapState = (state) => {
-    const users = state.user;
+    console.log(state.product)
     const user = state.auth || {};
+    let thisUser = state.user.filter( user => user.id === state.auth.id)
+    let usersMap = state.user.filter( user => user.id !== state.auth.id)
+
     return {
         adminAuth: state.adminAuth,
         user: user,
-        users: users,
-        wishlist: state.wishlist
+        usersMap,
+        thisUser,
+        wishlist: state.wishlist,
+        products: state.product
     }
 }
 
@@ -185,11 +271,8 @@ const mapDispatch = (dispatch) => {
     return{
         getWishList: ()=> dispatch(fetchWishList()),
         addCart: (product, quantity) => dispatch(addCart(product, quantity)),
-        setUsers: ()=> dispatch(setUsers()),
         deleteUser: (user)=> dispatch(deleteUser(user)),
-        createUser: (user)=> {
-            dispatch(createUser(user));
-          },
+        deleteProduct: (product)=> dispatch(deleteProduct(product)),
     }
 }
 

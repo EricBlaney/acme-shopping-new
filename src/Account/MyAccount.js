@@ -64,29 +64,33 @@ class MyAccount extends React.Component{
       }
 
     render() {
-        const {auth, wishlist, adminAuth} = this.props;
+        const {auth, thisUser, wishlist, adminAuth} = this.props;
         const {avatar, username, email, street, city, zipcode} = this.state;
         return(
             <div>
             { adminAuth.isAdmin ? <Admin/> :
 
                 <main className='user-details'>
-                    <h1>
-                    {username}'s Profile
-                    </h1>
-                    { avatar ? <img src={avatar} className="avatar"/> : null}
-                    <h2>{username}'s details:</h2>
-                    <div>Email: {email}</div>
-                    <div>Address: {auth.street || "None Listed"}</div>
-                    <div>City: {auth.city || "None listed."}</div>
-                    <div>Zipcode: {auth.zipcode || 'None listed.'}</div>
-                    <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+                {thisUser.map(user=>{
+                return(
+                    <div key={user.id}>
+                        <h1>
+                            { user.username }'s Profile
+                            </h1>
+                            { user.avatar ? <img src={user.avatar} className="avatar"/> : null}
+                            <h3>{user.username}'s details:</h3>
+                            <div>Email: {user.email}</div>
+                            <div>Address: {user.street || "None Listed"}</div>
+                            <div>City: {user.city || "None listed."}</div>
+                            <div>Zipcode: {user.zipcode || 'None listed.'}</div>
+                            <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+                    </div>
+                        )
+                    })}
                     <br></br>
                     Your Wish List:
                     <br></br>
                     <br></br>
-
-
 
                     {
                         wishlist ? 
@@ -126,9 +130,11 @@ class MyAccount extends React.Component{
 
 const mapState = (state) => {
     const user = state.auth || {};
+    const thisUser = state.user.filter( user => user.id === state.auth.id)
     return {
         auth: state.auth,
         adminAuth: state.adminAuth,
+        thisUser,
         user: user,
         wishlist: state.wishlist
     }
