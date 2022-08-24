@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 import {exchangeToken, logout} from './store/auth';
-import { fetchProducts, fetchCart } from './store';
+import { fetchProducts, fetchCart, setUsers } from './store';
 
 class Nav extends Component {
 
@@ -12,6 +12,7 @@ class Nav extends Component {
         this.props.fetchProducts();
         this.props.exchangeToken();
         this.props.fetchCart();
+        this.props.setUsers();
     }
 
     componentDidUpdate(prevProps){
@@ -109,6 +110,7 @@ const mapDispatch = (dispatch) => {
         fetchCart: ()=> dispatch(fetchCart()),
         exchangeToken: ()=> dispatch(exchangeToken()),
         fetchProducts: ()=> dispatch(fetchProducts()),
+        setUsers: ()=> dispatch(setUsers()),
         logout: () => dispatch(logout())
     }
 };

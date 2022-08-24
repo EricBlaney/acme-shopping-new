@@ -44,6 +44,28 @@ app.get('/api/products/:id', async(req,res,next)=>{
   }
 });
 
+app.delete('/api/products/:id', async(req,res,next) => {
+  try{
+    const product = await Product.findByPk(req.params.id);
+    await product.destroy();
+    res.sendStatus(204);
+  }
+  catch(err){
+    next(err);
+  }
+});
+
+app.put('/api/products/:id', async(req,res,next) => {
+  try{
+    const product = await Product.findByPk(req.body.id);
+    await product.update(req.body);
+    res.status(200).send(product);
+  }
+  catch(err){
+    next(err);
+  }
+});
+
 // WishList Routes
 
 app.post('/', isLoggedIn, async(req, res, next)=> {
@@ -109,8 +131,8 @@ app.delete('/api/users/:id', async(req,res,next) => {
     await user.destroy();
     res.sendStatus(204);
   }
-  catch{ex}{
-    next(ex);
+  catch(err){
+    next(err);
   }
 });
 
@@ -125,19 +147,27 @@ app.put('/api/users', async(req,res,next) => {
   }
 });
 
+app.put('/api/users/:id', async(req,res,next) => {
+  try{
+    const user = await User.findByPk(req.body.id);
+    await user.update(req.body);
+    res.status(200).send(user);
+  }
+  catch(err){
+    next(err);
+  }
+});
+
 //Token Routes
 app.get('/api/tokens', async(req,res,next) => {
   try{
     const token = await Token.findOne({where: {userId: req.body.userId}})
     res.send(token);
   }
-  catch(error){
-    console.log(error);
+  catch(err){
+    next(err);
   }
 })
-
-// Admin Routes
-
 
 
 app.use((err, req, res, next)=> {
