@@ -3,9 +3,18 @@ const app = express();
 const { User, Product, Token } = require('./db');
 const path = require('path');
 const { useStore } = require('react-redux');
+const Dotenv = require('dotenv-webpack');
+
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 app.use('/dist', express.static('dist'));
+
+// Dotenv({
+//   path:path.resolve(__dirname, './env')
+// })
+
+
+
 const isLoggedIn = async(req, res, next)=> {
   try {
     req.user = await User.findByToken(req.headers.authorization);
@@ -21,7 +30,6 @@ app.use('/api/orders', require('./routes/orders'));
 app.use('/api/sessions', require('./routes/sessions'));
 app.use('/api/passwordReset', require('./routes/passwordReset'));
 app.use('/api/passwordResetRequest', require('./routes/passwordResetRequest'));
-
 // Product Routes
 
 app.get('/api/products', async(req,res,next)=>{

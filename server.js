@@ -1,9 +1,15 @@
+// try{
+//   require('./.env.js');
+//   console.log(process.env.CLIENT_ID)
+// }
+// catch(ex){
+//   console.log('running locally? create .env file');
+//   console.log('deployed? set env variables');
+// }
 const app = require('./app');
 const { conn, User, Product } = require('./db');
 const { faker } = require('@faker-js/faker');
-
 const igdb = require('igdb-api-node').default;
-
 const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
 
 // Random Condition Generator
