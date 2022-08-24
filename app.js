@@ -3,12 +3,9 @@ const app = express();
 const { User, Product, Token } = require('./db');
 const path = require('path');
 const { useStore } = require('react-redux');
-const Dotenv = require('dotenv-webpack');
-
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 app.use('/dist', express.static('dist'));
-
 
 
 const isLoggedIn = async(req, res, next)=> {
@@ -16,8 +13,8 @@ const isLoggedIn = async(req, res, next)=> {
     req.user = await User.findByToken(req.headers.authorization);
     next();
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 };
 
@@ -32,8 +29,8 @@ app.get('/api/products', async(req,res,next)=>{
   try{
     res.status(200).send(await Product.findAll())
 
-  }catch(err){
-    next(err);
+  }catch(er){
+    next(er);
   }
 });
 
@@ -42,8 +39,8 @@ app.get('/api/products/:id', async(req,res,next)=>{
     const game = await Product.findByPk(req.params.id);
     res.status(200).send(game);
 
-  }catch(err){
-    next(err);
+  }catch(er){
+    next(er);
   }
 });
 
@@ -53,8 +50,8 @@ app.post('/', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await req.user.createWishListFromWishListItems());
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 
 });
@@ -63,8 +60,8 @@ app.put('/api/wishlist', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await req.user.addToWishList(req.body));
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -72,8 +69,8 @@ app.get('/api/wishlist', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await req.user.getWishList());
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -83,8 +80,8 @@ app.post('/api/users', async(req,res,next) => {
   try{
       res.status(200).send(await User.create(req.body));
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -92,8 +89,8 @@ app.get('/api/users', async(req,res,next) => {
   try{
     res.status(200).send(await User.findAll())
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -101,8 +98,8 @@ app.get('/api/users/:id', async(req,res,next) => {
   try{
     res.status(200).send(await useStore.findByPk(req.params.id))
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -112,8 +109,8 @@ app.delete('/api/users/:id', async(req,res,next) => {
     await user.destroy();
     res.sendStatus(204);
   }
-  catch{
-    next(err);
+  catch{ex}{
+    next(ex);
   }
 });
 
@@ -123,8 +120,8 @@ app.put('/api/users', async(req,res,next) => {
     await user.update(req.body);
     res.status(200).send(user);
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -134,10 +131,13 @@ app.get('/api/tokens', async(req,res,next) => {
     const token = await Token.findOne({where: {userId: req.body.userId}})
     res.send(token);
   }
-  catch(err){
-    next(err);
+  catch(error){
+    console.log(error);
   }
 })
+
+// Admin Routes
+
 
 
 app.use((err, req, res, next)=> {

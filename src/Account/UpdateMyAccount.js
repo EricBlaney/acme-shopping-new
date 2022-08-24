@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateUser, deleteUser, exchangeToken} from '../store'
+import {withRouter} from 'react-router-dom';
 
 class UpdateMyAccount extends React.Component{
     constructor(){
@@ -34,14 +35,14 @@ class UpdateMyAccount extends React.Component{
         }
     }
     static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.auth.id !== prevState.id){
-        return { id: nextProps.auth.id,
-        username: nextProps.auth.username, 
-        email: nextProps.auth.email,
-        street: nextProps.auth.street || '',
-        city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || '',
-        avatar: nextProps.auth.avatar  || ''
+        if(nextProps.user.id !== prevState.id){
+        return { id: nextProps.user.id,
+        username: nextProps.user.username, 
+        email: nextProps.user.email,
+        street: nextProps.user.street || '',
+        city: nextProps.user.city || '',
+        zipcode: nextProps.user.zipcode || '',
+        avatar: nextProps.user.avatar  || ''
         };
         }
         else return null;
@@ -50,10 +51,14 @@ class UpdateMyAccount extends React.Component{
         this.setState({ [ev.target.name]: ev.target.value });
       }
     updateUser(ev) {
+
         ev.preventDefault();
         this.props.updateUser(this.state);
-        
-    }
+
+        setTimeout(() => {
+            this.props.history.push('/myaccount')}, 500)
+     }
+
     render() {
         const {updateUser, onChange} = this;
         const {avatar, username, email, street, city, zipcode} = this.state;
@@ -81,9 +86,15 @@ class UpdateMyAccount extends React.Component{
 }
 
 const mapState = (state) => {
-    
+    let user = {}
+    if (Object.keys(state.user).length === 0) {
+        user = state.auth 
+    } else {
+        user = state.user
+    }
     return {
-        auth: state.auth
+        auth: state.auth,
+        user: user
     }
 }
 
