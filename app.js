@@ -8,8 +8,6 @@ app.use(express.urlencoded({limit: '50mb'}));
 app.use('/dist', express.static('dist'));
 
 
-
-
 const isLoggedIn = async(req, res, next)=> {
   try {
     req.user = await User.findByToken(req.headers.authorization);
