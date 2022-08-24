@@ -4,8 +4,12 @@ import { fetchCart, exchangeToken, logout, addCart } from './store'
 import { Link } from 'react-router-dom';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
+import { Modal } from 'antd';
 
 class LandingPage extends React.Component{
+  state = {
+    cartProduct: null
+  }
 
   componentDidMount(){
     this.props.exchangeToken();
@@ -20,6 +24,7 @@ class LandingPage extends React.Component{
     const signUpTriggerText = 'Sign Up';
     const signInTriggerText = 'Sign In';
     const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990 } = this.props;
+    const { cartProduct } = this.state;
     return (
       <main>
       { auth.id ? (
@@ -34,11 +39,16 @@ class LandingPage extends React.Component{
           return (
             <li>
             <Link key={product.id} to={`/api/product/${product.id}`}>
-            <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+            <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
             height="170" /></div><div className='name'>{product.name}</div>
             </Link>
             <div className='price'>{`$${product.price}`}</div>
-            <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+            <button className='addtocart' onClick={() => {
+              this.props.addCart(product, 1)
+              this.setState({
+                cartProduct: product
+              })
+            }}>Add To Cart</button>
             </li>
           )
         }).slice(0,5)}
@@ -55,11 +65,16 @@ class LandingPage extends React.Component{
           return (
             <li>
             <Link key={product.id} to={`/api/product/${product.id}`}>
-            <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-            height="170" /></div><div className='name'>{product.name}</div> 
+            <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
+            height="170" /></div><div className='name'>{product.name}</div>
             </Link>
             <div className='price'>{`$${product.price}`}</div>
-            <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+            <button className='addtocart' onClick={() => {
+              this.props.addCart(product, 1)
+              this.setState({
+                cartProduct: product
+              })
+            }}>Add To Cart</button>
             </li>
           )
         }).slice(0,5)}
@@ -76,11 +91,16 @@ class LandingPage extends React.Component{
           return (
             <li>
             <Link key={product.id} to={`/api/product/${product.id}`}>
-            <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-            height="170" /></div><div className='name'>{product.name}</div> 
+            <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
+            height="170" /></div><div className='name'>{product.name}</div>
             </Link>
             <div className='price'>{`$${product.price}`}</div>
-            <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+            <button className='addtocart' onClick={() => {
+              this.props.addCart(product, 1)
+              this.setState({
+                cartProduct: product
+              })
+            }}>Add To Cart</button>
             </li>
           )
         }).slice(0,5)}
@@ -96,7 +116,20 @@ class LandingPage extends React.Component{
               <SignUpContainer triggerText={signUpTriggerText} />
           )
         }
-
+        <Modal title="Add a new product to cart" visible={!!cartProduct} onCancel={() => this.setState({cartProduct: null})} footer={null}>
+          {
+            cartProduct && (
+              <div className="cart-item">
+                <img className="cart-image" src={`//images.igdb.com/igdb/image/upload/t_cover_big/${cartProduct.imageUrl}`} />
+                <div>
+                  <div className="cart-name">{ cartProduct.name }</div>
+                  <div className="cart-desc">{ cartProduct.summary.length > 200 ? cartProduct.summary.slice(0, 200) + '...' : cartProduct.summary }</div>
+                  <div className="cart-price">${ cartProduct.price }</div>
+                </div>
+              </div>
+            )
+          }
+        </Modal>
       </main>
     );
 

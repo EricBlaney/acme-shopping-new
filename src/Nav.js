@@ -8,9 +8,9 @@ import { fetchProducts } from './store';
 import { logout } from './store';
 import GenreDropdown from './Dropdown/GenreDropdown';
 import PlatformDropDown from './Dropdown/PlatformDropdown';
+import { ShoppingCartOutlined } from '@ant-design/icons';
+import { Badge } from 'antd';
 
-// import Badge from "@material-ui/core/Badge";
-// import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 class Nav extends Component {
     componentDidMount(){
@@ -40,7 +40,12 @@ class Nav extends Component {
           auth.id ? <button onClick={ logout }>Logout</button> : <SignInContainer triggerText={signInTriggerText} />
         }
             { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
-            <NavLink to='/cart'>Cart</NavLink>
+
+            <NavLink to='/cart'>
+                <Badge count={this.props.cart.lineItems.length} size="small">
+                    <ShoppingCartOutlined style={{fontSize:20}} />
+                </Badge>
+                </NavLink>
         </div>
         
         <div className="footer">
@@ -61,9 +66,10 @@ class Nav extends Component {
 }
 };
 
-const mapState = ({ auth }) => {
+const mapState = ({ auth, cart }) => {
     return {
-        auth
+        auth,
+        cart,
     }
 };
 

@@ -29,9 +29,9 @@ export const addCart = (product, quantity) => {
         authorization: window.localStorage.getItem('token')
       }
     });
-    if (response.status === 200) {
-      alert('Added to cart successfully')
-    }
+    // if (response.status === 200) {
+    //   alert('Added to cart successfully')
+    // }
   }
 }
 
@@ -84,7 +84,7 @@ export const checkout = () => {
     const line_items = getState().cart.lineItems;
     const stripe_line_items = line_items.map(item => ({
       price_data: {
-        currency: "usd",
+        currency: 'usd',
         product_data: {
           name: item.product.name,
           description: item.product.summary,
