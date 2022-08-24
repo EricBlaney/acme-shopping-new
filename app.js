@@ -9,15 +9,8 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 app.use('/dist', express.static('dist'));
 
-<<<<<<< HEAD
-// Dotenv({
-//   path:path.resolve(__dirname, './env')
-// })
 
 
-
-=======
->>>>>>> b5344184ce2da710de8e1f56b16f41a7a3c0c16f
 const isLoggedIn = async(req, res, next)=> {
   try {
     req.user = await User.findByToken(req.headers.authorization);
