@@ -18,6 +18,9 @@ class Nav extends Component {
     componentDidUpdate(prevProps){
         if(!prevProps.auth.id && this.props.auth.id){
           this.props.fetchCart();
+          this.props.exchangeToken();
+          this.props.fetchProducts();
+          this.props.setUsers();
         }
       }
 
@@ -67,7 +70,7 @@ class Nav extends Component {
 
             <NavLink exact to='/api/console'>Consoles</NavLink>
         <div className="topnav-right">
-            <NavLink exact to='/myaccount'> Account </NavLink>
+            <NavLink exact to='/api/myaccount'> Account </NavLink>
             <NavLink to='/cart'>Cart</NavLink>
         
         {
@@ -99,6 +102,7 @@ class Nav extends Component {
 };
 
 const mapState = ({ auth }) => {
+  console.log(auth)
     return {
         auth,
         

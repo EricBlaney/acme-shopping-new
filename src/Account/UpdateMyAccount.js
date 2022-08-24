@@ -8,7 +8,7 @@ class UpdateMyAccount extends React.Component{
     constructor(){
         super();
         this.state = {
-            id: '',
+          id: '',
           username: '',
           email: '',
           street: '',
@@ -92,6 +92,7 @@ const mapState = (state) => {
     } else {
         user = state.user
     }
+    console.log(user)
     return {
         auth: state.auth,
         user: user

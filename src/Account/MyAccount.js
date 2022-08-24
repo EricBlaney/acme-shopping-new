@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList, loadUser } from '../store'
+import { fetchWishList, addCart, exchangeToken } from '../store'
 import { Link, NavLink } from 'react-router-dom';
 import Admin from './Admin';
 import Carousel from 'react-multi-carousel';
@@ -42,12 +42,20 @@ class MyAccount extends React.Component{
       }
     componentDidMount() {
         this.props.getWishList();
-    }
+        try{
+        this.props.exchangeToken();
+        } catch(er){
+            console.log(er)
+        }
+    };
+
     componentDidUpdate(prevProps){
         if(!prevProps.auth.id && this.props.auth.id){
           this.props.getWishList();
-        }
-  }
+          this.props.exchangeToken();
+    }
+  };
+
     static getDerivedStateFromProps(nextProps, prevState){
         if(nextProps.user !== prevState){
         return { id: nextProps.user.id,
@@ -63,14 +71,15 @@ class MyAccount extends React.Component{
       }
 
     render() {
-        const {auth, thisUser, wishlist, adminAuth} = this.props;
+        const {auth, wishlist, adminAuth} = this.props;
         const {avatar, username, email, street, city, zipcode} = this.state;
+
         return(
             <div>
             { adminAuth.isAdmin ? <Admin/> :
 
-                <main className='user-details'>
-                {thisUser.map(user=>{
+            <main key={auth.id} className='user-details'>
+                {([auth]||[]).map(user=>{
                 return(
                     <div key={user.id}>
                         <h1>
@@ -83,9 +92,11 @@ class MyAccount extends React.Component{
                             <div>City: {user.city || "None listed."}</div>
                             <div>Zipcode: {user.zipcode || 'None listed.'}</div>
                             <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+
                     </div>
                         )
                     })}
+
                     <br></br>
                     Your Wish List:
                     <br></br>
@@ -127,30 +138,27 @@ class MyAccount extends React.Component{
     }
 }
 
-const mapState = (state) => {
-    console.log(state.user);
-    let user = {}
-    if (Object.keys(state.user).length === 0) {
-        user = state.auth 
+const mapState = ({ user, auth, adminAuth, wishlist}) => {
+    user = {}; 
+    if (Object.keys(user).length === 0) {
+        user = auth 
     } else {
-        user = state.user
+        user = user
     }
-    console.log(state.user);
-
-    const thisUser = state.user.filter( user => user.id === state.auth.id)
     return {
-        auth: state.auth,
-        adminAuth: state.adminAuth,
-        thisUser,
-        user: user,
-        wishlist: state.wishlist
+        auth,
+        adminAuth,
+        user,
+        wishlist
     }
 }
 
 const mapDispatch = (dispatch) => {
     return{
         getWishList: ()=> dispatch(fetchWishList()),
-        addCart: (product, quantity) => dispatch(addCart(product, quantity))
+        addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+        exchangeToken: ()=> dispatch(exchangeToken()),
+
     
     }
 }

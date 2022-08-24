@@ -23,6 +23,7 @@ app.use('/api/orders', require('./routes/orders'));
 app.use('/api/sessions', require('./routes/sessions'));
 app.use('/api/passwordReset', require('./routes/passwordReset'));
 app.use('/api/passwordResetRequest', require('./routes/passwordResetRequest'));
+
 // Product Routes
 
 app.get('/api/products', async(req,res,next)=>{
