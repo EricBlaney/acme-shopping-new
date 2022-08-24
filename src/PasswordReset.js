@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 class PasswordReset extends Component{
@@ -11,7 +11,7 @@ class PasswordReset extends Component{
       username: '',
       token: '',
       password: '',
-    success: false
+      success: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);

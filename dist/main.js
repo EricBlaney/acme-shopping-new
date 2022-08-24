@@ -1,132 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/assertion-error/index.js":
-/*!***********************************************!*\
-  !*** ./node_modules/assertion-error/index.js ***!
-  \***********************************************/
-/***/ ((module) => {
-
-/*!
- * assertion-error
- * Copyright(c) 2013 Jake Luer <jake@qualiancy.com>
- * MIT Licensed
- */
-
-/*!
- * Return a function that will copy properties from
- * one object to another excluding any originally
- * listed. Returned function will create a new `{}`.
- *
- * @param {String} excluded properties ...
- * @return {Function}
- */
-
-function exclude () {
-  var excludes = [].slice.call(arguments);
-
-  function excludeProps (res, obj) {
-    Object.keys(obj).forEach(function (key) {
-      if (!~excludes.indexOf(key)) res[key] = obj[key];
-    });
-  }
-
-  return function extendExclude () {
-    var args = [].slice.call(arguments)
-      , i = 0
-      , res = {};
-
-    for (; i < args.length; i++) {
-      excludeProps(res, args[i]);
-    }
-
-    return res;
-  };
-};
-
-/*!
- * Primary Exports
- */
-
-module.exports = AssertionError;
-
-/**
- * ### AssertionError
- *
- * An extension of the JavaScript `Error` constructor for
- * assertion and validation scenarios.
- *
- * @param {String} message
- * @param {Object} properties to include (optional)
- * @param {callee} start stack function (optional)
- */
-
-function AssertionError (message, _props, ssf) {
-  var extend = exclude('name', 'message', 'stack', 'constructor', 'toJSON')
-    , props = extend(_props || {});
-
-  // default values
-  this.message = message || 'Unspecified AssertionError';
-  this.showDiff = false;
-
-  // copy from properties
-  for (var key in props) {
-    this[key] = props[key];
-  }
-
-  // capture stack trace
-  ssf = ssf || AssertionError;
-  if (Error.captureStackTrace) {
-    Error.captureStackTrace(this, ssf);
-  } else {
-    try {
-      throw new Error();
-    } catch(e) {
-      this.stack = e.stack;
-    }
-  }
-}
-
-/*!
- * Inherit from Error.prototype
- */
-
-AssertionError.prototype = Object.create(Error.prototype);
-
-/*!
- * Statically set name
- */
-
-AssertionError.prototype.name = 'AssertionError';
-
-/*!
- * Ensure correct constructor
- */
-
-AssertionError.prototype.constructor = AssertionError;
-
-/**
- * Allow errors to be converted to JSON for static transfer.
- *
- * @param {Boolean} include stack (default: `true`)
- * @return {Object} object that can be `JSON.stringify`
- */
-
-AssertionError.prototype.toJSON = function (stack) {
-  var extend = exclude('constructor', 'toJSON', 'stack')
-    , props = extend({ name: this.name }, this);
-
-  // include stack if exists and not turned off
-  if (false !== stack && this.stack) {
-    props.stack = this.stack;
-  }
-
-  return props;
-};
-
-
-/***/ }),
-
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -2603,9 +2477,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
-/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _AdminModal_CreateUser_CreateUserContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AdminModal/CreateUser/CreateUserContainer */ "./src/Account/AdminModal/CreateUser/CreateUserContainer.js");
+/* harmony import */ var _Admin_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Admin.css */ "./src/Account/Admin.css");
+/* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
+/* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
+
+
 
 
 
@@ -2653,18 +2531,27 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
       street: '',
       city: '',
       zipcode: '',
-      avatar: ''
+      avatar: '',
+      showCreateUser: false
     };
+    this.renderCreateUser = this.renderCreateUser.bind(this);
   }
 
   componentDidMount() {
     this.props.getWishList();
+    this.props.setUsers();
   }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.adminAuth.id && this.props.adminAuth.id) {
       this.props.getWishList();
     }
+  }
+
+  renderCreateUser() {
+    this.setState({
+      showCreateUser: true
+    });
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -2684,7 +2571,11 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
   render() {
     const {
       wishlist,
-      adminAuth
+      adminAuth,
+      users,
+      deleteUser,
+      renderCreateUser,
+      onSubmit
     } = this.props;
     const {
       avatar,
@@ -2694,13 +2585,16 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
       city,
       zipcode
     } = this.state;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Admin Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    const triggerText = 'Create User';
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "admin"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Admin Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
       src: avatar,
       className: "avatar"
-    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", adminAuth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", adminAuth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", adminAuth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.NavLink, {
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", adminAuth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", adminAuth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", adminAuth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
       exact: true,
       to: "/updatemyaccount"
-    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), wishlist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), wishlist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_5__["default"], {
       responsive: responsive,
       ssr: true
     }, wishlist.wishListItems.map(wishListItem => {
@@ -2713,7 +2607,7 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
         key: wishListItem.product.id
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
         className: "link",
         to: `/api/product/${wishListItem.product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -2731,16 +2625,29 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, wishListItem.product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: () => this.props.addCart(product, 1)
       }, "Add To Cart"))));
-    })) : 'You have nothing in your Wish List! Go add something!', "Admin Tools");
+    })) : 'You have nothing in your Wish List! Go add something!', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Admin Tools"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Current Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_AdminModal_CreateUser_CreateUserContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      triggerText: triggerText,
+      onSubmit: onSubmit
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Username "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Delete User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Edit User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "User Type"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, users.map(user => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
+        key: user.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, user.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: () => {
+          deleteUser(user);
+        }
+      }, "X")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "X")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, user.isAdmin ? 'Admin' : 'User'));
+    }))));
   }
 
 }
 
 const mapState = state => {
+  const users = state.user;
   const user = state.auth || {};
   return {
     adminAuth: state.adminAuth,
     user: user,
+    users: users,
     wishlist: state.wishlist
   };
 };
@@ -2748,11 +2655,290 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getWishList: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchWishList)()),
-    addCart: (product, quantity) => dispatch(addCart(product, quantity))
+    addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+    setUsers: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.setUsers)()),
+    deleteUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deleteUser)(user)),
+    createUser: user => {
+      dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.createUser)(user));
+    }
   };
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Admin));
+
+/***/ }),
+
+/***/ "./src/Account/AdminModal/CreateUser/CreateUserContainer.js":
+/*!******************************************************************!*\
+  !*** ./src/Account/AdminModal/CreateUser/CreateUserContainer.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Modal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Modal */ "./src/Account/AdminModal/CreateUser/Modal.js");
+/* harmony import */ var _TriggerButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TriggerButton */ "./src/Account/AdminModal/CreateUser/TriggerButton.js");
+
+
+
+
+class CreateUserContainer extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
+  state = {
+    isShown: false
+  };
+  showModal = () => {
+    this.setState({
+      isShown: true
+    }, () => {
+      this.closeButton.focus();
+    });
+    this.toggleScrollLock();
+  };
+  closeModal = () => {
+    this.setState({
+      isShown: false
+    });
+    this.TriggerButton.focus();
+    this.toggleScrollLock();
+  };
+  onKeyDown = event => {
+    if (event.keyCode === 27) {
+      this.closeModal();
+    }
+  };
+  onClickOutside = event => {
+    if (this.modal && this.modal.contains(event.target)) return;
+    this.closeModal();
+  };
+  toggleScrollLock = () => {
+    document.querySelector('html').classList.toggle('scroll-lock');
+  };
+
+  render() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_TriggerButton__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      showModal: this.showModal,
+      buttonRef: n => this.TriggerButton = n,
+      triggerText: this.props.triggerText
+    }), this.state.isShown ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Modal__WEBPACK_IMPORTED_MODULE_1__.Modal, {
+      onSubmit: this.props.onSubmit,
+      modalRef: n => this.modal = n,
+      buttonRef: n => this.closeButton = n,
+      closeModal: this.closeModal,
+      onKeyDown: this.onKeyDown,
+      onClickOutside: this.onClickOutside
+    }) : null);
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CreateUserContainer);
+
+/***/ }),
+
+/***/ "./src/Account/AdminModal/CreateUser/Modal.js":
+/*!****************************************************!*\
+  !*** ./src/Account/AdminModal/CreateUser/Modal.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Modal": () => (/* binding */ Modal),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.js */ "./src/Account/AdminModal/CreateUser/index.js");
+/* harmony import */ var focus_trap_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! focus-trap-react */ "./node_modules/focus-trap-react/dist/focus-trap-react.js");
+/* harmony import */ var focus_trap_react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(focus_trap_react__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+const Modal = ({
+  onClickOutside,
+  onKeyDown,
+  modalRef,
+  buttonRef,
+  closeModal,
+  onSubmit
+}) => {
+  return /*#__PURE__*/react_dom__WEBPACK_IMPORTED_MODULE_1__.createPortal( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((focus_trap_react__WEBPACK_IMPORTED_MODULE_3___default()), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("aside", {
+    tag: "aside",
+    role: "dialog",
+    tabIndex: "-1",
+    "aria-modal": "true",
+    className: "modal-cover",
+    onClick: onClickOutside,
+    onKeyDown: onKeyDown
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "modal-area",
+    ref: modalRef
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    ref: buttonRef,
+    "aria-label": "Close Modal",
+    "aria-labelledby": "close-modal",
+    className: "_modal-close",
+    onClick: closeModal
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    id: "close-modal",
+    className: "_hide-visual"
+  }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+    className: "_modal-close-icon",
+    viewBox: "0 0 40 40"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
+    d: "M 10,10 L 30,30 M 30,10 L 10,30"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "modal-body"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_index_js__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    onSubmit: onSubmit
+  }))))), document.body);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Modal);
+
+/***/ }),
+
+/***/ "./src/Account/AdminModal/CreateUser/TriggerButton.js":
+/*!************************************************************!*\
+  !*** ./src/Account/AdminModal/CreateUser/TriggerButton.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const TriggerButton = ({
+  triggerText,
+  buttonRef,
+  showModal
+}) => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "btn btn-lg btn-danger center modal-button",
+    ref: buttonRef,
+    onClick: showModal
+  }, triggerText);
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TriggerButton);
+
+/***/ }),
+
+/***/ "./src/Account/AdminModal/CreateUser/index.js":
+/*!****************************************************!*\
+  !*** ./src/Account/AdminModal/CreateUser/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../store */ "./src/store/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+
+
+
+class CreateUser extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor() {
+    super();
+    this.state = {
+      username: '',
+      password: '',
+      email: '',
+      isAdmin: false
+    };
+    this.onChangeAdmin = this.onChangeAdmin.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onChangeAdmin(ev) {
+    if (ev.target.checked) {
+      this.setState({
+        [ev.target.name]: true
+      });
+    } else {
+      this.setState({
+        [ev.target.name]: false
+      });
+    }
+  }
+
+  onChange(ev) {
+    this.setState({
+      [ev.target.name]: ev.target.value
+    });
+  }
+
+  onSubmit(ev) {
+    ev.preventDefault();
+    this.props.createUser(this.state);
+  }
+
+  render() {
+    const {
+      onChange,
+      onSubmit,
+      onChangeAdmin
+    } = this;
+    const {
+      username,
+      password,
+      email,
+      isAdmin
+    } = this.state;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+      onSubmit: onSubmit
+    }, "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      name: "username",
+      onChange: onChange,
+      value: username
+    }), "Password:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "password",
+      name: "password",
+      value: password,
+      onChange: onChange
+    }), "Email:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "email",
+      name: "email",
+      value: email,
+      onChange: onChange
+    }), "Set Admin Privilege?", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+      type: "checkbox",
+      name: "isAdmin",
+      onChange: onChangeAdmin,
+      value: isAdmin
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Create User"));
+  }
+
+}
+
+const mapDispatch = dispatch => {
+  return {
+    createUser: user => {
+      dispatch((0,_store__WEBPACK_IMPORTED_MODULE_1__.createUser)(user));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(null, mapDispatch)(CreateUser));
 
 /***/ }),
 
@@ -3437,15 +3623,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _SignUp_SignUpContainer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SignUp/SignUpContainer */ "./src/SignUp/SignUpContainer.js");
 /* harmony import */ var _SignIn_SignInContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SignIn/SignInContainer */ "./src/SignIn/SignInContainer.js");
 /* harmony import */ var _store_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/auth */ "./src/store/auth.js");
-/* harmony import */ var chai__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! chai */ "./node_modules/chai/index.mjs");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
-
-
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store */ "./src/store/index.js");
 
 
 
@@ -3476,17 +3659,17 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const signInTriggerText = 'Sign In';
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "topnav"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
       exact: true,
       to: "/"
     }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
       exact: true,
       to: "/api/genre"
     }, " By Genre "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "dropdown-content"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
       to: `/api/genre/topFightingGames`
     }, "  Top Fighting Games"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
       href: "#"
@@ -3494,7 +3677,7 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       href: "#"
     }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
       exact: true,
       to: "/api/platform"
     }, " By Platform "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -3507,7 +3690,7 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       href: "#"
     }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "dropdown"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
       exact: true,
       to: "/api/gamesbyyear"
     }, "By Year"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -3518,17 +3701,17 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       href: "#"
     }, "Link 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
       href: "#"
-    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+    }, "Link 3"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
       exact: true,
       to: "/api/console"
     }, "Consoles"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "topnav-right"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
       exact: true,
       to: "/myaccount"
-    }, " Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.NavLink, {
+    }, " Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
       to: "/cart"
-    }, "Cart"), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Link, {
+    }, "Cart"), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
       to: "/"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       onClick: logout
@@ -3563,9 +3746,9 @@ const mapState = ({
 
 const mapDispatch = dispatch => {
   return {
-    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchCart)()),
+    fetchCart: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.fetchCart)()),
     exchangeToken: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.exchangeToken)()),
-    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_6__.fetchProducts)()),
+    fetchProducts: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_5__.fetchProducts)()),
     logout: () => dispatch((0,_store_auth__WEBPACK_IMPORTED_MODULE_4__.logout)())
   };
 };
@@ -5710,6 +5893,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "loadUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.loadUser),
 /* harmony export */   "login": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_0__.login),
 /* harmony export */   "logout": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_0__.logout),
+/* harmony export */   "setUsers": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.setUsers),
 /* harmony export */   "updateQuantity": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.updateQuantity),
 /* harmony export */   "updateUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.updateUser)
 /* harmony export */ });
@@ -5801,6 +5985,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   "deleteUser": () => (/* binding */ deleteUser),
 /* harmony export */   "loadUser": () => (/* binding */ loadUser),
+/* harmony export */   "setUsers": () => (/* binding */ setUsers),
 /* harmony export */   "updateUser": () => (/* binding */ updateUser)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -5808,8 +5993,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const user = (state = [], action) => {
+  if (action.type === 'SET_USERS') {
+    return action.user;
+  }
+
   if (action.type === 'CREATE_USER') {
-    state = action.user;
+    return [action.user, ...state];
   }
 
   if (action.type === 'UPDATE_USER') {
@@ -5817,7 +6006,7 @@ const user = (state = [], action) => {
   }
 
   if (action.type === 'DELETE_USER') {
-    state = [];
+    return state.filter(user => user.id !== action.user.id);
   }
 
   return state;
@@ -5842,6 +6031,15 @@ const createUser = credentials => {
     }
   };
 };
+const setUsers = () => {
+  return async dispatch => {
+    const user = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/users')).data;
+    dispatch({
+      type: "SET_USERS",
+      user
+    });
+  };
+};
 const updateUser = user => {
   return async dispatch => {
     try {
@@ -5859,7 +6057,7 @@ const deleteUser = user => {
   return async dispatch => {
     await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"](`/api/users/${user.id}`);
     dispatch({
-      type: 'DELETE_user',
+      type: 'DELETE_USER',
       user
     });
   };
@@ -5956,727 +6154,393 @@ const deleteFromWishList = product => {
 
 /***/ }),
 
-/***/ "./node_modules/chai/index.js":
-/*!************************************!*\
-  !*** ./node_modules/chai/index.js ***!
-  \************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/react-multi-carousel/lib/styles.css":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/react-multi-carousel/lib/styles.css ***!
+  \************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-module.exports = __webpack_require__(/*! ./lib/chai */ "./node_modules/chai/lib/chai.js");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
+// Imports
 
 
-/***/ }),
 
-/***/ "./node_modules/chai/lib/chai.js":
-/*!***************************************!*\
-  !*** ./node_modules/chai/lib/chai.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-/*!
- * chai
- * Copyright(c) 2011-2014 Jake Luer <jake@alogicalparadox.com>
- * MIT Licensed
- */
-
-var used = [];
-
-/*!
- * Chai version
- */
-
-exports.version = '4.3.3';
-
-/*!
- * Assertion Error
- */
-
-exports.AssertionError = __webpack_require__(/*! assertion-error */ "./node_modules/assertion-error/index.js");
-
-/*!
- * Utils for plugins (not exported)
- */
-
-var util = __webpack_require__(/*! ./chai/utils */ "./node_modules/chai/lib/chai/utils/index.js");
-
-/**
- * # .use(function)
- *
- * Provides a way to extend the internals of Chai.
- *
- * @param {Function}
- * @returns {this} for chaining
- * @api public
- */
-
-exports.use = function (fn) {
-  if (!~used.indexOf(fn)) {
-    fn(exports, util);
-    used.push(fn);
-  }
-
-  return exports;
-};
-
-/*!
- * Utility Functions
- */
-
-exports.util = util;
-
-/*!
- * Configuration
- */
-
-var config = __webpack_require__(/*! ./chai/config */ "./node_modules/chai/lib/chai/config.js");
-exports.config = config;
-
-/*!
- * Primary `Assertion` prototype
- */
-
-var assertion = __webpack_require__(/*! ./chai/assertion */ "./node_modules/chai/lib/chai/assertion.js");
-exports.use(assertion);
-
-/*!
- * Core Assertions
- */
-
-var core = __webpack_require__(/*! ./chai/core/assertions */ "./node_modules/chai/lib/chai/core/assertions.js");
-exports.use(core);
-
-/*!
- * Expect interface
- */
-
-var expect = __webpack_require__(/*! ./chai/interface/expect */ "./node_modules/chai/lib/chai/interface/expect.js");
-exports.use(expect);
-
-/*!
- * Should interface
- */
-
-var should = __webpack_require__(/*! ./chai/interface/should */ "./node_modules/chai/lib/chai/interface/should.js");
-exports.use(should);
-
-/*!
- * Assert interface
- */
-
-var assert = __webpack_require__(/*! ./chai/interface/assert */ "./node_modules/chai/lib/chai/interface/assert.js");
-exports.use(assert);
+var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ./revicons.woff */ "./node_modules/react-multi-carousel/lib/revicons.woff"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ./revicons.ttf */ "./node_modules/react-multi-carousel/lib/revicons.ttf"), __webpack_require__.b);
+var ___CSS_LOADER_URL_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ./revicons.eot */ "./node_modules/react-multi-carousel/lib/revicons.eot"), __webpack_require__.b);
+var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
+var ___CSS_LOADER_URL_REPLACEMENT_1___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_1___);
+var ___CSS_LOADER_URL_REPLACEMENT_2___ = _css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_2___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "@font-face{font-family:\"revicons\";fallback:fallback;src:url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") format('woff'),url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") format('ttf'),url(" + ___CSS_LOADER_URL_REPLACEMENT_2___ + ") format('ttf')}.react-multi-carousel-list{display:flex;align-items:center;overflow:hidden;position:relative}.react-multi-carousel-track{list-style:none;padding:0;margin:0;display:flex;flex-direction:row;position:relative;transform-style:preserve-3d;backface-visibility:hidden;will-change:transform,transition}.react-multiple-carousel__arrow{position:absolute;outline:0;transition:all .5s;border-radius:35px;z-index:1000;border:0;background:rgba(0,0,0,0.5);min-width:43px;min-height:43px;opacity:1;cursor:pointer}.react-multiple-carousel__arrow:hover{background:rgba(0,0,0,0.8)}.react-multiple-carousel__arrow::before{font-size:20px;color:#fff;display:block;font-family:revicons;text-align:center;z-index:2;position:relative}.react-multiple-carousel__arrow:disabled{cursor:default;background:rgba(0,0,0,0.5)}.react-multiple-carousel__arrow--left{left:calc(4% + 1px)}.react-multiple-carousel__arrow--left::before{content:\"\\e824\"}.react-multiple-carousel__arrow--right{right:calc(4% + 1px)}.react-multiple-carousel__arrow--right::before{content:\"\\e825\"}.react-multi-carousel-dot-list{position:absolute;bottom:0;display:flex;left:0;right:0;justify-content:center;margin:auto;padding:0;margin:0;list-style:none;text-align:center}.react-multi-carousel-dot button{display:inline-block;width:12px;height:12px;border-radius:50%;opacity:1;padding:5px 5px 5px 5px;box-shadow:none;transition:background .5s;border-width:2px;border-style:solid;border-color:grey;padding:0;margin:0;margin-right:6px;outline:0;cursor:pointer}.react-multi-carousel-dot button:hover:active{background:#080808}.react-multi-carousel-dot--active button{background:#080808}.react-multi-carousel-item{transform-style:preserve-3d;backface-visibility:hidden}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.react-multi-carousel-item{flex-shrink:0 !important}.react-multi-carousel-track{overflow:visible !important}}[dir='rtl'].react-multi-carousel-list{direction:rtl}.rtl.react-multiple-carousel__arrow--right{right:auto;left:calc(4% + 1px)}.rtl.react-multiple-carousel__arrow--right::before{content:\"\\e824\"}.rtl.react-multiple-carousel__arrow--left{left:auto;right:calc(4% + 1px)}.rtl.react-multiple-carousel__arrow--left::before{content:\"\\e825\"}", "",{"version":3,"sources":["webpack://./node_modules/react-multi-carousel/lib/styles.css"],"names":[],"mappings":"AAAA,WAAW,sBAAsB,CAAC,iBAAiB,CAAC,sKAAiH,CAAC,2BAA2B,YAAY,CAAC,kBAAkB,CAAC,eAAe,CAAC,iBAAiB,CAAC,4BAA4B,eAAe,CAAC,SAAS,CAAC,QAAQ,CAAC,YAAY,CAAC,kBAAkB,CAAC,iBAAiB,CAAC,2BAA2B,CAAC,0BAA0B,CAAC,gCAAgC,CAAC,gCAAgC,iBAAiB,CAAC,SAAS,CAAC,kBAAkB,CAAC,kBAAkB,CAAC,YAAY,CAAC,QAAQ,CAAC,0BAA0B,CAAC,cAAc,CAAC,eAAe,CAAC,SAAS,CAAC,cAAc,CAAC,sCAAsC,0BAA0B,CAAC,wCAAwC,cAAc,CAAC,UAAU,CAAC,aAAa,CAAC,oBAAoB,CAAC,iBAAiB,CAAC,SAAS,CAAC,iBAAiB,CAAC,yCAAyC,cAAc,CAAC,0BAA0B,CAAC,sCAAsC,mBAAmB,CAAC,8CAA8C,eAAe,CAAC,uCAAuC,oBAAoB,CAAC,+CAA+C,eAAe,CAAC,+BAA+B,iBAAiB,CAAC,QAAQ,CAAC,YAAY,CAAC,MAAM,CAAC,OAAO,CAAC,sBAAsB,CAAC,WAAW,CAAC,SAAS,CAAC,QAAQ,CAAC,eAAe,CAAC,iBAAiB,CAAC,iCAAiC,oBAAoB,CAAC,UAAU,CAAC,WAAW,CAAC,iBAAiB,CAAC,SAAS,CAAC,uBAAuB,CAAC,eAAe,CAAC,yBAAyB,CAAC,gBAAgB,CAAC,kBAAkB,CAAC,iBAAiB,CAAC,SAAS,CAAC,QAAQ,CAAC,gBAAgB,CAAC,SAAS,CAAC,cAAc,CAAC,8CAA8C,kBAAkB,CAAC,yCAAyC,kBAAkB,CAAC,2BAA2B,2BAA2B,CAAC,0BAA0B,CAAC,mEAAmE,2BAA2B,wBAAwB,CAAC,4BAA4B,2BAA2B,CAAC,CAAC,sCAAsC,aAAa,CAAC,2CAA2C,UAAU,CAAC,mBAAmB,CAAC,mDAAmD,eAAe,CAAC,0CAA0C,SAAS,CAAC,oBAAoB,CAAC,kDAAkD,eAAe","sourcesContent":["@font-face{font-family:\"revicons\";fallback:fallback;src:url(\"./revicons.woff\") format('woff'),url(\"./revicons.ttf\") format('ttf'),url(\"./revicons.eot\") format('ttf')}.react-multi-carousel-list{display:flex;align-items:center;overflow:hidden;position:relative}.react-multi-carousel-track{list-style:none;padding:0;margin:0;display:flex;flex-direction:row;position:relative;transform-style:preserve-3d;backface-visibility:hidden;will-change:transform,transition}.react-multiple-carousel__arrow{position:absolute;outline:0;transition:all .5s;border-radius:35px;z-index:1000;border:0;background:rgba(0,0,0,0.5);min-width:43px;min-height:43px;opacity:1;cursor:pointer}.react-multiple-carousel__arrow:hover{background:rgba(0,0,0,0.8)}.react-multiple-carousel__arrow::before{font-size:20px;color:#fff;display:block;font-family:revicons;text-align:center;z-index:2;position:relative}.react-multiple-carousel__arrow:disabled{cursor:default;background:rgba(0,0,0,0.5)}.react-multiple-carousel__arrow--left{left:calc(4% + 1px)}.react-multiple-carousel__arrow--left::before{content:\"\\e824\"}.react-multiple-carousel__arrow--right{right:calc(4% + 1px)}.react-multiple-carousel__arrow--right::before{content:\"\\e825\"}.react-multi-carousel-dot-list{position:absolute;bottom:0;display:flex;left:0;right:0;justify-content:center;margin:auto;padding:0;margin:0;list-style:none;text-align:center}.react-multi-carousel-dot button{display:inline-block;width:12px;height:12px;border-radius:50%;opacity:1;padding:5px 5px 5px 5px;box-shadow:none;transition:background .5s;border-width:2px;border-style:solid;border-color:grey;padding:0;margin:0;margin-right:6px;outline:0;cursor:pointer}.react-multi-carousel-dot button:hover:active{background:#080808}.react-multi-carousel-dot--active button{background:#080808}.react-multi-carousel-item{transform-style:preserve-3d;backface-visibility:hidden}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.react-multi-carousel-item{flex-shrink:0 !important}.react-multi-carousel-track{overflow:visible !important}}[dir='rtl'].react-multi-carousel-list{direction:rtl}.rtl.react-multiple-carousel__arrow--right{right:auto;left:calc(4% + 1px)}.rtl.react-multiple-carousel__arrow--right::before{content:\"\\e824\"}.rtl.react-multiple-carousel__arrow--left{left:auto;right:calc(4% + 1px)}.rtl.react-multiple-carousel__arrow--left::before{content:\"\\e825\"}"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/chai/lib/chai/assertion.js":
-/*!*************************************************!*\
-  !*** ./node_modules/chai/lib/chai/assertion.js ***!
-  \*************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/Account/Admin.css":
+/*!*********************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/Account/Admin.css ***!
+  \*********************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-/*!
- * chai
- * http://chaijs.com
- * Copyright(c) 2011-2014 Jake Luer <jake@alogicalparadox.com>
- * MIT Licensed
- */
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
 
-var config = __webpack_require__(/*! ./config */ "./node_modules/chai/lib/chai/config.js");
 
-module.exports = function (_chai, util) {
-  /*!
-   * Module dependencies.
-   */
-
-  var AssertionError = _chai.AssertionError
-    , flag = util.flag;
-
-  /*!
-   * Module export.
-   */
-
-  _chai.Assertion = Assertion;
-
-  /*!
-   * Assertion Constructor
-   *
-   * Creates object for chaining.
-   *
-   * `Assertion` objects contain metadata in the form of flags. Three flags can
-   * be assigned during instantiation by passing arguments to this constructor:
-   *
-   * - `object`: This flag contains the target of the assertion. For example, in
-   *   the assertion `expect(numKittens).to.equal(7);`, the `object` flag will
-   *   contain `numKittens` so that the `equal` assertion can reference it when
-   *   needed.
-   *
-   * - `message`: This flag contains an optional custom error message to be
-   *   prepended to the error message that's generated by the assertion when it
-   *   fails.
-   *
-   * - `ssfi`: This flag stands for "start stack function indicator". It
-   *   contains a function reference that serves as the starting point for
-   *   removing frames from the stack trace of the error that's created by the
-   *   assertion when it fails. The goal is to provide a cleaner stack trace to
-   *   end users by removing Chai's internal functions. Note that it only works
-   *   in environments that support `Error.captureStackTrace`, and only when
-   *   `Chai.config.includeStack` hasn't been set to `false`.
-   *
-   * - `lockSsfi`: This flag controls whether or not the given `ssfi` flag
-   *   should retain its current value, even as assertions are chained off of
-   *   this object. This is usually set to `true` when creating a new assertion
-   *   from within another assertion. It's also temporarily set to `true` before
-   *   an overwritten assertion gets called by the overwriting assertion.
-   *
-   * @param {Mixed} obj target of the assertion
-   * @param {String} msg (optional) custom error message
-   * @param {Function} ssfi (optional) starting point for removing stack frames
-   * @param {Boolean} lockSsfi (optional) whether or not the ssfi flag is locked
-   * @api private
-   */
-
-  function Assertion (obj, msg, ssfi, lockSsfi) {
-    flag(this, 'ssfi', ssfi || Assertion);
-    flag(this, 'lockSsfi', lockSsfi);
-    flag(this, 'object', obj);
-    flag(this, 'message', msg);
-
-    return util.proxify(this);
-  }
-
-  Object.defineProperty(Assertion, 'includeStack', {
-    get: function() {
-      console.warn('Assertion.includeStack is deprecated, use chai.config.includeStack instead.');
-      return config.includeStack;
-    },
-    set: function(value) {
-      console.warn('Assertion.includeStack is deprecated, use chai.config.includeStack instead.');
-      config.includeStack = value;
-    }
-  });
-
-  Object.defineProperty(Assertion, 'showDiff', {
-    get: function() {
-      console.warn('Assertion.showDiff is deprecated, use chai.config.showDiff instead.');
-      return config.showDiff;
-    },
-    set: function(value) {
-      console.warn('Assertion.showDiff is deprecated, use chai.config.showDiff instead.');
-      config.showDiff = value;
-    }
-  });
-
-  Assertion.addProperty = function (name, fn) {
-    util.addProperty(this.prototype, name, fn);
-  };
-
-  Assertion.addMethod = function (name, fn) {
-    util.addMethod(this.prototype, name, fn);
-  };
-
-  Assertion.addChainableMethod = function (name, fn, chainingBehavior) {
-    util.addChainableMethod(this.prototype, name, fn, chainingBehavior);
-  };
-
-  Assertion.overwriteProperty = function (name, fn) {
-    util.overwriteProperty(this.prototype, name, fn);
-  };
-
-  Assertion.overwriteMethod = function (name, fn) {
-    util.overwriteMethod(this.prototype, name, fn);
-  };
-
-  Assertion.overwriteChainableMethod = function (name, fn, chainingBehavior) {
-    util.overwriteChainableMethod(this.prototype, name, fn, chainingBehavior);
-  };
-
-  /**
-   * ### .assert(expression, message, negateMessage, expected, actual, showDiff)
-   *
-   * Executes an expression and check expectations. Throws AssertionError for reporting if test doesn't pass.
-   *
-   * @name assert
-   * @param {Philosophical} expression to be tested
-   * @param {String|Function} message or function that returns message to display if expression fails
-   * @param {String|Function} negatedMessage or function that returns negatedMessage to display if negated expression fails
-   * @param {Mixed} expected value (remember to check for negation)
-   * @param {Mixed} actual (optional) will default to `this.obj`
-   * @param {Boolean} showDiff (optional) when set to `true`, assert will display a diff in addition to the message if expression fails
-   * @api private
-   */
-
-  Assertion.prototype.assert = function (expr, msg, negateMsg, expected, _actual, showDiff) {
-    var ok = util.test(this, arguments);
-    if (false !== showDiff) showDiff = true;
-    if (undefined === expected && undefined === _actual) showDiff = false;
-    if (true !== config.showDiff) showDiff = false;
-
-    if (!ok) {
-      msg = util.getMessage(this, arguments);
-      var actual = util.getActual(this, arguments);
-      var assertionErrorObjectProperties = {
-          actual: actual
-        , expected: expected
-        , showDiff: showDiff
-      };
-
-      var operator = util.getOperator(this, arguments);
-      if (operator) {
-        assertionErrorObjectProperties.operator = operator;
-      }
-
-      throw new AssertionError(
-        msg,
-        assertionErrorObjectProperties,
-        (config.includeStack) ? this.assert : flag(this, 'ssfi'));
-    }
-  };
-
-  /*!
-   * ### ._obj
-   *
-   * Quick reference to stored `actual` value for plugin developers.
-   *
-   * @api private
-   */
-
-  Object.defineProperty(Assertion.prototype, '_obj',
-    { get: function () {
-        return flag(this, 'object');
-      }
-    , set: function (val) {
-        flag(this, 'object', val);
-      }
-  });
-};
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".admin{\n    text-align: center;\n}\ntable {\n    margin-left: auto;\n    margin-right: auto;\n}\ntr {\n    border: 1px solid black\n}\n\nth {\n    border: 1px solid black;\n    padding: 3rem;\n    padding-left: 10rem;\n    padding-right: 10rem;\n}\n\ntd {\n    text-align: center;\n    border: 1px solid black;\n    padding: 1.5rem;\n    padding-left: 5rem;\n    padding-right: 5rem;\n}", "",{"version":3,"sources":["webpack://./src/Account/Admin.css"],"names":[],"mappings":"AAAA;IACI,kBAAkB;AACtB;AACA;IACI,iBAAiB;IACjB,kBAAkB;AACtB;AACA;IACI;AACJ;;AAEA;IACI,uBAAuB;IACvB,aAAa;IACb,mBAAmB;IACnB,oBAAoB;AACxB;;AAEA;IACI,kBAAkB;IAClB,uBAAuB;IACvB,eAAe;IACf,kBAAkB;IAClB,mBAAmB;AACvB","sourcesContent":[".admin{\n    text-align: center;\n}\ntable {\n    margin-left: auto;\n    margin-right: auto;\n}\ntr {\n    border: 1px solid black\n}\n\nth {\n    border: 1px solid black;\n    padding: 3rem;\n    padding-left: 10rem;\n    padding-right: 10rem;\n}\n\ntd {\n    text-align: center;\n    border: 1px solid black;\n    padding: 1.5rem;\n    padding-left: 5rem;\n    padding-right: 5rem;\n}"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
 
-/***/ "./node_modules/chai/lib/chai/config.js":
-/*!**********************************************!*\
-  !*** ./node_modules/chai/lib/chai/config.js ***!
-  \**********************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/Cart.css":
+/*!************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/Cart.css ***!
+  \************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".cart-list {\n    padding: 10px;\n    list-style: none;\n    border: 1px solid #e1e1e1;\n}\n\n.cart-item {\n    display: flex;\n    margin-bottom: 20px;\n}\n\n.cart-image {\n    width: 150px;\n    height: 150px;\n    margin-right: 10px;\n}\n\n.cart-name {\n    font-size: 18px;\n    font-weight: 600;\n}\n\n.cart-desc {\n    font-size: 14px;\n    color: #333;\n}\n\n.cart-quantity {\n    display: flex;\n    align-items: center;\n    margin-top: 10px;\n}\n\n.quantity-minus,\n.quantity-plus {\n    width: 25px;\n    height: 25px;\n    color: #ffffff;\n    text-align: center;\n    line-height: 25px;\n    background-color: #dedede;\n    cursor: pointer;\n}\n\n.quantity-num {\n    padding: 0 10px;\n    text-align: center;\n    background-color: #f4f4f4;\n    height: 25px;\n    line-height: 25px;\n}\n\n.cart-delete {\n    margin-top: 30px;\n    color: #648caf;\n    cursor: pointer;\n}\n\n", "",{"version":3,"sources":["webpack://./src/Cart.css"],"names":[],"mappings":"AAAA;IACI,aAAa;IACb,gBAAgB;IAChB,yBAAyB;AAC7B;;AAEA;IACI,aAAa;IACb,mBAAmB;AACvB;;AAEA;IACI,YAAY;IACZ,aAAa;IACb,kBAAkB;AACtB;;AAEA;IACI,eAAe;IACf,gBAAgB;AACpB;;AAEA;IACI,eAAe;IACf,WAAW;AACf;;AAEA;IACI,aAAa;IACb,mBAAmB;IACnB,gBAAgB;AACpB;;AAEA;;IAEI,WAAW;IACX,YAAY;IACZ,cAAc;IACd,kBAAkB;IAClB,iBAAiB;IACjB,yBAAyB;IACzB,eAAe;AACnB;;AAEA;IACI,eAAe;IACf,kBAAkB;IAClB,yBAAyB;IACzB,YAAY;IACZ,iBAAiB;AACrB;;AAEA;IACI,gBAAgB;IAChB,cAAc;IACd,eAAe;AACnB","sourcesContent":[".cart-list {\n    padding: 10px;\n    list-style: none;\n    border: 1px solid #e1e1e1;\n}\n\n.cart-item {\n    display: flex;\n    margin-bottom: 20px;\n}\n\n.cart-image {\n    width: 150px;\n    height: 150px;\n    margin-right: 10px;\n}\n\n.cart-name {\n    font-size: 18px;\n    font-weight: 600;\n}\n\n.cart-desc {\n    font-size: 14px;\n    color: #333;\n}\n\n.cart-quantity {\n    display: flex;\n    align-items: center;\n    margin-top: 10px;\n}\n\n.quantity-minus,\n.quantity-plus {\n    width: 25px;\n    height: 25px;\n    color: #ffffff;\n    text-align: center;\n    line-height: 25px;\n    background-color: #dedede;\n    cursor: pointer;\n}\n\n.quantity-num {\n    padding: 0 10px;\n    text-align: center;\n    background-color: #f4f4f4;\n    height: 25px;\n    line-height: 25px;\n}\n\n.cart-delete {\n    margin-top: 30px;\n    color: #648caf;\n    cursor: pointer;\n}\n\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/LandingPage.css":
+/*!*******************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/LandingPage.css ***!
+  \*******************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n* {\n    box-sizing: border-box; \n  }\n  .row {\n    height: 90%\n  }\n  \n  .wrapper {\n    padding: 2rem;\n    display: flex;\n    width: 100%;\n    justify-content: space-around;\n }\n    \n  .card  {\n    width: 280px;\n    height: 360px;\n    border-radius: 15px;\n    padding: 1.5rem;\n    background: white;\n    position: relative;\n    display: flex;\n    align-items: flex-end;\n    transition: 0.4s ease-out;\n    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5); }\n    .card:hover {\n      transform: translateY(20px); }\n      .card:hover:before{\n        opacity: 1; }\n      .card:hover .info{\n        opacity: 1;\n        transform: translateY(0px);\n    }\n    \n    .card:before {\n      content: \"\";\n      pointer-events: none;\n      position: absolute;\n      top: 0;\n      left: 0;\n      display: block;\n      width: 100%;\n      height: 100%;\n      border-radius: 15px;\n      background: rgba(0, 0, 0, 0.6);\n      z-index: 2;\n      transition: 0.5s;\n      opacity: 0; }\n    .card img{\n      width: 100%;\n      height: 100%;\n      object-fit: cover;\n      position: absolute;\n      top: 0;\n      left: 0;\n      border-radius: 15px; }\n    .card .info {\n      position: relative;\n      z-index: 3;\n      color: white;\n      opacity: 0;\n      transform: translateY(30px);\n      transition: 0.5s; }\n      .card .info h3 {\n        margin: 0px; }\n      .card .info p {\n        letter-spacing: 1px;\n        font-size: 20px;\n        margin-top: 8px; }\n      .card .info button {\n        padding: 0.6rem;\n        outline: none;\n        border: none;\n        border-radius: 3px;\n        background: white;\n        color: black;\n        font-weight: bold;\n        cursor: pointer;\n        transition: 0.4s ease; }\n        .card .info button:hover {\n          background: #536B78;\n          color: white; }\n    \n    ", "",{"version":3,"sources":["webpack://./src/LandingPage.css"],"names":[],"mappings":";AACA;IACI,sBAAsB;EACxB;EACA;IACE;EACF;;EAEA;IACE,aAAa;IACb,aAAa;IACb,WAAW;IACX,6BAA6B;CAChC;;EAEC;IACE,YAAY;IACZ,aAAa;IACb,mBAAmB;IACnB,eAAe;IACf,iBAAiB;IACjB,kBAAkB;IAClB,aAAa;IACb,qBAAqB;IACrB,yBAAyB;IACzB,2CAA2C,EAAE;IAC7C;MACE,2BAA2B,EAAE;MAC7B;QACE,UAAU,EAAE;MACd;QACE,UAAU;QACV,0BAA0B;IAC9B;;IAEA;MACE,WAAW;MACX,oBAAoB;MACpB,kBAAkB;MAClB,MAAM;MACN,OAAO;MACP,cAAc;MACd,WAAW;MACX,YAAY;MACZ,mBAAmB;MACnB,8BAA8B;MAC9B,UAAU;MACV,gBAAgB;MAChB,UAAU,EAAE;IACd;MACE,WAAW;MACX,YAAY;MACZ,iBAAiB;MACjB,kBAAkB;MAClB,MAAM;MACN,OAAO;MACP,mBAAmB,EAAE;IACvB;MACE,kBAAkB;MAClB,UAAU;MACV,YAAY;MACZ,UAAU;MACV,2BAA2B;MAC3B,gBAAgB,EAAE;MAClB;QACE,WAAW,EAAE;MACf;QACE,mBAAmB;QACnB,eAAe;QACf,eAAe,EAAE;MACnB;QACE,eAAe;QACf,aAAa;QACb,YAAY;QACZ,kBAAkB;QAClB,iBAAiB;QACjB,YAAY;QACZ,iBAAiB;QACjB,eAAe;QACf,qBAAqB,EAAE;QACvB;UACE,mBAAmB;UACnB,YAAY,EAAE","sourcesContent":["\n* {\n    box-sizing: border-box; \n  }\n  .row {\n    height: 90%\n  }\n  \n  .wrapper {\n    padding: 2rem;\n    display: flex;\n    width: 100%;\n    justify-content: space-around;\n }\n    \n  .card  {\n    width: 280px;\n    height: 360px;\n    border-radius: 15px;\n    padding: 1.5rem;\n    background: white;\n    position: relative;\n    display: flex;\n    align-items: flex-end;\n    transition: 0.4s ease-out;\n    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5); }\n    .card:hover {\n      transform: translateY(20px); }\n      .card:hover:before{\n        opacity: 1; }\n      .card:hover .info{\n        opacity: 1;\n        transform: translateY(0px);\n    }\n    \n    .card:before {\n      content: \"\";\n      pointer-events: none;\n      position: absolute;\n      top: 0;\n      left: 0;\n      display: block;\n      width: 100%;\n      height: 100%;\n      border-radius: 15px;\n      background: rgba(0, 0, 0, 0.6);\n      z-index: 2;\n      transition: 0.5s;\n      opacity: 0; }\n    .card img{\n      width: 100%;\n      height: 100%;\n      object-fit: cover;\n      position: absolute;\n      top: 0;\n      left: 0;\n      border-radius: 15px; }\n    .card .info {\n      position: relative;\n      z-index: 3;\n      color: white;\n      opacity: 0;\n      transform: translateY(30px);\n      transition: 0.5s; }\n      .card .info h3 {\n        margin: 0px; }\n      .card .info p {\n        letter-spacing: 1px;\n        font-size: 20px;\n        margin-top: 8px; }\n      .card .info button {\n        padding: 0.6rem;\n        outline: none;\n        border: none;\n        border-radius: 3px;\n        background: white;\n        color: black;\n        font-weight: bold;\n        cursor: pointer;\n        transition: 0.4s ease; }\n        .card .info button:hover {\n          background: #536B78;\n          color: white; }\n    \n    "],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/ProductPages/SingleGame.css":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/ProductPages/SingleGame.css ***!
+  \*******************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap);"]);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n}\n\n/* .singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n    margin: 10rem;\n} */\n\n.singlecard {\n    display: flex;\n    justify-content: center;\n    padding-top: 5rem;\n\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: stretch;\n}\n\n.product-img{\n    width: 40%;\n    /* height: 500px; */\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n .productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n} \n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */ \n  \n   .heart-wrapper {\n    /* position: absolute; */\n    /* top: 50%; */\n    left: 0;\n    width: 100%;\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }\n\n  .price-condition {\n    display: flex;\n    align-items: center;\n  }\n\n  .condition {\n    padding: 1rem;\n    padding-bottom: 2.5rem;\n    padding-left: 2rem;\n  }\n\n  ", "",{"version":3,"sources":["webpack://./src/ProductPages/SingleGame.css"],"names":[],"mappings":"AAEA;IACI,SAAS;IACT,UAAU;IACV,sBAAsB;;AAE1B;;AAEA;;;;;GAKG;;AAEH;IACI,aAAa;IACb,uBAAuB;IACvB,iBAAiB;;AAErB;;AAEA;IACI,kBAAkB;IAClB,aAAa;IACb,gBAAgB;IAChB,iBAAiB;IACjB,YAAY;IACZ,aAAa;IACb,uBAAuB;IACvB,oBAAoB;AACxB;;AAEA;IACI,UAAU;IACV,mBAAmB;IACnB,gBAAgB;IAChB,kBAAkB;IAClB,UAAU;IACV,4BAA4B;IAC5B,gCAAgC;AACpC;;AAEA;IACI,WAAW;IACX,YAAY;IACZ,gBAAgB;IAChB,iBAAiB;AACrB;;CAEC;IACG,UAAU;IACV,iBAAiB;IACjB,YAAY;IACZ,mBAAmB;IACnB,aAAa;IACb,aAAa;IACb,uBAAuB;IACvB,cAAc;IACd,UAAU;IACV,2BAA2B;IAC3B,gCAAgC;AACpC;;AAEA;IACI;QACI,UAAU;QACV,wBAAwB;IAC5B;AACJ;;;AAGA;IACI,oBAAoB;IACpB,eAAe;IACf,0BAA0B;AAC9B;;AAEA;IACI,eAAe;IACf,gBAAgB;IAChB,mBAAmB;AACvB;;AAEA;IACI,mBAAmB;IACnB,cAAc;IACd,YAAY;IACZ,0BAA0B;IAC1B,eAAe;IACf,kBAAkB;IAClB,eAAe;IACf,mBAAmB;AACvB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;;;;KAIK;;GAEF;IACC,wBAAwB;IACxB,cAAc;IACd,OAAO;IACP,WAAW;IACX,kBAAkB;IAClB,iBAAiB;IACjB,cAAc;EAChB;;EAEA;IACE,2BAA2B;IAC3B,UAAU;IACV,WAAW;IACX,aAAa;IACb,mBAAmB;IACnB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;qBAqCiB;IACjB;;IAEA;IACA,kCAAkC;IAClC;;AAEJ;IACI,KAAK,mBAAmB,EAAE;IAC1B,MAAM,qBAAqB,EAAE;IAC7B,OAAO,mBAAmB,EAAE;AAChC;;EAEE;IACE,aAAa;EACf;;EAEA;IACE,aAAa;IACb,mBAAmB;EACrB;;EAEA;IACE,aAAa;IACb,sBAAsB;IACtB,kBAAkB;EACpB","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap');\n\n*{\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n}\n\n/* .singleGame {\n    display: flex;\n    justify-content: center;\n    margin-top: 7rem;\n    margin: 10rem;\n} */\n\n.singlecard {\n    display: flex;\n    justify-content: center;\n    padding-top: 5rem;\n\n}\n\n.product{\n    position: relative;\n    width: 1000px;\n    min-width: 350px;\n    min-height: 500px;\n    height: auto;\n    display: flex;\n    justify-content: center;\n    align-items: stretch;\n}\n\n.product-img{\n    width: 40%;\n    /* height: 500px; */\n    background: #fff;\n    position: relative;\n    opacity: 0;\n    transform: translateY(-50px);\n    animation: fade-in 1s forwards 1;\n}\n\n.product-img img{\n    width: 100%;\n    height: 100%;\n    object-fit: fill;\n    user-select: none;\n}\n\n .productlisting{\n    width: 60%;\n    min-height: 500px;\n    height: auto;\n    background: #292929;\n    padding: 40px;\n    display: flex;\n    justify-content: center;\n    color: #eae3d2;\n    opacity: 0;\n    transform: translateY(50px);\n    animation: fade-in 1s forwards 1;\n} \n\n@keyframes fade-in{\n    100%{\n        opacity: 1;\n        transform: translateY(0);\n    }\n}\n\n\n.singleName{\n    font-family: 'dosis';\n    font-size: 30px;\n    text-transform: capitalize;\n}\n\n.singlePrice{\n    font-size: 30px;\n    font-weight: 100;\n    margin-bottom: 20px;\n}\n\n.btn{\n    background: #eae3d2;\n    color: #292929;\n    border: none;\n    text-transform: capitalize;\n    font-size: 16px;\n    padding: 10px 20px;\n    cursor: pointer;\n    margin-bottom: 2rem;\n}\n\n.btn:hover{\n    background-color: #eedbaf;\n}\n\n/* body {\n    text-align: center;\n    background: black;\n    margin: 0;\n  } */ \n  \n   .heart-wrapper {\n    /* position: absolute; */\n    /* top: 50%; */\n    left: 0;\n    width: 100%;\n    margin-top: 1.3rem;\n    margin-left: 5rem;\n    font-size: 5px;\n  }\n  \n  .heart {\n    /* display: inline-block; */\n    width: 1em;\n    height: 1em;\n    margin: 0 7em;\n    background: #a52a21;\n    box-shadow:\n      /* white shine */\n      0 -2em 0 white,\n      -3em 0 0 white,\n      -2em -1em 0 white,\n      /* top shades */\n      0 -1em 0 0 #c52317,\n      -1em -2em 0 0 #c52317,\n      -2em -2em 0 0 #c52317,\n      -3em -2em 0 0 #c52317,\n      1em -2em 0 0 #c52317,\n      2em -2em 0 0 #c52317,\n      3em -2em 0 0 #c52317,\n      -4em -1em 0 0 #c52317,\n      4em -1em 0 0 #c52317,\n      /* fills my heart */\n      0 0 0 2em #a52a21,\n      -1em 0 0 2em #a52a21,\n      1em 0 0 2em #a52a21,\n      -3em 0 0 1em #a52a21,\n      3em 0 0 1em #a52a21,\n      0 1em 0 2em #a52a21,\n      0 3em 0 1em #a52a21,\n      0 5em 0 0 #a52a21,\n      /* white borders */\n      -2em -2em 0 1em white,\n      2em -2em 0 1em white,\n      -3em -1em 0 1em white,\n      3em -1em 0 1em white,\n      -4em 0 0 1em white,\n      4em 0 0 1em white,\n      -3em 1em 0 1em white,\n      3em 1em 0 1em white,\n      1em 1em 0 2em white,\n      -1em 1em 0 2em white,\n      0 2em 0 2em white,\n      0 4em 0 1em white,\n      0 6em 0 0 white;  \n    }\n\n    .heart-wrapper:active {\n    animation: pulse .5s ease infinite;\n    }\n    \n@keyframes pulse {\n    0% { transform: scale(1); }\n    50% { transform: scale(1.2); }\n    100% { transform: scale(1); }\n}\n\n  .heart-cart {\n    display: flex;\n  }\n\n  .price-condition {\n    display: flex;\n    align-items: center;\n  }\n\n  .condition {\n    padding: 1rem;\n    padding-bottom: 2.5rem;\n    padding-left: 2rem;\n  }\n\n  "],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./src/index.css":
+/*!*************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./src/index.css ***!
+  \*************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "body {\n    margin: 0;\n    padding: 0;\n    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif; */\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    box-sizing: border-box;\n  }\n  \n   *,\n  *:before,\n  *:after {\n    box-sizing: inherit;\n  }\n  ol{\n    list-style-type: none;\n  }\n  li{\n    list-style-type: none;\n  }\n  .App {\n    width: 90%;\n    max-width: 700px;\n    margin: 2em auto;\n  }\n  \n  .modal-cover {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 10;\n    transform: translateZ(0);\n    background-color: rgba(0, 0, 0, 0.8);\n  } \n  \n  .modal-area {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    padding: 2.5em 1.5em 1.5em 1.5em;\n    background-color: #ffffff;\n    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n  }\n  \n  @media screen and (min-width: 500px) {\n    /* Center the Modal! */\n    .modal-area {\n      left: 50%;\n      top: 50%;\n      height: auto;\n      transform: translate(-50%, -50%);\n      max-width: 30em;\n      max-height: calc(100% - 1em);\n    }\n  }\n  \n  ._modal-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.5em;\n    line-height: 1;\n    background: #f6f6f7;\n    border: 0;\n    box-shadow: 0;\n    cursor: pointer;\n  }\n  \n  ._modal-close-icon {\n    width: 25px;\n    height: 25px;\n    fill: transparent;\n    stroke: black;\n    stroke-linecap: round;\n    stroke-width: 2;\n  }\n  \n  .modal-body {\n    padding-top: 0.25em;\n  }\n  ._hide-visual {\n    border: 0 !important;\n    clip: rect(0 0 0 0) !important;\n    height: 1px !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    padding: 0 !important;\n    position: absolute !important;\n    width: 1px !important;\n    white-space: nowrap !important;\n  }\n  \n  /* .scroll-lock {\n    overflow: hidden;\n    margin-right: 17px;\n  } */\n  ", "",{"version":3,"sources":["webpack://./src/index.css"],"names":[],"mappings":"AAAA;IACI,SAAS;IACT,UAAU;IACV;;mBAEe;IACf,mCAAmC;IACnC,kCAAkC;IAClC,sBAAsB;EACxB;;GAEC;;;IAGC,mBAAmB;EACrB;EACA;IACE,qBAAqB;EACvB;EACA;IACE,qBAAqB;EACvB;EACA;IACE,UAAU;IACV,gBAAgB;IAChB,gBAAgB;EAClB;;EAEA;IACE,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,WAAW;IACX,wBAAwB;IACxB,oCAAoC;EACtC;;EAEA;IACE,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,gCAAgC;IAChC,yBAAyB;IACzB,2CAA2C;IAC3C,gBAAgB;IAChB,iCAAiC;EACnC;;EAEA;IACE,sBAAsB;IACtB;MACE,SAAS;MACT,QAAQ;MACR,YAAY;MACZ,gCAAgC;MAChC,eAAe;MACf,4BAA4B;IAC9B;EACF;;EAEA;IACE,kBAAkB;IAClB,MAAM;IACN,QAAQ;IACR,cAAc;IACd,cAAc;IACd,mBAAmB;IACnB,SAAS;IACT,aAAa;IACb,eAAe;EACjB;;EAEA;IACE,WAAW;IACX,YAAY;IACZ,iBAAiB;IACjB,aAAa;IACb,qBAAqB;IACrB,eAAe;EACjB;;EAEA;IACE,mBAAmB;EACrB;EACA;IACE,oBAAoB;IACpB,8BAA8B;IAC9B,sBAAsB;IACtB,uBAAuB;IACvB,2BAA2B;IAC3B,qBAAqB;IACrB,6BAA6B;IAC7B,qBAAqB;IACrB,8BAA8B;EAChC;;EAEA;;;KAGG","sourcesContent":["body {\n    margin: 0;\n    padding: 0;\n    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif; */\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    box-sizing: border-box;\n  }\n  \n   *,\n  *:before,\n  *:after {\n    box-sizing: inherit;\n  }\n  ol{\n    list-style-type: none;\n  }\n  li{\n    list-style-type: none;\n  }\n  .App {\n    width: 90%;\n    max-width: 700px;\n    margin: 2em auto;\n  }\n  \n  .modal-cover {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 10;\n    transform: translateZ(0);\n    background-color: rgba(0, 0, 0, 0.8);\n  } \n  \n  .modal-area {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    padding: 2.5em 1.5em 1.5em 1.5em;\n    background-color: #ffffff;\n    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n  }\n  \n  @media screen and (min-width: 500px) {\n    /* Center the Modal! */\n    .modal-area {\n      left: 50%;\n      top: 50%;\n      height: auto;\n      transform: translate(-50%, -50%);\n      max-width: 30em;\n      max-height: calc(100% - 1em);\n    }\n  }\n  \n  ._modal-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.5em;\n    line-height: 1;\n    background: #f6f6f7;\n    border: 0;\n    box-shadow: 0;\n    cursor: pointer;\n  }\n  \n  ._modal-close-icon {\n    width: 25px;\n    height: 25px;\n    fill: transparent;\n    stroke: black;\n    stroke-linecap: round;\n    stroke-width: 2;\n  }\n  \n  .modal-body {\n    padding-top: 0.25em;\n  }\n  ._hide-visual {\n    border: 0 !important;\n    clip: rect(0 0 0 0) !important;\n    height: 1px !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    padding: 0 !important;\n    position: absolute !important;\n    width: 1px !important;\n    white-space: nowrap !important;\n  }\n  \n  /* .scroll-lock {\n    overflow: hidden;\n    margin-right: 17px;\n  } */\n  "],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/api.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
+  \*****************************************************/
 /***/ ((module) => {
 
-module.exports = {
+"use strict";
 
-  /**
-   * ### config.includeStack
-   *
-   * User configurable property, influences whether stack trace
-   * is included in Assertion error message. Default of false
-   * suppresses stack trace in the error message.
-   *
-   *     chai.config.includeStack = true;  // enable stack on error
-   *
-   * @param {Boolean}
-   * @api public
-   */
 
-  includeStack: false,
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+module.exports = function (cssWithMappingToString) {
+  var list = []; // return the list of modules as css string
 
-  /**
-   * ### config.showDiff
-   *
-   * User configurable property, influences whether or not
-   * the `showDiff` flag should be included in the thrown
-   * AssertionErrors. `false` will always be `false`; `true`
-   * will be true when the assertion has requested a diff
-   * be shown.
-   *
-   * @param {Boolean}
-   * @api public
-   */
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = "";
+      var needLayer = typeof item[5] !== "undefined";
 
-  showDiff: true,
+      if (item[4]) {
+        content += "@supports (".concat(item[4], ") {");
+      }
 
-  /**
-   * ### config.truncateThreshold
-   *
-   * User configurable property, sets length threshold for actual and
-   * expected values in assertion errors. If this threshold is exceeded, for
-   * example for large data structures, the value is replaced with something
-   * like `[ Array(3) ]` or `{ Object (prop1, prop2) }`.
-   *
-   * Set it to zero if you want to disable truncating altogether.
-   *
-   * This is especially userful when doing assertions on arrays: having this
-   * set to a reasonable large value makes the failure messages readily
-   * inspectable.
-   *
-   *     chai.config.truncateThreshold = 0;  // disable truncating
-   *
-   * @param {Number}
-   * @api public
-   */
+      if (item[2]) {
+        content += "@media ".concat(item[2], " {");
+      }
 
-  truncateThreshold: 40,
+      if (needLayer) {
+        content += "@layer".concat(item[5].length > 0 ? " ".concat(item[5]) : "", " {");
+      }
 
-  /**
-   * ### config.useProxy
-   *
-   * User configurable property, defines if chai will use a Proxy to throw
-   * an error when a non-existent property is read, which protects users
-   * from typos when using property-based assertions.
-   *
-   * Set it to false if you want to disable this feature.
-   *
-   *     chai.config.useProxy = false;  // disable use of Proxy
-   *
-   * This feature is automatically disabled regardless of this config value
-   * in environments that don't support proxies.
-   *
-   * @param {Boolean}
-   * @api public
-   */
+      content += cssWithMappingToString(item);
 
-  useProxy: true,
+      if (needLayer) {
+        content += "}";
+      }
 
-  /**
-   * ### config.proxyExcludedKeys
-   *
-   * User configurable property, defines which properties should be ignored
-   * instead of throwing an error if they do not exist on the assertion.
-   * This is only applied if the environment Chai is running in supports proxies and
-   * if the `useProxy` configuration setting is enabled.
-   * By default, `then` and `inspect` will not throw an error if they do not exist on the
-   * assertion object because the `.inspect` property is read by `util.inspect` (for example, when
-   * using `console.log` on the assertion object) and `.then` is necessary for promise type-checking.
-   *
-   *     // By default these keys will not throw an error if they do not exist on the assertion object
-   *     chai.config.proxyExcludedKeys = ['then', 'inspect'];
-   *
-   * @param {Array}
-   * @api public
-   */
+      if (item[2]) {
+        content += "}";
+      }
 
-  proxyExcludedKeys: ['then', 'catch', 'inspect', 'toJSON']
+      if (item[4]) {
+        content += "}";
+      }
+
+      return content;
+    }).join("");
+  }; // import a list of modules into the list
+
+
+  list.i = function i(modules, media, dedupe, supports, layer) {
+    if (typeof modules === "string") {
+      modules = [[null, modules, undefined]];
+    }
+
+    var alreadyImportedModules = {};
+
+    if (dedupe) {
+      for (var k = 0; k < this.length; k++) {
+        var id = this[k][0];
+
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+
+    for (var _k = 0; _k < modules.length; _k++) {
+      var item = [].concat(modules[_k]);
+
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        continue;
+      }
+
+      if (typeof layer !== "undefined") {
+        if (typeof item[5] === "undefined") {
+          item[5] = layer;
+        } else {
+          item[1] = "@layer".concat(item[5].length > 0 ? " ".concat(item[5]) : "", " {").concat(item[1], "}");
+          item[5] = layer;
+        }
+      }
+
+      if (media) {
+        if (!item[2]) {
+          item[2] = media;
+        } else {
+          item[1] = "@media ".concat(item[2], " {").concat(item[1], "}");
+          item[2] = media;
+        }
+      }
+
+      if (supports) {
+        if (!item[4]) {
+          item[4] = "".concat(supports);
+        } else {
+          item[1] = "@supports (".concat(item[4], ") {").concat(item[1], "}");
+          item[4] = supports;
+        }
+      }
+
+      list.push(item);
+    }
+  };
+
+  return list;
 };
-
 
 /***/ }),
 
-/***/ "./node_modules/chai/lib/chai/core/assertions.js":
-/*!*******************************************************!*\
-  !*** ./node_modules/chai/lib/chai/core/assertions.js ***!
-  \*******************************************************/
+/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
+/*!********************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
+  \********************************************************/
 /***/ ((module) => {
 
-/*!
- * chai
- * http://chaijs.com
- * Copyright(c) 2011-2014 Jake Luer <jake@alogicalparadox.com>
- * MIT Licensed
- */
+"use strict";
 
-module.exports = function (chai, _) {
-  var Assertion = chai.Assertion
-    , AssertionError = chai.AssertionError
-    , flag = _.flag;
 
-  /**
-   * ### Language Chains
-   *
-   * The following are provided as chainable getters to improve the readability
-   * of your assertions.
-   *
-   * **Chains**
-   *
-   * - to
-   * - be
-   * - been
-   * - is
-   * - that
-   * - which
-   * - and
-   * - has
-   * - have
-   * - with
-   * - at
-   * - of
-   * - same
-   * - but
-   * - does
-   * - still
-   * - also
-   *
-   * @name language chains
-   * @namespace BDD
-   * @api public
-   */
-
-  [ 'to', 'be', 'been', 'is'
-  , 'and', 'has', 'have', 'with'
-  , 'that', 'which', 'at', 'of'
-  , 'same', 'but', 'does', 'still', "also" ].forEach(function (chain) {
-    Assertion.addProperty(chain);
-  });
-
-  /**
-   * ### .not
-   *
-   * Negates all assertions that follow in the chain.
-   *
-   *     expect(function () {}).to.not.throw();
-   *     expect({a: 1}).to.not.have.property('b');
-   *     expect([1, 2]).to.be.an('array').that.does.not.include(3);
-   *
-   * Just because you can negate any assertion with `.not` doesn't mean you
-   * should. With great power comes great responsibility. It's often best to
-   * assert that the one expected output was produced, rather than asserting
-   * that one of countless unexpected outputs wasn't produced. See individual
-   * assertions for specific guidance.
-   *
-   *     expect(2).to.equal(2); // Recommended
-   *     expect(2).to.not.equal(1); // Not recommended
-   *
-   * @name not
-   * @namespace BDD
-   * @api public
-   */
-
-  Assertion.addProperty('not', function () {
-    flag(this, 'negate', true);
-  });
-
-  /**
-   * ### .deep
-   *
-   * Causes all `.equal`, `.include`, `.members`, `.keys`, and `.property`
-   * assertions that follow in the chain to use deep equality instead of strict
-   * (`===`) equality. See the `deep-eql` project page for info on the deep
-   * equality algorithm: https://github.com/chaijs/deep-eql.
-   *
-   *     // Target object deeply (but not strictly) equals `{a: 1}`
-   *     expect({a: 1}).to.deep.equal({a: 1});
-   *     expect({a: 1}).to.not.equal({a: 1});
-   *
-   *     // Target array deeply (but not strictly) includes `{a: 1}`
-   *     expect([{a: 1}]).to.deep.include({a: 1});
-   *     expect([{a: 1}]).to.not.include({a: 1});
-   *
-   *     // Target object deeply (but not strictly) includes `x: {a: 1}`
-   *     expect({x: {a: 1}}).to.deep.include({x: {a: 1}});
-   *     expect({x: {a: 1}}).to.not.include({x: {a: 1}});
-   *
-   *     // Target array deeply (but not strictly) has member `{a: 1}`
-   *     expect([{a: 1}]).to.have.deep.members([{a: 1}]);
-   *     expect([{a: 1}]).to.not.have.members([{a: 1}]);
-   *
-   *     // Target set deeply (but not strictly) has key `{a: 1}`
-   *     expect(new Set([{a: 1}])).to.have.deep.keys([{a: 1}]);
-   *     expect(new Set([{a: 1}])).to.not.have.keys([{a: 1}]);
-   *
-   *     // Target object deeply (but not strictly) has property `x: {a: 1}`
-   *     expect({x: {a: 1}}).to.have.deep.property('x', {a: 1});
-   *     expect({x: {a: 1}}).to.not.have.property('x', {a: 1});
-   *
-   * @name deep
-   * @namespace BDD
-   * @api public
-   */
-
-  Assertion.addProperty('deep', function () {
-    flag(this, 'deep', true);
-  });
-
-  /**
-   * ### .nested
-   *
-   * Enables dot- and bracket-notation in all `.property` and `.include`
-   * assertions that follow in the chain.
-   *
-   *     expect({a: {b: ['x', 'y']}}).to.have.nested.property('a.b[1]');
-   *     expect({a: {b: ['x', 'y']}}).to.nested.include({'a.b[1]': 'y'});
-   *
-   * If `.` or `[]` are part of an actual property name, they can be escaped by
-   * adding two backslashes before them.
-   *
-   *     expect({'.a': {'[b]': 'x'}}).to.have.nested.property('\\.a.\\[b\\]');
-   *     expect({'.a': {'[b]': 'x'}}).to.nested.include({'\\.a.\\[b\\]': 'x'});
-   *
-   * `.nested` cannot be combined with `.own`.
-   *
-   * @name nested
-   * @namespace BDD
-   * @api public
-   */
-
-  Assertion.addProperty('nested', function () {
-    flag(this, 'nested', true);
-  });
-
-  /**
-   * ### .own
-   *
-   * Causes all `.property` and `.include` assertions that follow in the chain
-   * to ignore inherited properties.
-   *
-   *     Object.prototype.b = 2;
-   *
-   *     expect({a: 1}).to.have.own.property('a');
-   *     expect({a: 1}).to.have.property('b');
-   *     expect({a: 1}).to.not.have.own.property('b');
-   *
-   *     expect({a: 1}).to.own.include({a: 1});
-   *     expect({a: 1}).to.include({b: 2}).but.not.own.include({b: 2});
-   *
-   * `.own` cannot be combined with `.nested`.
-   *
-   * @name own
-   * @namespace BDD
-   * @api public
-   */
-
-  Assertion.addProperty('own', function () {
-    flag(this, 'own', true);
-  });
-
-  /**
-   * ### .ordered
-   *
-   * Causes all `.members` assertions that follow in the chain to require that
-   * members be in the same order.
-   *
-   *     expect([1, 2]).to.have.ordered.members([1, 2])
-   *       .but.not.have.ordered.members([2, 1]);
-   *
-   * When `.include` and `.ordered` are combined, the ordering begins at the
-   * start of both arrays.
-   *
-   *     expect([1, 2, 3]).to.include.ordered.members([1, 2])
-   *       .but.not.include.ordered.members([2, 3]);
-   *
-   * @name ordered
-   * @namespace BDD
-   * @api public
-   */
-
-  Assertion.addProperty('ordered', function () {
-    flag(this, 'ordered', true);
-  });
-
-  /**
-   * ### .any
-   *
-   * Causes all `.keys` assertions that follow in the chain to only require that
-   * the target have at least one of the given keys. This is the opposite of
-   * `.all`, which requires that the target have all of the given keys.
-   *
-   *     expect({a: 1, b: 2}).to.not.have.any.keys('c', 'd');
-   *
-   * See the `.keys` doc for guidance on when to use `.any` or `.all`.
-   *
-   * @name any
-   * @namespace BDD
-   * @api public
-   */
-
-  Assertion.addProperty('any', function () {
-    flag(this, 'any', true);
-    flag(this, 'all', false);
-  });
-
-  /**
-   * ### .all
-   *
-   * Causes all `.keys` assertions that follow in the chain to require that the
-   * target have all of the given keys. This is the opposite of `.any`, which
-   * only requires that the target have at least one of the given keys.
-   *
-   *     expect({a: 1, b: 2}).to.have.all.keys('a', 'b');
-   *
-   * Note that `.all` is used by default when neither `.all` nor `.any` are
-   * added earlier in the chain. However, it's often best to add `.all` anyway
-   * because it improves readability.
-   *
-   * See the `.keys` doc for guidance on when to use `.any` or `.all`.
-   *
-   * @name all
-   * @namespace BDD
-   * @api public
-   */
-
-  Assertion.addProperty('all', function () {
-    flag(this, 'all', true);
-    flag(this, 'any', false);
-  });
-
-  /**
-   * ### .a(type[, msg])
-   *
-   * Asserts that the target's type is equal to the given string `type`. Types
-   * are case insensitive. See the `type-detect` project page for info on the
-   * type detection algorithm: https://github.com/chaijs/type-detect.
-   *
-   *     expect('foo').to.be.a('string');
-   *     expect({a: 1}).to.be.an('object');
-   *     expect(null).to.be.a('null');
-   *     expect(undefined).to.be.an('undefined');
-   *     expect(new Error).to.be.an('error');
-   *     expect(Promise.resolve()).to.be.a('promise');
-   *     expect(new Float32Array).to.be.a('float32array');
-   *     expect(Symbol()).to.be.a('symbol');
-   *
-   * `.a` supports objects that have a custom type set via `Symbol.toStringTag`.
-   *
-   *     var myObj = {
-   *       [Symbol.toStringTag]: 'myCustomType'
-   *     };
-   *
-   *     expect(myObj).to.be.a('myCustomType').but.not.an('object');
-   *
-   * It's often best to use `.a` to check a target's type before making more
-   * assertions on the same target. That way, you avoid unexpected behavior from
-   * any assertion that does different things based on the target's type.
-   *
-   *     expect([1, 2, 3]).to.be.an('array').that.includes(2);
-   *     expect([]).to.be.an('array').that.is.empty;
-   *
-   * Add `.not` earlier in the chain to negate `.a`. However, it's often best to
-   * assert that the target is the expected type, rather than asserting that it
-   * isn't one of many unexpected types.
-   *
-   *     expect('foo').to.be.a('string'); // Recommended
-   *     expect('foo').to.not.be.an('array'); // Not recommended
-   *
-   * `.a` accepts an optional `msg` argument which is a custom error message to
-   * show when the assertion fails. The message can also be given as the second
-   * argument to `expect`.
-   *
-   *     expect(1).to.be.a('string', 'nooo why fail??');
-   *     expect(1, 'nooo why fail??').to.be.a('string');
-   *
-   * `.a` can also be used as a language chain to improve the readability of
-   * your assertions.
-   *
-   *     expect({b: 2}).to.have.a.property('b');
-   *
-   * The alias `.an` can be used interchangeably with `.a`.
-   *
-   * @name a
-   * @alias an
-   * @param {String} type
-   * @param {String} msg _optional_
-   * @namespace BDD
-   * @api public
-   */
-
-  function an (type, msg) {
-    if (msg) flag(this, 'message', msg);
-    type = type.toLowerCase();
-    var obj = flag(this, 'object')
-      , article = ~[ 'a', 'e', 'i', 'o', 'u' ].indexOf(type.charAt(0)) ? 'an ' : 'a ';
-
-    this.assert(
-        type === _.type(obj).toLowerCase()
-      , 'expected #{this} to be ' + article + type
-      , 'expected #{this} not to be ' + article + type
-    );
+module.exports = function (url, options) {
+  if (!options) {
+    options = {};
   }
 
+  if (!url) {
+    return url;
+  }
+
+  url = String(url.__esModule ? url.default : url); // If url is already wrapped in quotes, remove them
+
+  if (/^['"].*['"]$/.test(url)) {
+    url = url.slice(1, -1);
+  }
+
+  if (options.hash) {
+    url += options.hash;
+  } // Should url be wrapped?
+  // See https://drafts.csswg.org/css-values-3/#urls
+
+
+  if (/["'() \t\n]|(%20)/.test(url) || options.needQuotes) {
+    return "\"".concat(url.replace(/"/g, '\\"').replace(/\n/g, "\\n"), "\"");
+  }
+
+  return url;
+};
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/sourceMaps.js":
+/*!************************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/sourceMaps.js ***!
+  \************************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = function (item) {
+  var content = item[1];
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (typeof btoa === "function") {
+    var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(cssMapping))));
+    var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+    var sourceMapping = "/*# ".concat(data, " */");
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || "").concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join("\n");
+  }
+
+  return [content].join("\n");
+};
+
+/***/ }),
+
+/***/ "./node_modules/focus-trap-react/dist/focus-trap-react.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/focus-trap-react/dist/focus-trap-react.js ***!
+  \****************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+<<<<<<< HEAD
   Assertion.addChainableMethod('an', an);
   Assertion.addChainableMethod('a', an);
 
@@ -16345,6 +16209,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+=======
+>>>>>>> b5344184ce2da710de8e1f56b16f41a7a3c0c16f
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -17583,61 +17449,6 @@ var createFocusTrap = function createFocusTrap(elements, userOptions) {
 
 
 //# sourceMappingURL=focus-trap.esm.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/get-func-name/index.js":
-/*!*********************************************!*\
-  !*** ./node_modules/get-func-name/index.js ***!
-  \*********************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-/* !
- * Chai - getFuncName utility
- * Copyright(c) 2012-2016 Jake Luer <jake@alogicalparadox.com>
- * MIT Licensed
- */
-
-/**
- * ### .getFuncName(constructorFn)
- *
- * Returns the name of a function.
- * When a non-function instance is passed, returns `null`.
- * This also includes a polyfill function if `aFunc.name` is not defined.
- *
- * @name getFuncName
- * @param {Function} funct
- * @namespace Utils
- * @api public
- */
-
-var toString = Function.prototype.toString;
-var functionNameMatch = /\s*function(?:\s|\s*\/\*[^(?:*\/)]+\*\/\s*)*([^\s\(\/]+)/;
-function getFuncName(aFunc) {
-  if (typeof aFunc !== 'function') {
-    return null;
-  }
-
-  var name = '';
-  if (typeof Function.prototype.name === 'undefined' && typeof aFunc.name === 'undefined') {
-    // Here we run a polyfill if Function does not support the `name` property and if aFunc.name is not defined
-    var match = toString.call(aFunc).match(functionNameMatch);
-    if (match) {
-      name = match[1];
-    }
-  } else {
-    // If we've got a `name` property we just use it
-    name = aFunc.name;
-  }
-
-  return name;
-}
-
-module.exports = getFuncName;
 
 
 /***/ }),
@@ -18922,867 +18733,6 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
-/***/ "./node_modules/loupe/loupe.js":
-/*!*************************************!*\
-  !*** ./node_modules/loupe/loupe.js ***!
-  \*************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-(function (global, factory) {
-   true ? factory(exports) :
-  0;
-}(this, (function (exports) { 'use strict';
-
-  function _typeof(obj) {
-    "@babel/helpers - typeof";
-
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
-  }
-
-  function _slicedToArray(arr, i) {
-    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-  }
-
-  function _arrayWithHoles(arr) {
-    if (Array.isArray(arr)) return arr;
-  }
-
-  function _iterableToArrayLimit(arr, i) {
-    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _e = undefined;
-
-    try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"] != null) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-
-    return _arr;
-  }
-
-  function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-  }
-
-  function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-
-    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
-    return arr2;
-  }
-
-  function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-
-  var ansiColors = {
-    bold: ['1', '22'],
-    dim: ['2', '22'],
-    italic: ['3', '23'],
-    underline: ['4', '24'],
-    // 5 & 6 are blinking
-    inverse: ['7', '27'],
-    hidden: ['8', '28'],
-    strike: ['9', '29'],
-    // 10-20 are fonts
-    // 21-29 are resets for 1-9
-    black: ['30', '39'],
-    red: ['31', '39'],
-    green: ['32', '39'],
-    yellow: ['33', '39'],
-    blue: ['34', '39'],
-    magenta: ['35', '39'],
-    cyan: ['36', '39'],
-    white: ['37', '39'],
-    brightblack: ['30;1', '39'],
-    brightred: ['31;1', '39'],
-    brightgreen: ['32;1', '39'],
-    brightyellow: ['33;1', '39'],
-    brightblue: ['34;1', '39'],
-    brightmagenta: ['35;1', '39'],
-    brightcyan: ['36;1', '39'],
-    brightwhite: ['37;1', '39'],
-    grey: ['90', '39']
-  };
-  var styles = {
-    special: 'cyan',
-    number: 'yellow',
-    bigint: 'yellow',
-    boolean: 'yellow',
-    undefined: 'grey',
-    null: 'bold',
-    string: 'green',
-    symbol: 'green',
-    date: 'magenta',
-    regexp: 'red'
-  };
-  var truncator = '…';
-
-  function colorise(value, styleType) {
-    var color = ansiColors[styles[styleType]] || ansiColors[styleType];
-
-    if (!color) {
-      return String(value);
-    }
-
-    return "\x1B[".concat(color[0], "m").concat(String(value), "\x1B[").concat(color[1], "m");
-  }
-
-  function normaliseOptions() {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        _ref$showHidden = _ref.showHidden,
-        showHidden = _ref$showHidden === void 0 ? false : _ref$showHidden,
-        _ref$depth = _ref.depth,
-        depth = _ref$depth === void 0 ? 2 : _ref$depth,
-        _ref$colors = _ref.colors,
-        colors = _ref$colors === void 0 ? false : _ref$colors,
-        _ref$customInspect = _ref.customInspect,
-        customInspect = _ref$customInspect === void 0 ? true : _ref$customInspect,
-        _ref$showProxy = _ref.showProxy,
-        showProxy = _ref$showProxy === void 0 ? false : _ref$showProxy,
-        _ref$maxArrayLength = _ref.maxArrayLength,
-        maxArrayLength = _ref$maxArrayLength === void 0 ? Infinity : _ref$maxArrayLength,
-        _ref$breakLength = _ref.breakLength,
-        breakLength = _ref$breakLength === void 0 ? Infinity : _ref$breakLength,
-        _ref$seen = _ref.seen,
-        seen = _ref$seen === void 0 ? [] : _ref$seen,
-        _ref$truncate = _ref.truncate,
-        truncate = _ref$truncate === void 0 ? Infinity : _ref$truncate,
-        _ref$stylize = _ref.stylize,
-        stylize = _ref$stylize === void 0 ? String : _ref$stylize;
-
-    var options = {
-      showHidden: Boolean(showHidden),
-      depth: Number(depth),
-      colors: Boolean(colors),
-      customInspect: Boolean(customInspect),
-      showProxy: Boolean(showProxy),
-      maxArrayLength: Number(maxArrayLength),
-      breakLength: Number(breakLength),
-      truncate: Number(truncate),
-      seen: seen,
-      stylize: stylize
-    };
-
-    if (options.colors) {
-      options.stylize = colorise;
-    }
-
-    return options;
-  }
-  function truncate(string, length) {
-    var tail = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : truncator;
-    string = String(string);
-    var tailLength = tail.length;
-    var stringLength = string.length;
-
-    if (tailLength > length && stringLength > tailLength) {
-      return tail;
-    }
-
-    if (stringLength > length && stringLength > tailLength) {
-      return "".concat(string.slice(0, length - tailLength)).concat(tail);
-    }
-
-    return string;
-  } // eslint-disable-next-line complexity
-
-  function inspectList(list, options, inspectItem) {
-    var separator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : ', ';
-    inspectItem = inspectItem || options.inspect;
-    var size = list.length;
-    if (size === 0) return '';
-    var originalLength = options.truncate;
-    var output = '';
-    var peek = '';
-    var truncated = '';
-
-    for (var i = 0; i < size; i += 1) {
-      var last = i + 1 === list.length;
-      var secondToLast = i + 2 === list.length;
-      truncated = "".concat(truncator, "(").concat(list.length - i, ")");
-      var value = list[i]; // If there is more than one remaining we need to account for a separator of `, `
-
-      options.truncate = originalLength - output.length - (last ? 0 : separator.length);
-      var string = peek || inspectItem(value, options) + (last ? '' : separator);
-      var nextLength = output.length + string.length;
-      var truncatedLength = nextLength + truncated.length; // If this is the last element, and adding it would
-      // take us over length, but adding the truncator wouldn't - then break now
-
-      if (last && nextLength > originalLength && output.length + truncated.length <= originalLength) {
-        break;
-      } // If this isn't the last or second to last element to scan,
-      // but the string is already over length then break here
-
-
-      if (!last && !secondToLast && truncatedLength > originalLength) {
-        break;
-      } // Peek at the next string to determine if we should
-      // break early before adding this item to the output
-
-
-      peek = last ? '' : inspectItem(list[i + 1], options) + (secondToLast ? '' : separator); // If we have one element left, but this element and
-      // the next takes over length, the break early
-
-      if (!last && secondToLast && truncatedLength > originalLength && nextLength + peek.length > originalLength) {
-        break;
-      }
-
-      output += string; // If the next element takes us to length -
-      // but there are more after that, then we should truncate now
-
-      if (!last && !secondToLast && nextLength + peek.length >= originalLength) {
-        truncated = "".concat(truncator, "(").concat(list.length - i - 1, ")");
-        break;
-      }
-
-      truncated = '';
-    }
-
-    return "".concat(output).concat(truncated);
-  }
-
-  function quoteComplexKey(key) {
-    if (key.match(/^[a-zA-Z_][a-zA-Z_0-9]*$/)) {
-      return key;
-    }
-
-    return JSON.stringify(key).replace(/'/g, "\\'").replace(/\\"/g, '"').replace(/(^"|"$)/g, "'");
-  }
-
-  function inspectProperty(_ref2, options) {
-    var _ref3 = _slicedToArray(_ref2, 2),
-        key = _ref3[0],
-        value = _ref3[1];
-
-    options.truncate -= 2;
-
-    if (typeof key === 'string') {
-      key = quoteComplexKey(key);
-    } else if (typeof key !== 'number') {
-      key = "[".concat(options.inspect(key, options), "]");
-    }
-
-    options.truncate -= key.length;
-    value = options.inspect(value, options);
-    return "".concat(key, ": ").concat(value);
-  }
-
-  function inspectArray(array, options) {
-    // Object.keys will always output the Array indices first, so we can slice by
-    // `array.length` to get non-index properties
-    var nonIndexProperties = Object.keys(array).slice(array.length);
-    if (!array.length && !nonIndexProperties.length) return '[]';
-    options.truncate -= 4;
-    var listContents = inspectList(array, options);
-    options.truncate -= listContents.length;
-    var propertyContents = '';
-
-    if (nonIndexProperties.length) {
-      propertyContents = inspectList(nonIndexProperties.map(function (key) {
-        return [key, array[key]];
-      }), options, inspectProperty);
-    }
-
-    return "[ ".concat(listContents).concat(propertyContents ? ", ".concat(propertyContents) : '', " ]");
-  }
-
-  /* !
-   * Chai - getFuncName utility
-   * Copyright(c) 2012-2016 Jake Luer <jake@alogicalparadox.com>
-   * MIT Licensed
-   */
-
-  /**
-   * ### .getFuncName(constructorFn)
-   *
-   * Returns the name of a function.
-   * When a non-function instance is passed, returns `null`.
-   * This also includes a polyfill function if `aFunc.name` is not defined.
-   *
-   * @name getFuncName
-   * @param {Function} funct
-   * @namespace Utils
-   * @api public
-   */
-
-  var toString = Function.prototype.toString;
-  var functionNameMatch = /\s*function(?:\s|\s*\/\*[^(?:*\/)]+\*\/\s*)*([^\s\(\/]+)/;
-  function getFuncName(aFunc) {
-    if (typeof aFunc !== 'function') {
-      return null;
-    }
-
-    var name = '';
-    if (typeof Function.prototype.name === 'undefined' && typeof aFunc.name === 'undefined') {
-      // Here we run a polyfill if Function does not support the `name` property and if aFunc.name is not defined
-      var match = toString.call(aFunc).match(functionNameMatch);
-      if (match) {
-        name = match[1];
-      }
-    } else {
-      // If we've got a `name` property we just use it
-      name = aFunc.name;
-    }
-
-    return name;
-  }
-
-  var getFuncName_1 = getFuncName;
-
-  var getArrayName = function getArrayName(array) {
-    // We need to special case Node.js' Buffers, which report to be Uint8Array
-    if (typeof Buffer === 'function' && array instanceof Buffer) {
-      return 'Buffer';
-    }
-
-    if (array[Symbol.toStringTag]) {
-      return array[Symbol.toStringTag];
-    }
-
-    return getFuncName_1(array.constructor);
-  };
-
-  function inspectTypedArray(array, options) {
-    var name = getArrayName(array);
-    options.truncate -= name.length + 4; // Object.keys will always output the Array indices first, so we can slice by
-    // `array.length` to get non-index properties
-
-    var nonIndexProperties = Object.keys(array).slice(array.length);
-    if (!array.length && !nonIndexProperties.length) return "".concat(name, "[]"); // As we know TypedArrays only contain Unsigned Integers, we can skip inspecting each one and simply
-    // stylise the toString() value of them
-
-    var output = '';
-
-    for (var i = 0; i < array.length; i++) {
-      var string = "".concat(options.stylize(truncate(array[i], options.truncate), 'number')).concat(i === array.length - 1 ? '' : ', ');
-      options.truncate -= string.length;
-
-      if (array[i] !== array.length && options.truncate <= 3) {
-        output += "".concat(truncator, "(").concat(array.length - array[i] + 1, ")");
-        break;
-      }
-
-      output += string;
-    }
-
-    var propertyContents = '';
-
-    if (nonIndexProperties.length) {
-      propertyContents = inspectList(nonIndexProperties.map(function (key) {
-        return [key, array[key]];
-      }), options, inspectProperty);
-    }
-
-    return "".concat(name, "[ ").concat(output).concat(propertyContents ? ", ".concat(propertyContents) : '', " ]");
-  }
-
-  function inspectDate(dateObject, options) {
-    // If we need to - truncate the time portion, but never the date
-    var split = dateObject.toJSON().split('T');
-    var date = split[0];
-    return options.stylize("".concat(date, "T").concat(truncate(split[1], options.truncate - date.length - 1)), 'date');
-  }
-
-  function inspectFunction(func, options) {
-    var name = getFuncName_1(func);
-
-    if (!name) {
-      return options.stylize('[Function]', 'special');
-    }
-
-    return options.stylize("[Function ".concat(truncate(name, options.truncate - 11), "]"), 'special');
-  }
-
-  function inspectMapEntry(_ref, options) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        key = _ref2[0],
-        value = _ref2[1];
-
-    options.truncate -= 4;
-    key = options.inspect(key, options);
-    options.truncate -= key.length;
-    value = options.inspect(value, options);
-    return "".concat(key, " => ").concat(value);
-  } // IE11 doesn't support `map.entries()`
-
-
-  function mapToEntries(map) {
-    var entries = [];
-    map.forEach(function (value, key) {
-      entries.push([key, value]);
-    });
-    return entries;
-  }
-
-  function inspectMap(map, options) {
-    var size = map.size - 1;
-
-    if (size <= 0) {
-      return 'Map{}';
-    }
-
-    options.truncate -= 7;
-    return "Map{ ".concat(inspectList(mapToEntries(map), options, inspectMapEntry), " }");
-  }
-
-  var isNaN = Number.isNaN || function (i) {
-    return i !== i;
-  }; // eslint-disable-line no-self-compare
-
-
-  function inspectNumber(number, options) {
-    if (isNaN(number)) {
-      return options.stylize('NaN', 'number');
-    }
-
-    if (number === Infinity) {
-      return options.stylize('Infinity', 'number');
-    }
-
-    if (number === -Infinity) {
-      return options.stylize('-Infinity', 'number');
-    }
-
-    if (number === 0) {
-      return options.stylize(1 / number === Infinity ? '+0' : '-0', 'number');
-    }
-
-    return options.stylize(truncate(number, options.truncate), 'number');
-  }
-
-  function inspectBigInt(number, options) {
-    var nums = truncate(number.toString(), options.truncate - 1);
-    if (nums !== truncator) nums += 'n';
-    return options.stylize(nums, 'bigint');
-  }
-
-  function inspectRegExp(value, options) {
-    var flags = value.toString().split('/')[2];
-    var sourceLength = options.truncate - (2 + flags.length);
-    var source = value.source;
-    return options.stylize("/".concat(truncate(source, sourceLength), "/").concat(flags), 'regexp');
-  }
-
-  function arrayFromSet(set) {
-    var values = [];
-    set.forEach(function (value) {
-      values.push(value);
-    });
-    return values;
-  }
-
-  function inspectSet(set, options) {
-    if (set.size === 0) return 'Set{}';
-    options.truncate -= 7;
-    return "Set{ ".concat(inspectList(arrayFromSet(set), options), " }");
-  }
-
-  var stringEscapeChars = new RegExp("['\\u0000-\\u001f\\u007f-\\u009f\\u00ad\\u0600-\\u0604\\u070f\\u17b4\\u17b5" + "\\u200c-\\u200f\\u2028-\\u202f\\u2060-\\u206f\\ufeff\\ufff0-\\uffff]", 'g');
-  var escapeCharacters = {
-    '\b': '\\b',
-    '\t': '\\t',
-    '\n': '\\n',
-    '\f': '\\f',
-    '\r': '\\r',
-    "'": "\\'",
-    '\\': '\\\\'
-  };
-  var hex = 16;
-  var unicodeLength = 4;
-
-  function escape(char) {
-    return escapeCharacters[char] || "\\u".concat("0000".concat(char.charCodeAt(0).toString(hex)).slice(-unicodeLength));
-  }
-
-  function inspectString(string, options) {
-    if (stringEscapeChars.test(string)) {
-      string = string.replace(stringEscapeChars, escape);
-    }
-
-    return options.stylize("'".concat(truncate(string, options.truncate - 2), "'"), 'string');
-  }
-
-  function inspectSymbol(value) {
-    if ('description' in Symbol.prototype) {
-      return value.description ? "Symbol(".concat(value.description, ")") : 'Symbol()';
-    }
-
-    return value.toString();
-  }
-
-  var getPromiseValue = function getPromiseValue() {
-    return 'Promise{…}';
-  };
-
-  try {
-    var _process$binding = process.binding('util'),
-        getPromiseDetails = _process$binding.getPromiseDetails,
-        kPending = _process$binding.kPending,
-        kRejected = _process$binding.kRejected;
-
-    if (Array.isArray(getPromiseDetails(Promise.resolve()))) {
-      getPromiseValue = function getPromiseValue(value, options) {
-        var _getPromiseDetails = getPromiseDetails(value),
-            _getPromiseDetails2 = _slicedToArray(_getPromiseDetails, 2),
-            state = _getPromiseDetails2[0],
-            innerValue = _getPromiseDetails2[1];
-
-        if (state === kPending) {
-          return 'Promise{<pending>}';
-        }
-
-        return "Promise".concat(state === kRejected ? '!' : '', "{").concat(options.inspect(innerValue, options), "}");
-      };
-    }
-  } catch (notNode) {
-    /* ignore */
-  }
-
-  var inspectPromise = getPromiseValue;
-
-  function inspectObject(object, options) {
-    var properties = Object.getOwnPropertyNames(object);
-    var symbols = Object.getOwnPropertySymbols ? Object.getOwnPropertySymbols(object) : [];
-
-    if (properties.length === 0 && symbols.length === 0) {
-      return '{}';
-    }
-
-    options.truncate -= 4;
-    options.seen = options.seen || [];
-
-    if (options.seen.indexOf(object) >= 0) {
-      return '[Circular]';
-    }
-
-    options.seen.push(object);
-    var propertyContents = inspectList(properties.map(function (key) {
-      return [key, object[key]];
-    }), options, inspectProperty);
-    var symbolContents = inspectList(symbols.map(function (key) {
-      return [key, object[key]];
-    }), options, inspectProperty);
-    options.seen.pop();
-    var sep = '';
-
-    if (propertyContents && symbolContents) {
-      sep = ', ';
-    }
-
-    return "{ ".concat(propertyContents).concat(sep).concat(symbolContents, " }");
-  }
-
-  var toStringTag = typeof Symbol !== 'undefined' && Symbol.toStringTag ? Symbol.toStringTag : false;
-  function inspectClass(value, options) {
-    var name = '';
-
-    if (toStringTag && toStringTag in value) {
-      name = value[toStringTag];
-    }
-
-    name = name || getFuncName_1(value.constructor); // Babel transforms anonymous classes to the name `_class`
-
-    if (!name || name === '_class') {
-      name = '<Anonymous Class>';
-    }
-
-    options.truncate -= name.length;
-    return "".concat(name).concat(inspectObject(value, options));
-  }
-
-  function inspectArguments(args, options) {
-    if (args.length === 0) return 'Arguments[]';
-    options.truncate -= 13;
-    return "Arguments[ ".concat(inspectList(args, options), " ]");
-  }
-
-  var errorKeys = ['stack', 'line', 'column', 'name', 'message', 'fileName', 'lineNumber', 'columnNumber', 'number', 'description'];
-  function inspectObject$1(error, options) {
-    var properties = Object.getOwnPropertyNames(error).filter(function (key) {
-      return errorKeys.indexOf(key) === -1;
-    });
-    var name = error.name;
-    options.truncate -= name.length;
-    var message = '';
-
-    if (typeof error.message === 'string') {
-      message = truncate(error.message, options.truncate);
-    } else {
-      properties.unshift('message');
-    }
-
-    message = message ? ": ".concat(message) : '';
-    options.truncate -= message.length + 5;
-    var propertyContents = inspectList(properties.map(function (key) {
-      return [key, error[key]];
-    }), options, inspectProperty);
-    return "".concat(name).concat(message).concat(propertyContents ? " { ".concat(propertyContents, " }") : '');
-  }
-
-  function inspectAttribute(_ref, options) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        key = _ref2[0],
-        value = _ref2[1];
-
-    options.truncate -= 3;
-
-    if (!value) {
-      return "".concat(options.stylize(key, 'yellow'));
-    }
-
-    return "".concat(options.stylize(key, 'yellow'), "=").concat(options.stylize("\"".concat(value, "\""), 'string'));
-  }
-  function inspectHTMLCollection(collection, options) {
-    // eslint-disable-next-line no-use-before-define
-    return inspectList(collection, options, inspectHTML, '\n');
-  }
-  function inspectHTML(element, options) {
-    var properties = element.getAttributeNames();
-    var name = element.tagName.toLowerCase();
-    var head = options.stylize("<".concat(name), 'special');
-    var headClose = options.stylize(">", 'special');
-    var tail = options.stylize("</".concat(name, ">"), 'special');
-    options.truncate -= name.length * 2 + 5;
-    var propertyContents = '';
-
-    if (properties.length > 0) {
-      propertyContents += ' ';
-      propertyContents += inspectList(properties.map(function (key) {
-        return [key, element.getAttribute(key)];
-      }), options, inspectAttribute, ' ');
-    }
-
-    options.truncate -= propertyContents.length;
-    var truncate = options.truncate;
-    var children = inspectHTMLCollection(element.children, options);
-
-    if (children && children.length > truncate) {
-      children = "".concat(truncator, "(").concat(element.children.length, ")");
-    }
-
-    return "".concat(head).concat(propertyContents).concat(headClose).concat(children).concat(tail);
-  }
-
-  var symbolsSupported = typeof Symbol === 'function' && typeof Symbol.for === 'function';
-  var chaiInspect = symbolsSupported ? Symbol.for('chai/inspect') : '@@chai/inspect';
-  var nodeInspect = false;
-
-  try {
-    // eslint-disable-next-line global-require
-    var nodeUtil = __webpack_require__(/*! util */ "?0ac7");
-
-    nodeInspect = nodeUtil.inspect ? nodeUtil.inspect.custom : false;
-  } catch (noNodeInspect) {
-    nodeInspect = false;
-  }
-
-  var constructorMap = new WeakMap();
-  var stringTagMap = {};
-  var baseTypesMap = {
-    undefined: function undefined$1(value, options) {
-      return options.stylize('undefined', 'undefined');
-    },
-    null: function _null(value, options) {
-      return options.stylize(null, 'null');
-    },
-    boolean: function boolean(value, options) {
-      return options.stylize(value, 'boolean');
-    },
-    Boolean: function Boolean(value, options) {
-      return options.stylize(value, 'boolean');
-    },
-    number: inspectNumber,
-    Number: inspectNumber,
-    bigint: inspectBigInt,
-    BigInt: inspectBigInt,
-    string: inspectString,
-    String: inspectString,
-    function: inspectFunction,
-    Function: inspectFunction,
-    symbol: inspectSymbol,
-    // A Symbol polyfill will return `Symbol` not `symbol` from typedetect
-    Symbol: inspectSymbol,
-    Array: inspectArray,
-    Date: inspectDate,
-    Map: inspectMap,
-    Set: inspectSet,
-    RegExp: inspectRegExp,
-    Promise: inspectPromise,
-    // WeakSet, WeakMap are totally opaque to us
-    WeakSet: function WeakSet(value, options) {
-      return options.stylize('WeakSet{…}', 'special');
-    },
-    WeakMap: function WeakMap(value, options) {
-      return options.stylize('WeakMap{…}', 'special');
-    },
-    Arguments: inspectArguments,
-    Int8Array: inspectTypedArray,
-    Uint8Array: inspectTypedArray,
-    Uint8ClampedArray: inspectTypedArray,
-    Int16Array: inspectTypedArray,
-    Uint16Array: inspectTypedArray,
-    Int32Array: inspectTypedArray,
-    Uint32Array: inspectTypedArray,
-    Float32Array: inspectTypedArray,
-    Float64Array: inspectTypedArray,
-    Generator: function Generator() {
-      return '';
-    },
-    DataView: function DataView() {
-      return '';
-    },
-    ArrayBuffer: function ArrayBuffer() {
-      return '';
-    },
-    Error: inspectObject$1,
-    HTMLCollection: inspectHTMLCollection,
-    NodeList: inspectHTMLCollection
-  }; // eslint-disable-next-line complexity
-
-  var inspectCustom = function inspectCustom(value, options, type) {
-    if (chaiInspect in value && typeof value[chaiInspect] === 'function') {
-      return value[chaiInspect](options);
-    }
-
-    if (nodeInspect && nodeInspect in value && typeof value[nodeInspect] === 'function') {
-      return value[nodeInspect](options.depth, options);
-    }
-
-    if ('inspect' in value && typeof value.inspect === 'function') {
-      return value.inspect(options.depth, options);
-    }
-
-    if ('constructor' in value && constructorMap.has(value.constructor)) {
-      return constructorMap.get(value.constructor)(value, options);
-    }
-
-    if (stringTagMap[type]) {
-      return stringTagMap[type](value, options);
-    }
-
-    return '';
-  };
-
-  var toString$1 = Object.prototype.toString; // eslint-disable-next-line complexity
-
-  function inspect(value, options) {
-    options = normaliseOptions(options);
-    options.inspect = inspect;
-    var _options = options,
-        customInspect = _options.customInspect;
-    var type = value === null ? 'null' : _typeof(value);
-
-    if (type === 'object') {
-      type = toString$1.call(value).slice(8, -1);
-    } // If it is a base value that we already support, then use Loupe's inspector
-
-
-    if (baseTypesMap[type]) {
-      return baseTypesMap[type](value, options);
-    } // If `options.customInspect` is set to true then try to use the custom inspector
-
-
-    if (customInspect && value) {
-      var output = inspectCustom(value, options, type);
-
-      if (output) {
-        if (typeof output === 'string') return output;
-        return inspect(output, options);
-      }
-    }
-
-    var proto = value ? Object.getPrototypeOf(value) : false; // If it's a plain Object then use Loupe's inspector
-
-    if (proto === Object.prototype || proto === null) {
-      return inspectObject(value, options);
-    } // Specifically account for HTMLElements
-    // eslint-disable-next-line no-undef
-
-
-    if (value && typeof HTMLElement === 'function' && value instanceof HTMLElement) {
-      return inspectHTML(value, options);
-    }
-
-    if ('constructor' in value) {
-      // If it is a class, inspect it like an object but add the constructor name
-      if (value.constructor !== Object) {
-        return inspectClass(value, options);
-      } // If it is an object with an anonymous prototype, display it as an object.
-
-
-      return inspectObject(value, options);
-    } // last chance to check if it's an object
-
-
-    if (value === Object(value)) {
-      return inspectObject(value, options);
-    } // We have run out of options! Just stringify the value
-
-
-    return options.stylize(String(value), type);
-  }
-  function registerConstructor(constructor, inspector) {
-    if (constructorMap.has(constructor)) {
-      return false;
-    }
-
-    constructorMap.add(constructor, inspector);
-    return true;
-  }
-  function registerStringTag(stringTag, inspector) {
-    if (stringTag in stringTagMap) {
-      return false;
-    }
-
-    stringTagMap[stringTag] = inspector;
-    return true;
-  }
-  var custom = chaiInspect;
-
-  exports.custom = custom;
-  exports.default = inspect;
-  exports.inspect = inspect;
-  exports.registerConstructor = registerConstructor;
-  exports.registerStringTag = registerStringTag;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-})));
-
-
-/***/ }),
-
 /***/ "./node_modules/object-assign/index.js":
 /*!*********************************************!*\
   !*** ./node_modules/object-assign/index.js ***!
@@ -19879,318 +18829,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	}
 
 	return to;
-};
-
-
-/***/ }),
-
-/***/ "./node_modules/pathval/index.js":
-/*!***************************************!*\
-  !*** ./node_modules/pathval/index.js ***!
-  \***************************************/
-/***/ ((module) => {
-
-"use strict";
-
-
-/* !
- * Chai - pathval utility
- * Copyright(c) 2012-2014 Jake Luer <jake@alogicalparadox.com>
- * @see https://github.com/logicalparadox/filtr
- * MIT Licensed
- */
-
-/**
- * ### .hasProperty(object, name)
- *
- * This allows checking whether an object has own
- * or inherited from prototype chain named property.
- *
- * Basically does the same thing as the `in`
- * operator but works properly with null/undefined values
- * and other primitives.
- *
- *     var obj = {
- *         arr: ['a', 'b', 'c']
- *       , str: 'Hello'
- *     }
- *
- * The following would be the results.
- *
- *     hasProperty(obj, 'str');  // true
- *     hasProperty(obj, 'constructor');  // true
- *     hasProperty(obj, 'bar');  // false
- *
- *     hasProperty(obj.str, 'length'); // true
- *     hasProperty(obj.str, 1);  // true
- *     hasProperty(obj.str, 5);  // false
- *
- *     hasProperty(obj.arr, 'length');  // true
- *     hasProperty(obj.arr, 2);  // true
- *     hasProperty(obj.arr, 3);  // false
- *
- * @param {Object} object
- * @param {String|Symbol} name
- * @returns {Boolean} whether it exists
- * @namespace Utils
- * @name hasProperty
- * @api public
- */
-
-function hasProperty(obj, name) {
-  if (typeof obj === 'undefined' || obj === null) {
-    return false;
-  }
-
-  // The `in` operator does not work with primitives.
-  return name in Object(obj);
-}
-
-/* !
- * ## parsePath(path)
- *
- * Helper function used to parse string object
- * paths. Use in conjunction with `internalGetPathValue`.
- *
- *      var parsed = parsePath('myobject.property.subprop');
- *
- * ### Paths:
- *
- * * Can be infinitely deep and nested.
- * * Arrays are also valid using the formal `myobject.document[3].property`.
- * * Literal dots and brackets (not delimiter) must be backslash-escaped.
- *
- * @param {String} path
- * @returns {Object} parsed
- * @api private
- */
-
-function parsePath(path) {
-  var str = path.replace(/([^\\])\[/g, '$1.[');
-  var parts = str.match(/(\\\.|[^.]+?)+/g);
-  return parts.map(function mapMatches(value) {
-    if (
-      value === 'constructor' ||
-      value === '__proto__' ||
-      value === 'prototype'
-    ) {
-      return {};
-    }
-    var regexp = /^\[(\d+)\]$/;
-    var mArr = regexp.exec(value);
-    var parsed = null;
-    if (mArr) {
-      parsed = { i: parseFloat(mArr[1]) };
-    } else {
-      parsed = { p: value.replace(/\\([.[\]])/g, '$1') };
-    }
-
-    return parsed;
-  });
-}
-
-/* !
- * ## internalGetPathValue(obj, parsed[, pathDepth])
- *
- * Helper companion function for `.parsePath` that returns
- * the value located at the parsed address.
- *
- *      var value = getPathValue(obj, parsed);
- *
- * @param {Object} object to search against
- * @param {Object} parsed definition from `parsePath`.
- * @param {Number} depth (nesting level) of the property we want to retrieve
- * @returns {Object|Undefined} value
- * @api private
- */
-
-function internalGetPathValue(obj, parsed, pathDepth) {
-  var temporaryValue = obj;
-  var res = null;
-  pathDepth = typeof pathDepth === 'undefined' ? parsed.length : pathDepth;
-
-  for (var i = 0; i < pathDepth; i++) {
-    var part = parsed[i];
-    if (temporaryValue) {
-      if (typeof part.p === 'undefined') {
-        temporaryValue = temporaryValue[part.i];
-      } else {
-        temporaryValue = temporaryValue[part.p];
-      }
-
-      if (i === pathDepth - 1) {
-        res = temporaryValue;
-      }
-    }
-  }
-
-  return res;
-}
-
-/* !
- * ## internalSetPathValue(obj, value, parsed)
- *
- * Companion function for `parsePath` that sets
- * the value located at a parsed address.
- *
- *  internalSetPathValue(obj, 'value', parsed);
- *
- * @param {Object} object to search and define on
- * @param {*} value to use upon set
- * @param {Object} parsed definition from `parsePath`
- * @api private
- */
-
-function internalSetPathValue(obj, val, parsed) {
-  var tempObj = obj;
-  var pathDepth = parsed.length;
-  var part = null;
-  // Here we iterate through every part of the path
-  for (var i = 0; i < pathDepth; i++) {
-    var propName = null;
-    var propVal = null;
-    part = parsed[i];
-
-    // If it's the last part of the path, we set the 'propName' value with the property name
-    if (i === pathDepth - 1) {
-      propName = typeof part.p === 'undefined' ? part.i : part.p;
-      // Now we set the property with the name held by 'propName' on object with the desired val
-      tempObj[propName] = val;
-    } else if (typeof part.p !== 'undefined' && tempObj[part.p]) {
-      tempObj = tempObj[part.p];
-    } else if (typeof part.i !== 'undefined' && tempObj[part.i]) {
-      tempObj = tempObj[part.i];
-    } else {
-      // If the obj doesn't have the property we create one with that name to define it
-      var next = parsed[i + 1];
-      // Here we set the name of the property which will be defined
-      propName = typeof part.p === 'undefined' ? part.i : part.p;
-      // Here we decide if this property will be an array or a new object
-      propVal = typeof next.p === 'undefined' ? [] : {};
-      tempObj[propName] = propVal;
-      tempObj = tempObj[propName];
-    }
-  }
-}
-
-/**
- * ### .getPathInfo(object, path)
- *
- * This allows the retrieval of property info in an
- * object given a string path.
- *
- * The path info consists of an object with the
- * following properties:
- *
- * * parent - The parent object of the property referenced by `path`
- * * name - The name of the final property, a number if it was an array indexer
- * * value - The value of the property, if it exists, otherwise `undefined`
- * * exists - Whether the property exists or not
- *
- * @param {Object} object
- * @param {String} path
- * @returns {Object} info
- * @namespace Utils
- * @name getPathInfo
- * @api public
- */
-
-function getPathInfo(obj, path) {
-  var parsed = parsePath(path);
-  var last = parsed[parsed.length - 1];
-  var info = {
-    parent:
-      parsed.length > 1 ?
-        internalGetPathValue(obj, parsed, parsed.length - 1) :
-        obj,
-    name: last.p || last.i,
-    value: internalGetPathValue(obj, parsed),
-  };
-  info.exists = hasProperty(info.parent, info.name);
-
-  return info;
-}
-
-/**
- * ### .getPathValue(object, path)
- *
- * This allows the retrieval of values in an
- * object given a string path.
- *
- *     var obj = {
- *         prop1: {
- *             arr: ['a', 'b', 'c']
- *           , str: 'Hello'
- *         }
- *       , prop2: {
- *             arr: [ { nested: 'Universe' } ]
- *           , str: 'Hello again!'
- *         }
- *     }
- *
- * The following would be the results.
- *
- *     getPathValue(obj, 'prop1.str'); // Hello
- *     getPathValue(obj, 'prop1.att[2]'); // b
- *     getPathValue(obj, 'prop2.arr[0].nested'); // Universe
- *
- * @param {Object} object
- * @param {String} path
- * @returns {Object} value or `undefined`
- * @namespace Utils
- * @name getPathValue
- * @api public
- */
-
-function getPathValue(obj, path) {
-  var info = getPathInfo(obj, path);
-  return info.value;
-}
-
-/**
- * ### .setPathValue(object, path, value)
- *
- * Define the value in an object at a given string path.
- *
- * ```js
- * var obj = {
- *     prop1: {
- *         arr: ['a', 'b', 'c']
- *       , str: 'Hello'
- *     }
- *   , prop2: {
- *         arr: [ { nested: 'Universe' } ]
- *       , str: 'Hello again!'
- *     }
- * };
- * ```
- *
- * The following would be acceptable.
- *
- * ```js
- * var properties = require('tea-properties');
- * properties.set(obj, 'prop1.str', 'Hello Universe!');
- * properties.set(obj, 'prop1.arr[2]', 'B');
- * properties.set(obj, 'prop2.arr[0].nested.value', { hello: 'universe' });
- * ```
- *
- * @param {Object} object
- * @param {String} path
- * @param {Mixed} value
- * @api private
- */
-
-function setPathValue(obj, path, val) {
-  var parsed = parsePath(path);
-  internalSetPathValue(obj, val, parsed);
-  return obj;
-}
-
-module.exports = {
-  hasProperty: hasProperty,
-  getPathInfo: getPathInfo,
-  getPathValue: getPathValue,
-  setPathValue: setPathValue,
 };
 
 
@@ -59570,6 +58208,61 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
+/***/ "./src/Account/Admin.css":
+/*!*******************************!*\
+  !*** ./src/Account/Admin.css ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_Admin_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js!./Admin.css */ "./node_modules/css-loader/dist/cjs.js!./src/Account/Admin.css");
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+
+      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+    
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_Admin_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_Admin_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_Admin_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_Admin_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
 /***/ "./src/Cart.css":
 /*!**********************!*\
   !*** ./src/Cart.css ***!
@@ -60678,403 +59371,6 @@ function warning(condition, message) {
 
 /***/ }),
 
-/***/ "./node_modules/type-detect/type-detect.js":
-/*!*************************************************!*\
-  !*** ./node_modules/type-detect/type-detect.js ***!
-  \*************************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-(function (global, factory) {
-	 true ? module.exports = factory() :
-	0;
-}(this, (function () { 'use strict';
-
-/* !
- * type-detect
- * Copyright(c) 2013 jake luer <jake@alogicalparadox.com>
- * MIT Licensed
- */
-var promiseExists = typeof Promise === 'function';
-
-/* eslint-disable no-undef */
-var globalObject = typeof self === 'object' ? self : __webpack_require__.g; // eslint-disable-line id-blacklist
-
-var symbolExists = typeof Symbol !== 'undefined';
-var mapExists = typeof Map !== 'undefined';
-var setExists = typeof Set !== 'undefined';
-var weakMapExists = typeof WeakMap !== 'undefined';
-var weakSetExists = typeof WeakSet !== 'undefined';
-var dataViewExists = typeof DataView !== 'undefined';
-var symbolIteratorExists = symbolExists && typeof Symbol.iterator !== 'undefined';
-var symbolToStringTagExists = symbolExists && typeof Symbol.toStringTag !== 'undefined';
-var setEntriesExists = setExists && typeof Set.prototype.entries === 'function';
-var mapEntriesExists = mapExists && typeof Map.prototype.entries === 'function';
-var setIteratorPrototype = setEntriesExists && Object.getPrototypeOf(new Set().entries());
-var mapIteratorPrototype = mapEntriesExists && Object.getPrototypeOf(new Map().entries());
-var arrayIteratorExists = symbolIteratorExists && typeof Array.prototype[Symbol.iterator] === 'function';
-var arrayIteratorPrototype = arrayIteratorExists && Object.getPrototypeOf([][Symbol.iterator]());
-var stringIteratorExists = symbolIteratorExists && typeof String.prototype[Symbol.iterator] === 'function';
-var stringIteratorPrototype = stringIteratorExists && Object.getPrototypeOf(''[Symbol.iterator]());
-var toStringLeftSliceLength = 8;
-var toStringRightSliceLength = -1;
-/**
- * ### typeOf (obj)
- *
- * Uses `Object.prototype.toString` to determine the type of an object,
- * normalising behaviour across engine versions & well optimised.
- *
- * @param {Mixed} object
- * @return {String} object type
- * @api public
- */
-function typeDetect(obj) {
-  /* ! Speed optimisation
-   * Pre:
-   *   string literal     x 3,039,035 ops/sec ±1.62% (78 runs sampled)
-   *   boolean literal    x 1,424,138 ops/sec ±4.54% (75 runs sampled)
-   *   number literal     x 1,653,153 ops/sec ±1.91% (82 runs sampled)
-   *   undefined          x 9,978,660 ops/sec ±1.92% (75 runs sampled)
-   *   function           x 2,556,769 ops/sec ±1.73% (77 runs sampled)
-   * Post:
-   *   string literal     x 38,564,796 ops/sec ±1.15% (79 runs sampled)
-   *   boolean literal    x 31,148,940 ops/sec ±1.10% (79 runs sampled)
-   *   number literal     x 32,679,330 ops/sec ±1.90% (78 runs sampled)
-   *   undefined          x 32,363,368 ops/sec ±1.07% (82 runs sampled)
-   *   function           x 31,296,870 ops/sec ±0.96% (83 runs sampled)
-   */
-  var typeofObj = typeof obj;
-  if (typeofObj !== 'object') {
-    return typeofObj;
-  }
-
-  /* ! Speed optimisation
-   * Pre:
-   *   null               x 28,645,765 ops/sec ±1.17% (82 runs sampled)
-   * Post:
-   *   null               x 36,428,962 ops/sec ±1.37% (84 runs sampled)
-   */
-  if (obj === null) {
-    return 'null';
-  }
-
-  /* ! Spec Conformance
-   * Test: `Object.prototype.toString.call(window)``
-   *  - Node === "[object global]"
-   *  - Chrome === "[object global]"
-   *  - Firefox === "[object Window]"
-   *  - PhantomJS === "[object Window]"
-   *  - Safari === "[object Window]"
-   *  - IE 11 === "[object Window]"
-   *  - IE Edge === "[object Window]"
-   * Test: `Object.prototype.toString.call(this)``
-   *  - Chrome Worker === "[object global]"
-   *  - Firefox Worker === "[object DedicatedWorkerGlobalScope]"
-   *  - Safari Worker === "[object DedicatedWorkerGlobalScope]"
-   *  - IE 11 Worker === "[object WorkerGlobalScope]"
-   *  - IE Edge Worker === "[object WorkerGlobalScope]"
-   */
-  if (obj === globalObject) {
-    return 'global';
-  }
-
-  /* ! Speed optimisation
-   * Pre:
-   *   array literal      x 2,888,352 ops/sec ±0.67% (82 runs sampled)
-   * Post:
-   *   array literal      x 22,479,650 ops/sec ±0.96% (81 runs sampled)
-   */
-  if (
-    Array.isArray(obj) &&
-    (symbolToStringTagExists === false || !(Symbol.toStringTag in obj))
-  ) {
-    return 'Array';
-  }
-
-  // Not caching existence of `window` and related properties due to potential
-  // for `window` to be unset before tests in quasi-browser environments.
-  if (typeof window === 'object' && window !== null) {
-    /* ! Spec Conformance
-     * (https://html.spec.whatwg.org/multipage/browsers.html#location)
-     * WhatWG HTML$7.7.3 - The `Location` interface
-     * Test: `Object.prototype.toString.call(window.location)``
-     *  - IE <=11 === "[object Object]"
-     *  - IE Edge <=13 === "[object Object]"
-     */
-    if (typeof window.location === 'object' && obj === window.location) {
-      return 'Location';
-    }
-
-    /* ! Spec Conformance
-     * (https://html.spec.whatwg.org/#document)
-     * WhatWG HTML$3.1.1 - The `Document` object
-     * Note: Most browsers currently adher to the W3C DOM Level 2 spec
-     *       (https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-26809268)
-     *       which suggests that browsers should use HTMLTableCellElement for
-     *       both TD and TH elements. WhatWG separates these.
-     *       WhatWG HTML states:
-     *         > For historical reasons, Window objects must also have a
-     *         > writable, configurable, non-enumerable property named
-     *         > HTMLDocument whose value is the Document interface object.
-     * Test: `Object.prototype.toString.call(document)``
-     *  - Chrome === "[object HTMLDocument]"
-     *  - Firefox === "[object HTMLDocument]"
-     *  - Safari === "[object HTMLDocument]"
-     *  - IE <=10 === "[object Document]"
-     *  - IE 11 === "[object HTMLDocument]"
-     *  - IE Edge <=13 === "[object HTMLDocument]"
-     */
-    if (typeof window.document === 'object' && obj === window.document) {
-      return 'Document';
-    }
-
-    if (typeof window.navigator === 'object') {
-      /* ! Spec Conformance
-       * (https://html.spec.whatwg.org/multipage/webappapis.html#mimetypearray)
-       * WhatWG HTML$8.6.1.5 - Plugins - Interface MimeTypeArray
-       * Test: `Object.prototype.toString.call(navigator.mimeTypes)``
-       *  - IE <=10 === "[object MSMimeTypesCollection]"
-       */
-      if (typeof window.navigator.mimeTypes === 'object' &&
-          obj === window.navigator.mimeTypes) {
-        return 'MimeTypeArray';
-      }
-
-      /* ! Spec Conformance
-       * (https://html.spec.whatwg.org/multipage/webappapis.html#pluginarray)
-       * WhatWG HTML$8.6.1.5 - Plugins - Interface PluginArray
-       * Test: `Object.prototype.toString.call(navigator.plugins)``
-       *  - IE <=10 === "[object MSPluginsCollection]"
-       */
-      if (typeof window.navigator.plugins === 'object' &&
-          obj === window.navigator.plugins) {
-        return 'PluginArray';
-      }
-    }
-
-    if ((typeof window.HTMLElement === 'function' ||
-        typeof window.HTMLElement === 'object') &&
-        obj instanceof window.HTMLElement) {
-      /* ! Spec Conformance
-      * (https://html.spec.whatwg.org/multipage/webappapis.html#pluginarray)
-      * WhatWG HTML$4.4.4 - The `blockquote` element - Interface `HTMLQuoteElement`
-      * Test: `Object.prototype.toString.call(document.createElement('blockquote'))``
-      *  - IE <=10 === "[object HTMLBlockElement]"
-      */
-      if (obj.tagName === 'BLOCKQUOTE') {
-        return 'HTMLQuoteElement';
-      }
-
-      /* ! Spec Conformance
-       * (https://html.spec.whatwg.org/#htmltabledatacellelement)
-       * WhatWG HTML$4.9.9 - The `td` element - Interface `HTMLTableDataCellElement`
-       * Note: Most browsers currently adher to the W3C DOM Level 2 spec
-       *       (https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-82915075)
-       *       which suggests that browsers should use HTMLTableCellElement for
-       *       both TD and TH elements. WhatWG separates these.
-       * Test: Object.prototype.toString.call(document.createElement('td'))
-       *  - Chrome === "[object HTMLTableCellElement]"
-       *  - Firefox === "[object HTMLTableCellElement]"
-       *  - Safari === "[object HTMLTableCellElement]"
-       */
-      if (obj.tagName === 'TD') {
-        return 'HTMLTableDataCellElement';
-      }
-
-      /* ! Spec Conformance
-       * (https://html.spec.whatwg.org/#htmltableheadercellelement)
-       * WhatWG HTML$4.9.9 - The `td` element - Interface `HTMLTableHeaderCellElement`
-       * Note: Most browsers currently adher to the W3C DOM Level 2 spec
-       *       (https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-82915075)
-       *       which suggests that browsers should use HTMLTableCellElement for
-       *       both TD and TH elements. WhatWG separates these.
-       * Test: Object.prototype.toString.call(document.createElement('th'))
-       *  - Chrome === "[object HTMLTableCellElement]"
-       *  - Firefox === "[object HTMLTableCellElement]"
-       *  - Safari === "[object HTMLTableCellElement]"
-       */
-      if (obj.tagName === 'TH') {
-        return 'HTMLTableHeaderCellElement';
-      }
-    }
-  }
-
-  /* ! Speed optimisation
-  * Pre:
-  *   Float64Array       x 625,644 ops/sec ±1.58% (80 runs sampled)
-  *   Float32Array       x 1,279,852 ops/sec ±2.91% (77 runs sampled)
-  *   Uint32Array        x 1,178,185 ops/sec ±1.95% (83 runs sampled)
-  *   Uint16Array        x 1,008,380 ops/sec ±2.25% (80 runs sampled)
-  *   Uint8Array         x 1,128,040 ops/sec ±2.11% (81 runs sampled)
-  *   Int32Array         x 1,170,119 ops/sec ±2.88% (80 runs sampled)
-  *   Int16Array         x 1,176,348 ops/sec ±5.79% (86 runs sampled)
-  *   Int8Array          x 1,058,707 ops/sec ±4.94% (77 runs sampled)
-  *   Uint8ClampedArray  x 1,110,633 ops/sec ±4.20% (80 runs sampled)
-  * Post:
-  *   Float64Array       x 7,105,671 ops/sec ±13.47% (64 runs sampled)
-  *   Float32Array       x 5,887,912 ops/sec ±1.46% (82 runs sampled)
-  *   Uint32Array        x 6,491,661 ops/sec ±1.76% (79 runs sampled)
-  *   Uint16Array        x 6,559,795 ops/sec ±1.67% (82 runs sampled)
-  *   Uint8Array         x 6,463,966 ops/sec ±1.43% (85 runs sampled)
-  *   Int32Array         x 5,641,841 ops/sec ±3.49% (81 runs sampled)
-  *   Int16Array         x 6,583,511 ops/sec ±1.98% (80 runs sampled)
-  *   Int8Array          x 6,606,078 ops/sec ±1.74% (81 runs sampled)
-  *   Uint8ClampedArray  x 6,602,224 ops/sec ±1.77% (83 runs sampled)
-  */
-  var stringTag = (symbolToStringTagExists && obj[Symbol.toStringTag]);
-  if (typeof stringTag === 'string') {
-    return stringTag;
-  }
-
-  var objPrototype = Object.getPrototypeOf(obj);
-  /* ! Speed optimisation
-  * Pre:
-  *   regex literal      x 1,772,385 ops/sec ±1.85% (77 runs sampled)
-  *   regex constructor  x 2,143,634 ops/sec ±2.46% (78 runs sampled)
-  * Post:
-  *   regex literal      x 3,928,009 ops/sec ±0.65% (78 runs sampled)
-  *   regex constructor  x 3,931,108 ops/sec ±0.58% (84 runs sampled)
-  */
-  if (objPrototype === RegExp.prototype) {
-    return 'RegExp';
-  }
-
-  /* ! Speed optimisation
-  * Pre:
-  *   date               x 2,130,074 ops/sec ±4.42% (68 runs sampled)
-  * Post:
-  *   date               x 3,953,779 ops/sec ±1.35% (77 runs sampled)
-  */
-  if (objPrototype === Date.prototype) {
-    return 'Date';
-  }
-
-  /* ! Spec Conformance
-   * (http://www.ecma-international.org/ecma-262/6.0/index.html#sec-promise.prototype-@@tostringtag)
-   * ES6$25.4.5.4 - Promise.prototype[@@toStringTag] should be "Promise":
-   * Test: `Object.prototype.toString.call(Promise.resolve())``
-   *  - Chrome <=47 === "[object Object]"
-   *  - Edge <=20 === "[object Object]"
-   *  - Firefox 29-Latest === "[object Promise]"
-   *  - Safari 7.1-Latest === "[object Promise]"
-   */
-  if (promiseExists && objPrototype === Promise.prototype) {
-    return 'Promise';
-  }
-
-  /* ! Speed optimisation
-  * Pre:
-  *   set                x 2,222,186 ops/sec ±1.31% (82 runs sampled)
-  * Post:
-  *   set                x 4,545,879 ops/sec ±1.13% (83 runs sampled)
-  */
-  if (setExists && objPrototype === Set.prototype) {
-    return 'Set';
-  }
-
-  /* ! Speed optimisation
-  * Pre:
-  *   map                x 2,396,842 ops/sec ±1.59% (81 runs sampled)
-  * Post:
-  *   map                x 4,183,945 ops/sec ±6.59% (82 runs sampled)
-  */
-  if (mapExists && objPrototype === Map.prototype) {
-    return 'Map';
-  }
-
-  /* ! Speed optimisation
-  * Pre:
-  *   weakset            x 1,323,220 ops/sec ±2.17% (76 runs sampled)
-  * Post:
-  *   weakset            x 4,237,510 ops/sec ±2.01% (77 runs sampled)
-  */
-  if (weakSetExists && objPrototype === WeakSet.prototype) {
-    return 'WeakSet';
-  }
-
-  /* ! Speed optimisation
-  * Pre:
-  *   weakmap            x 1,500,260 ops/sec ±2.02% (78 runs sampled)
-  * Post:
-  *   weakmap            x 3,881,384 ops/sec ±1.45% (82 runs sampled)
-  */
-  if (weakMapExists && objPrototype === WeakMap.prototype) {
-    return 'WeakMap';
-  }
-
-  /* ! Spec Conformance
-   * (http://www.ecma-international.org/ecma-262/6.0/index.html#sec-dataview.prototype-@@tostringtag)
-   * ES6$24.2.4.21 - DataView.prototype[@@toStringTag] should be "DataView":
-   * Test: `Object.prototype.toString.call(new DataView(new ArrayBuffer(1)))``
-   *  - Edge <=13 === "[object Object]"
-   */
-  if (dataViewExists && objPrototype === DataView.prototype) {
-    return 'DataView';
-  }
-
-  /* ! Spec Conformance
-   * (http://www.ecma-international.org/ecma-262/6.0/index.html#sec-%mapiteratorprototype%-@@tostringtag)
-   * ES6$23.1.5.2.2 - %MapIteratorPrototype%[@@toStringTag] should be "Map Iterator":
-   * Test: `Object.prototype.toString.call(new Map().entries())``
-   *  - Edge <=13 === "[object Object]"
-   */
-  if (mapExists && objPrototype === mapIteratorPrototype) {
-    return 'Map Iterator';
-  }
-
-  /* ! Spec Conformance
-   * (http://www.ecma-international.org/ecma-262/6.0/index.html#sec-%setiteratorprototype%-@@tostringtag)
-   * ES6$23.2.5.2.2 - %SetIteratorPrototype%[@@toStringTag] should be "Set Iterator":
-   * Test: `Object.prototype.toString.call(new Set().entries())``
-   *  - Edge <=13 === "[object Object]"
-   */
-  if (setExists && objPrototype === setIteratorPrototype) {
-    return 'Set Iterator';
-  }
-
-  /* ! Spec Conformance
-   * (http://www.ecma-international.org/ecma-262/6.0/index.html#sec-%arrayiteratorprototype%-@@tostringtag)
-   * ES6$22.1.5.2.2 - %ArrayIteratorPrototype%[@@toStringTag] should be "Array Iterator":
-   * Test: `Object.prototype.toString.call([][Symbol.iterator]())``
-   *  - Edge <=13 === "[object Object]"
-   */
-  if (arrayIteratorExists && objPrototype === arrayIteratorPrototype) {
-    return 'Array Iterator';
-  }
-
-  /* ! Spec Conformance
-   * (http://www.ecma-international.org/ecma-262/6.0/index.html#sec-%stringiteratorprototype%-@@tostringtag)
-   * ES6$21.1.5.2.2 - %StringIteratorPrototype%[@@toStringTag] should be "String Iterator":
-   * Test: `Object.prototype.toString.call(''[Symbol.iterator]())``
-   *  - Edge <=13 === "[object Object]"
-   */
-  if (stringIteratorExists && objPrototype === stringIteratorPrototype) {
-    return 'String Iterator';
-  }
-
-  /* ! Speed optimisation
-  * Pre:
-  *   object from null   x 2,424,320 ops/sec ±1.67% (76 runs sampled)
-  * Post:
-  *   object from null   x 5,838,000 ops/sec ±0.99% (84 runs sampled)
-  */
-  if (objPrototype === null) {
-    return 'Object';
-  }
-
-  return Object
-    .prototype
-    .toString
-    .call(obj)
-    .slice(toStringLeftSliceLength, toStringRightSliceLength);
-}
-
-return typeDetect;
-
-})));
-
-
-/***/ }),
-
 /***/ "./node_modules/use-sync-external-store/cjs/use-sync-external-store-shim.development.js":
 /*!**********************************************************************************************!*\
   !*** ./node_modules/use-sync-external-store/cjs/use-sync-external-store-shim.development.js ***!
@@ -61617,16 +59913,6 @@ module.exports = __webpack_require__.p + "e8746a624ed098489406.woff";
 
 /***/ }),
 
-/***/ "?0ac7":
-/*!**********************!*\
-  !*** util (ignored) ***!
-  \**********************/
-/***/ (() => {
-
-/* (ignored) */
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
@@ -61794,46 +60080,6 @@ function _setPrototypeOf(o, p) {
   };
   return _setPrototypeOf(o, p);
 }
-
-/***/ }),
-
-/***/ "./node_modules/chai/index.mjs":
-/*!*************************************!*\
-  !*** ./node_modules/chai/index.mjs ***!
-  \*************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Assertion": () => (/* binding */ Assertion),
-/* harmony export */   "AssertionError": () => (/* binding */ AssertionError),
-/* harmony export */   "assert": () => (/* binding */ assert),
-/* harmony export */   "config": () => (/* binding */ config),
-/* harmony export */   "core": () => (/* binding */ core),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "expect": () => (/* binding */ expect),
-/* harmony export */   "should": () => (/* binding */ should),
-/* harmony export */   "use": () => (/* binding */ use),
-/* harmony export */   "util": () => (/* binding */ util),
-/* harmony export */   "version": () => (/* binding */ version)
-/* harmony export */ });
-/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.js */ "./node_modules/chai/index.js");
-
-
-const expect = _index_js__WEBPACK_IMPORTED_MODULE_0__.expect;
-const version = _index_js__WEBPACK_IMPORTED_MODULE_0__.version;
-const Assertion = _index_js__WEBPACK_IMPORTED_MODULE_0__.Assertion;
-const AssertionError = _index_js__WEBPACK_IMPORTED_MODULE_0__.AssertionError;
-const util = _index_js__WEBPACK_IMPORTED_MODULE_0__.util;
-const config = _index_js__WEBPACK_IMPORTED_MODULE_0__.config;
-const use = _index_js__WEBPACK_IMPORTED_MODULE_0__.use;
-const should = _index_js__WEBPACK_IMPORTED_MODULE_0__.should;
-const assert = _index_js__WEBPACK_IMPORTED_MODULE_0__.assert;
-const core = _index_js__WEBPACK_IMPORTED_MODULE_0__.core;
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_index_js__WEBPACK_IMPORTED_MODULE_0__);
-
 
 /***/ })
 

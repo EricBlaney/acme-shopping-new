@@ -3,8 +3,6 @@ import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
-import auth from './store/auth';
-import { use } from 'chai';
 import {exchangeToken, logout} from './store/auth';
 import { fetchProducts, fetchCart } from './store';
 
@@ -14,7 +12,6 @@ class Nav extends Component {
         this.props.fetchProducts();
         this.props.exchangeToken();
         this.props.fetchCart();
-
     }
 
     componentDidUpdate(prevProps){
@@ -71,11 +68,14 @@ class Nav extends Component {
         <div className="topnav-right">
             <NavLink exact to='/myaccount'> Account </NavLink>
             <NavLink to='/cart'>Cart</NavLink>
+        
         {
           auth.id ? <Link to='/'><button onClick={ logout }>Logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
         }
             
-        { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
+        { 
+          auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  
+        }
             
         </div>
         

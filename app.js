@@ -9,19 +9,22 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 app.use('/dist', express.static('dist'));
 
+<<<<<<< HEAD
 // Dotenv({
 //   path:path.resolve(__dirname, './env')
 // })
 
 
 
+=======
+>>>>>>> b5344184ce2da710de8e1f56b16f41a7a3c0c16f
 const isLoggedIn = async(req, res, next)=> {
   try {
     req.user = await User.findByToken(req.headers.authorization);
     next();
   }
-  catch(ex){
-    next(ex);
+  catch(err){
+    next(err);
   }
 };
 
@@ -36,8 +39,8 @@ app.get('/api/products', async(req,res,next)=>{
   try{
     res.status(200).send(await Product.findAll())
 
-  }catch(er){
-    next(er);
+  }catch(err){
+    next(err);
   }
 });
 
@@ -46,8 +49,8 @@ app.get('/api/products/:id', async(req,res,next)=>{
     const game = await Product.findByPk(req.params.id);
     res.status(200).send(game);
 
-  }catch(er){
-    next(er);
+  }catch(err){
+    next(err);
   }
 });
 
@@ -57,8 +60,8 @@ app.post('/', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await req.user.createWishListFromWishListItems());
   }
-  catch(ex){
-    next(ex);
+  catch(err){
+    next(err);
   }
 
 });
@@ -67,8 +70,8 @@ app.put('/api/wishlist', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await req.user.addToWishList(req.body));
   }
-  catch(ex){
-    next(ex);
+  catch(err){
+    next(err);
   }
 });
 
@@ -76,8 +79,8 @@ app.get('/api/wishlist', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await req.user.getWishList());
   }
-  catch(ex){
-    next(ex);
+  catch(err){
+    next(err);
   }
 });
 
@@ -87,8 +90,8 @@ app.post('/api/users', async(req,res,next) => {
   try{
       res.status(200).send(await User.create(req.body));
   }
-  catch(ex){
-    next(ex);
+  catch(err){
+    next(err);
   }
 });
 
@@ -96,8 +99,8 @@ app.get('/api/users', async(req,res,next) => {
   try{
     res.status(200).send(await User.findAll())
   }
-  catch(ex){
-    next(ex);
+  catch(err){
+    next(err);
   }
 });
 
@@ -105,8 +108,8 @@ app.get('/api/users/:id', async(req,res,next) => {
   try{
     res.status(200).send(await useStore.findByPk(req.params.id))
   }
-  catch(ex){
-    next(ex);
+  catch(err){
+    next(err);
   }
 });
 
@@ -116,8 +119,8 @@ app.delete('/api/users/:id', async(req,res,next) => {
     await user.destroy();
     res.sendStatus(204);
   }
-  catch{ex}{
-    next(ex);
+  catch{
+    next(err);
   }
 });
 
@@ -127,8 +130,8 @@ app.put('/api/users', async(req,res,next) => {
     await user.update(req.body);
     res.status(200).send(user);
   }
-  catch(ex){
-    next(ex);
+  catch(err){
+    next(err);
   }
 });
 
@@ -138,13 +141,10 @@ app.get('/api/tokens', async(req,res,next) => {
     const token = await Token.findOne({where: {userId: req.body.userId}})
     res.send(token);
   }
-  catch(error){
-    console.log(error);
+  catch(err){
+    next(err);
   }
 })
-
-// Admin Routes
-
 
 
 app.use((err, req, res, next)=> {
