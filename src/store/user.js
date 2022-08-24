@@ -1,14 +1,17 @@
 import axios from 'axios';
 
-const user = (state = [], action)=> {
+const user = (state = {}, action)=> {
   if (action.type === 'SET_USERS'){
+    return action.user
+  }
+  if (action.type === 'SET_USER'){
     return action.user
   }
   if(action.type === 'CREATE_USER'){
     return [action.user, ...state]
   }
   if(action.type === 'UPDATE_USER'){
-    state = action.user;
+    return action.user
   }
   if(action.type === 'DELETE_USER') {
     return state.filter((user)=> user.id !== action.user.id)
@@ -59,9 +62,9 @@ export const deleteUser = (user) => {
   }
 }
 
-export const loadUser = (user) => {
+export const loadUser = (auth) => {
   return async(dispatch) => {
-    await axios.get(``)
+    dispatch({ type: 'SET_USER', user})
   }
 }
 
