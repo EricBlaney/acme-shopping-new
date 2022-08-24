@@ -1,0 +1,2 @@
+process.env.CLIENT_ID = 'ac95066b9818db8ba409';
+process.env.CLIENT_SECRET = '072fe8e1416159334f1d406e947199a0eecfab59';
