@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList } from '../store'
+import { fetchWishList, loadUser } from '../store'
 import { Link, NavLink } from 'react-router-dom';
 import Admin from './Admin';
 import Carousel from 'react-multi-carousel';
@@ -42,22 +42,21 @@ class MyAccount extends React.Component{
       }
     componentDidMount() {
         this.props.getWishList();
-   
     }
     componentDidUpdate(prevProps){
         if(!prevProps.auth.id && this.props.auth.id){
           this.props.getWishList();
         }
-    }
+  }
     static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.auth !== prevState){
-        return { id: nextProps.auth.id,
-        username: nextProps.auth.username, 
-        email: nextProps.auth.email,
-        street: nextProps.auth.street || '',
-        city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || '',
-        avatar: nextProps.auth.avatar  || ''
+        if(nextProps.user !== prevState){
+        return { id: nextProps.user.id,
+        username: nextProps.user.username, 
+        email: nextProps.user.email,
+        street: nextProps.user.street || '',
+        city: nextProps.user.city || '',
+        zipcode: nextProps.user.zipcode || '',
+        avatar: nextProps.user.avatar  || ''
         };
         }
         else return null;
@@ -129,7 +128,15 @@ class MyAccount extends React.Component{
 }
 
 const mapState = (state) => {
-    const user = state.auth || {};
+    console.log(state.user);
+    let user = {}
+    if (Object.keys(state.user).length === 0) {
+        user = state.auth 
+    } else {
+        user = state.user
+    }
+    console.log(state.user);
+
     const thisUser = state.user.filter( user => user.id === state.auth.id)
     return {
         auth: state.auth,
@@ -144,6 +151,7 @@ const mapDispatch = (dispatch) => {
     return{
         getWishList: ()=> dispatch(fetchWishList()),
         addCart: (product, quantity) => dispatch(addCart(product, quantity))
+    
     }
 }
 

@@ -4358,15 +4358,15 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.auth !== prevState) {
+    if (nextProps.user !== prevState) {
       return {
-        id: nextProps.auth.id,
-        username: nextProps.auth.username,
-        email: nextProps.auth.email,
-        street: nextProps.auth.street || '',
-        city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || '',
-        avatar: nextProps.auth.avatar || ''
+        id: nextProps.user.id,
+        username: nextProps.user.username,
+        email: nextProps.user.email,
+        street: nextProps.user.street || '',
+        city: nextProps.user.city || '',
+        zipcode: nextProps.user.zipcode || '',
+        avatar: nextProps.user.avatar || ''
       };
     } else return null;
   }
@@ -4388,17 +4388,13 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
     } = this.state;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, adminAuth.isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Admin__WEBPACK_IMPORTED_MODULE_3__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
       className: "user-details"
-    }, thisUser.map(user => {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        key: user.id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, user.username, "'s Profile"), user.avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: user.avatar,
-        className: "avatar"
-      }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, user.username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", user.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", user.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", user.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
-        exact: true,
-        to: "/updatemyaccount"
-      }, "Edit account details"));
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), wishlist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: avatar,
+      className: "avatar"
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", auth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", auth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", auth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
+      exact: true,
+      to: "/updatemyaccount"
+    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), wishlist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
       responsive: responsive,
       ssr: true
     }, wishlist.wishListItems.map(wishListItem => {
@@ -4436,7 +4432,6 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
 
 const mapState = state => {
   const user = state.auth || {};
-  const thisUser = state.user.filter(user => user.id === state.auth.id);
   return {
     auth: state.auth,
     adminAuth: state.adminAuth,
@@ -4472,8 +4467,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
-/* harmony import */ var _UpdateMyAccount_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UpdateMyAccount.css */ "./src/Account/UpdateMyAccount.css");
-
 
 
 
@@ -4508,15 +4501,15 @@ class UpdateMyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Comp
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.auth.id !== prevState.id) {
+    if (nextProps.user.id !== prevState.id) {
       return {
-        id: nextProps.auth.id,
-        username: nextProps.auth.username,
-        email: nextProps.auth.email,
-        street: nextProps.auth.street || '',
-        city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || '',
-        avatar: nextProps.auth.avatar || ''
+        id: nextProps.user.id,
+        username: nextProps.user.username,
+        email: nextProps.user.email,
+        street: nextProps.user.street || '',
+        city: nextProps.user.city || '',
+        zipcode: nextProps.user.zipcode || '',
+        avatar: nextProps.user.avatar || ''
       };
     } else return null;
   }
@@ -4530,6 +4523,9 @@ class UpdateMyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Comp
   updateUser(ev) {
     ev.preventDefault();
     this.props.updateUser(this.state);
+    setTimeout(() => {
+      this.props.history.push('/myaccount');
+    }, 500);
   }
 
   render() {
@@ -4585,8 +4581,17 @@ class UpdateMyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Comp
 }
 
 const mapState = state => {
+  let user = {};
+
+  if (Object.keys(state.user).length === 0) {
+    user = state.auth;
+  } else {
+    user = state.user;
+  }
+
   return {
-    auth: state.auth
+    auth: state.auth,
+    user: user
   };
 };
 
@@ -6516,7 +6521,18 @@ class SignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       onChange: onChange
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
       onClick: renderAdminSignIn
-    }, " Admin? Click here to sign in.")), password_email_sent ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Check your email to continue with password reset.") : null, password_reset ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    }, " Admin? Click here to sign in.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+      href: "/api/sessions/github",
+      className: "github_button"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+      height: "18",
+      viewBox: "0 0 16 16",
+      width: "40px",
+      className: "github_logo"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
+      fillRule: "evenodd",
+      d: "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+    })), "Sign in with GitHub"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), password_email_sent ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Check your email to continue with password reset.") : null, password_reset ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
       onSubmit: updatepassword
     }, "Password Reset: What is the email associated with your account? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Email:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
       name: "email",
@@ -7357,8 +7373,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 
-const user = (state = [], action) => {
+const user = (state = {}, action) => {
   if (action.type === 'SET_USERS') {
+    return action.user;
+  }
+
+  if (action.type === 'SET_USER') {
     return action.user;
   }
 
@@ -7368,10 +7388,6 @@ const user = (state = [], action) => {
 
   if (action.type === 'UPDATE_USER') {
     state = action.user;
-  }
-
-  if (action.type === 'UPDATE_USERS') {
-    return state.map(user => user.id === action.user.id ? action.user : user);
   }
 
   if (action.type === 'DELETE_USER') {
@@ -7444,9 +7460,12 @@ const deleteUser = user => {
     });
   };
 };
-const loadUser = user => {
+const loadUser = auth => {
   return async dispatch => {
-    await axios__WEBPACK_IMPORTED_MODULE_0___default().get(``);
+    dispatch({
+      type: 'SET_USER',
+      user
+    });
   };
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (user);
@@ -7795,7 +7814,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body {\n    margin: 0;\n    padding: 0;\n    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif; */\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    box-sizing: border-box;\n  }\n  \n   *,\n  *:before,\n  *:after {\n    box-sizing: inherit;\n  }\n  ol{\n    list-style-type: none;\n  }\n  li{\n    list-style-type: none;\n  }\n  .App {\n    width: 90%;\n    max-width: 700px;\n    margin: 2em auto;\n  }\n  \n  .modal-cover {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 10;\n    transform: translateZ(0);\n    background-color: rgba(0, 0, 0, 0.8);\n  } \n  \n  .modal-area {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    padding: 2.5em 1.5em 1.5em 1.5em;\n    background-color: #ffffff;\n    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n  }\n  \n  @media screen and (min-width: 500px) {\n    /* Center the Modal! */\n    .modal-area {\n      left: 50%;\n      top: 50%;\n      height: auto;\n      transform: translate(-50%, -50%);\n      max-width: 30em;\n      max-height: calc(100% - 1em);\n    }\n  }\n  \n  ._modal-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.5em;\n    line-height: 1;\n    background: #f6f6f7;\n    border: 0;\n    box-shadow: 0;\n    cursor: pointer;\n  }\n  \n  ._modal-close-icon {\n    width: 25px;\n    height: 25px;\n    fill: transparent;\n    stroke: black;\n    stroke-linecap: round;\n    stroke-width: 2;\n  }\n  \n  .modal-body {\n    padding-top: 0.25em;\n  }\n  ._hide-visual {\n    border: 0 !important;\n    clip: rect(0 0 0 0) !important;\n    height: 1px !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    padding: 0 !important;\n    position: absolute !important;\n    width: 1px !important;\n    white-space: nowrap !important;\n  }\n  \n  /* .scroll-lock {\n    overflow: hidden;\n    margin-right: 17px;\n  } */\n  ", "",{"version":3,"sources":["webpack://./src/index.css"],"names":[],"mappings":"AAAA;IACI,SAAS;IACT,UAAU;IACV;;mBAEe;IACf,mCAAmC;IACnC,kCAAkC;IAClC,sBAAsB;EACxB;;GAEC;;;IAGC,mBAAmB;EACrB;EACA;IACE,qBAAqB;EACvB;EACA;IACE,qBAAqB;EACvB;EACA;IACE,UAAU;IACV,gBAAgB;IAChB,gBAAgB;EAClB;;EAEA;IACE,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,WAAW;IACX,wBAAwB;IACxB,oCAAoC;EACtC;;EAEA;IACE,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,gCAAgC;IAChC,yBAAyB;IACzB,2CAA2C;IAC3C,gBAAgB;IAChB,iCAAiC;EACnC;;EAEA;IACE,sBAAsB;IACtB;MACE,SAAS;MACT,QAAQ;MACR,YAAY;MACZ,gCAAgC;MAChC,eAAe;MACf,4BAA4B;IAC9B;EACF;;EAEA;IACE,kBAAkB;IAClB,MAAM;IACN,QAAQ;IACR,cAAc;IACd,cAAc;IACd,mBAAmB;IACnB,SAAS;IACT,aAAa;IACb,eAAe;EACjB;;EAEA;IACE,WAAW;IACX,YAAY;IACZ,iBAAiB;IACjB,aAAa;IACb,qBAAqB;IACrB,eAAe;EACjB;;EAEA;IACE,mBAAmB;EACrB;EACA;IACE,oBAAoB;IACpB,8BAA8B;IAC9B,sBAAsB;IACtB,uBAAuB;IACvB,2BAA2B;IAC3B,qBAAqB;IACrB,6BAA6B;IAC7B,qBAAqB;IACrB,8BAA8B;EAChC;;EAEA;;;KAGG","sourcesContent":["body {\n    margin: 0;\n    padding: 0;\n    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif; */\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    box-sizing: border-box;\n  }\n  \n   *,\n  *:before,\n  *:after {\n    box-sizing: inherit;\n  }\n  ol{\n    list-style-type: none;\n  }\n  li{\n    list-style-type: none;\n  }\n  .App {\n    width: 90%;\n    max-width: 700px;\n    margin: 2em auto;\n  }\n  \n  .modal-cover {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 10;\n    transform: translateZ(0);\n    background-color: rgba(0, 0, 0, 0.8);\n  } \n  \n  .modal-area {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    padding: 2.5em 1.5em 1.5em 1.5em;\n    background-color: #ffffff;\n    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n  }\n  \n  @media screen and (min-width: 500px) {\n    /* Center the Modal! */\n    .modal-area {\n      left: 50%;\n      top: 50%;\n      height: auto;\n      transform: translate(-50%, -50%);\n      max-width: 30em;\n      max-height: calc(100% - 1em);\n    }\n  }\n  \n  ._modal-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.5em;\n    line-height: 1;\n    background: #f6f6f7;\n    border: 0;\n    box-shadow: 0;\n    cursor: pointer;\n  }\n  \n  ._modal-close-icon {\n    width: 25px;\n    height: 25px;\n    fill: transparent;\n    stroke: black;\n    stroke-linecap: round;\n    stroke-width: 2;\n  }\n  \n  .modal-body {\n    padding-top: 0.25em;\n  }\n  ._hide-visual {\n    border: 0 !important;\n    clip: rect(0 0 0 0) !important;\n    height: 1px !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    padding: 0 !important;\n    position: absolute !important;\n    width: 1px !important;\n    white-space: nowrap !important;\n  }\n  \n  /* .scroll-lock {\n    overflow: hidden;\n    margin-right: 17px;\n  } */\n  "],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\n    margin: 0;\n    padding: 0;\n    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif; */\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    box-sizing: border-box;\n  }\n  \n   *,\n  *:before,\n  *:after {\n    box-sizing: inherit;\n  }\n  ol{\n    list-style-type: none;\n  }\n  li{\n    list-style-type: none;\n  }\n  .App {\n    width: 90%;\n    max-width: 700px;\n    margin: 2em auto;\n  }\n  \n  .modal-cover {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 10;\n    transform: translateZ(0);\n    background-color: rgba(0, 0, 0, 0.8);\n  } \n  \n  .modal-area {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    padding: 2.5em 1.5em 1.5em 1.5em;\n    background-color: #ffffff;\n    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n  }\n  \n  @media screen and (min-width: 500px) {\n    /* Center the Modal! */\n    .modal-area {\n      left: 50%;\n      top: 50%;\n      height: auto;\n      transform: translate(-50%, -50%);\n      max-width: 30em;\n      max-height: calc(100% - 1em);\n    }\n  }\n  \n  ._modal-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.5em;\n    line-height: 1;\n    background: #f6f6f7;\n    border: 0;\n    box-shadow: 0;\n    cursor: pointer;\n  }\n  \n  ._modal-close-icon {\n    width: 25px;\n    height: 25px;\n    fill: transparent;\n    stroke: black;\n    stroke-linecap: round;\n    stroke-width: 2;\n  }\n  \n  .modal-body {\n    padding-top: 0.25em;\n  }\n  ._hide-visual {\n    border: 0 !important;\n    clip: rect(0 0 0 0) !important;\n    height: 1px !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    padding: 0 !important;\n    position: absolute !important;\n    width: 1px !important;\n    white-space: nowrap !important;\n  }\n  .github_logo{\n    fill: white;\n  }\n  .github_button{\n    margin-left: auto;\n    margin-right: auto;\n    display: block;\n    width: 85%;\n    text-align: center;\n    align-items:center; \n    min-height:40px;\n    background-color:#24292e; \n    font-family:'Roboto',sans-serif;\n    font-size:14px; \n    color:white; \n    text-decoration:none;\n    padding:8px 12px 8px 0px;\n  }\n  \n  /* .scroll-lock {\n    overflow: hidden;\n    margin-right: 17px;\n  } */\n  ", "",{"version":3,"sources":["webpack://./src/index.css"],"names":[],"mappings":"AAAA;IACI,SAAS;IACT,UAAU;IACV;;mBAEe;IACf,mCAAmC;IACnC,kCAAkC;IAClC,sBAAsB;EACxB;;GAEC;;;IAGC,mBAAmB;EACrB;EACA;IACE,qBAAqB;EACvB;EACA;IACE,qBAAqB;EACvB;EACA;IACE,UAAU;IACV,gBAAgB;IAChB,gBAAgB;EAClB;;EAEA;IACE,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,WAAW;IACX,wBAAwB;IACxB,oCAAoC;EACtC;;EAEA;IACE,eAAe;IACf,MAAM;IACN,OAAO;IACP,WAAW;IACX,YAAY;IACZ,gCAAgC;IAChC,yBAAyB;IACzB,2CAA2C;IAC3C,gBAAgB;IAChB,iCAAiC;EACnC;;EAEA;IACE,sBAAsB;IACtB;MACE,SAAS;MACT,QAAQ;MACR,YAAY;MACZ,gCAAgC;MAChC,eAAe;MACf,4BAA4B;IAC9B;EACF;;EAEA;IACE,kBAAkB;IAClB,MAAM;IACN,QAAQ;IACR,cAAc;IACd,cAAc;IACd,mBAAmB;IACnB,SAAS;IACT,aAAa;IACb,eAAe;EACjB;;EAEA;IACE,WAAW;IACX,YAAY;IACZ,iBAAiB;IACjB,aAAa;IACb,qBAAqB;IACrB,eAAe;EACjB;;EAEA;IACE,mBAAmB;EACrB;EACA;IACE,oBAAoB;IACpB,8BAA8B;IAC9B,sBAAsB;IACtB,uBAAuB;IACvB,2BAA2B;IAC3B,qBAAqB;IACrB,6BAA6B;IAC7B,qBAAqB;IACrB,8BAA8B;EAChC;EACA;IACE,WAAW;EACb;EACA;IACE,iBAAiB;IACjB,kBAAkB;IAClB,cAAc;IACd,UAAU;IACV,kBAAkB;IAClB,kBAAkB;IAClB,eAAe;IACf,wBAAwB;IACxB,+BAA+B;IAC/B,cAAc;IACd,WAAW;IACX,oBAAoB;IACpB,wBAAwB;EAC1B;;EAEA;;;KAGG","sourcesContent":["body {\n    margin: 0;\n    padding: 0;\n    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',\n      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',\n      sans-serif; */\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n    box-sizing: border-box;\n  }\n  \n   *,\n  *:before,\n  *:after {\n    box-sizing: inherit;\n  }\n  ol{\n    list-style-type: none;\n  }\n  li{\n    list-style-type: none;\n  }\n  .App {\n    width: 90%;\n    max-width: 700px;\n    margin: 2em auto;\n  }\n  \n  .modal-cover {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 10;\n    transform: translateZ(0);\n    background-color: rgba(0, 0, 0, 0.8);\n  } \n  \n  .modal-area {\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    padding: 2.5em 1.5em 1.5em 1.5em;\n    background-color: #ffffff;\n    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);\n    overflow-y: auto;\n    -webkit-overflow-scrolling: touch;\n  }\n  \n  @media screen and (min-width: 500px) {\n    /* Center the Modal! */\n    .modal-area {\n      left: 50%;\n      top: 50%;\n      height: auto;\n      transform: translate(-50%, -50%);\n      max-width: 30em;\n      max-height: calc(100% - 1em);\n    }\n  }\n  \n  ._modal-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    padding: 0.5em;\n    line-height: 1;\n    background: #f6f6f7;\n    border: 0;\n    box-shadow: 0;\n    cursor: pointer;\n  }\n  \n  ._modal-close-icon {\n    width: 25px;\n    height: 25px;\n    fill: transparent;\n    stroke: black;\n    stroke-linecap: round;\n    stroke-width: 2;\n  }\n  \n  .modal-body {\n    padding-top: 0.25em;\n  }\n  ._hide-visual {\n    border: 0 !important;\n    clip: rect(0 0 0 0) !important;\n    height: 1px !important;\n    margin: -1px !important;\n    overflow: hidden !important;\n    padding: 0 !important;\n    position: absolute !important;\n    width: 1px !important;\n    white-space: nowrap !important;\n  }\n  .github_logo{\n    fill: white;\n  }\n  .github_button{\n    margin-left: auto;\n    margin-right: auto;\n    display: block;\n    width: 85%;\n    text-align: center;\n    align-items:center; \n    min-height:40px;\n    background-color:#24292e; \n    font-family:'Roboto',sans-serif;\n    font-size:14px; \n    color:white; \n    text-decoration:none;\n    padding:8px 12px 8px 0px;\n  }\n  \n  /* .scroll-lock {\n    overflow: hidden;\n    margin-right: 17px;\n  } */\n  "],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -7,13 +7,14 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
 app.use('/dist', express.static('dist'));
 
+
 const isLoggedIn = async(req, res, next)=> {
   try {
     req.user = await User.findByToken(req.headers.authorization);
     next();
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 };
 
@@ -22,15 +23,14 @@ app.use('/api/orders', require('./routes/orders'));
 app.use('/api/sessions', require('./routes/sessions'));
 app.use('/api/passwordReset', require('./routes/passwordReset'));
 app.use('/api/passwordResetRequest', require('./routes/passwordResetRequest'));
-
 // Product Routes
 
 app.get('/api/products', async(req,res,next)=>{
   try{
     res.status(200).send(await Product.findAll())
 
-  }catch(err){
-    next(err);
+  }catch(er){
+    next(er);
   }
 });
 
@@ -39,8 +39,8 @@ app.get('/api/products/:id', async(req,res,next)=>{
     const game = await Product.findByPk(req.params.id);
     res.status(200).send(game);
 
-  }catch(err){
-    next(err);
+  }catch(er){
+    next(er);
   }
 });
 
@@ -72,8 +72,8 @@ app.post('/', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await req.user.createWishListFromWishListItems());
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 
 });
@@ -82,8 +82,8 @@ app.put('/api/wishlist', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await req.user.addToWishList(req.body));
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -91,8 +91,8 @@ app.get('/api/wishlist', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await req.user.getWishList());
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -102,8 +102,8 @@ app.post('/api/users', async(req,res,next) => {
   try{
       res.status(200).send(await User.create(req.body));
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -111,8 +111,8 @@ app.get('/api/users', async(req,res,next) => {
   try{
     res.status(200).send(await User.findAll())
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -120,8 +120,8 @@ app.get('/api/users/:id', async(req,res,next) => {
   try{
     res.status(200).send(await useStore.findByPk(req.params.id))
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 
@@ -142,8 +142,8 @@ app.put('/api/users', async(req,res,next) => {
     await user.update(req.body);
     res.status(200).send(user);
   }
-  catch(err){
-    next(err);
+  catch(ex){
+    next(ex);
   }
 });
 

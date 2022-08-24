@@ -19,6 +19,7 @@ import Console from './ProductPages/Console'
 import topFightingGames from './ProductPages/topFightingGames';
 import PasswordReset from './PasswordReset';
 class _App extends Component{
+
     render(){
         return(
         <div id="main-body">
@@ -42,6 +43,8 @@ class _App extends Component{
         )
     }
 }
+
+
 
 const App = connect(null)(_App);
 

@@ -97,6 +97,24 @@ body {
     width: 1px !important;
     white-space: nowrap !important;
   }
+  .github_logo{
+    fill: white;
+  }
+  .github_button{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 85%;
+    text-align: center;
+    align-items:center; 
+    min-height:40px;
+    background-color:#24292e; 
+    font-family:'Roboto',sans-serif;
+    font-size:14px; 
+    color:white; 
+    text-decoration:none;
+    padding:8px 12px 8px 0px;
+  }
   
   /* .scroll-lock {
     overflow: hidden;
