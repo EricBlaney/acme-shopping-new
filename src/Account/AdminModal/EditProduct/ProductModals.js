@@ -50,7 +50,6 @@ class ProductModals extends React.Component {
             </ModalHeader>
             <ModalBody>
             <Form.Group >
-             
               <Form.Label>Game/Console Name: </Form.Label>
               <Form.Control type="text" name='name' onChange={this.handleChange} defaultValue={name} placeholder="enter a name"/>     
               <Form.Label>Game Summary: </Form.Label>

@@ -3477,15 +3477,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _AdminModal_CreateUser_CreateUserContainer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AdminModal/CreateUser/CreateUserContainer */ "./src/Account/AdminModal/CreateUser/CreateUserContainer.js");
 /* harmony import */ var _AdminModal_EditUser_Modals__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AdminModal/EditUser/Modals */ "./src/Account/AdminModal/EditUser/Modals.js");
 /* harmony import */ var _AdminModal_EditProduct_ProductModals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AdminModal/EditProduct/ProductModals */ "./src/Account/AdminModal/EditProduct/ProductModals.js");
 /* harmony import */ var _Admin_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Admin.css */ "./src/Account/Admin.css");
 /* harmony import */ var react_multi_carousel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-multi-carousel */ "./node_modules/react-multi-carousel/index.js");
 /* harmony import */ var react_multi_carousel_lib_styles_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-multi-carousel/lib/styles.css */ "./node_modules/react-multi-carousel/lib/styles.css");
-/* harmony import */ var _store_product__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../store/product */ "./src/store/product.js");
-
 
 
 
@@ -3549,11 +3547,13 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
 
   componentDidMount() {
     this.props.getWishList();
+    this.props.exchangeToken();
   }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.adminAuth.id && this.props.adminAuth.id) {
       this.props.getWishList();
+      this.props.exchangeToken();
     }
   }
 
@@ -3569,10 +3569,7 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
         avatar: nextProps.adminAuth.avatar || ''
       };
     } else return null;
-  } // onChange(ev){
-  //     this.setState({ [ev.target.name]: ev.target.value });
-  // }
-
+  }
 
   handleShow = user => {
     this.setState({
@@ -3596,12 +3593,12 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
   render() {
     const {
       wishlist,
-      products,
-      thisUser,
-      usersMap,
+      product,
+      user,
       deleteUser,
       deleteProduct,
-      onSubmit
+      onSubmit,
+      adminAuth
     } = this.props;
     const {
       handleClose,
@@ -3611,13 +3608,13 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
     const triggerTextCreate = 'Create User';
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "admin"
-    }, thisUser.map(user => {
+    }, ([adminAuth] || 0).map(user => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         key: user.id
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, " ", user.username, "'s Admin Profile "), user.avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: user.avatar,
         className: "avatar"
-      }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, user.username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", user.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", user.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", user.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.NavLink, {
+      }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, user.username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", user.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", user.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", user.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.NavLink, {
         exact: true,
         to: "/updatemyaccount"
       }, "Edit account details"));
@@ -3634,7 +3631,7 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
         key: wishListItem.product.id
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Link, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Link, {
         className: "link",
         to: `/api/product/${wishListItem.product.id}`
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -3650,12 +3647,13 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, wishListItem.product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, `$${wishListItem.product.price}`), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        onClick: () => this.props.addCart(_store_product__WEBPACK_IMPORTED_MODULE_9__["default"], 1)
+        onClick: () => this.props.addCart(product, 1)
       }, "Add To Cart"))));
     })) : 'You have nothing in your Wish List! Go add something!', /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Admin Tools"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Current Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_AdminModal_CreateUser_CreateUserContainer__WEBPACK_IMPORTED_MODULE_3__["default"], {
       onSubmit: onSubmit,
       triggerText: triggerTextCreate
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Username "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Delete User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Edit User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "User Type"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, usersMap.map(user => {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Username "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Delete User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Edit User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "User Type"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, (user || []).map(user => {
+      console.log(user);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
         key: user.id
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, user.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
@@ -3669,7 +3667,7 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
       handleClose: handleClose,
       isShowModal: this.state.isShowModal,
       user: this.state.modalUser
-    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Current Products"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Game/Console Name "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Condition"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Delete Game"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Edit Game Summary"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, products.map(product => {
+    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "Current Products"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("table", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Game/Console Name "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Condition"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Price"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Delete Game"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("th", null, "Edit Game Summary"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tbody", null, (product || []).map(product => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("tr", {
         key: product.id
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, product.condition), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, "$", product.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
@@ -3688,18 +3686,18 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
 
 }
 
-const mapState = state => {
-  console.log(state.product);
-  const user = state.auth || {};
-  let thisUser = state.user.filter(user => user.id === state.auth.id);
-  let usersMap = state.user.filter(user => user.id !== state.auth.id);
+const mapState = ({
+  adminAuth,
+  wishlist,
+  product,
+  user
+}) => {
+  user = user.filter(user => user.id !== adminAuth.id);
   return {
-    adminAuth: state.adminAuth,
-    user: user,
-    usersMap,
-    thisUser,
-    wishlist: state.wishlist,
-    products: state.product
+    adminAuth,
+    user,
+    wishlist,
+    product
   };
 };
 
@@ -3708,7 +3706,8 @@ const mapDispatch = dispatch => {
     getWishList: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchWishList)()),
     addCart: (product, quantity) => dispatch(addCart(product, quantity)),
     deleteUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deleteUser)(user)),
-    deleteProduct: product => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deleteProduct)(product))
+    deleteProduct: product => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deleteProduct)(product)),
+    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)())
   };
 };
 
@@ -4349,11 +4348,18 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
 
   componentDidMount() {
     this.props.getWishList();
+
+    try {
+      this.props.exchangeToken();
+    } catch (er) {
+      console.log(er);
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.auth.id && this.props.auth.id) {
       this.props.getWishList();
+      this.props.exchangeToken();
     }
   }
 
@@ -4374,7 +4380,6 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
   render() {
     const {
       auth,
-      thisUser,
       wishlist,
       adminAuth
     } = this.props;
@@ -4387,14 +4392,19 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
       zipcode
     } = this.state;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, adminAuth.isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Admin__WEBPACK_IMPORTED_MODULE_3__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
+      key: auth.id,
       className: "user-details"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, username, "'s Profile"), avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-      src: avatar,
-      className: "avatar"
-    }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", auth.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", auth.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", auth.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
-      exact: true,
-      to: "/updatemyaccount"
-    }, "Edit account details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), wishlist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, ([auth] || 0).map(user => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        key: user.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, user.username, "'s Profile"), user.avatar ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: user.avatar,
+        className: "avatar"
+      }) : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, user.username, "'s details:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Email: ", user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Address: ", user.street || "None Listed"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "City: ", user.city || "None listed."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Zipcode: ", user.zipcode || 'None listed.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
+        exact: true,
+        to: "/updatemyaccount"
+      }, "Edit account details"));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Your Wish List:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), wishlist ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_carousel__WEBPACK_IMPORTED_MODULE_4__["default"], {
       responsive: responsive,
       ssr: true
     }, wishlist.wishListItems.map(wishListItem => {
@@ -4430,21 +4440,33 @@ class MyAccount extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component)
 
 }
 
-const mapState = state => {
-  const user = state.auth || {};
+const mapState = ({
+  user,
+  auth,
+  adminAuth,
+  wishlist
+}) => {
+  user = {};
+
+  if (Object.keys(user).length === 0) {
+    user = auth;
+  } else {
+    user = user;
+  }
+
   return {
-    auth: state.auth,
-    adminAuth: state.adminAuth,
-    thisUser,
-    user: user,
-    wishlist: state.wishlist
+    auth,
+    adminAuth,
+    user,
+    wishlist
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     getWishList: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchWishList)()),
-    addCart: (product, quantity) => dispatch(addCart(product, quantity))
+    addCart: (product, quantity) => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addCart)(product, quantity)),
+    exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)())
   };
 };
 
@@ -4467,6 +4489,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./src/store/index.js");
+/* harmony import */ var _UpdateMyAccount_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UpdateMyAccount.css */ "./src/Account/UpdateMyAccount.css");
+
 
 
 
@@ -4589,6 +4613,7 @@ const mapState = state => {
     user = state.user;
   }
 
+  console.log(user);
   return {
     auth: state.auth,
     user: user
@@ -4991,6 +5016,9 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentDidUpdate(prevProps) {
     if (!prevProps.auth.id && this.props.auth.id) {
       this.props.fetchCart();
+      this.props.exchangeToken();
+      this.props.fetchProducts();
+      this.props.setUsers();
     }
   }
 
@@ -5052,7 +5080,7 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "topnav-right"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
       exact: true,
-      to: "/myaccount"
+      to: "/api/myaccount"
     }, " Account "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.NavLink, {
       to: "/cart"
     }, "Cart"), auth.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.Link, {
@@ -5083,6 +5111,7 @@ class Nav extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 const mapState = ({
   auth
 }) => {
+  console.log(auth);
   return {
     auth
   };
@@ -7387,7 +7416,11 @@ const user = (state = {}, action) => {
   }
 
   if (action.type === 'UPDATE_USER') {
-    state = action.user;
+    return action.user;
+  }
+
+  if (action.type === 'UPDATE_USERS') {
+    return state.map(user => user.id === action.user.id ? action.user : user);
   }
 
   if (action.type === 'DELETE_USER') {
@@ -57082,7 +57115,7 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
       exact: true,
       component: _ProductPages_Console__WEBPACK_IMPORTED_MODULE_16__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
-      path: "/myaccount",
+      path: "/api/myaccount",
       exact: true,
       component: _Account_MyAccount__WEBPACK_IMPORTED_MODULE_4__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_19__.Route, {
