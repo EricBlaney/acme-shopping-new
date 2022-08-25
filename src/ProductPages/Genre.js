@@ -51,7 +51,7 @@ class Genre extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -75,7 +75,7 @@ class Genre extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -99,7 +99,7 @@ class Genre extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -123,7 +123,7 @@ class Genre extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -147,7 +147,7 @@ class Genre extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -162,7 +162,7 @@ class Genre extends Component {
 
 }
 
-const mapStateToProps = ({ product, cart })=> {
+const mapStateToProps = ({ product, cart, auth })=> {
     const topFightingGames = product.filter(product => product.theme === 'topFightingGames');
     const topRPGGames = product.filter(product => product.theme === 'topRPGGames');
     const topSportsGames = product.filter(product => product.theme === 'topSportsGames');
@@ -170,6 +170,7 @@ const mapStateToProps = ({ product, cart })=> {
     const topPlatformGames = product.filter(product => product.theme === 'topPlatformGames');
 
     return {
+        auth,
         topFightingGames,
         topRPGGames,
         topSportsGames,
@@ -181,7 +182,7 @@ const mapStateToProps = ({ product, cart })=> {
 
    const mapDispatch = (dispatch) => {
      return {
-      addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+      addCart: (product, quantity) => dispatch(addCart(product, quantity, auth)),
       fetchProducts: ()=> dispatch(fetchProducts()),
     }
  };

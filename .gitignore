@@ -1,6 +1,6 @@
 .env
 .env.js
-node_modules
-dist
+/node_modules
+/dist
 *.main.js
 *.main.js.map

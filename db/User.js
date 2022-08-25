@@ -121,7 +121,7 @@ User.prototype.addToCart = async function({ product, quantity }){
     }
   }
   else {
-    await conn.models.lineItem.create({ productId: product.id, quantity, orderId: cart.id });
+    await conn.models.lineItem.create({ productId: product.id, quantity: quantity, orderId: cart.id });
   }
   return this.getCart();
 };

@@ -30,7 +30,7 @@ class Platform extends Component {
     }
 
     render() {
-        const {  topNESGames, topSNESGames, topPlayStationGames, topXboxGames, topSegaGenesisGames } = this.props;
+        const {  topNESGames, topSNESGames, topPlayStationGames, topXboxGames, topSegaGenesisGames, auth } = this.props;
 
     return (
       
@@ -54,7 +54,7 @@ class Platform extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -78,7 +78,7 @@ class Platform extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -102,7 +102,7 @@ class Platform extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -126,7 +126,7 @@ class Platform extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -150,7 +150,7 @@ class Platform extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -184,7 +184,7 @@ const mapStateToProps = ({ product})=> {
 
   const mapDispatch = (dispatch) => {
     return {
-      addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+      addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
       fetchProducts: ()=> dispatch(fetchProducts()),
     }
 };

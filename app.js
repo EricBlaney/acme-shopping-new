@@ -4,7 +4,11 @@ const { User, Product, Token } = require('./db');
 const path = require('path');
 const { useStore } = require('react-redux');
 app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
+app.use(express.urlencoded({
+  extended: true,
+  limit: '50mb'
+}));
+
 app.use('/dist', express.static('dist'));
 
 
