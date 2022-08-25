@@ -10,8 +10,10 @@ import Cart from './Cart';
 import Search from './Search/Search';
 import SearchResults from './Search/SearchResults'
 import './index.css';
-import Platform from './ProductPages/Platform'
-import Genre from './ProductPages/Genre'
+import Platform from './ProductPages/Platform';
+import Genre from './ProductPages/Genre';
+import 'antd/dist/antd.css';
+import CheckoutSuccess from './CheckoutSuccess';
 import store from './store'
 import Nav from './Nav'
 import GamesbyYear from './ProductPages/GamesbyYear';
@@ -28,6 +30,7 @@ class _App extends Component{
                 <Route component={ Search }/>
              </div>
             <Route path='/cart' exact component={ Cart }/>
+        <Route path='/cart/success' exact component={ CheckoutSuccess }/>
             <Route path='/' exact component={ LandingPage }/>
             <Route path='/api/product/:id' exact component={ SingleGame }/>
             <Route path='/api/genre' exact component={ Genre }/>

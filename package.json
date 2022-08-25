@@ -16,11 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "-": "^0.0.1",
+    "@ant-design/icons": "^4.7.0",
     "@faker-js/faker": "^7.3.0",
-    "@fortawesome/fontawesome-svg-core": "^6.1.2",
-    "@fortawesome/react-fontawesome": "^0.2.0",
-    "@reach/combobox": "0.1.1",
-    "@reach/menu-button": "0.1.18",
+    "antd": "^4.22.7",
     "assert": "^2.0.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
@@ -39,7 +37,9 @@
     "react-bootstrap": "^2.5.0",
     "react-multi-carousel": "^2.8.2",
     "redux-logger": "^3.0.6",
+    "reselect": "^4.1.6",
     "sequelize": "^6.21.3",
+    "stripe": "^10.3.0",
     "util": "^0.12.4"
   },
   "devDependencies": {

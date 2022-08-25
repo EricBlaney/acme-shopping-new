@@ -29,9 +29,9 @@ export const addCart = (product, quantity) => {
         authorization: window.localStorage.getItem('token')
       }
     });
-    if (response.status === 200) {
-      alert('Added to cart successfully')
-    }
+    // if (response.status === 200) {
+    //   alert('Added to cart successfully')
+    // }
   }
 }
 
@@ -76,7 +76,33 @@ export const updateQuantity = (product, quantity) => {
       dispatch({ type: 'UPDATE_QUANTITY', id: product.id, quantity});
     }
   };
-}
+};
 
+
+export const checkout = () => {
+  return async(disptach, getState) => {
+    const line_items = getState().cart.lineItems;
+    const stripe_line_items = line_items.map(item => ({
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: item.product.name,
+          description: item.product.summary,
+          images:[ `https:${item.product.imageUrl}`]
+          },
+          unit_amount: item.product.price * 100
+        },
+        quantity: item.quantity
+    }))
+    const response = await axios.post('/api/orders/create-checkout-session', stripe_line_items, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
+    if (response.status === 200) {
+      window.location.href = response.data.url;
+    }
+  }
+}
 
 export default cart;
