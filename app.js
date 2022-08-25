@@ -137,17 +137,6 @@ app.delete('/api/users/:id', async(req,res,next) => {
   }
 });
 
-app.put('/api/users', async(req,res,next) => {
-  try{
-    const user = await User.findByPk(req.body.id);
-    await user.update(req.body);
-    res.status(200).send(user);
-  }
-  catch(ex){
-    next(ex);
-  }
-});
-
 app.put('/api/users/:id', async(req,res,next) => {
   try{
     const user = await User.findByPk(req.body.id);
