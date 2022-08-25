@@ -5,14 +5,9 @@ import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 import auth from './store/auth';
 import { use } from 'chai';
-import {exchangeToken, logout} from './store/auth';
-import { fetchProducts, fetchCart } from './store';
 import './Nav.css';
 import './Footer.css';
-
-
-import { fetchProducts } from './store';
-import { logout, exchangeToken, fetchCart, setUsers } from './store';
+import { logout, exchangeToken, fetchCart, setUsers, fetchProducts } from './store';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
 
@@ -127,6 +122,8 @@ RETROS </h1>
             fetchCart: ()=> dispatch(fetchCart()),
             exchangeToken: ()=> dispatch(exchangeToken()),
             fetchProducts: ()=> dispatch(fetchProducts()),
+            setUsers: ()=> dispatch(setUsers()),
+
             logout: () => dispatch(logout())
         }
     };

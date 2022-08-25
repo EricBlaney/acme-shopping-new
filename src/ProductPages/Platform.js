@@ -189,9 +189,5 @@ const mapStateToProps = ({ product})=> {
     }
 };
 
-<<<<<<< HEAD
 export default connect(mapStateToProps, mapDispatch)(Platform)
 
-=======
-export default connect(mapStateToProps, mapDispatch)(Platform)
->>>>>>> c3cdc6bc3ec519f24865e80b2dc4677495868852
