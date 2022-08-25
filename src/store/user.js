@@ -1,14 +1,24 @@
 import axios from 'axios';
 
-const user = (state = [], action)=> {
+const user = (state = {}, action)=> {
+  if (action.type === 'SET_USERS'){
+    return action.user
+  }
+  if (action.type === 'SET_USER'){
+    return action.user
+  }
   if(action.type === 'CREATE_USER'){
-    state = action.user;
+    return [action.user, ...state]
   }
   if(action.type === 'UPDATE_USER'){
-    state = action.user;
+    return action.user
+  }
+  if(action.type === 'UPDATE_USERS'){
+    return state.map(user => user.id === action.user.id ? action.user : user)
+
   }
   if(action.type === 'DELETE_USER') {
-    state = [];
+    return state.filter((user)=> user.id !== action.user.id)
   }
   return state; 
 };
@@ -30,6 +40,13 @@ export const createUser = (credentials) => {
     }
   };
 
+export const setUsers = () => {
+    return async(dispatch)=>{
+        const user = (await axios.get('/api/users')).data;
+        dispatch({type: "SET_USERS", user})
+    }
+};
+
 export const updateUser = (user) => {
     return async(dispatch) => {
       try{
@@ -40,18 +57,30 @@ export const updateUser = (user) => {
         console.log(ex)
       }
     }
-}
+};
+
+export const updateUsers = (user) => {
+  return async(dispatch) => {
+    try{
+      await axios.put(`/api/users/${user.id}`, user);
+      dispatch({type: "UPDATE_USERS", user})
+    }
+    catch(ex){
+      console.log(ex)
+    }
+  }
+};
 
 export const deleteUser = (user) => {
   return async(dispatch) => {
       await axios.delete(`/api/users/${user.id}`);
-      dispatch({ type: 'DELETE_user', user})
+      dispatch({ type: 'DELETE_USER', user})
   }
 }
 
-export const loadUser = (user) => {
+export const loadUser = (auth) => {
   return async(dispatch) => {
-    await axios.get(``)
+    dispatch({ type: 'SET_USER', user})
   }
 }
 

@@ -1,9 +1,15 @@
+// try{
+//   require('./.env.js');
+//   console.log(process.env.CLIENT_ID)
+// }
+// catch(ex){
+//   console.log('running locally? create .env file');
+//   console.log('deployed? set env variables');
+// }
 const app = require('./app');
 const { conn, User, Product } = require('./db');
 const { faker } = require('@faker-js/faker');
-
 const igdb = require('igdb-api-node').default;
-
 const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
 
 // Random Condition Generator
@@ -223,7 +229,7 @@ const consoles = await Promise.all ([
     // console.log(genreIds.data); 
 
     await User.create({ username: 'fred', password: 'fred_pw', email: 'fred@gmail.com', isAdmin: true});
-    await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com'});
+    await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com', isAdmin: true});
     await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});
 
     const port = process.env.PORT || 3000;

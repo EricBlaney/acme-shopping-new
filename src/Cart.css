@@ -56,3 +56,7 @@
     cursor: pointer;
 }
 
+.cart-price {
+    margin-top: 10px;
+    color: #648caf;
+}

@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 import './LandingPage.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { Modal } from 'antd';
 
 //Carousel responsiveness
+
 
 const responsive = {
   superLargeDesktop: {
@@ -28,9 +30,18 @@ const responsive = {
 };
 
 class LandingPage extends React.Component{
-
+  constructor(){
+    super();
+    this.state = {
+      cartProduct: null
+    }
+  }
+  
   render(){
-    const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990, thisYearsGames1994, thisYearsGames1985, thisYearsGames1987 } = this.props;
+    const signUpTriggerText = 'Sign Up';
+    const signInTriggerText = 'Sign In';
+    const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990, thisYearsGames1985, thisYearsGames1987, thisYearsGames1989, thisYearsGames1994 } = this.props;
+    const { cartProduct } = this.state;
     return (
       <main>
       { auth.id ? (
@@ -53,7 +64,12 @@ class LandingPage extends React.Component{
                   <div className='info'>
                     <h3>{product.name}</h3>
                     <p>{`$${product.price}`}</p>
-                    <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                    <button  onClick={() => {this.props.addCart(product, 1)
+                    this.setState({
+                      cartProduct: product
+                    })
+                    }}>
+                      Add To Cart</button>
                   </div>
               </div>
             
@@ -80,7 +96,12 @@ class LandingPage extends React.Component{
                     <div className='info'>
                       <h3>{product.name}</h3>
                       <p>{`$${product.price}`}</p>
-                      <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                      <button  onClick={() => {this.props.addCart(product, 1)
+                    this.setState({
+                      cartProduct: product
+                    })
+                    }}>
+                      Add To Cart</button>
                     </div>
                 </div>
             </div>   
@@ -104,7 +125,12 @@ class LandingPage extends React.Component{
                     <div className='info'>
                       <h3>{product.name}</h3>
                       <p>{`$${product.price}`}</p>
-                      <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                      <button  onClick={() => {this.props.addCart(product, 1)
+                    this.setState({
+                      cartProduct: product
+                    })
+                    }}>
+                      Add To Cart</button>
                     </div>
                 </div>
             </div>   
@@ -129,7 +155,12 @@ class LandingPage extends React.Component{
                     <div className='info'>
                       <h3>{product.name}</h3>
                       <p>{`$${product.price}`}</p>
-                      <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                      <button  onClick={() => {this.props.addCart(product, 1)
+                    this.setState({
+                      cartProduct: product
+                    })
+                    }}>
+                      Add To Cart</button>
                     </div>
                 </div>
             </div>   
@@ -153,7 +184,12 @@ class LandingPage extends React.Component{
                   <div className='info'>
                     <h3>{product.name}</h3>
                     <p>{`$${product.price}`}</p>
-                    <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                    <button  onClick={() => {this.props.addCart(product, 1)
+                    this.setState({
+                      cartProduct: product
+                    })
+                    }}>
+                      Add To Cart</button>
                   </div>
               </div>
             </div>
@@ -177,7 +213,12 @@ class LandingPage extends React.Component{
                 <div className='info'>
                   <h3>{product.name}</h3>
                   <p>{`$${product.price}`}</p>
-                  <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                  <button  onClick={() => {this.props.addCart(product, 1)
+                    this.setState({
+                      cartProduct: product
+                    })
+                    }}>
+                      Add To Cart</button>
                 </div>
               </div>
             </div>
@@ -186,7 +227,20 @@ class LandingPage extends React.Component{
         </Carousel>
 
         </div> ) : null }
-
+        <Modal title="Add a new product to cart" visible={!!cartProduct} onCancel={() => this.setState({cartProduct: null})} footer={null}>
+          {
+            cartProduct && (
+              <div className="cart-item">
+                <img className="cart-image" src={`//images.igdb.com/igdb/image/upload/t_cover_big/${cartProduct.imageUrl}`} />
+                <div>
+                  <div className="cart-name">{ cartProduct.name }</div>
+                  <div className="cart-desc">{ cartProduct.summary.length > 200 ? cartProduct.summary.slice(0, 200) + '...' : cartProduct.summary }</div>
+                  <div className="cart-price">${ cartProduct.price }</div>
+                </div>
+              </div>
+            )
+          }
+        </Modal>
       </main>
     );
 

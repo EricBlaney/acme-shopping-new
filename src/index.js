@@ -10,8 +10,10 @@ import Cart from './Cart';
 import Search from './Search/Search';
 import SearchResults from './Search/SearchResults'
 import './index.css';
-import Platform from './ProductPages/Platform'
-import Genre from './ProductPages/Genre'
+import Platform from './ProductPages/Platform';
+import Genre from './ProductPages/Genre';
+import 'antd/dist/antd.css';
+import CheckoutSuccess from './CheckoutSuccess';
 import store from './store'
 import Nav from './Nav'
 import GamesbyYear from './ProductPages/GamesbyYear';
@@ -26,6 +28,7 @@ import topPlatformGames from './dropdownPage/topPlatformGames';
 import PasswordReset from './PasswordReset';
 
 class _App extends Component{
+
     render(){
         return(
         <div id="main-body">
@@ -34,6 +37,7 @@ class _App extends Component{
                 <Route component={ Search }/>
              </div>
             <Route path='/cart' exact component={ Cart }/>
+        <Route path='/cart/success' exact component={ CheckoutSuccess }/>
             <Route path='/' exact component={ LandingPage }/>
             <Route path='/api/product/:id' exact component={ SingleGame }/>
             <Route path='/api/genre' exact component={ Genre }/>
@@ -46,7 +50,7 @@ class _App extends Component{
             <Route path='/api/platform' exact component={ Platform }/>
             <Route path='/api/gamesbyyear' exact component={ GamesbyYear }/>
             <Route path='/api/console' exact component={ Console }/>
-            <Route path='/myaccount' exact component={ MyAccount }/>
+            <Route path='/api/myaccount' exact component={ MyAccount }/>
             <Route path='/updatemyaccount' exact component={ UpdateMyAccount }/>
             <Route path='/search/:term?' component={ SearchResults }/>
             <Route path='/passwordreset/:token/:username/:id' component={ PasswordReset }/>
@@ -54,6 +58,8 @@ class _App extends Component{
         )
     }
 }
+
+
 
 const App = connect(null)(_App);
 const root = createRoot(document.querySelector('#root'));

@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList } from '../store'
+import { fetchWishList, deleteUser, deleteProduct, exchangeToken } from '../store'
 import { Link, NavLink } from 'react-router-dom';
+import CreateUserContainer from './AdminModal/CreateUser/CreateUserContainer'
+import Modals from './AdminModal/EditUser/Modals'
+import ProductModals from './AdminModal/EditProduct/ProductModals'
+import './Admin.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-
 //Carousel responsiveness
 
 const responsive = {
@@ -30,22 +33,33 @@ class Admin extends React.Component{
     constructor(){
         super();
         this.state = {
+            modalProduct: {},
+            modalUser: {},
             username: '',
             email: '',
             street: '',
             city: '',
             zipcode: '',
-            avatar: ''
+            avatar: '',
+            isShowModal: false,
+            isShowProductModal: false
         };
-      }
+
+        this.handleClose = this.handleClose.bind(this);
+        this.handleShow = this.handleShow.bind(this);
+      };
 
     componentDidMount() {
         this.props.getWishList();
+        this.props.exchangeToken();
+
     }
 
     componentDidUpdate(prevProps){
         if(!prevProps.adminAuth.id && this.props.adminAuth.id){
           this.props.getWishList();
+          this.props.exchangeToken();
+
         }
     }
 
@@ -62,29 +76,58 @@ class Admin extends React.Component{
         }
         else return null;
       }
+    
+      handleShow = (user) =>{
+        this.setState({
+          modalUser: user,
+          isShowModal: true
+        })
+     }
+
+     handleShowProduct = (product) =>{
+        this.setState({
+          modalProduct: product,
+          isShowProductModal: true
+        })
+     }
+
+     handleClose = () =>{
+        this.setState({
+            isShowModal: false,
+            isShowProductModal: false
+
+        })
+     }
 
     render() {
-        const {wishlist, adminAuth} = this.props;
-        const {avatar, username, email, street, city, zipcode} = this.state;
+        const {wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth} = this.props;
+        const { handleClose, handleShow, handleShowProduct } = this;
+        const triggerTextCreate = 'Create User';
+  
         return(
-            <div>
-    
-            <h1>
-            {username}'s Admin Profile
-            </h1>
-            { avatar ? <img src={avatar} className="avatar"/> : null}
-            <h2>{username}'s details:</h2>
-            <div>Email: {email}</div>
-            <div>Address: {adminAuth.street || "None Listed"}</div>
-            <div>City: {adminAuth.city || "None listed."}</div>
-            <div>Zipcode: {adminAuth.zipcode || 'None listed.'}</div>
-            <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+            <div className='admin'>
+            {([adminAuth]||[]).map(user=>{
+                return(
+                <div key={user.id}>
+                    <h1> { user.username }'s Admin Profile </h1>
+                        { user.avatar ? <img src={user.avatar} className="avatar"/> : null}
+                        <h3>{user.username}'s details:</h3>
+                        <div>Email: {user.email}</div>
+                        <div>Address: {user.street || "None Listed"}</div>
+                        <div>City: {user.city || "None listed."}</div>
+                        <div>Zipcode: {user.zipcode || 'None listed.'}</div>
+                        <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+
+                </div>
+                )
+            })}
+            <br></br>
             <br></br>
             Your Wish List:
             <br></br>
             <br></br>
 
-            {
+                    {
                         wishlist ? 
                         <Carousel responsive={responsive} ssr={true}> 
                         { 
@@ -102,7 +145,7 @@ class Admin extends React.Component{
                                 <div className='info'>
                                     <h3>{wishListItem.product.name}</h3>
                                     <p>{`$${wishListItem.product.price}`}</p>
-                                    <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                                    <button onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                                 </div>
                             </div>
                             </div>   
@@ -113,25 +156,118 @@ class Admin extends React.Component{
                         : 'You have nothing in your Wish List! Go add something!'
                     }
 
-            Admin Tools
+            <br></br>
+            <h3>Admin Tools</h3>
+            <br></br>
+            <h4>Current Users</h4>
+            <div>
+
+            <CreateUserContainer onSubmit={ onSubmit } triggerText={ triggerTextCreate } />
+            
+            </div>
+            <br></br>
+            <br></br>
+            <table>
+            <thead>
+                <tr>
+                    <th>Username </th>
+                    <th>Email</th>
+                    <th>Delete User</th>
+                    <th>Edit User</th>
+                    <th>User Type</th>
+                </tr>
+                
+                </thead>
+                <tbody>
+                    {
+                    (user||[]).map(user=>{
+                        console.log(user)
+                        return(
+                                <tr key={user.id}>
+                                    <td>{user.username}</td>
+                                    <td>{user.email}</td>
+                                    <td><button onClick={()=>{ deleteUser(user) }}>X</button></td>
+                                    <td><button onClick={()=> handleShow(user)}>X</button> </td>
+                                    <td>{user.isAdmin ? 'Admin' : 'User'}</td>
+                                </tr>
+                        )
+                    })
+                    } 
+                </tbody>
+              
+                </table>
+                
+                {this.state.isShowModal ? <Modals handleClose={ handleClose } isShowModal={this.state.isShowModal} user={this.state.modalUser}/> : null}
+
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+
+            <h4>Current Products</h4>
+            <div>
+
+            {/* <CreateUserContainer onSubmit={ onSubmit } triggerText={ triggerTextCreate } /> */}
+            
+            </div>
+            <br></br>
+            <br></br>
+            <table>
+            <thead>
+                <tr>
+                    <th>Game/Console Name </th>
+                    <th>Condition</th>
+                    <th>Price</th>
+                    <th>Delete Game</th>
+                    <th>Edit Game Summary</th>
+                </tr>
+                
+                </thead>
+                <tbody>
+                    {
+                    (product||[]).map(product=>{
+                        return(
+                                
+                                <tr key={product.id}>
+                                    <td>{product.name}</td>
+                                    <td>{product.condition}</td>
+                                    <td>${product.price}</td>
+                                    <td><button onClick={()=>{ deleteProduct(product) }}>X</button></td>
+                                    <td><button onClick={()=> handleShowProduct(product)}>X</button> </td>
+                                </tr>
+                        )
+                    })
+                    } 
+                </tbody>
+              
+                </table>
+                
+                {this.state.isShowProductModal ? <ProductModals handleClose={ handleClose } isShowModal={this.state.isShowProductModal} product={this.state.modalProduct}/> : null}
+
             </div>
         )
     }
 }
 
-const mapState = (state) => {
-    const user = state.auth || {};
+const mapState = ({adminAuth, wishlist, product, user}) => {
+    user = user.filter( user => user.id !== adminAuth.id);
+
     return {
-        adminAuth: state.adminAuth,
-        user: user,
-        wishlist: state.wishlist
+        adminAuth,
+        user,
+        wishlist,
+        product
     }
 }
 
 const mapDispatch = (dispatch) => {
     return{
         getWishList: ()=> dispatch(fetchWishList()),
-        addCart: (product, quantity) => dispatch(addCart(product, quantity))
+        addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+        deleteUser: (user)=> dispatch(deleteUser(user)),
+        deleteProduct: (product)=> dispatch(deleteProduct(product)),
+        exchangeToken: ()=> dispatch(exchangeToken()),
+
     }
 }
 

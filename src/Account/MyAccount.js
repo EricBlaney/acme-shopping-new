@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList } from '../store'
+import { fetchWishList, addCart, exchangeToken } from '../store'
 import { Link, NavLink } from 'react-router-dom';
 import Admin from './Admin';
 import Carousel from 'react-multi-carousel';
@@ -42,22 +42,29 @@ class MyAccount extends React.Component{
       }
     componentDidMount() {
         this.props.getWishList();
-   
-    }
+        try{
+        this.props.exchangeToken();
+        } catch(er){
+            console.log(er)
+        }
+    };
+
     componentDidUpdate(prevProps){
         if(!prevProps.auth.id && this.props.auth.id){
           this.props.getWishList();
-        }
+          this.props.exchangeToken();
     }
+  };
+
     static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.auth !== prevState){
-        return { id: nextProps.auth.id,
-        username: nextProps.auth.username, 
-        email: nextProps.auth.email,
-        street: nextProps.auth.street || '',
-        city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || '',
-        avatar: nextProps.auth.avatar  || ''
+        if(nextProps.user !== prevState){
+        return { id: nextProps.user.id,
+        username: nextProps.user.username, 
+        email: nextProps.user.email,
+        street: nextProps.user.street || '',
+        city: nextProps.user.city || '',
+        zipcode: nextProps.user.zipcode || '',
+        avatar: nextProps.user.avatar  || ''
         };
         }
         else return null;
@@ -66,27 +73,34 @@ class MyAccount extends React.Component{
     render() {
         const {auth, wishlist, adminAuth} = this.props;
         const {avatar, username, email, street, city, zipcode} = this.state;
+
         return(
             <div>
             { adminAuth.isAdmin ? <Admin/> :
 
-                <main className='user-details'>
-                    <h1>
-                    {username}'s Profile
-                    </h1>
-                    { avatar ? <img src={avatar} className="avatar"/> : null}
-                    <h2>{username}'s details:</h2>
-                    <div>Email: {email}</div>
-                    <div>Address: {auth.street || "None Listed"}</div>
-                    <div>City: {auth.city || "None listed."}</div>
-                    <div>Zipcode: {auth.zipcode || 'None listed.'}</div>
-                    <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+            <main key={auth.id} className='user-details'>
+                {([auth]||[]).map(user=>{
+                return(
+                    <div key={user.id}>
+                        <h1>
+                            { user.username }'s Profile
+                            </h1>
+                            { user.avatar ? <img src={user.avatar} className="avatar"/> : null}
+                            <h3>{user.username}'s details:</h3>
+                            <div>Email: {user.email}</div>
+                            <div>Address: {user.street || "None Listed"}</div>
+                            <div>City: {user.city || "None listed."}</div>
+                            <div>Zipcode: {user.zipcode || 'None listed.'}</div>
+                            <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
+
+                    </div>
+                        )
+                    })}
+
                     <br></br>
                     Your Wish List:
                     <br></br>
                     <br></br>
-
-
 
                     {
                         wishlist ? 
@@ -124,20 +138,28 @@ class MyAccount extends React.Component{
     }
 }
 
-const mapState = (state) => {
-    const user = state.auth || {};
+const mapState = ({ user, auth, adminAuth, wishlist}) => {
+    user = {}; 
+    if (Object.keys(user).length === 0) {
+        user = auth 
+    } else {
+        user = user
+    }
     return {
-        auth: state.auth,
-        adminAuth: state.adminAuth,
-        user: user,
-        wishlist: state.wishlist
+        auth,
+        adminAuth,
+        user,
+        wishlist
     }
 }
 
 const mapDispatch = (dispatch) => {
     return{
         getWishList: ()=> dispatch(fetchWishList()),
-        addCart: (product, quantity) => dispatch(addCart(product, quantity))
+        addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+        exchangeToken: ()=> dispatch(exchangeToken()),
+
+    
     }
 }
 

@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateUser, deleteUser, exchangeToken} from '../store'
+import { updateUsers } from '../store'
+import './UpdateMyAccount.css';
+
 
 class UpdateMyAccount extends React.Component{
     constructor(){
         super();
         this.state = {
-            id: '',
+          id: '',
           username: '',
           email: '',
           street: '',
@@ -26,41 +28,43 @@ class UpdateMyAccount extends React.Component{
             });
             reader.readAsDataURL(file);
         })
-        try{
-            this.props.exchangeToken();
-        }
-        catch(ex){
-            console.log(ex);
-        }
     }
+
     static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.auth.id !== prevState.id){
-        return { id: nextProps.auth.id,
-        username: nextProps.auth.username, 
-        email: nextProps.auth.email,
-        street: nextProps.auth.street || '',
-        city: nextProps.auth.city || '',
-        zipcode: nextProps.auth.zipcode || '',
-        avatar: nextProps.auth.avatar  || ''
+        if(nextProps.user.id !== prevState.id){
+        return { id: nextProps.user.id,
+        username: nextProps.user.username, 
+        email: nextProps.user.email,
+        street: nextProps.user.street || '',
+        city: nextProps.user.city || '',
+        zipcode: nextProps.user.zipcode || '',
+        avatar: nextProps.user.avatar  || ''
         };
         }
         else return null;
       }
+
     onChange(ev){
         this.setState({ [ev.target.name]: ev.target.value });
       }
+
     updateUser(ev) {
+
         ev.preventDefault();
         this.props.updateUser(this.state);
-        
-    }
+
+        setTimeout(() => {
+            this.props.history.push('/myaccount')}, 500)
+     }
+
     render() {
         const {updateUser, onChange} = this;
         const {avatar, username, email, street, city, zipcode} = this.state;
         
         return(
-            <form onSubmit={ updateUser }>
-            Update {this.state.username}'s details: <br></br>
+            <div className='editaccountcontainer'>
+            <form className="editaccount" onSubmit={ updateUser }>
+            <h1>Update {this.state.username}'s details: </h1><br></br>
             Avatar: 
             <input type='file' ref={ el => this.el = el }/>
             { avatar ? <img src={avatar} className="avatar"/> : null}
@@ -76,22 +80,28 @@ class UpdateMyAccount extends React.Component{
             <input name='zipcode' onChange={ onChange } value={ zipcode }/>
             <button type="submit" disabled={!username || !email}>Update</button> 
           </form>
+          </div>
         )
     }
 }
 
 const mapState = (state) => {
-    
+    let user = {}
+    if (Object.keys(state.user).length === 0) {
+        user = state.auth 
+    } else {
+        user = state.user
+    }
+    console.log(user)
     return {
-        auth: state.auth
+        auth: state.auth,
+        user: user
     }
 }
 
 const mapDispatch = (dispatch) => {
     return{
-        exchangeToken: () => dispatch(exchangeToken()),
-        updateUser: (user) =>  dispatch(updateUser(user)),
-        deleteUser: (user) => dispatch(deleteUser(user))
+        updateUser: (user) =>  dispatch(updateUsers(user)),
     }
 }
 

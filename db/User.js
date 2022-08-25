@@ -49,6 +49,9 @@ const User = conn.define('user', {
   isAdmin: {
     type: BOOLEAN,
     defaultValue: false
+  },
+  githubId: {
+    type: Sequelize.INTEGER
   }
 });
 

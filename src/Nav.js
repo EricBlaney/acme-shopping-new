@@ -11,6 +11,10 @@ import './Nav.css';
 import './Footer.css';
 
 
+import { fetchProducts } from './store';
+import { logout, exchangeToken, fetchCart, setUsers } from './store';
+import { ShoppingCartOutlined } from '@ant-design/icons';
+import { Badge } from 'antd';
 
 
 class Nav extends Component {
@@ -19,12 +23,15 @@ class Nav extends Component {
         this.props.fetchProducts();
         this.props.exchangeToken();
         this.props.fetchCart();
-
+        this.props.setUsers();
     }
 
     componentDidUpdate(prevProps){
         if(!prevProps.auth.id && this.props.auth.id){
           this.props.fetchCart();
+          this.props.exchangeToken();
+          this.props.fetchProducts();
+          this.props.setUsers();
         }
       }
 
