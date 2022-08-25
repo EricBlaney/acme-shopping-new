@@ -3,8 +3,12 @@ import { NavLink, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
-import {exchangeToken, logout} from './store/auth';
-import { fetchProducts, fetchCart, setUsers } from './store';
+import auth from './store/auth';
+import { fetchProducts } from './store';
+import { logout, exchangeToken, fetchCart, setUsers } from './store';
+import { ShoppingCartOutlined } from '@ant-design/icons';
+import { Badge } from 'antd';
+
 
 class Nav extends Component {
 
@@ -76,11 +80,13 @@ class Nav extends Component {
         {
           auth.id ? <Link to='/'><button onClick={ logout }>Logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
         }
-            
-        { 
-          auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  
-        }
-            
+            { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
+
+            <NavLink to='/cart'>
+                <Badge count={this.props.cart.lineItems.length} size="small">
+                    <ShoppingCartOutlined style={{fontSize:20}} />
+                </Badge>
+                </NavLink>
         </div>
         
         <div className="footer">
@@ -93,7 +99,6 @@ class Nav extends Component {
        </div>
     
        </div>
-       
         </header>
         </nav>
         </main>
@@ -101,11 +106,10 @@ class Nav extends Component {
 }
 };
 
-const mapState = ({ auth }) => {
-  console.log(auth)
+const mapState = ({ auth, cart }) => {
     return {
         auth,
-        
+        cart,
     }
 };
 

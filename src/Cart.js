@@ -2,12 +2,19 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './Cart.css'; // npm install css-loader style-loader -D
 import { Link } from 'react-router-dom'
-import { deleteCart, updateQuantity, fetchCart } from './store'
+import { deleteCart, updateQuantity, fetchCart, checkout} from './store'
 
-const Cart = ({ cart, deleteCart, updateQuantity, getCart })=> {
+//new import from here
+import { Card, Button } from 'antd';
+
+const Cart = ({ cart, deleteCart, updateQuantity, getCart, checkout })=> {
   useEffect(() => {
     getCart();
   }, [])
+
+const totalPrice = cart.lineItems.reduce((total, item) => total += item.product.price, 0);
+console.log(totalPrice);
+
 
   return (
     <div className="cart-container">
@@ -32,20 +39,30 @@ const Cart = ({ cart, deleteCart, updateQuantity, getCart })=> {
         })
       }
       </ul>
-      <div>
-        <Link to="/buy">Buy</Link>
-      </div>
+
+      {/* <div>
+        <Link to="../Checkout/PurchaseButton"><Button onClick={handleBuy}>Purchase</Button></Link>
+      </div> */}
+
+        <Card meta={<Button>Checkout</Button>} title="Total Price">
+          <div>
+            <h2>Total:</h2>
+            <h2>{`$${totalPrice}`}</h2>
+          </div>
+          <Button style={{marginBottom: 50}} className="Checkout" onClick={checkout}>Checkout</Button>
+        </Card>
     </div>
   );
 };
+
 
 const mapDispatch = (dispatch)=> {
   return {
     deleteCart: (product)=> dispatch(deleteCart(product)),
     updateQuantity: (product, num)=> dispatch(updateQuantity(product, num)),
     getCart: ()=> dispatch(fetchCart()),
+    checkout: () => dispatch(checkout()),
   };
 };
 
 export default connect(state => state, mapDispatch)(Cart);
-
