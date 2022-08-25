@@ -8,6 +8,10 @@ import './Footer.css';
 import { logout, exchangeToken, fetchCart, setUsers, fetchProducts, adminExchangeToken } from './store';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
+import Search from './Search/Search';
+import { HashRouter as  Route } from 'react-router-dom';
+
+
 
 class Nav extends Component {
 
@@ -43,6 +47,61 @@ class Nav extends Component {
                             <button className="dropbtn"> <NavLink exact to='/'>Home</NavLink></button>
                             <button className="dropbtn"> <NavLink exact to={`/api/console`}>Consoles</NavLink></button>
 
+<<<<<<< HEAD
+                 
+                <div className="dropdown">
+               <button class="dropbtn"><NavLink exact to='/api/genre'> By Genre </NavLink></button>
+      <div  className="dropdown-content">
+          <ul>
+      <Link exact to={`/api/genre/topFightingGames`}>Fighting </Link>
+      <Link exact to={`/api/genre/topRPGGames`}>RPG</Link>
+      <Link exact to={`/api/genre/topSportsGames`}>Sports</Link>
+      <Link exact to={`/api/genre/topAdventureGames`}>Adventure</Link>
+      <Link exact to={`/api/genre/topPlatformGames`}>Platform</Link>
+        </ul>
+      </div>
+    </div>
+                 <div className="dropdown">
+     <button class="dropbtn"> <NavLink exact to='/api/platform'> By Platform </NavLink></button>
+      <div className="dropdown-content">
+      <Link exact to={`/api/platform/nes`}>NES </Link>
+      <Link exact to={`/api/platform/snes`}>SNES </Link>
+      <Link exact to={`/api/platform/playstation`}>PlayStation </Link>
+      <Link exact to={`/api/platform/xbox`}>XBox </Link>
+      <Link exact to={`/api/platform/sega`}>Sega </Link>
+      </div>
+    </div>
+    
+            <div className="dropdown">
+            <button class="dropbtn"><NavLink exact to='/api/gamesbyyear'>By Year</NavLink></button>
+      <div className="dropdown-content">
+      <Link exact to={`/api/gamesbyyear/1985`}>1985 </Link>
+      <Link exact to={`/api/gamesbyyear/1987`}>1987 </Link>
+      <Link exact to={`/api/gamesbyyear/1989`}>1989 </Link>
+      <Link exact to={`/api/gamesbyyear/1990`}>1990 </Link>
+      <Link exact to={`/api/gamesbyyear/1992`}>1992 </Link>
+      <Link exact to={`/api/gamesbyyear/1994`}>1994 </Link>
+      </div>
+    </div>
+              
+    
+            <div className="topnav-right">
+            {/* <Route component={ Search }/>
+
+<Search /> */}
+               <NavLink exact to='/myaccount' ><i class="fas fa-user-alt"></i> </NavLink> 
+                <NavLink to='/cart'><i class="fas fa-shopping-cart"></i></NavLink>
+            {
+              auth.id ? <Link to='/'><button class='logout' onClick={ logout }>logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
+            }
+                
+            { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
+            </div>
+
+
+            <h1 className='mainlogo'><img src='https://blog.lootcrate.com/wp-content/uploads/2018/02/pacman_ghosts_header.gif'></img>
+RETROS </h1>
+=======
                               
                         <div className="dropdown">
                         <button className="dropbtn"><NavLink exact to={`/api/genre`}> By Genre </NavLink></button>
@@ -85,6 +144,7 @@ class Nav extends Component {
                             <NavLink exact to='/api/myaccount' ><i className="fas fa-user-alt"></i> </NavLink> 
                               <NavLink to='/cart'><i className="fas fa-shopping-cart"></i></NavLink>
 
+>>>>>>> cc0e7ef778463d1538c7009557520da31a9ffdf9
 
                           {
                             auth.id ? <Link to='/'><button onClick={ logout }><i className="fa fa-sign-out"></i></button></Link> : <SignInContainer triggerText={signInTriggerText} />

@@ -17,19 +17,19 @@
   @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
   @import url('https://fonts.googleapis.com/css2?family=Silkscreen');
 
-  form {
+ form {
     display: flex;
     flex-direction: column;
   }
 
   form > * {
     margin: 1rem;
-  }
+  } 
 
-  body {
+ body {
   font-family:'Silkscreen', regular;
-  background-color: black;
-  color: white
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Black_colour.jpg/1200px-Black_colour.jpg'); 
+  color: white;
 }
 
 
@@ -40,7 +40,6 @@
 .user-details{
   margin: auto;
   text-align: center;
-  color: white
 }
 
 .avatar {
@@ -53,18 +52,17 @@
 h2 {
   padding: 14px 16px;
   font-size: 20px;
-  color: white;
   text-align: center;
   text-transform: uppercase;
-  font-style: italic;
   font-weight: 900;
   border-radius: 25px;
-  font-family: "Avenir Next", sans-serif;
+  font-family:'Silkscreen', regular;
   background: linear-gradient(to right, orange,blue, red, yellow);
 }
 
 * {
   box-sizing: border-box;
+
 }
 
 form.example input[type=text] {
@@ -76,6 +74,9 @@ form.example input[type=text] {
   background: #f1f1f1;
 }
 
+.row {
+    height: 90%;
+  }
 .games li{
   margin: 5;
   padding: 5;
@@ -85,11 +86,13 @@ form.example input[type=text] {
   margin-left: auto;
   margin-right: auto;
   flex-wrap: wrap;
+
 } 
 
  .games {
   display: flex;
   flex-wrap: wrap;
+
 }
 
 .name {
@@ -98,6 +101,8 @@ form.example input[type=text] {
   margin-left: auto;
   margin-right: auto;
   font-size: 15px;
+  color: white;
+
 }
 
 .price {
@@ -127,17 +132,11 @@ form.example input[type=text] {
   padding-bottom: 60px;
 }
 
-.searchbar {
-  margin-top: 0;
-  margin-left: 3rem;
-  background-color:#CEE5F2;
-  border-radius:10px;
-  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+.info {
+  color: white
 }
 
-#main-body{
-  padding-bottom: 60px;
-}
+
 </style>
 
   <script defer src='/dist/main.js'></script>

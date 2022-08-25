@@ -7,12 +7,14 @@
 .cart-item {
     display: flex;
     margin-bottom: 20px;
+
 }
 
 .cart-image {
     width: 150px;
     height: 150px;
     margin-right: 10px;
+
 }
 
 .cart-name {
@@ -59,4 +61,5 @@
 .cart-price {
     margin-top: 10px;
     color: #648caf;
+
 }
