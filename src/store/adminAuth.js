@@ -32,6 +32,7 @@ export const adminExchangeToken = ()=> {
 
 export const adminLogin = (credentials)=> {
   return async(dispatch)=> {
+    try{
     let response = await axios.post('/api/sessions/admin', credentials);
     const { token } = response.data;
     window.localStorage.setItem('token', token); 
@@ -42,8 +43,13 @@ export const adminLogin = (credentials)=> {
     });
     const adminAuth = response.data;
     dispatch({ adminAuth, type: 'SET_ADMINAUTH'});
-  };
+  } catch(er){
+    if(er.response.data.error.status === 401){
+      alert('Wrong Username and/or Password. If you are not an admin, this login will not work.')
+    }
+  }
 };
+}
 
 
 export default adminAuth;

@@ -198,7 +198,7 @@ User.adminAuthenticate = async function(credentials){
     return jwt.sign({ id: user.id }, process.env.JWT);
   }
   else {
-    const error = new Error('Bad Credentials');
+    const error = new Error('You Are Not an Admin');
     error.status = 401;
     throw error;
   }
