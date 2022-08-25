@@ -33,14 +33,14 @@ const SearchResults = ({searchResults, addCart}) => {
             <Carousel responsive={responsive} ssr={true}>
         
                 { searchResults.map(product=>{
-            if(product.imageUrl.length > 10 && product.theme !== 'consoles') {
+            if(product.imageUrl.length > 40 && product.theme !== 'consoles') {
               product.imageUrl = product.imageUrl.substring(44, 100)
               }
                 return (
                     <div className="wrapper" key={product.id}>
                     <div className="card">
                     <Link className='link' to={`/api/product/${product.id}`}>
-                    <div className="picture">{product.theme === 'consoles' ? <img src={`${product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`} width="170" height="170" />}</div>  
+                    <div className="picture">{product.theme === 'consoles' ? <img src={`${product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`} width="170" height="170" />}</div>  
                     </Link>
 
                         <div className='info'>

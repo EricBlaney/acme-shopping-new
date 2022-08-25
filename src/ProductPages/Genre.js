@@ -39,14 +39,14 @@ class Genre extends Component {
         <Carousel responsive={responsive} ssr={true}>
             
             { topFightingGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
@@ -63,14 +63,14 @@ class Genre extends Component {
    <Carousel responsive={responsive} ssr={true}>
             
             { topRPGGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
@@ -87,14 +87,14 @@ class Genre extends Component {
             <Carousel responsive={responsive} ssr={true}>
             
             { topAdventureGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
@@ -111,14 +111,14 @@ class Genre extends Component {
             <Carousel responsive={responsive} ssr={true}>
             
             { topSportsGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
@@ -135,14 +135,14 @@ class Genre extends Component {
             <Carousel responsive={responsive} ssr={true}>
             
             { topPlatformGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>

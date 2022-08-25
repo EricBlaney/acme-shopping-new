@@ -40,58 +40,25 @@ class LandingPage extends React.Component{
   render(){
     const signUpTriggerText = 'Sign Up';
     const signInTriggerText = 'Sign In';
-    const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990, thisYearsGames1985, thisYearsGames1987, thisYearsGames1989, thisYearsGames1994 } = this.props;
+    const { auth, thisYearsGames1992, thisYearsGames1990, thisYearsGames1985, thisYearsGames1987, thisYearsGames1994 } = this.props;
     const { cartProduct } = this.state;
     return (
       <main>
       { auth.id ? (
         <div className='row'>
-        <h2>Top Games of August 1989!</h2>
+
+        <h2>Top NES Games of the 80s!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
-        { thisMonthGames1989.map(product=>{
-          if(product.imageUrl.length > 10) {
+        { thisYearsGames1985.map((product,i)=>{
+          if(product.imageUrl.length > 40) {
           product.imageUrl = product.imageUrl.substring(44, 100)
-          }
-          return (
-            
-            <div className="wrapper" key={product.id}>
-                      
-              <div className="card">
-                <Link to={`/api/product/${product.id}`}>
-                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-                height="170" /></div> </Link>
-                  <div className='info'>
-                    <h3>{product.name}</h3>
-                    <p>{`$${product.price}`}</p>
-                    <button  onClick={() => {this.props.addCart(product, 1)
-                    this.setState({
-                      cartProduct: product
-                    })
-                    }}>
-                      Add To Cart</button>
-                  </div>
-              </div>
-            
-            </div>
-           
-
-          )
-        })}
-        </Carousel>
-
-        <h2>Top Games of 1985!</h2>
-        <Carousel responsive={responsive} ssr={true}>
-        
-        { thisYearsGames1985.map(product=>{
-          if(product.imageUrl.length > 10) {
-          product.imageUrl = product.imageUrl.substring(44, 100)
-          }
+          } 
           return (
             <div className="wrapper" key={product.id}>
               <div className="card">
                   <Link to={`/api/product/${product.id}`}>
-                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                   height="170" /></div> </Link>
                     <div className='info'>
                       <h3>{product.name}</h3>
@@ -109,18 +76,18 @@ class LandingPage extends React.Component{
         })}
         </Carousel>
 
-        <h2>Top Games of 1987!</h2>
+        <h2>Top NES Games of the late 80s!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
         { thisYearsGames1987.map(product=>{
-          if(product.imageUrl.length > 10) {
+          if(product.imageUrl.length > 40) {
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
           return (
             <div className="wrapper" key={product.id}>
               <div className="card">
                   <Link to={`/api/product/${product.id}`}>
-                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                   height="170" /></div> </Link>
                     <div className='info'>
                       <h3>{product.name}</h3>
@@ -139,18 +106,18 @@ class LandingPage extends React.Component{
         </Carousel>
         
         
-        <h2>Top Games of 1990!</h2>
+        <h2>Top SNES games!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
         { thisYearsGames1990.map(product=>{
-          if(product.imageUrl.length > 10) {
+          if(product.imageUrl.length > 40) {
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
           return (
             <div className="wrapper" key={product.id}>
               <div className="card">
                   <Link to={`/api/product/${product.id}`}>
-                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                   height="170" /></div> </Link>
                     <div className='info'>
                       <h3>{product.name}</h3>
@@ -171,14 +138,14 @@ class LandingPage extends React.Component{
         <h2>Top Games of 1992!</h2>
         <Carousel responsive={responsive} ssr={true}>
         { thisYearsGames1992.map(product=>{
-          if(product.imageUrl.length > 10) {
+          if(product.imageUrl.length > 40) {
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
           return (
             <div className="wrapper" key={product.id}>
               <div className="card">
                 <Link className='link' to={`/api/product/${product.id}`}>
-                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                 height="170" /></div> 
                 </Link>
                   <div className='info'>
@@ -200,14 +167,14 @@ class LandingPage extends React.Component{
         <h2>Top Games of 1994!</h2>
         <Carousel responsive={responsive} ssr={true}>
         { thisYearsGames1994.map(product=>{
-          if(product.imageUrl.length > 10) {
+          if(product.imageUrl.length > 40) {
           product.imageUrl = product.imageUrl.substring(44, 100)
           }
           return (
             <div className="wrapper" key={product.id}>
               <div className="card">
                 <Link className='link' to={`/api/product/${product.id}`}>
-                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                 height="170" /></div> 
                 </Link>
                 <div className='info'>
@@ -254,7 +221,6 @@ const mapDispatch = (dispatch)=> {
 };
 
 const mapStateToProps = ({auth, product, cart}) => {
-  const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
   const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
   const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
   const thisYearsGames1990 = product.filter(product => product.theme === 'thisYearsGames1990');
@@ -265,7 +231,6 @@ const mapStateToProps = ({auth, product, cart}) => {
       auth,
       thisYearsGames1985,
       thisYearsGames1987,
-      thisMonthGames1989,
       thisYearsGames1990,
       thisYearsGames1992,
       thisYearsGames1994,

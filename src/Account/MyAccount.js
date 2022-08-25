@@ -107,7 +107,7 @@ class MyAccount extends React.Component{
                         <Carousel responsive={responsive} ssr={true}> 
                         { 
                         wishlist.wishListItems.map(wishListItem=>{
-                        if(wishListItem.product.imageUrl.length > 10 && wishListItem.product.theme !== 'consoles') {
+                        if(wishListItem.product.imageUrl.length > 40 && wishListItem.product.theme !== 'consoles') {
                             wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100)
                                 }
 
@@ -115,7 +115,7 @@ class MyAccount extends React.Component{
                             <div className="wrapper" key={wishListItem.product.id}>
                             <div className="card">
                             <Link className='link' to={`/api/product/${wishListItem.product.id}`}>
-                            <div className="picture">{wishListItem.product.theme === 'consoles' ? <img src={`${wishListItem.product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`} width="170" height="170" />}</div>  
+                            <div className="picture">{wishListItem.product.theme === 'consoles' ? <img src={`${wishListItem.product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_1080p/${wishListItem.product.imageUrl}`} width="170" height="170" />}</div>  
                             </Link>
 
                                 <div className='info'>
