@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { addCart, addToWishList } from '../store';
 import './SingleGame.css';
 import { Modal } from 'antd'
+import adminAuth from '../store/adminAuth';
 
-class SingleGame extends React.Component{
+class SingleGame extends Component {
   constructor(){
     super()
     this.state = {
@@ -13,45 +14,43 @@ class SingleGame extends React.Component{
   }
 
   render(){
-    const signUpTriggerText = 'Sign Up';
-    const signInTriggerText = 'Sign In';
-    const { auth, logout, cart, game  } = this.props;
+    const { adminAuth, auth, game  } = this.props;
     const { cartProduct } = this.state;
     return (
       <main>
 
-          { auth.id ? (
+          { auth.id || adminAuth.id ? (
 
           <div className="singlegame">
 
-            { [game].map(product=>{
-              if(product.imageUrl.length > 10 && product.theme !== 'consoles') {
-              product.imageUrl = product.imageUrl.substring(44, 100)
+            { (game||[]).map(game=>{
+              if(game.imageUrl.length > 10 && game.theme !== 'consoles') {
+                game.imageUrl = game.imageUrl.substring(44, 100)
               }
               return (
-                      <div key={product.id} className='singlecard'>
+                      <div key={game.id} className='singlecard'>
                         <li className='product'>
-                          <div className="product-img"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`} width="170" height="170" /></div>
+                          <div className="product-img"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${game.imageUrl}`} width="170" height="170" /></div>
                               <div className='productlisting'>
                                   <div className='content'>
-                                    <div className='singleName'>{product.name}</div>
+                                    <div className='singleName'>{game.name}</div>
                                     <div className="price-condition">
-                                    <div className='singlePrice'>{`$${product.price}  |`}</div> 
-                                    <div className='condition'>Condition: {`${product.condition}`}</div>
+                                    <div className='singlePrice'>{`$${game.price}  |`}</div> 
+                                    <div className='condition'>Condition: {`${game.condition}`}</div>
                                     </div>
                                     <div className='heart-cart'>
                                       <button className='btn' onClick={() => {
-                                      this.props.addCart(product, 1)
+                                      this.props.addCart(game, 1)
                                       this.setState({
-                                        cartProduct: product
+                                        cartProduct: game
                                       })
                                     }}>Add To Cart</button>
-                                      <div className="heart-wrapper" onClick={ () => this.props.addToWishList(product)}>
+                                      <div className="heart-wrapper" onClick={ () => this.props.addToWishList(game)}>
                                         <div className='heart'></div>
                                       </div>
                                     </div>
                                     <br></br>
-                                    <div className='singleSummary'>{product.summary.substring(0,600)}</div>
+                                    <div className='singleSummary'>{(game.summary.substring(0,400))}</div>
                                   </div>
                               </div>
                         </li>
@@ -89,11 +88,12 @@ const mapDispatch = (dispatch)=> {
   };
 };
 
-const mapStateToProps = ({auth, product, cart}, { match }) => {
-    const id = match.params.id;
-    let game = product.find(game => game.id === id)
+const mapStateToProps = ({auth, adminAuth, product, cart}, { match }) => {
+  const id = match.params.id;
+  let game = product.filter(game => game.id === id)
 
     return {
+      adminAuth,
       auth,
       cart,
       game
