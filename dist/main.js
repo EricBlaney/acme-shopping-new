@@ -3548,12 +3548,14 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
   componentDidMount() {
     this.props.getWishList();
     this.props.exchangeToken();
+    this.props.setUsers();
   }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.adminAuth.id && this.props.adminAuth.id) {
       this.props.getWishList();
       this.props.exchangeToken();
+      this.props.setUsers();
     }
   }
 
@@ -3606,6 +3608,7 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
       handleShowProduct
     } = this;
     const triggerTextCreate = 'Create User';
+    console.log(this.props);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "admin"
     }, ([adminAuth] || 0).map(user => {
@@ -3688,16 +3691,19 @@ class Admin extends (react__WEBPACK_IMPORTED_MODULE_0___default().Component) {
 
 const mapState = ({
   adminAuth,
-  wishlist,
   product,
-  user
+  user,
+  wishlist
+}, {
+  match
 }) => {
+  // console.log(state)
   user = user.filter(user => user.id !== adminAuth.id);
   return {
     adminAuth,
-    user,
     wishlist,
-    product
+    product,
+    user
   };
 };
 
@@ -3707,6 +3713,7 @@ const mapDispatch = dispatch => {
     addCart: (product, quantity) => dispatch(addCart(product, quantity)),
     deleteUser: user => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deleteUser)(user)),
     deleteProduct: product => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deleteProduct)(product)),
+    setUsers: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.setUsers)()),
     exchangeToken: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.exchangeToken)())
   };
 };
@@ -6537,7 +6544,7 @@ class SignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     } = this.state;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, showAdminSignIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SignInAdmin__WEBPACK_IMPORTED_MODULE_3__["default"], {
       onSubmit: onSubmit
-    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
       onSubmit: onSubmit
     }, "Sign-In: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
       name: "username",
@@ -6560,7 +6567,7 @@ class SignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "github_logo"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
       fillRule: "evenodd",
-      d: "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+      d: "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38\n0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01\n1.08.58 1.23.82.72 1.21 1.87.87\n2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12\n0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08\n2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0\n.21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
     })), "Sign in with GitHub"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), password_email_sent ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Check your email to continue with password reset.") : null, password_reset ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
       onSubmit: updatepassword
     }, "Password Reset: What is the email associated with your account? ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Email:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -6570,7 +6577,7 @@ class SignIn extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Reset Password")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
       className: "reset-password",
       onClick: flag_email_input
-    }, "Forgot your password? Reset here."));
+    }, "Forgot your password? Reset here.")));
   }
 
 }
@@ -7271,7 +7278,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "setUsers": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.setUsers),
 /* harmony export */   "updateProducts": () => (/* reexport safe */ _product__WEBPACK_IMPORTED_MODULE_4__.updateProducts),
 /* harmony export */   "updateQuantity": () => (/* reexport safe */ _cart__WEBPACK_IMPORTED_MODULE_1__.updateQuantity),
-/* harmony export */   "updateUser": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.updateUser),
 /* harmony export */   "updateUsers": () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.updateUsers)
 /* harmony export */ });
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
@@ -7395,7 +7401,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "deleteUser": () => (/* binding */ deleteUser),
 /* harmony export */   "loadUser": () => (/* binding */ loadUser),
 /* harmony export */   "setUsers": () => (/* binding */ setUsers),
-/* harmony export */   "updateUser": () => (/* binding */ updateUser),
 /* harmony export */   "updateUsers": () => (/* binding */ updateUsers)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -7413,10 +7418,6 @@ const user = (state = {}, action) => {
 
   if (action.type === 'CREATE_USER') {
     return [action.user, ...state];
-  }
-
-  if (action.type === 'UPDATE_USER') {
-    return action.user;
   }
 
   if (action.type === 'UPDATE_USERS') {
@@ -7457,20 +7458,18 @@ const setUsers = () => {
       user
     });
   };
-};
-const updateUser = user => {
-  return async dispatch => {
-    try {
-      await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/users`, user);
-      dispatch({
-        type: "UPDATE_USER",
-        user
-      });
-    } catch (ex) {
-      console.log(ex);
-    }
-  };
-};
+}; // export const updateUser = (user) => {
+//     return async(dispatch) => {
+//       try{
+//         await axios.put(`/api/users`, user);
+//         dispatch({type: "UPDATE_USER", user})
+//       }
+//       catch(ex){
+//         console.log(ex)
+//       }
+//     }
+// };
+
 const updateUsers = user => {
   return async dispatch => {
     try {
