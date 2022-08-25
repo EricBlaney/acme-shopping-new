@@ -1,7 +1,20 @@
+main {
+  background-color: black;
 
-* {
-    box-sizing: border-box; 
-  }
+}
+h2 {
+  padding: 14px 16px;
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 900;
+  border-radius: 25px;
+  font-family: "Avenir Next", sans-serif;
+  background: linear-gradient(to right, orange,blue, red, yellow);
+}
+
   .row {
     height: 90%
   }
