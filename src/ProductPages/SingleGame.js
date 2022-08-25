@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addCart, addToWishList } from '../store';
 import './SingleGame.css';
-import { Modal } from 'antd'
-import adminAuth from '../store/adminAuth';
+import { Modal } from 'antd';
+import BackButton from '../BackButton'
 
 class SingleGame extends Component {
   constructor(){
@@ -14,11 +14,11 @@ class SingleGame extends Component {
   }
 
   render(){
-    const { adminAuth, auth, game  } = this.props;
+    const { auth, game  } = this.props;
     const { cartProduct } = this.state;
     return (
       <main>
-
+        <BackButton/>
           {
           <div className="singlegame">
 
