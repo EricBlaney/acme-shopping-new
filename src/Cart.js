@@ -34,7 +34,7 @@ console.log(auth.id);
                   <span className="quantity-num">{ lineItem.quantity }</span>
                   <span className="quantity-plus" onClick={() => updateQuantity(lineItem.product, lineItem.quantity + 1, auth)}>+</span>
                 </div>
-                <div className="cart-delete" onClick={() => deleteCart(lineItem.product)}>delete</div>
+                <div className="cart-delete" onClick={() => deleteCart(lineItem.product, auth)}>delete</div>
               </div>
             </li>
               )
@@ -67,7 +67,7 @@ const mapStateToProps = ({auth, cart}) => {
 
 const mapDispatch = (dispatch)=> {
   return {
-    deleteCart: (product)=> dispatch(deleteCart(product)),
+    deleteCart: (product, auth)=> dispatch(deleteCart(product, auth)),
     updateQuantity: (product, num, auth)=> dispatch(updateQuantity(product, num, auth)),
     getCart: (auth)=> dispatch(fetchCart(auth)),
     checkout: () => dispatch(checkout())
