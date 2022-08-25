@@ -1,4 +1,4 @@
-const stripe = require("stripe")(process.env.pk_test_51LZN7BDFzNDjkHzZMHCY0KqU77RmrY5FqrwnfVArjx2ewov02KSpy4yWcQPPKEf61khFhXfdjmRx20JAt1XUQBQV00Ce3yAwyC);
+const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
 module.exports = async (req, res) => {
     const { totalAmount, cancelRoute, productIds, currentRoute } = req.body;
