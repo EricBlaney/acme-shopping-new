@@ -29,7 +29,7 @@ class GamesbyYear extends Component {
     }
 
     render() {
-        const { thisYearsGames1994, thisYearsGames1992, thisYearsGames1990, thisYearsGames1987, thisYearsGames1985 } = this.props;
+        const { auth, thisYearsGames1994, thisYearsGames1992, thisYearsGames1990, thisYearsGames1987, thisYearsGames1985 } = this.props;
 
     return (
     <div>
@@ -38,19 +38,19 @@ class GamesbyYear extends Component {
       <Carousel responsive={responsive} ssr={true}>
 
       { thisYearsGames1994.map(product=>{
-  if(product.imageUrl.length > 10) {
+  if(product.imageUrl.length > 40) {
     product.imageUrl = product.imageUrl.substring(44, 100)
     }
   return (
     <div className="wrapper" key={product.id}>
       <div className="card">
           <Link to={`/api/product/${product.id}`}>
-          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
           height="170" /></div> </Link>
             <div className='info'>
               <h3>{product.name}</h3>
               <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+              <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
             </div>
         </div>
     </div>   
@@ -62,19 +62,19 @@ class GamesbyYear extends Component {
       <Carousel responsive={responsive} ssr={true}>
 
       { thisYearsGames1992.map(product=>{
-  if(product.imageUrl.length > 10) {
+  if(product.imageUrl.length > 40) {
     product.imageUrl = product.imageUrl.substring(44, 100)
     }
   return (
     <div className="wrapper" key={product.id}>
       <div className="card">
           <Link to={`/api/product/${product.id}`}>
-          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
           height="170" /></div> </Link>
             <div className='info'>
               <h3>{product.name}</h3>
               <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+              <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
             </div>
         </div>
     </div>   
@@ -86,19 +86,19 @@ class GamesbyYear extends Component {
       <Carousel responsive={responsive} ssr={true}>
 
       { thisYearsGames1990.map(product=>{
-  if(product.imageUrl.length > 10) {
+  if(product.imageUrl.length > 40) {
     product.imageUrl = product.imageUrl.substring(44, 100)
     }
   return (
     <div className="wrapper" key={product.id}>
       <div className="card">
           <Link to={`/api/product/${product.id}`}>
-          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
           height="170" /></div> </Link>
             <div className='info'>
               <h3>{product.name}</h3>
               <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+              <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
             </div>
         </div>
     </div>   
@@ -110,19 +110,19 @@ class GamesbyYear extends Component {
       <Carousel responsive={responsive} ssr={true}>
 
       { thisYearsGames1987.map(product=>{
-  if(product.imageUrl.length > 10) {
+  if(product.imageUrl.length > 40) {
     product.imageUrl = product.imageUrl.substring(44, 100)
     }
   return (
     <div className="wrapper" key={product.id}>
       <div className="card">
           <Link to={`/api/product/${product.id}`}>
-          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
           height="170" /></div> </Link>
             <div className='info'>
               <h3>{product.name}</h3>
               <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+              <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
             </div>
         </div>
     </div>   
@@ -134,19 +134,19 @@ class GamesbyYear extends Component {
       <Carousel responsive={responsive} ssr={true}>
 
       { thisYearsGames1985.map(product=>{
-  if(product.imageUrl.length > 10) {
+  if(product.imageUrl.length > 40) {
     product.imageUrl = product.imageUrl.substring(44, 100)
     }
   return (
     <div className="wrapper" key={product.id}>
       <div className="card">
           <Link to={`/api/product/${product.id}`}>
-          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
           height="170" /></div> </Link>
             <div className='info'>
               <h3>{product.name}</h3>
               <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+              <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
             </div>
         </div>
     </div>   
@@ -180,7 +180,7 @@ cart
 
   const mapDispatch = (dispatch) => {
     return {
-      addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+      addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
 
         fetchProducts: ()=> dispatch(fetchProducts())
 

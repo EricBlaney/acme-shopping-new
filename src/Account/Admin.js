@@ -1,13 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList, deleteUser, deleteProduct, exchangeToken } from '../store'
-import { Link, NavLink } from 'react-router-dom';
+import { fetchWishList, deleteUser, deleteProduct } from '../store'
+import { Link } from 'react-router-dom';
 import CreateUserContainer from './AdminModal/CreateUser/CreateUserContainer'
 import Modals from './AdminModal/EditUser/Modals'
 import ProductModals from './AdminModal/EditProduct/ProductModals'
+import MyAccountModals from './AdminModal/EditMyAccount/MyAccountModals'
 import './Admin.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+
 //Carousel responsiveness
 
 const responsive = {
@@ -33,49 +35,27 @@ class Admin extends React.Component{
     constructor(){
         super();
         this.state = {
+            modalMyAccount: {},
             modalProduct: {},
             modalUser: {},
-            username: '',
-            email: '',
-            street: '',
-            city: '',
-            zipcode: '',
-            avatar: '',
             isShowModal: false,
+            isShowMyAccountModal: false,
             isShowProductModal: false
         };
-
+        this.handleShowMyAccount = this.handleShowMyAccount.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
       };
 
     componentDidMount() {
         this.props.getWishList();
-        this.props.exchangeToken();
-
     }
 
     componentDidUpdate(prevProps){
         if(!prevProps.adminAuth.id && this.props.adminAuth.id){
           this.props.getWishList();
-          this.props.exchangeToken();
-
         }
     }
-
-    static getDerivedStateFromProps(nextProps, prevState){
-        if(nextProps.adminAuth !== prevState){
-        return { id: nextProps.adminAuth.id,
-        username: nextProps.adminAuth.username, 
-        email: nextProps.adminAuth.email,
-        street: nextProps.adminAuth.street || '',
-        city: nextProps.adminAuth.city || '',
-        zipcode: nextProps.adminAuth.zipcode || '',
-        avatar: nextProps.adminAuth.avatar  || ''
-        };
-        }
-        else return null;
-      }
     
       handleShow = (user) =>{
         this.setState({
@@ -91,22 +71,29 @@ class Admin extends React.Component{
         })
      }
 
+     handleShowMyAccount = (user) =>{
+        this.setState({
+          modalMyAccount: user,
+          isShowMyAccountModal: true
+        })
+     }
+
      handleClose = () =>{
         this.setState({
-            isShowModal: false,
-            isShowProductModal: false
-
+          isShowModal: false,
+          isShowProductModal: false,
+          isShowMyAccountModal: false
         })
      }
 
     render() {
-        const {wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth} = this.props;
-        const { handleClose, handleShow, handleShowProduct } = this;
+        const {wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth, thisUser, values} = this.props;
+        const { handleClose, handleShow, handleShowProduct, handleShowMyAccount } = this;
         const triggerTextCreate = 'Create User';
   
         return(
-            <div className='admin'>
-            {([adminAuth]||[]).map(user=>{
+            <div className='admin' key={user.id}>
+            {thisUser.map(user=>{
                 return(
                 <div key={user.id}>
                     <h1> { user.username }'s Admin Profile </h1>
@@ -116,11 +103,12 @@ class Admin extends React.Component{
                         <div>Address: {user.street || "None Listed"}</div>
                         <div>City: {user.city || "None listed."}</div>
                         <div>Zipcode: {user.zipcode || 'None listed.'}</div>
-                        <NavLink exact to='/updatemyaccount'>Edit account details</NavLink>
-
+                        <button onClick={()=> handleShowMyAccount(user)}>Click Here to Edit Your Account</button>
                 </div>
                 )
             })}
+            {this.state.isShowMyAccountModal ? <MyAccountModals handleClose={ handleClose } isShowModal={this.state.isShowMyAccountModal} user={this.state.modalMyAccount}/> : null}
+
             <br></br>
             <br></br>
             Your Wish List:
@@ -132,14 +120,14 @@ class Admin extends React.Component{
                         <Carousel responsive={responsive} ssr={true}> 
                         { 
                         wishlist.wishListItems.map(wishListItem=>{
-                            if(wishListItem.product.imageUrl.length > 10 && wishListItem.product.theme !== 'consoles') {
+                            if(wishListItem.product.imageUrl.length > 40 && wishListItem.product.theme !== 'consoles') {
                             wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100)
                                 }
                         return (
                             <div className="wrapper" key={wishListItem.product.id}>
                             <div className="card">
                             <Link className='link' to={`/api/product/${wishListItem.product.id}`}>
-                            <div className="picture">{wishListItem.product.theme === 'consoles' ? <img src={`${wishListItem.product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`} width="170" height="170" />}</div>  
+                            <div className="picture">{wishListItem.product.theme === 'consoles' ? <img src={`${wishListItem.product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_1080p/${wishListItem.product.imageUrl}`} width="170" height="170" />}</div>  
                             </Link>
 
                                 <div className='info'>
@@ -159,7 +147,7 @@ class Admin extends React.Component{
             <br></br>
             <h3>Admin Tools</h3>
             <br></br>
-            <h4>Current Users</h4>
+            <h4>Current Users ({user.length} including you) </h4>
             <div>
 
             <CreateUserContainer onSubmit={ onSubmit } triggerText={ triggerTextCreate } />
@@ -180,8 +168,8 @@ class Admin extends React.Component{
                 </thead>
                 <tbody>
                     {
-                    (user||[]).map(user=>{
-                        console.log(user)
+                    (values.filter((user)=> user.id !== adminAuth.id).map(user=>{
+                        
                         return(
                                 <tr key={user.id}>
                                     <td>{user.username}</td>
@@ -191,8 +179,8 @@ class Admin extends React.Component{
                                     <td>{user.isAdmin ? 'Admin' : 'User'}</td>
                                 </tr>
                         )
-                    })
-                    } 
+                    }))
+                    }
                 </tbody>
               
                 </table>
@@ -204,7 +192,7 @@ class Admin extends React.Component{
                 <br></br>
                 <br></br>
 
-            <h4>Current Products</h4>
+            <h4>Current Products ({product.length})</h4>
             <div>
 
             {/* <CreateUserContainer onSubmit={ onSubmit } triggerText={ triggerTextCreate } /> */}
@@ -249,14 +237,16 @@ class Admin extends React.Component{
     }
 }
 
-const mapState = ({adminAuth, wishlist, product, user}) => {
-    user = user.filter( user => user.id !== adminAuth.id);
-
+const mapState = ({adminAuth, product, user, wishlist}) => {
+    let values = Object.values(user)
+    const thisUser = values.filter((user)=>user.id === adminAuth.id)
     return {
         adminAuth,
-        user,
         wishlist,
-        product
+        product,
+        user,
+        thisUser,
+        values
     }
 }
 
@@ -266,8 +256,6 @@ const mapDispatch = (dispatch) => {
         addCart: (product, quantity) => dispatch(addCart(product, quantity)),
         deleteUser: (user)=> dispatch(deleteUser(user)),
         deleteProduct: (product)=> dispatch(deleteProduct(product)),
-        exchangeToken: ()=> dispatch(exchangeToken()),
-
     }
 }
 

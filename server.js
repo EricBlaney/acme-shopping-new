@@ -1,27 +1,8 @@
-// try{
-//   require('./.env.js');
-//   console.log(process.env.CLIENT_ID)
-// }
-// catch(ex){
-//   console.log('running locally? create .env file');
-//   console.log('deployed? set env variables');
-// }
 const app = require('./app');
-const { conn, User, Product } = require('./db');
-const { faker } = require('@faker-js/faker');
-const igdb = require('igdb-api-node').default;
-const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
-
-// Random Condition Generator
-
-const arr = ['poor', 'fair', 'good', 'excellent'];
-
-function randomCondition(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
 
 const setUp = async()=> {
   try {
+<<<<<<< HEAD
     await conn.sync({ force: true });
 
 // General / Landing Page Queries
@@ -232,6 +213,8 @@ const consoles = await Promise.all ([
     await User.create({ username: 'moe', password: 'moe_pw', email: 'moe@gmail.com', isAdmin: true});
     await User.create({ username: 'lucy', password: 'lucy_pw', email: 'lucy@gmail.com'});
 
+=======
+>>>>>>> cc0e7ef778463d1538c7009557520da31a9ffdf9
     const port = process.env.PORT || 3000;
     app.listen(port, ()=> console.log(`listening on port ${port}`));
   }

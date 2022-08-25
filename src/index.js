@@ -1,20 +1,22 @@
 import { createRoot } from 'react-dom/client';
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import Nav from './Nav'
+import store from './store'
+import LandingPage from './LandingPage';
 import SingleGame from './ProductPages/SingleGame';
 import MyAccount from './Account/MyAccount';
-import UpdateMyAccount from './Account/UpdateMyAccount';
-import { HashRouter as Router, Route } from 'react-router-dom';
-import LandingPage from './LandingPage';
 import Cart from './Cart';
+<<<<<<< HEAD
+=======
+import CheckoutSuccess from './CheckoutSuccess';
+import PasswordReset from './PasswordReset';
+import Search from './Search/Search';
+>>>>>>> cc0e7ef778463d1538c7009557520da31a9ffdf9
 import SearchResults from './Search/SearchResults'
-import './index.css';
 import Platform from './ProductPages/Platform';
 import Genre from './ProductPages/Genre';
-import 'antd/dist/antd.css';
-import CheckoutSuccess from './CheckoutSuccess';
-import store from './store'
-import Nav from './Nav'
 import GamesbyYear from './ProductPages/GamesbyYear';
 import Console from './ProductPages/Console'
 import topFightingGames from './dropdownPage/topFightingGames';
@@ -22,6 +24,7 @@ import topRPGGames from './dropdownPage/topRPGGames';
 import topSportsGames from './dropdownPage/topSportsGames';
 import topAdventureGames from './dropdownPage/topAdventureGames';
 import topPlatformGames from './dropdownPage/topPlatformGames';
+<<<<<<< HEAD
 import topNESGames from './dropdownPage/nes';
 import topSNESGames from './dropdownPage/snes';
 import topPlayStationGames from './dropdownPage/playstation';
@@ -39,17 +42,26 @@ import Search from './Search/Search';
 
 
 import PasswordReset from './PasswordReset';
+=======
+import 'antd/dist/antd.css';
+import './index.css';
+>>>>>>> cc0e7ef778463d1538c7009557520da31a9ffdf9
 
 class _App extends Component{
 
     render(){
         return(
         <div id="main-body">
+<<<<<<< HEAD
             <Nav />
+=======
+            <Nav/>
+            
+            <Route component={ Search }/>  
+>>>>>>> cc0e7ef778463d1538c7009557520da31a9ffdf9
             <Route path='/cart' exact component={ Cart }/>
             <Route path='/cart/success' exact component={ CheckoutSuccess }/>
             <Route path='/' exact component={ LandingPage }/>
-            <Route path='/api/product/:id' exact component={ SingleGame }/>
             <Route path='/api/genre' exact component={ Genre }/>
             <Route path='/api/genre/topFightingGames' exact component={ topFightingGames }/>
             <Route path='/api/genre/topRPGGames' exact component={ topRPGGames }/>
@@ -72,9 +84,10 @@ class _App extends Component{
 
             <Route path='/api/console' exact component={ Console }/>
             <Route path='/api/myaccount' exact component={ MyAccount }/>
-            <Route path='/updatemyaccount' exact component={ UpdateMyAccount }/>
             <Route path='/search/:term?' component={ SearchResults }/>
             <Route path='/passwordreset/:token/:username/:id' component={ PasswordReset }/>
+            <Route path='/api/product/:id' exact component={ SingleGame }/>
+
         </div>
         )
     }

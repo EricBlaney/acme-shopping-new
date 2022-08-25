@@ -17,8 +17,8 @@ const product = (state = [], action)=> {
 
 export const fetchProducts = ()=> {
   return async(dispatch)=> {
-    const response = (await axios.get('/api/products')).data;
-    dispatch({ type: 'SET_PRODUCTS', products: response });
+    const products = (await axios.get('/api/products')).data;
+    dispatch({ type: 'SET_PRODUCTS', products });
   };
 };
 

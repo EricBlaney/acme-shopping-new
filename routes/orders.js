@@ -1,9 +1,16 @@
 const express = require('express');
 const stripe = require('stripe')('sk_test_51LZN7BDFzNDjkHzZXfRweOHxroFYedkM3NvPch4QTXBjCp29t5rV8gx6BQRYRUfhe2mlAieHqaKCTV91fKTU8k4n00dCPmJ5zV');
 const app = express.Router();
-const { isLoggedIn } = require('./middleware');
 
-module.exports = app;
+const { isLoggedIn } = require('./middleware');
+const Order = require('../db/Order');
+const { User } = require('../db');
+
+
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
 
 app.post('/', isLoggedIn, async(req, res, next)=> {
   try {
@@ -12,8 +19,26 @@ app.post('/', isLoggedIn, async(req, res, next)=> {
   catch(ex){
     next(ex);
   }
-
 });
+app.post('/guest', async(req, res, next)=> {
+  try {
+    res.send(await Order.createOrderFromCart());
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+app.post('/createGuestCart', async(req,res,next) => {
+  try{
+    console.log("this");
+    console.log(req.body);
+    res.status(200).send(await Order.create({isCart: true, guestId: req.body.guestId }));
+  }
+  catch(ex){
+    next(ex);
+  }
+})
 
 app.put('/cart', isLoggedIn, async(req, res, next)=> {
   try {
@@ -24,9 +49,29 @@ app.put('/cart', isLoggedIn, async(req, res, next)=> {
   }
 });
 
+app.put('/guestCart', async(req, res, next)=> {
+  console.log(req.body);
+  try {
+    res.send(await Order.prototype.guestAddToCart(req.body));
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 app.get('/cart', isLoggedIn, async(req, res, next)=> {
   try {
     res.send(await req.user.getCart());
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+app.get('/guestCart/:id', async(req, res, next)=> {
+  console.log(req.params.id);
+  try {
+    res.send(await Order.prototype.guestGetCart({guestId: req.params.id}));
   }
   catch(ex){
     next(ex);
@@ -45,3 +90,6 @@ app.post('/create-checkout-session', async(req, res)=> {
 
 
 });
+
+
+module.exports = app;

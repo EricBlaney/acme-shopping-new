@@ -39,19 +39,19 @@ class Genre extends Component {
         <Carousel responsive={responsive} ssr={true}>
             
             { topFightingGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -63,19 +63,19 @@ class Genre extends Component {
    <Carousel responsive={responsive} ssr={true}>
             
             { topRPGGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -87,19 +87,19 @@ class Genre extends Component {
             <Carousel responsive={responsive} ssr={true}>
             
             { topAdventureGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -111,19 +111,19 @@ class Genre extends Component {
             <Carousel responsive={responsive} ssr={true}>
             
             { topSportsGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -135,19 +135,19 @@ class Genre extends Component {
             <Carousel responsive={responsive} ssr={true}>
             
             { topPlatformGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -162,7 +162,7 @@ class Genre extends Component {
 
 }
 
-const mapStateToProps = ({ product, cart })=> {
+const mapStateToProps = ({ product, cart, auth })=> {
     const topFightingGames = product.filter(product => product.theme === 'topFightingGames');
     const topRPGGames = product.filter(product => product.theme === 'topRPGGames');
     const topSportsGames = product.filter(product => product.theme === 'topSportsGames');
@@ -170,6 +170,7 @@ const mapStateToProps = ({ product, cart })=> {
     const topPlatformGames = product.filter(product => product.theme === 'topPlatformGames');
 
     return {
+        auth,
         topFightingGames,
         topRPGGames,
         topSportsGames,
@@ -181,7 +182,7 @@ const mapStateToProps = ({ product, cart })=> {
 
    const mapDispatch = (dispatch) => {
      return {
-      addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+      addCart: (product, quantity) => dispatch(addCart(product, quantity, auth)),
       fetchProducts: ()=> dispatch(fetchProducts()),
     }
  };

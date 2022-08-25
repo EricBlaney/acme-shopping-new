@@ -121,7 +121,7 @@ User.prototype.addToCart = async function({ product, quantity }){
     }
   }
   else {
-    await conn.models.lineItem.create({ productId: product.id, quantity, orderId: cart.id });
+    await conn.models.lineItem.create({ productId: product.id, quantity: quantity, orderId: cart.id });
   }
   return this.getCart();
 };
@@ -198,7 +198,7 @@ User.adminAuthenticate = async function(credentials){
     return jwt.sign({ id: user.id }, process.env.JWT);
   }
   else {
-    const error = new Error('Bad Credentials');
+    const error = new Error('You Are Not an Admin');
     error.status = 401;
     throw error;
   }
