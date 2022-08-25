@@ -10,6 +10,10 @@ import './Footer.css';
 import { logout, exchangeToken, fetchCart, setUsers, fetchProducts } from './store';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
+import Search from './Search/Search';
+import { HashRouter as  Route } from 'react-router-dom';
+
+
 
 
 class Nav extends Component {
@@ -60,36 +64,40 @@ class Nav extends Component {
                  <div className="dropdown">
      <button class="dropbtn"> <NavLink exact to='/api/platform'> By Platform </NavLink></button>
       <div className="dropdown-content">
-        <a href="#">NES</a>
-        <a href="#">SNES</a>
-        <a href="#">PlayStation</a>
-        <a href="#">XBox</a>
-        <a href="#">Sega</a>
+      <Link exact to={`/api/platform/nes`}>NES </Link>
+      <Link exact to={`/api/platform/snes`}>SNES </Link>
+      <Link exact to={`/api/platform/playstation`}>PlayStation </Link>
+      <Link exact to={`/api/platform/xbox`}>XBox </Link>
+      <Link exact to={`/api/platform/sega`}>Sega </Link>
       </div>
     </div>
     
             <div className="dropdown">
             <button class="dropbtn"><NavLink exact to='/api/gamesbyyear'>By Year</NavLink></button>
       <div className="dropdown-content">
-        <a href="#">1985</a>
-        <a href="#">1987</a>
-        <a href="#">1989</a>
-        <a href="#">1990</a>
-        <a href="#">1992</a>
-        <a href="#">1994</a>
+      <Link exact to={`/api/gamesbyyear/1985`}>1985 </Link>
+      <Link exact to={`/api/gamesbyyear/1987`}>1987 </Link>
+      <Link exact to={`/api/gamesbyyear/1989`}>1989 </Link>
+      <Link exact to={`/api/gamesbyyear/1990`}>1990 </Link>
+      <Link exact to={`/api/gamesbyyear/1992`}>1992 </Link>
+      <Link exact to={`/api/gamesbyyear/1994`}>1994 </Link>
       </div>
     </div>
               
     
             <div className="topnav-right">
+            {/* <Route component={ Search }/>
+
+<Search /> */}
                <NavLink exact to='/myaccount' ><i class="fas fa-user-alt"></i> </NavLink> 
                 <NavLink to='/cart'><i class="fas fa-shopping-cart"></i></NavLink>
             {
-              auth.id ? <Link to='/'><button onClick={ logout }><i class="fa fa-sign-out"></i></button></Link> : <SignInContainer triggerText={signInTriggerText} />
+              auth.id ? <Link to='/'><button class='logout' onClick={ logout }>logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
             }
                 
             { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
             </div>
+
 
             <h1 className='mainlogo'><img src='https://blog.lootcrate.com/wp-content/uploads/2018/02/pacman_ghosts_header.gif'></img>
 RETROS </h1>
