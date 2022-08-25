@@ -34,6 +34,7 @@ export const exchangeToken = ()=> {
 
 export const login = (credentials)=> {
   return async(dispatch)=> {
+    try{
     let response = await axios.post('/api/sessions', credentials);
     const { token } = response.data;
     window.localStorage.setItem('token', token); 
@@ -44,8 +45,15 @@ export const login = (credentials)=> {
     });
     const auth = response.data;
     dispatch({ auth, type: 'SET_AUTH'});
-  };
-};
+  }catch(er){
+    console.log(er)
+    console.log(er.response.data.error)
+    if(er.response.data.error.status === 401){
+      alert('Wrong Username and/or Password. If you are an admin, please use the admin login.')
+    }
+}
+}
+}
 
 
 export default auth;
