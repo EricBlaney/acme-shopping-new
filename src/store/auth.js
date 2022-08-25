@@ -3,16 +3,15 @@ const auth = (state = {}, action)=> {
   if(action.type === 'SET_AUTH'){
     state = action.auth;
   }
+  if(action.type === 'SET_ADMINAUTH'){
+    state = action.adminAuth;
+  }
   return state;
 };
 
 export const logout = ()=> {
   return (dispatch)=> {
-    if (typeof this.props.googleReducer.accessToken !== 'undefined') {
-
-    } else {
       window.localStorage.removeItem('token');
-    }
     dispatch({ type: 'SET_AUTH', auth: {}});
 
   };
@@ -32,6 +31,7 @@ export const exchangeToken = ()=> {
     }
   };
 };
+
 export const login = (credentials)=> {
   return async(dispatch)=> {
     let response = await axios.post('/api/sessions', credentials);
@@ -46,7 +46,6 @@ export const login = (credentials)=> {
     dispatch({ auth, type: 'SET_AUTH'});
   };
 };
-
 
 
 export default auth;

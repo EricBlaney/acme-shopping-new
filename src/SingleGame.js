@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCart, addCart, exchangeToken, logout } from './store';
 import './SingleGame.css';
-import SignUpContainer from './SignUp/SignUpContainer';
-import SignInContainer from './SignIn/SignInContainer';
-import { Modal } from 'antd'
+import { Modal } from 'antd';
 
 class SingleGame extends React.Component{
   state = {
@@ -62,14 +60,6 @@ class SingleGame extends React.Component{
 
           ) : null}
 
-          {
-            auth.id ? null : <SignInContainer triggerText={signInTriggerText} />
-          }
-                  {
-            auth.id ? null : (
-                <SignUpContainer triggerText={signUpTriggerText} />
-            )
-          }
         <Modal title="Add a new product to cart" visible={!!cartProduct} onCancel={() => this.setState({cartProduct: null})} footer={null}>
           {
             cartProduct && (
