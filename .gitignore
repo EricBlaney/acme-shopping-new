@@ -1,4 +1,5 @@
 .env
+.env.js
 /node_modules
 /dist
 *.main.js

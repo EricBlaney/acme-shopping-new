@@ -6,7 +6,7 @@ import ModalBody from "react-bootstrap/ModalBody";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import ModalFooter from "react-bootstrap/ModalFooter";
 import ModalTitle from "react-bootstrap/ModalTitle";
-import Button from 'react-bootstrap/button';
+import {Button} from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 
 class MyAccountModals extends React.Component {
