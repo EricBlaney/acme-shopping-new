@@ -42,7 +42,7 @@ class SingleGame extends React.Component{
                                       this.setState({
                                         cartProduct: product
                                       })
-                                    }} onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                                    }} >Add To Cart</button>
                                       <div className="heart-wrapper" onClick={ () => this.props.addToWishList(product)}>
                                         <div className='heart'></div>
                                       </div>

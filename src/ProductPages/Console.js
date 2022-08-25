@@ -83,4 +83,4 @@ const mapStateToProps = ({ product})=> {
     }
 };
 
-export default connect(mapStateToProps, mapDispatch)(Console)
+export default connect(mapStateToProps, mapDispatch)(Console);

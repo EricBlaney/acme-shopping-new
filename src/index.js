@@ -18,8 +18,15 @@ import store from './store'
 import Nav from './Nav'
 import GamesbyYear from './ProductPages/GamesbyYear';
 import Console from './ProductPages/Console'
-import topFightingGames from './ProductPages/topFightingGames';
+import topFightingGames from './dropdownPage/topFightingGames';
+import topRPGGames from './dropdownPage/topRPGGames';
+import topSportsGames from './dropdownPage/topSportsGames';
+import topAdventureGames from './dropdownPage/topAdventureGames';
+import topPlatformGames from './dropdownPage/topPlatformGames';
+
+
 import PasswordReset from './PasswordReset';
+
 class _App extends Component{
 
     render(){
@@ -35,6 +42,11 @@ class _App extends Component{
             <Route path='/api/product/:id' exact component={ SingleGame }/>
             <Route path='/api/genre' exact component={ Genre }/>
             <Route path='/api/genre/topFightingGames' exact component={ topFightingGames }/>
+            <Route path='/api/genre/topRPGGames' exact component={ topRPGGames }/>
+            <Route path='/api/genre/topSportsGames' exact component={ topSportsGames }/>
+            <Route path='/api/genre/topAdventureGames' exact component={ topAdventureGames }/>
+            <Route path='/api/genre/topPlatformGames' exact component={ topPlatformGames }/>
+
             <Route path='/api/platform' exact component={ Platform }/>
             <Route path='/api/gamesbyyear' exact component={ GamesbyYear }/>
             <Route path='/api/console' exact component={ Console }/>
@@ -50,6 +62,5 @@ class _App extends Component{
 
 
 const App = connect(null)(_App);
-
 const root = createRoot(document.querySelector('#root'));
 root.render(<Provider store={ store }><Router><App /></Router></Provider>);

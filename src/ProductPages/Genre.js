@@ -2,95 +2,158 @@ import React, {Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store';
 import { Link } from 'react-router-dom';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
 class Genre extends Component {
 
     componentDidMount(){
         this.props.fetchProducts();
     }
-
     render() {
         const {  topFightingGames, topRPGGames, topSportsGames, topAdventureGames, topPlatformGames } = this.props;
 
     return (
     <div>
         <main>
-        <h2>Top RPG Games</h2>
-            <ul>
+        <h2>Top Fighting Games</h2>
+        <Carousel responsive={responsive} ssr={true}>
+            
             { topFightingGames.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
+              if(product.imageUrl.length > 10) {
+                product.imageUrl = product.imageUrl.substring(44, 100)
+                }
+                return (
+                  <div className="wrapper" key={product.id}>
+                    <div className="card">
+                        <Link to={`/api/product/${product.id}`}>
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        height="170" /></div> </Link>
+                          <div className='info'>
+                            <h3>{product.name}</h3>
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>   
+                )
         })}
-            </ul>
+   </Carousel> 
 
-            <h2>Top RPG Games</h2>
-            <ul>
+   <h2>Top RPG Games</h2>
+   <Carousel responsive={responsive} ssr={true}>
+            
             { topRPGGames.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
+              if(product.imageUrl.length > 10) {
+                product.imageUrl = product.imageUrl.substring(44, 100)
+                }
+                return (
+                  <div className="wrapper" key={product.id}>
+                    <div className="card">
+                        <Link to={`/api/product/${product.id}`}>
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        height="170" /></div> </Link>
+                          <div className='info'>
+                            <h3>{product.name}</h3>
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>   
+                )
         })}
-            </ul>
-
-            <h2>Top Sports Games</h2>
-            <ul>
-            { topSportsGames.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
-        })}
-            </ul>
-
+   </Carousel> 
 
             <h2>Top Adventure Games</h2>
-            <ul>
+            <Carousel responsive={responsive} ssr={true}>
+            
             { topAdventureGames.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
+              if(product.imageUrl.length > 10) {
+                product.imageUrl = product.imageUrl.substring(44, 100)
+                }
+                return (
+                  <div className="wrapper" key={product.id}>
+                    <div className="card">
+                        <Link to={`/api/product/${product.id}`}>
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        height="170" /></div> </Link>
+                          <div className='info'>
+                            <h3>{product.name}</h3>
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>   
+                )
         })}
-            </ul>
+   </Carousel> 
+
+   <h2>Top Sports Games</h2>
+            <Carousel responsive={responsive} ssr={true}>
+            
+            { topSportsGames.map(product=>{
+              if(product.imageUrl.length > 10) {
+                product.imageUrl = product.imageUrl.substring(44, 100)
+                }
+                return (
+                  <div className="wrapper" key={product.id}>
+                    <div className="card">
+                        <Link to={`/api/product/${product.id}`}>
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        height="170" /></div> </Link>
+                          <div className='info'>
+                            <h3>{product.name}</h3>
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>   
+                )
+        })}
+   </Carousel> 
 
             <h2>Top Platform Games</h2>
-            <ul>
+            <Carousel responsive={responsive} ssr={true}>
+            
             { topPlatformGames.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
+              if(product.imageUrl.length > 10) {
+                product.imageUrl = product.imageUrl.substring(44, 100)
+                }
+                return (
+                  <div className="wrapper" key={product.id}>
+                    <div className="card">
+                        <Link to={`/api/product/${product.id}`}>
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        height="170" /></div> </Link>
+                          <div className='info'>
+                            <h3>{product.name}</h3>
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>   
+                )
         })}
-            </ul>
+   </Carousel> 
         </main>
     </div>
 
@@ -99,7 +162,7 @@ class Genre extends Component {
 
 }
 
-const mapStateToProps = ({ product })=> {
+const mapStateToProps = ({ product, cart })=> {
     const topFightingGames = product.filter(product => product.theme === 'topFightingGames');
     const topRPGGames = product.filter(product => product.theme === 'topRPGGames');
     const topSportsGames = product.filter(product => product.theme === 'topSportsGames');
@@ -111,142 +174,18 @@ const mapStateToProps = ({ product })=> {
         topRPGGames,
         topSportsGames,
         topAdventureGames,
-        topPlatformGames
+        topPlatformGames,
+        cart
     };
   }
 
-  const mapDispatch = (dispatch) => {
-    return {
-        fetchProducts: ()=> dispatch(fetchProducts()),
+   const mapDispatch = (dispatch) => {
+     return {
+      addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+      fetchProducts: ()=> dispatch(fetchProducts()),
     }
-};
+ };
   export default connect(mapStateToProps,mapDispatch)(Genre)
 
 
 
-// import React from 'react';
-// import { connect } from 'react-redux';
-// import { fetchCart, exchangeToken, logout, addCart } from './store'
-// import { Link } from 'react-router-dom';
-// import SignUpContainer from './SignUp/SignUpContainer';
-// import SignInContainer from './SignIn/SignInContainer';
-
-// class Genre extends React.Component{
-
-//   componentDidMount(){
-//     this.props.exchangeToken();
-//   }
-
-//   componentDidUpdate(prevProps){
-//     if(!prevProps.auth.id && this.props.auth.id){
-//       this.props.fetchCart();
-//     }
-//   }
-//   render(){
-//     const signUpTriggerText = 'Sign Up';
-//     const signInTriggerText = 'Sign In';
-//     const { auth, topFightingGames, topRPGGames, topSportsGames } = this.props;
-//     return (
-//       <main>
-//       { auth.id ? (
-//         <div>
-//         <div>
-//         <h2>Top Fighting Games</h2>
-//         <div className="games">
-//         { topFightingGames.map(product=>{
-//           if(product.imageUrl.length > 10) {
-//           product.imageUrl = product.imageUrl.substring(44, 100)
-//           }
-//           return (
-//             <li>
-//             <Link key={product.id} to={`/api/product/${product.id}`}>
-//             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-//             height="170" /></div><div className='name'>{product.name}</div>
-//             </Link>
-//             <div className='price'>{`$${product.price}`}</div>
-//             <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-//             </li>
-//           )
-//         })}
-//         </div>
-//         </div>
-
-//         <div>
-//         <h2>Top RPB Games</h2>
-//         <div className="games">
-//         { topRPGGames.map(product=>{
-//           if(product.imageUrl.length > 10) {
-//           product.imageUrl = product.imageUrl.substring(44, 100)
-//           }
-//           return (
-//             <li>
-//             <Link key={product.id} to={`/api/product/${product.id}`}>
-//             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-//             height="170" /></div><div className='name'>{product.name}</div> 
-//             </Link>
-//             <div className='price'>{`$${product.price}`}</div>
-//             <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-//             </li>
-//           )
-//         })}
-//         </div>
-//         </div>
-
-//         <div>
-//         <h2>Top Sports Games</h2>
-//         <div className="games">
-//         { topSportsGames.map(product=>{
-//           if(product.imageUrl.length > 10) {
-//           product.imageUrl = product.imageUrl.substring(44, 100)
-//           }
-//           return (
-//             <li>
-//             <Link key={product.id} to={`/api/product/${product.id}`}>
-//             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-//             height="170" /></div><div className='name'>{product.name}</div> 
-//             </Link>
-//             <div className='price'>{`$${product.price}`}</div>
-//             <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-//             </li>
-//           )
-//         })}
-//         </div>
-//         </div>
-//         </div> ) : null }
-
-//         {
-//           auth.id ? null : <SignInContainer triggerText={signInTriggerText} />
-//         }
-//                 {
-//           auth.id ? null : (
-//               <SignUpContainer triggerText={signUpTriggerText} />
-//           )
-//         }
-
-//       </main>
-//     );
-
-//   }
-// }
-// const mapDispatch = (dispatch)=> {
-//   return {
-//     exchangeToken: ()=> dispatch(exchangeToken()),
-//     logout: ()=> dispatch(logout()),
-//     fetchCart: ()=> dispatch(fetchCart()),
-//     addCart: (product, quantity) => dispatch(addCart(product, quantity))
-//   };
-// };
-// const mapStateToProps = ({auth, product, cart}) => {
-//   const topFightingGames = product.filter(product => product.theme === 'topFightingGames');
-//   const topRPGGames = product.filter(product => product.theme === 'topRPGGames');
-//   const topSportsGames = product.filter(product => product.theme === 'topSportsGames');
-//     return {
-//       auth,
-//       topFightingGames,
-//       topRPGGames,
-//       topSportsGames,
-//       cart
-//     }
-//   };
-
-// export default connect(mapStateToProps, mapDispatch)(Genre);

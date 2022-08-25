@@ -18,15 +18,26 @@
     "-": "^0.0.1",
     "@ant-design/icons": "^4.7.0",
     "@faker-js/faker": "^7.3.0",
+<<<<<<< HEAD
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@reach/combobox": "0.1.1",
+    "@reach/menu-button": "0.1.18",
+    "assert": "^2.0.0",
+    "babel-plugin-macros": "^3.1.0",
+=======
     "antd": "^4.22.7",
     "assert": "^2.0.0",
     "axios": "^0.27.2",
+>>>>>>> c3cdc6bc3ec519f24865e80b2dc4677495868852
     "bcrypt": "^5.0.1",
     "bootstrap": "^5.2.0",
     "cors-anywhere": "^0.4.4",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.1",
     "dotenv-webpack": "^8.0.1",
+    "dropdown": "^0.2.0",
     "express": "^4.18.1",
     "handlebars": "^4.7.7",
     "igdb-api-node": "^5.0.1",
@@ -35,6 +46,10 @@
     "pg": "^8.7.3",
     "proxy-from-env": "^1.1.0",
     "react-bootstrap": "^2.5.0",
+<<<<<<< HEAD
+    "react-fontawesome": "^1.7.1",
+=======
+>>>>>>> c3cdc6bc3ec519f24865e80b2dc4677495868852
     "react-multi-carousel": "^2.8.2",
     "redux-logger": "^3.0.6",
     "reselect": "^4.1.6",
