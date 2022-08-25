@@ -86,7 +86,7 @@ export const fetchCart = (auth)=> {
 
 export const deleteCart = (product, auth) => {
   return async(dispatch)=> {
-    if(auth) {
+    if(auth.id !== undefined) {
       const response = await axios.put('/api/orders/cart', {
         product,
         quantity: 0
