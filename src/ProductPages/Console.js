@@ -32,7 +32,7 @@ class Console extends Component {
     }
 
     render() {
-        const { consoles } = this.props;
+        const { auth, consoles } = this.props;
 
     return (
     <div>
@@ -51,7 +51,7 @@ class Console extends Component {
                     <div className='info'>
                       <h3>{product.name}</h3>
                       <p>{`$${product.price}`}</p>
-                      <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                      <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                     </div>
                 </div>
             </div>   
@@ -69,16 +69,17 @@ class Console extends Component {
 
 }
 
-const mapStateToProps = ({ product})=> {
+const mapStateToProps = ({ product, auth})=> {
     const consoles = product.filter(product => product.theme === 'consoles');
     return {
+      auth,
       consoles
     };
   }
 
   const mapDispatch = (dispatch) => {
     return {
-        addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+        addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
         fetchProducts: ()=> dispatch(fetchProducts()),
     }
 };

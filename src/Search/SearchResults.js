@@ -26,7 +26,7 @@ const responsive = {
     }
   };
 
-const SearchResults = ({searchResults, addCart}) => {
+const SearchResults = ({searchResults, auth, addCart}) => {
     return (
         <div>
             <h2>Search Results</h2>
@@ -47,7 +47,7 @@ const SearchResults = ({searchResults, addCart}) => {
                             <h3>{product.name}</h3>
                 
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                         </div>
                     </div>
                     </div>   
@@ -61,13 +61,14 @@ const mapState = ({product}, {match}) => {
     const term = match.params.term;
     const searchResults = product.filter(product => product.name.toLowerCase().includes(term.toLowerCase()))
     return {
+        auth,
         searchResults
     }
 }
 
 export default connect(mapState, (dispatch)=>{
     return {
-        addCart: (product, quantity) => dispatch(addCart(product, quantity))
+        addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth))
     }
 
 })(SearchResults)

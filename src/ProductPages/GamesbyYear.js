@@ -29,7 +29,7 @@ class GamesbyYear extends Component {
     }
 
     render() {
-        const { thisYearsGames1994, thisYearsGames1992, thisYearsGames1990, thisYearsGames1987, thisYearsGames1985 } = this.props;
+        const { auth, thisYearsGames1994, thisYearsGames1992, thisYearsGames1990, thisYearsGames1987, thisYearsGames1985 } = this.props;
 
     return (
     <div>
@@ -50,7 +50,7 @@ class GamesbyYear extends Component {
             <div className='info'>
               <h3>{product.name}</h3>
               <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+              <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
             </div>
         </div>
     </div>   
@@ -74,7 +74,7 @@ class GamesbyYear extends Component {
             <div className='info'>
               <h3>{product.name}</h3>
               <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+              <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
             </div>
         </div>
     </div>   
@@ -98,7 +98,7 @@ class GamesbyYear extends Component {
             <div className='info'>
               <h3>{product.name}</h3>
               <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+              <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
             </div>
         </div>
     </div>   
@@ -122,7 +122,7 @@ class GamesbyYear extends Component {
             <div className='info'>
               <h3>{product.name}</h3>
               <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+              <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
             </div>
         </div>
     </div>   
@@ -146,7 +146,7 @@ class GamesbyYear extends Component {
             <div className='info'>
               <h3>{product.name}</h3>
               <p>{`$${product.price}`}</p>
-              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+              <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
             </div>
         </div>
     </div>   
@@ -180,7 +180,7 @@ cart
 
   const mapDispatch = (dispatch) => {
     return {
-      addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+      addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
 
         fetchProducts: ()=> dispatch(fetchProducts())
 

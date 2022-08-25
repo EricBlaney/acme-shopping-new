@@ -19,61 +19,124 @@ const cart = (state = { lineItems: [ ] }, action)=> {
   return state;
 };
 
-export const addCart = (product, quantity) => {
+export const addCart = (product, quantity, auth) => {
   return async (dispatch) => {
-    const response = await axios.put('/api/orders/cart', {
-      product,
-      quantity
-    }, {
-      headers: {
-        authorization: window.localStorage.getItem('token')
+    console.log(auth);
+    console.log('that was auth')
+    if(auth.id !== undefined) {
+      const response = await axios.put('/api/orders/cart', {
+        product,
+        quantity
+      }, {
+        headers: {
+          authorization: window.localStorage.getItem('token')
+        }
+      });
+    } else {
+      if(window.localStorage.getItem('guest_cart_id')) {
+        const guest_cart_id = window.localStorage.getItem('guest_cart_id');
+        await axios.put('/api/orders/guestCart', {
+          product,
+          quantity,
+          guest_cart_id
+        })
+      } else {
+          const guest_cart_id = Math.floor(Math.random()*1E16);
+          console.log(guest_cart_id);
+          await axios.post('/api/orders/createGuestCart', {guestId: guest_cart_id});
+          window.localStorage.setItem('guest_cart_id', JSON.stringify(guest_cart_id))
+          await axios.put('/api/orders/guestCart', {
+          product,
+          quantity,
+          guest_cart_id
+        })
       }
-    });
+    }
     // if (response.status === 200) {
     //   alert('Added to cart successfully')
     // }
   }
 }
 
-export const fetchCart = ()=> {
+export const fetchCart = (auth)=> {
   return async(dispatch)=> {
-    const response = await axios.get('/api/orders/cart', {
-      headers: {
-        authorization: window.localStorage.getItem('token')
+    console.log(auth);
+    if (auth.id !== undefined) {
+      const response = await axios.get('/api/orders/cart', {
+        headers: {
+          authorization: window.localStorage.getItem('token')
+        }
+      });
+      dispatch({ type: 'SET_CART', cart: response.data});
+    } else {
+      const guest_cart_id = window.localStorage.getItem('guest_cart_id');
+      console.log("fetch cart attempt");
+      console.log(parseInt(guest_cart_id));
+      try{
+        const response = await axios.get(`/api/orders/guestCart/${guest_cart_id}`);
+        dispatch({ type: 'SET_CART', cart: response.data});
       }
-    });
-    dispatch({ type: 'SET_CART', cart: response.data});
-  };
-};
+      catch(ex){
+        console.log(ex);
+      }
 
-export const deleteCart = (product) => {
-  return async(dispatch)=> {
-    const response = await axios.put('/api/orders/cart', {
-      product,
-      quantity: 0
-    }, {
-      headers: {
-        authorization: window.localStorage.getItem('token')
-      }
-    });
-    if (response.status === 200) {
-      dispatch({type: 'DELETE_CART', id: product.id});
     }
   };
 };
 
-export const updateQuantity = (product, quantity) => {
+export const deleteCart = (product, auth) => {
   return async(dispatch)=> {
-    const response = await axios.put('/api/orders/cart', {
-      product,
-      quantity
-    }, {
-      headers: {
-        authorization: window.localStorage.getItem('token')
+    if(auth) {
+      const response = await axios.put('/api/orders/cart', {
+        product,
+        quantity: 0
+      }, {
+        headers: {
+          authorization: window.localStorage.getItem('token')
+        }
+      });
+      if (response.status === 200) {
+        dispatch({type: 'DELETE_CART', id: product.id});
       }
-    });
-    if (response.status === 200) {
-      dispatch({ type: 'UPDATE_QUANTITY', id: product.id, quantity});
+    } else {
+      const response = await axios.put('/api/orders/guestCart', {
+        product,
+        quantity: 0,
+        guest_cart_id: window.localStorage.getItem('guest_cart_id')
+      })
+      if (response.status === 200) {
+        dispatch({type: 'DELETE_CART', id: product.id});
+      }
+    }
+
+  };
+};
+
+export const updateQuantity = (product, quantity, auth) => {
+  return async(dispatch)=> {
+    if(auth.id !== undefined) {
+      const response = await axios.put('/api/orders/cart', {
+        product,
+        quantity
+      }, {
+        headers: {
+          authorization: window.localStorage.getItem('token')
+        }
+      });
+      if (response.status === 200) {
+        dispatch({ type: 'UPDATE_QUANTITY', id: product.id, quantity});
+      }
+    } else {
+      const guest_cart_id = window.localStorage.getItem('guest_cart_id');
+      console.log(guest_cart_id);
+      const response = await axios.put('/api/orders/guestCart', {
+        product,
+        quantity,
+        guest_cart_id
+      })
+      if (response.status === 200) {
+        dispatch({ type: 'UPDATE_QUANTITY', id: product.id, quantity});
+      }
     }
   };
 };

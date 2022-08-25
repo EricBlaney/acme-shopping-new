@@ -15,13 +15,13 @@ class Nav extends Component {
         this.props.fetchProducts();
         this.props.exchangeToken();
         this.props.adminExchangeToken()
-        this.props.fetchCart();
+        this.props.fetchCart(this.props.auth);
         this.props.setUsers();
     }
 
     componentDidUpdate(prevProps){
         if(!prevProps.auth.id && this.props.auth.id){
-          this.props.fetchCart();
+          this.props.fetchCart(this.props.auth);
           this.props.exchangeToken();
           this.props.adminExchangeToken()
           this.props.fetchProducts();
@@ -121,7 +121,7 @@ class Nav extends Component {
     
     const mapDispatch = (dispatch) => {
         return {
-            fetchCart: ()=> dispatch(fetchCart()),
+            fetchCart: (auth)=> dispatch(fetchCart(auth)),
             adminExchangeToken: ()=> dispatch(adminExchangeToken),
             exchangeToken: ()=> dispatch(exchangeToken()),
             fetchProducts: ()=> dispatch(fetchProducts()),

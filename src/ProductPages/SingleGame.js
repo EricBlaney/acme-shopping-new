@@ -19,8 +19,7 @@ class SingleGame extends Component {
     return (
       <main>
 
-          { auth.id || adminAuth.id ? (
-
+          {
           <div className="singlegame">
 
             { (game||[]).map(game=>{
@@ -40,7 +39,7 @@ class SingleGame extends Component {
                                     </div>
                                     <div className='heart-cart'>
                                       <button className='btn' onClick={() => {
-                                      this.props.addCart(game, 1)
+                                      this.props.addCart(game, 1, auth)
                                       this.setState({
                                         cartProduct: game
                                       })
@@ -59,7 +58,7 @@ class SingleGame extends Component {
             })}
             </div>
 
-          ) : null}
+          }
 
   
         <Modal title="Add a new product to cart" visible={!!cartProduct} onCancel={() => this.setState({cartProduct: null})} footer={null}>
@@ -83,7 +82,7 @@ class SingleGame extends Component {
 
 const mapDispatch = (dispatch)=> {
   return {
-    addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+    addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
     addToWishList: (product) => dispatch(addToWishList(product))
   };
 };
