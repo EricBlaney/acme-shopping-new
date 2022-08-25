@@ -5,8 +5,11 @@ import './SingleGame.css';
 import { Modal } from 'antd'
 
 class SingleGame extends React.Component{
-  state = {
-    cartProduct: null
+  constructor(){
+    super()
+    this.state = {
+      cartProduct: null
+    }
   }
 
   render(){
@@ -42,7 +45,7 @@ class SingleGame extends React.Component{
                                       this.setState({
                                         cartProduct: product
                                       })
-                                    }} >Add To Cart</button>
+                                    }}>Add To Cart</button>
                                       <div className="heart-wrapper" onClick={ () => this.props.addToWishList(product)}>
                                         <div className='heart'></div>
                                       </div>

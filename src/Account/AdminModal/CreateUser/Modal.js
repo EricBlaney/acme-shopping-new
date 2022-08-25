@@ -11,6 +11,7 @@ export const Modal = ({
     closeModal,
     onSubmit
    }) => {
+    
    return ReactDOM.createPortal(
    <FocusTrap>
      <aside

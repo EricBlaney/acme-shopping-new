@@ -10,12 +10,9 @@ const user = (state = {}, action)=> {
   if(action.type === 'CREATE_USER'){
     return [action.user, ...state]
   }
-  if(action.type === 'UPDATE_USER'){
-    return action.user
-  }
   if(action.type === 'UPDATE_USERS'){
+    
     return state.map(user => user.id === action.user.id ? action.user : user)
-
   }
   if(action.type === 'DELETE_USER') {
     return state.filter((user)=> user.id !== action.user.id)
@@ -47,17 +44,17 @@ export const setUsers = () => {
     }
 };
 
-export const updateUser = (user) => {
-    return async(dispatch) => {
-      try{
-        await axios.put(`/api/users`, user);
-        dispatch({type: "UPDATE_USER", user})
-      }
-      catch(ex){
-        console.log(ex)
-      }
-    }
-};
+// export const updateUser = (user) => {
+//     return async(dispatch) => {
+//       try{
+//         await axios.put(`/api/users`, user);
+//         dispatch({type: "UPDATE_USER", user})
+//       }
+//       catch(ex){
+//         console.log(ex)
+//       }
+//     }
+// };
 
 export const updateUsers = (user) => {
   return async(dispatch) => {

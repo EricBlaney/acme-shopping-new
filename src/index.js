@@ -33,8 +33,9 @@ class _App extends Component{
         return(
         <div id="main-body">
             <Nav/>
-                <Route component={ Search }/>
-         
+          
+            <Route component={ Search }/>
+                      
             <Route path='/cart' exact component={ Cart }/>
         <Route path='/cart/success' exact component={ CheckoutSuccess }/>
             <Route path='/' exact component={ LandingPage }/>

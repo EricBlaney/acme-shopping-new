@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList, deleteUser, deleteProduct, exchangeToken } from '../store'
+import { fetchWishList, deleteUser, deleteProduct, exchangeToken, setUsers } from '../store'
 import { Link, NavLink } from 'react-router-dom';
 import CreateUserContainer from './AdminModal/CreateUser/CreateUserContainer'
 import Modals from './AdminModal/EditUser/Modals'
@@ -8,6 +8,7 @@ import ProductModals from './AdminModal/EditProduct/ProductModals'
 import './Admin.css';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+
 //Carousel responsiveness
 
 const responsive = {
@@ -44,7 +45,6 @@ class Admin extends React.Component{
             isShowModal: false,
             isShowProductModal: false
         };
-
         this.handleClose = this.handleClose.bind(this);
         this.handleShow = this.handleShow.bind(this);
       };
@@ -52,14 +52,14 @@ class Admin extends React.Component{
     componentDidMount() {
         this.props.getWishList();
         this.props.exchangeToken();
-
+        this.props.setUsers();
     }
 
     componentDidUpdate(prevProps){
         if(!prevProps.adminAuth.id && this.props.adminAuth.id){
           this.props.getWishList();
           this.props.exchangeToken();
-
+          this.props.setUsers();
         }
     }
 
@@ -103,6 +103,7 @@ class Admin extends React.Component{
         const {wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth} = this.props;
         const { handleClose, handleShow, handleShowProduct } = this;
         const triggerTextCreate = 'Create User';
+        console.log(this.props)
   
         return(
             <div className='admin'>
@@ -249,14 +250,15 @@ class Admin extends React.Component{
     }
 }
 
-const mapState = ({adminAuth, wishlist, product, user}) => {
-    user = user.filter( user => user.id !== adminAuth.id);
+const mapState = ({adminAuth, product, user, wishlist}, {match}) => {
+    // console.log(state)
+    user = user.filter(user => user.id !== adminAuth.id);
 
     return {
         adminAuth,
-        user,
         wishlist,
-        product
+        product,
+        user
     }
 }
 
@@ -266,6 +268,7 @@ const mapDispatch = (dispatch) => {
         addCart: (product, quantity) => dispatch(addCart(product, quantity)),
         deleteUser: (user)=> dispatch(deleteUser(user)),
         deleteProduct: (product)=> dispatch(deleteProduct(product)),
+        setUsers: ()=> dispatch(setUsers()),
         exchangeToken: ()=> dispatch(exchangeToken()),
 
     }
