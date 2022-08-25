@@ -35,7 +35,7 @@ class LandingPage extends React.Component{
       <main>
       { auth.id ? (
         <div className='row'>
-        <h1>Top Games of August 1989!</h1>
+        <h2>Top Games of August 1989!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
         { thisMonthGames1989.map(product=>{
@@ -64,7 +64,7 @@ class LandingPage extends React.Component{
         })}
         </Carousel>
 
-        <h1>Top Games of 1985!</h1>
+        <h2>Top Games of 1985!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
         { thisYearsGames1985.map(product=>{
@@ -88,7 +88,7 @@ class LandingPage extends React.Component{
         })}
         </Carousel>
 
-        <h1>Top Games of 1987!</h1>
+        <h2>Top Games of 1987!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
         { thisYearsGames1987.map(product=>{
@@ -113,7 +113,7 @@ class LandingPage extends React.Component{
         </Carousel>
         
         
-        <h1>Top Games of 1990!</h1>
+        <h2>Top Games of 1990!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
         { thisYearsGames1990.map(product=>{
@@ -137,7 +137,7 @@ class LandingPage extends React.Component{
         })}
         </Carousel>
 
-        <h1>Top Games of 1992!</h1>
+        <h2>Top Games of 1992!</h2>
         <Carousel responsive={responsive} ssr={true}>
         { thisYearsGames1992.map(product=>{
           if(product.imageUrl.length > 10) {
@@ -161,7 +161,7 @@ class LandingPage extends React.Component{
         })}
         </Carousel>
 
-        <h1>Top Games of 1994!</h1>
+        <h2>Top Games of 1994!</h2>
         <Carousel responsive={responsive} ssr={true}>
         { thisYearsGames1994.map(product=>{
           if(product.imageUrl.length > 10) {

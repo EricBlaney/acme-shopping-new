@@ -2,7 +2,27 @@ import React, {Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../store';
 import { Link } from 'react-router-dom';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 class Platform extends Component {
 
     componentDidMount(){
@@ -10,85 +30,133 @@ class Platform extends Component {
     }
 
     render() {
-        const { topNESGames, topSNESGames, topPlayStationGames, topXboxGames, topSegaGenesisGames } = this.props;
+        const {  topNESGames, topSNESGames, topPlayStationGames, topXboxGames, topSegaGenesisGames } = this.props;
 
     return (
+      
     <div>
         <main>
-      <h2>Top NES Games</h2>
-            <ul>
-            { topNESGames.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
-        })}
-            </ul>
 
-            <h2>Top SNES Games</h2>
-            <ul>
-            { topSNESGames.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
+          
+      <h2>Top NES Games</h2>
+      <Carousel responsive={responsive} ssr={true}>
+            
+            { topNESGames.map(product=>{
+              if(product.imageUrl.length > 10) {
+                product.imageUrl = product.imageUrl.substring(44, 100)
+                }
+                return (
+                  <div className="wrapper" key={product.id}>
+                    <div className="card">
+                        <Link to={`/api/product/${product.id}`}>
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        height="170" /></div> </Link>
+                          <div className='info'>
+                            <h3>{product.name}</h3>
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>   
+                )
         })}
-            </ul>
+   </Carousel> 
+
+   <h2>Top SNES Games</h2>
+   <Carousel responsive={responsive} ssr={true}>
+            
+            { topSNESGames.map(product=>{
+              if(product.imageUrl.length > 10) {
+                product.imageUrl = product.imageUrl.substring(44, 100)
+                }
+                return (
+                  <div className="wrapper" key={product.id}>
+                    <div className="card">
+                        <Link to={`/api/product/${product.id}`}>
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        height="170" /></div> </Link>
+                          <div className='info'>
+                            <h3>{product.name}</h3>
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>   
+                )
+        })}
+   </Carousel> 
 
             <h2>Top PlayStation Games</h2>
-            <ul> 
+            <Carousel responsive={responsive} ssr={true}>
+            
             { topPlayStationGames.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
+              if(product.imageUrl.length > 10) {
+                product.imageUrl = product.imageUrl.substring(44, 100)
+                }
+                return (
+                  <div className="wrapper" key={product.id}>
+                    <div className="card">
+                        <Link to={`/api/product/${product.id}`}>
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        height="170" /></div> </Link>
+                          <div className='info'>
+                            <h3>{product.name}</h3>
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>   
+                )
         })}
-            </ul>
+   </Carousel> 
 
-            <h2>Top Xbox Games</h2>
-            <ul> 
+   <h2>Top XBox Games</h2>
+            <Carousel responsive={responsive} ssr={true}>
+            
             { topXboxGames.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
+              if(product.imageUrl.length > 10) {
+                product.imageUrl = product.imageUrl.substring(44, 100)
+                }
+                return (
+                  <div className="wrapper" key={product.id}>
+                    <div className="card">
+                        <Link to={`/api/product/${product.id}`}>
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        height="170" /></div> </Link>
+                          <div className='info'>
+                            <h3>{product.name}</h3>
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>   
+                )
         })}
-            </ul>
+   </Carousel> 
 
             <h2>Top Sega Genesis Games</h2>
-            <ul> 
+            <Carousel responsive={responsive} ssr={true}>
+            
             { topSegaGenesisGames.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
+              if(product.imageUrl.length > 10) {
+                product.imageUrl = product.imageUrl.substring(44, 100)
+                }
+                return (
+                  <div className="wrapper" key={product.id}>
+                    <div className="card">
+                        <Link to={`/api/product/${product.id}`}>
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        height="170" /></div> </Link>
+                          <div className='info'>
+                            <h3>{product.name}</h3>
+                            <p>{`$${product.price}`}</p>
+                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                          </div>
+                      </div>
+                  </div>   
+                )
         })}
-            </ul>
+   </Carousel> 
         </main>
     </div>
 
@@ -116,179 +184,10 @@ const mapStateToProps = ({ product})=> {
 
   const mapDispatch = (dispatch) => {
     return {
-        fetchProducts: ()=> dispatch(fetchProducts()),
+      addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+      fetchProducts: ()=> dispatch(fetchProducts()),
     }
 };
 
 export default connect(mapStateToProps, mapDispatch)(Platform)
 
-// import React from 'react';
-// import { connect } from 'react-redux';
-// import { fetchCart, exchangeToken, logout, addCart } from './store'
-// import { Link } from 'react-router-dom';
-
-
-// class Platform extends React.Component{
-
-//   componentDidMount(){
-//     this.props.exchangeToken();
-//   }
-
-//   componentDidUpdate(prevProps){
-//     if(!prevProps.auth.id && this.props.auth.id){
-//       this.props.fetchCart();
-//     }
-//   }
-//   render(){
-
-//     const { auth, topNESGames, topSNESGames, topPlayStationGames, topXboxGames, topSegaGenesisGames } = this.props;
-//     return (
-//       <main>
-//       { auth.id ? (
-
-
-
-//         <div>
-//         <div>
-//         <h2>Top NES Games</h2>
-//         <div className="games">
-//         { topNESGames.map(product=>{
-//           if(product.imageUrl.length > 10) {
-//           product.imageUrl = product.imageUrl.substring(44, 100)
-//           }
-//           return (
-//             <li>
-//             <Link key={product.id} to={`/api/product/${product.id}`}>
-//             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-//             height="170" /></div><div className='name'>{product.name}</div>
-//             </Link>
-//             <div className='price'>{`$${product.price}`}</div>
-//             <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-//             </li>
-//           )
-//         })}
-//         </div>
-//         </div>
-
-//         <div>
-//         <h2>Top SNES Games</h2>
-//         <div className="games">
-//         { topSNESGames.map(product=>{
-//           if(product.imageUrl.length > 10) {
-//           product.imageUrl = product.imageUrl.substring(44, 100)
-//           }
-//           return (
-//             <li>
-//             <Link key={product.id} to={`/api/product/${product.id}`}>
-//             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-//             height="170" /></div><div className='name'>{product.name}</div> 
-//             </Link>
-//             <div className='price'>{`$${product.price}`}</div>
-//             <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-//             </li>
-//           )
-//         })}
-//         </div>
-//         </div>
-
-//         <div>
-//         <h2>Top PlayStation Games</h2>
-//         <div className="games">
-//         { topPlayStationGames.map(product=>{
-//           if(product.imageUrl.length > 10) {
-//           product.imageUrl = product.imageUrl.substring(44, 100)
-//           }
-//           return (
-//             <li>
-//             <Link key={product.id} to={`/api/product/${product.id}`}>
-//             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-//             height="170" /></div><div className='name'>{product.name}</div> 
-//             </Link>
-//             <div className='price'>{`$${product.price}`}</div>
-//             <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-//             </li>
-//           )
-//         })}
-//         </div>
-//         </div>
-
-//         <div>
-//         <h2>Top XBox Games</h2>
-//         <div className="games">
-//         { topXboxGames.map(product=>{
-//           if(product.imageUrl.length > 10) {
-//           product.imageUrl = product.imageUrl.substring(44, 100)
-//           }
-//           return (
-//             <li>
-//             <Link key={product.id} to={`/api/product/${product.id}`}>
-//             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-//             height="170" /></div><div className='name'>{product.name}</div>
-//             </Link>
-//             <div className='price'>{`$${product.price}`}</div>
-//             <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-//             </li>
-//           )
-//         })}
-//         </div>
-//         </div>
-        
-
-//         <div>
-//         <h2>Top Sega Genesis Games</h2>
-//         <div className="games">
-//         { topSegaGenesisGames.map(product=>{
-//           if(product.imageUrl.length > 10) {
-//           product.imageUrl = product.imageUrl.substring(44, 100)
-//           }
-//           return (
-//             <li>
-//             <Link key={product.id} to={`/api/product/${product.id}`}>
-//             <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-//             height="170" /></div><div className='name'>{product.name}</div>
-//             </Link>
-//             <div className='price'>{`$${product.price}`}</div>
-//             <button className='addtocart' onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
-//             </li>
-//           )
-//         })}
-//         </div>
-//         </div>
-
-//         </div> ) : null }
-
-       
-
-//       </main>
-//     );
-
-//   }
-// }
-// const mapDispatch = (dispatch)=> {
-//   return {
-//     exchangeToken: ()=> dispatch(exchangeToken()),
-//     logout: ()=> dispatch(logout()),
-//     fetchCart: ()=> dispatch(fetchCart()),
-//     addCart: (product, quantity) => dispatch(addCart(product, quantity))
-//   };
-// };
-// const mapStateToProps = ({auth, product, cart}) => {
-
-//   const topNESGames = product.filter(product => product.theme === 'topNESGames');
-//   const topSNESGames = product.filter(product => product.theme === 'topSNESGames');
-//   const topPlayStationGames = product.filter(product => product.theme === 'topPlayStationGames');
-//   const topXboxGames = product.filter(product => product.theme === 'topXboxGames');
-//   const topSegaGenesisGames = product.filter(product => product.theme === 'topSegaGenesisGames');
-
-//     return {
-//       auth,
-//       topNESGames,
-//       topSNESGames,
-//       topPlayStationGames,
-//       topXboxGames,
-//       topSegaGenesisGames,
-//       cart
-//     }
-//   };
-
-// export default connect(mapStateToProps, mapDispatch)(Platform);

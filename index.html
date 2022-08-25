@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script> -->
 <style>
@@ -25,67 +28,13 @@
 
   body {
   font-family:'Silkscreen', regular;
-  background-color: #CEE5F2;
+  background-color: black;
+  color: white
 }
 
-.topnav {
-  padding-left: 2rem;
-  overflow: hidden;
-  background-color: whitesmoke;
-}
 
-.topnav a {
-  float: left;
-  color: black;
-  text-align: center;
-  padding: 14px 16px;
-  /* padding-bottom: 2rem; */
-  text-decoration: none;
-  font-size: 12px;
-  text-transform: uppercase;
-}
 .reset-password{
   cursor: pointer
-}
-.topnav a:hover {
-  background-color: #accbe1;
-  padding: 14px 16px;
-  color: #536b78;
-}
-
-.topnav a.active {
-  color: #536b78;
-}
-
-.topnav-right {
-  float: right;
-  
-}
-
-.logo {
-  height: 350px;
-  background-image:url('https://www.gizmodo.com.au/wp-content/uploads/sites/2/2020/04/22/ctdb8olk4rqkjv1kmryx.gif?quality=80&resize=720,405'); background-repeat:repeat;
-} 
-
-h1 {
-  text-align: center;
-  padding-top: 1.5rem;
-  padding-bottom: 1rem;
-
-}
-
-.footer {
-  position: fixed;
-  right:0;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: whitesmoke;
-  color: white;
-  text-align: left;
-  text-transform: uppercase;
-  font-size: 15px;
-  z-index: 999;
 }
 
 .user-details{
@@ -100,16 +49,19 @@ h1 {
   border-radius: 10%;
 }
 
-/* .footer-right {
-  float: right;
-  text-align: center;
-  padding: 10px;
-  font-size: 15px;
-} */
-
 h2 {
   padding: 14px 16px;
   font-size: 20px;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 900;
+  border-radius: 25px;
+
+  font-family: "Avenir Next", sans-serif;
+
+  background: linear-gradient(to right, orange,blue, red, yellow);
 }
 
 * {
@@ -177,66 +129,16 @@ form.example input[type=text] {
 }
 
 .searchbar {
-  margin-top: 30rem;
+  margin-top: 0;
   margin-left: 3rem;
   background-color:#CEE5F2;
   border-radius:10px;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
 
-
 #main-body{
   padding-bottom: 60px;
 }
-
-
-/* Dropdown Button */
-/* .dropbtn { */
-  /* background-color: #04AA6D; */
-  /* color: white; */
-  /* padding: 16px; */
-  /* font-size: 16px;
-  border: none;
-} */
-
-/* The container <div> - needed to position the dropdown content */
-  .dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  /* width: 20rem;
-  height: 75px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 10px;
-  /* width: 20rem;
-  height: auto;
-  top: 65px; */
-  /* text-decoration: none; */
-  display: block;
-
-}
-
-/* Change color of dropdown links on hover */ 
-.dropdown-content a:hover {background-color: #ddd;} 
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-
 </style>
 
   <script defer src='/dist/main.js'></script>
