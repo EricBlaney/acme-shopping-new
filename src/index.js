@@ -35,7 +35,7 @@ class _App extends Component{
             <Nav/>
           
             <Route component={ Search }/>
-             
+                      
             <Route path='/cart' exact component={ Cart }/>
         <Route path='/cart/success' exact component={ CheckoutSuccess }/>
             <Route path='/' exact component={ LandingPage }/>
