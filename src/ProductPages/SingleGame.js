@@ -37,12 +37,12 @@ class SingleGame extends React.Component{
                                     <div className='condition'>Condition: {`${product.condition}`}</div>
                                     </div>
                                     <div className='heart-cart'>
-                                      <button className='btn' onClick={() => {
+                                    <button className='btn' onClick={() => {
                                       this.props.addCart(product, 1)
                                       this.setState({
                                         cartProduct: product
                                       })
-                                    }} onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                                    }}>Add To Cart</button>
                                       <div className="heart-wrapper" onClick={ () => this.props.addToWishList(product)}>
                                         <div className='heart'></div>
                                       </div>
