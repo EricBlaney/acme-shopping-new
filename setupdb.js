@@ -1,7 +1,7 @@
 const { conn, User, Product } = require('./db');
 const { faker } = require('@faker-js/faker');
 const igdb = require('igdb-api-node').default;
-const client = igdb('71n9jotfv4acipnlmuxyy6btvrik4u', '9y3fegv67pshqedo7s191euhphaztj');
+const client = igdb(process.env.IGDB_CLIENT_ID, process.env.IGDB_SECRET_KEY);
 
 const arr = ['Poor', 'Fair', 'Good', 'Excellent'];
 

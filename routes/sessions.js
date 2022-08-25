@@ -3,13 +3,7 @@ const app = express.Router();
 const { User } = require('../db');
 const { isLoggedIn } = require('./middleware');
 const axios = require('axios');
-try{
-  require('../.env.js');
-}
-catch(ex){
-  console.log('running locally? create .env file');
-  console.log('deployed? set env variables');
-}
+
 module.exports = app;
 
 app.post('/', async(req, res, next)=> {
@@ -43,14 +37,15 @@ app.get('/', isLoggedIn, async(req, res, next)=> {
 });
 
 app.get('/github', (req, res, next)=> {
-  res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.CLIENT_ID}&scope=user:email`);
+  console.log(process.env.GITHUB_CLIENT_ID)
+  res.redirect(`https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&scope=user:email`);
   
 });
 app.get('/github/callback', async(req, res, next)=> {
   try {
     let response = await axios.post('https://github.com/login/oauth/access_token', {
-      client_id: process.env.CLIENT_ID,
-      client_secret: process.env.CLIENT_SECRET,
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_SECRET_KEY,
       code: req.query.code
     }, {
       headers: {
