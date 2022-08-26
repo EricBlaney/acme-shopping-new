@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList, deleteUser, deleteProduct } from '../store'
+import { fetchWishList, deleteUser, deleteProduc, addCart } from '../store'
 import { Link } from 'react-router-dom';
 import CreateUserContainer from './AdminModal/CreateUser/CreateUserContainer'
 import Modals from './AdminModal/EditUser/Modals'
@@ -87,7 +87,7 @@ class Admin extends React.Component{
      }
 
     render() {
-        const {wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth, thisUser, values} = this.props;
+        const {wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth, thisUser, values, addCart} = this.props;
         const { handleClose, handleShow, handleShowProduct, handleShowMyAccount } = this;
         const triggerTextCreate = 'Create User';
   
