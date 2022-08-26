@@ -61,7 +61,7 @@ const mapState = ({product}, {match}) => {
     const term = match.params.term;
     const searchResults = product.filter(product => product.name.toLowerCase().includes(term.toLowerCase()))
     return {
-        auth,
+        
         searchResults
     }
 }
