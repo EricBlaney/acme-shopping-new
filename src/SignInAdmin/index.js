@@ -41,6 +41,14 @@ class AdminSignIn extends Component{
         <input required type='password' name='password' value={ password } onChange={ onChange }/>
         <button>Login</button>
         <button onClick={renderSignIn}> Not an admin? Click here.</button>
+        <div className='signup'>Admin Sign-In</div> <br></br>
+        <div class='username'>Username: 
+        <input name='username' onChange={ onChange } value={ username }/>
+        Password:
+        <input type='password' name='password' value={ password } onChange={ onChange }/>
+        </div>
+        <button class='login'>Login</button>
+        <button class='adminlogin'  onClick={renderSignIn}> Not an admin?</button>
       </form>
       }
       </div>

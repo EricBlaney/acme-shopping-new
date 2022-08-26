@@ -244,4 +244,3 @@ const mapStateToProps = ({auth, product, cart}) => {
   };
 
 export default connect(mapStateToProps, mapDispatch)(LandingPage);
-

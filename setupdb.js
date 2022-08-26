@@ -176,7 +176,7 @@ const setupdb = async() => {
         .limit(10)
         .where('(release_dates.platform = (7,18,19,11,29) & genres = 8) & total_rating > 60')
         .request('https://api.igdb.com/v4/games')
-        // console.log(topPlatformGames.data)
+        console.log(topPlatformGames.data)
         topPlatformGames.data.map(game=>{
             Product.create({theme: 'topPlatformGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
         });

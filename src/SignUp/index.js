@@ -47,18 +47,19 @@ class SignUp extends Component{
       { showSignIn ? <SignIn onSubmit={onSubmit} /> :
       <div>
         <form onSubmit={ onSubmit }>
-          Sign-Up <br></br>
-          Username:
+          <div className='signup'>Sign-Up</div> <br></br>
+          <div class='username'>Username:
           <input name='username' onChange={ onChange } value={ username }/>
           Email:
           <input name='email' value={email} onChange={onChange}/>
           Password:
           <input type='password' name='password' value={ password } onChange={ onChange }/>
-          <button disabled={this.submitButton() || !username || !password || !email}>Create User</button>
+          </div> 
+          <button class='createuser' disabled={this.submitButton() || !username || !password || !email}>Create User</button>
           {!username ? "Missing Username" : ""} <br></br>
           {!password ? "Missing Password" : ""} <br></br>
           {this.submitButton() || !email ? "Invalid Email" : ""}
-          <button onClick={renderSignIn}> Already a user?  Sign in.</button>
+          <button class='alreadyuser' onClick={renderSignIn}> Already a user?  Sign in.</button>
         </form>
       </div> }
 
