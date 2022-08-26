@@ -66,6 +66,7 @@ class _App extends Component{
             <Route path='/cart' exact component={ Cart }/>
             <Route path='/cart/success' exact component={ CheckoutSuccess }/>
             <Route path='/' exact component={ LandingPage }/>
+            <Route path='/api/product/:id' exact component={ SingleGame }/>
             <Route path='/api/genre' exact component={ Genre }/>
             <Route path='/api/genre/topFightingGames' exact component={ topFightingGames }/>
             <Route path='/api/genre/topRPGGames' exact component={ topRPGGames }/>
@@ -89,8 +90,6 @@ class _App extends Component{
             <Route path='/api/myaccount' exact component={ MyAccount }/>
             <Route path='/search/:term?' component={ SearchResults }/>
             <Route path='/passwordreset/:token/:username/:id' component={ PasswordReset }/>
-            <Route path='/api/product/:id' exact component={ SingleGame }/>
-
         </div>
         )
     }

@@ -48,7 +48,8 @@ class SignUp extends Component{
       <div>
         <form onSubmit={ onSubmit }>
           <div className='signup'>Sign-Up</div> <br></br>
-          <div class='username'>Username:
+          <div class='username'>
+          Username:
           <input name='username' onChange={ onChange } value={ username }/>
           Email:
           <input name='email' value={email} onChange={onChange}/>

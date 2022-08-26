@@ -10,8 +10,6 @@ import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
 import Search from './Search/Search';
 
-
-
 class Nav extends Component {
 
     render() {
