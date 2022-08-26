@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../store';
+import { fetchProducts, addCart } from '../store';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -33,14 +33,14 @@ class Platform extends Component {
         const {  topNESGames, topSNESGames, topPlayStationGames, topXboxGames, topSegaGenesisGames } = this.props;
 
     return (
-      
+
     <div>
         <main>
 
-          
+
       <h2>Top NES Games</h2>
       <Carousel responsive={responsive} ssr={true}>
-            
+
             { topNESGames.map(product=>{
               if(product.imageUrl.length > 10) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
@@ -49,7 +49,7 @@ class Platform extends Component {
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
@@ -57,14 +57,14 @@ class Platform extends Component {
                             <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                           </div>
                       </div>
-                  </div>   
+                  </div>
                 )
         })}
-   </Carousel> 
+   </Carousel>
 
    <h2>Top SNES Games</h2>
    <Carousel responsive={responsive} ssr={true}>
-            
+
             { topSNESGames.map(product=>{
               if(product.imageUrl.length > 10) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
@@ -73,7 +73,7 @@ class Platform extends Component {
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
@@ -81,14 +81,14 @@ class Platform extends Component {
                             <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                           </div>
                       </div>
-                  </div>   
+                  </div>
                 )
         })}
-   </Carousel> 
+   </Carousel>
 
             <h2>Top PlayStation Games</h2>
             <Carousel responsive={responsive} ssr={true}>
-            
+
             { topPlayStationGames.map(product=>{
               if(product.imageUrl.length > 10) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
@@ -97,7 +97,7 @@ class Platform extends Component {
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
@@ -105,14 +105,14 @@ class Platform extends Component {
                             <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                           </div>
                       </div>
-                  </div>   
+                  </div>
                 )
         })}
-   </Carousel> 
+   </Carousel>
 
    <h2>Top XBox Games</h2>
             <Carousel responsive={responsive} ssr={true}>
-            
+
             { topXboxGames.map(product=>{
               if(product.imageUrl.length > 10) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
@@ -121,7 +121,7 @@ class Platform extends Component {
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
@@ -129,14 +129,14 @@ class Platform extends Component {
                             <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                           </div>
                       </div>
-                  </div>   
+                  </div>
                 )
         })}
-   </Carousel> 
+   </Carousel>
 
             <h2>Top Sega Genesis Games</h2>
             <Carousel responsive={responsive} ssr={true}>
-            
+
             { topSegaGenesisGames.map(product=>{
               if(product.imageUrl.length > 10) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
@@ -145,7 +145,7 @@ class Platform extends Component {
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
@@ -153,10 +153,10 @@ class Platform extends Component {
                             <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                           </div>
                       </div>
-                  </div>   
+                  </div>
                 )
         })}
-   </Carousel> 
+   </Carousel>
         </main>
     </div>
 

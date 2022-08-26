@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../store';
+import { fetchProducts, addCart } from '../store';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -39,14 +39,14 @@ class Console extends Component {
         <main>
       <h2>Consoles</h2>
       <Carousel responsive={responsive} ssr={true}>
-        
+
         { consoles.map(product=>{
-  
+
           return (
             <div className="wrapper" key={product.id}>
               <div className="card">
                   <Link to={`/api/product/${product.id}`}>
-                  <div className="picture"><img src={product.imageUrl}width="170" 
+                  <div className="picture"><img src={product.imageUrl}width="170"
                   height="170" /></div> </Link>
                     <div className='info'>
                       <h3>{product.name}</h3>
@@ -54,13 +54,13 @@ class Console extends Component {
                       <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                     </div>
                 </div>
-            </div>   
+            </div>
           )
         })}
         </Carousel>
 
 
-           
+
         </main>
     </div>
 

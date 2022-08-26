@@ -27,11 +27,13 @@ const responsive = {
   };
 
 const SearchResults = ({searchResults, addCart}) => {
+
+
     return (
         <div>
             <h2>Search Results</h2>
             <Carousel responsive={responsive} ssr={true}>
-        
+
                 { searchResults.map(product=>{
             if(product.imageUrl.length > 10 && product.theme !== 'consoles') {
               product.imageUrl = product.imageUrl.substring(44, 100)
@@ -40,17 +42,17 @@ const SearchResults = ({searchResults, addCart}) => {
                     <div className="wrapper" key={product.id}>
                     <div className="card">
                     <Link className='link' to={`/api/product/${product.id}`}>
-                    <div className="picture">{product.theme === 'consoles' ? <img src={`${product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`} width="170" height="170" />}</div>  
+                    <div className="picture">{product.theme === 'consoles' ? <img src={`${product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`} width="170" height="170" />}</div>
                     </Link>
 
                         <div className='info'>
                             <h3>{product.name}</h3>
-                
+
                             <p>{`$${product.price}`}</p>
                             <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                         </div>
                     </div>
-                    </div>   
+                    </div>
                 )
                 })}
         </Carousel>

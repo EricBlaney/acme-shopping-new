@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const cart = (state = { lineItems: [ ] }, action)=> {
+const cart = (state = { lineItems: [ ], cartProduct: null, cartName: '' }, action)=> {
   if(action.type === 'SET_CART'){
-    state = action.cart;
+    state.lineItems = action.cart.lineItems;
   } else if (action.type === 'DELETE_CART') {
     const lineItems = state.lineItems.filter(item => item.product.id !== action.id)
     state = {
@@ -14,6 +14,12 @@ const cart = (state = { lineItems: [ ] }, action)=> {
     lineItem.quantity = action.quantity;
     state = {
       ...state
+    };
+  } else if (action.type === 'SET_CART_PRODUCT') {
+    state = {
+      ...state,
+      cartProduct:  action.cartProduct,
+      cartName: action.name
     };
   }
   return state;
@@ -29,9 +35,10 @@ export const addCart = (product, quantity) => {
         authorization: window.localStorage.getItem('token')
       }
     });
-    // if (response.status === 200) {
-    //   alert('Added to cart successfully')
-    // }
+    if (response.status === 200) {
+      dispatch({ type: 'SET_CART_PRODUCT', cartProduct: product, name: 'cart'});
+      dispatch(fetchCart());
+    }
   }
 }
 

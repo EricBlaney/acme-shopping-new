@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList, deleteUser, deleteProduct } from '../store'
+import { fetchWishList, deleteUser, deleteProduct, addCart } from '../store'
 import { Link } from 'react-router-dom';
 import CreateUserContainer from './AdminModal/CreateUser/CreateUserContainer'
 import Modals from './AdminModal/EditUser/Modals'
@@ -56,7 +56,7 @@ class Admin extends React.Component{
           this.props.getWishList();
         }
     }
-    
+
       handleShow = (user) =>{
         this.setState({
           modalUser: user,
@@ -90,7 +90,7 @@ class Admin extends React.Component{
         const {wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth, thisUser, values} = this.props;
         const { handleClose, handleShow, handleShowProduct, handleShowMyAccount } = this;
         const triggerTextCreate = 'Create User';
-  
+
         return(
             <div className='admin' key={user.id}>
             {thisUser.map(user=>{
@@ -116,9 +116,9 @@ class Admin extends React.Component{
             <br></br>
 
                     {
-                        wishlist ? 
-                        <Carousel responsive={responsive} ssr={true}> 
-                        { 
+                        wishlist ?
+                        <Carousel responsive={responsive} ssr={true}>
+                        {
                         wishlist.wishListItems.map(wishListItem=>{
                             if(wishListItem.product.imageUrl.length > 40 && wishListItem.product.theme !== 'consoles') {
                             wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100)
@@ -127,7 +127,7 @@ class Admin extends React.Component{
                             <div className="wrapper" key={wishListItem.product.id}>
                             <div className="card">
                             <Link className='link' to={`/api/product/${wishListItem.product.id}`}>
-                            <div className="picture">{wishListItem.product.theme === 'consoles' ? <img src={`${wishListItem.product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_1080p/${wishListItem.product.imageUrl}`} width="170" height="170" />}</div>  
+                            <div className="picture">{wishListItem.product.theme === 'consoles' ? <img src={`${wishListItem.product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_1080p/${wishListItem.product.imageUrl}`} width="170" height="170" />}</div>
                             </Link>
 
                                 <div className='info'>
@@ -136,11 +136,11 @@ class Admin extends React.Component{
                                     <button onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                                 </div>
                             </div>
-                            </div>   
-                            
+                            </div>
+
                         )
                         }) }</Carousel>
-                        
+
                         : 'You have nothing in your Wish List! Go add something!'
                     }
 
@@ -151,7 +151,7 @@ class Admin extends React.Component{
             <div>
 
             <CreateUserContainer onSubmit={ onSubmit } triggerText={ triggerTextCreate } />
-            
+
             </div>
             <br></br>
             <br></br>
@@ -164,12 +164,12 @@ class Admin extends React.Component{
                     <th>Edit User</th>
                     <th>User Type</th>
                 </tr>
-                
+
                 </thead>
                 <tbody>
                     {
                     (values.filter((user)=> user.id !== adminAuth.id).map(user=>{
-                        
+
                         return(
                                 <tr key={user.id}>
                                     <td>{user.username}</td>
@@ -182,9 +182,9 @@ class Admin extends React.Component{
                     }))
                     }
                 </tbody>
-              
+
                 </table>
-                
+
                 {this.state.isShowModal ? <Modals handleClose={ handleClose } isShowModal={this.state.isShowModal} user={this.state.modalUser}/> : null}
 
                 <br></br>
@@ -196,7 +196,7 @@ class Admin extends React.Component{
             <div>
 
             {/* <CreateUserContainer onSubmit={ onSubmit } triggerText={ triggerTextCreate } /> */}
-            
+
             </div>
             <br></br>
             <br></br>
@@ -209,13 +209,13 @@ class Admin extends React.Component{
                     <th>Delete Game</th>
                     <th>Edit Game Summary</th>
                 </tr>
-                
+
                 </thead>
                 <tbody>
                     {
                     (product||[]).map(product=>{
                         return(
-                                
+
                                 <tr key={product.id}>
                                     <td>{product.name}</td>
                                     <td>{product.condition}</td>
@@ -225,11 +225,11 @@ class Admin extends React.Component{
                                 </tr>
                         )
                     })
-                    } 
+                    }
                 </tbody>
-              
+
                 </table>
-                
+
                 {this.state.isShowProductModal ? <ProductModals handleClose={ handleClose } isShowModal={this.state.isShowProductModal} product={this.state.modalProduct}/> : null}
 
             </div>

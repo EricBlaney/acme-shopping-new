@@ -6,7 +6,7 @@ import SignInContainer from './SignIn/SignInContainer';
 import './Nav.css';
 import './Footer.css';
 import { logout, exchangeToken, fetchCart, setUsers, fetchProducts, adminExchangeToken } from './store';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons'
 import { Badge } from 'antd';
 
 class Nav extends Component {
@@ -43,7 +43,7 @@ class Nav extends Component {
                             <button className="dropbtn"> <NavLink exact to='/'>Home</NavLink></button>
                             <button className="dropbtn"> <NavLink exact to={`/api/console`}>Consoles</NavLink></button>
 
-                              
+
                         <div className="dropdown">
                         <button className="dropbtn"><NavLink exact to={`/api/genre`}> By Genre </NavLink></button>
                             <div  className="dropdown-content">
@@ -67,7 +67,7 @@ class Nav extends Component {
                               <a href="#">Sega</a>
                           </div>
                         </div>
-                  
+
                           <div className="dropdown">
                           <button className="dropbtn"><NavLink exact to={`/api/gamesbyyear`}>By Year</NavLink></button>
                               <div className="dropdown-content">
@@ -79,46 +79,52 @@ class Nav extends Component {
                                 <a href="#">1994</a>
                               </div>
                         </div>
-                            
-                  
+
+
                           <div className="topnav-right">
-                            <NavLink exact to='/api/myaccount' ><i className="fas fa-user-alt"></i> </NavLink> 
-                              <NavLink to='/cart'><i className="fas fa-shopping-cart"></i></NavLink>
+                            <NavLink exact to='/api/myaccount' >
+                              <UserOutlined style={{fontSize: 18, color: '#fff'}} />
+                            </NavLink>
+                            <NavLink to='/cart'>
+                              <Badge count={this.props.cart.lineItems.length} size="small">
+                                <ShoppingCartOutlined style={{fontSize: 18, color: '#fff'}} />
+                              </Badge>
+                            </NavLink>
 
 
                           {
                             auth.id ? <Link to='/'><button onClick={ logout }><i className="fa fa-sign-out"></i></button></Link> : <SignInContainer triggerText={signInTriggerText} />
                           }
-                              
+
                           { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
-                          
+
                           </div>
 
                           <h1 className='mainlogo'><img src='https://blog.lootcrate.com/wp-content/uploads/2018/02/pacman_ghosts_header.gif'></img> RETROS</h1>
 
-                        
+
                         <div className="footer">
                             <li><a href="https://www.facebook.com/profile.php?id=100085008934837"><i className="fa fa-facebook"></i></a></li>
                             <li><a href="https://twitter.com/fullstack2022"><i className="fa fa-twitter"></i></a></li>
                             <li><a href="https://www.instagram.com/fsseniorproject/"><i className="fa fa-instagram"></i></a></li>
                         </div>
-                      
+
                       </div>
-                        
+
                   </header>
                 </nav>
             </main>
         )
     }
     };
-    
-    const mapState = ({ auth }) => {
+
+    const mapState = ({ auth, cart }) => {
         return {
             auth,
-            
+          cart
         }
     };
-    
+
     const mapDispatch = (dispatch) => {
         return {
             fetchCart: ()=> dispatch(fetchCart()),
@@ -129,5 +135,5 @@ class Nav extends Component {
             logout: () => dispatch(logout())
         }
     };
-    
+
     export default connect(mapState, mapDispatch)(Nav);

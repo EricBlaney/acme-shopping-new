@@ -12,7 +12,7 @@ const Cart = ({ cart, deleteCart, updateQuantity, getCart, checkout })=> {
     getCart();
   }, [])
 
-const totalPrice = cart.lineItems.reduce((total, item) => total += item.product.price, 0);
+const totalPrice = cart.lineItems.reduce((total, item) => total += item.product.price * item.quantity, 0);
 console.log(totalPrice);
 
 

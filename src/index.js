@@ -23,15 +23,17 @@ import topAdventureGames from './dropdownPage/topAdventureGames';
 import topPlatformGames from './dropdownPage/topPlatformGames';
 import 'antd/dist/antd.css';
 import './index.css';
+import { Modal } from 'antd'
 
 class _App extends Component{
-
     render(){
+        const { cartProduct, cartName } = this.props.cart;
+        console.log(cartProduct)
         return(
         <div id="main-body">
             <Nav/>
-            
-            <Route component={ Search }/>  
+
+            <Route component={ Search }/>
             <Route path='/cart' exact component={ Cart }/>
             <Route path='/cart/success' exact component={ CheckoutSuccess }/>
             <Route path='/' exact component={ LandingPage }/>
@@ -50,6 +52,20 @@ class _App extends Component{
             <Route path='/passwordreset/:token/:username/:id' component={ PasswordReset }/>
             <Route path='/api/product/:id' exact component={ SingleGame }/>
 
+            <Modal title={`Add a new product to ${cartName}`} visible={!!cartProduct} onCancel={() => this.props.setCartProductNull()} footer={null}>
+                {
+                  cartProduct && (
+                    <div className="cart-item">
+                        <img className="cart-image" src={`//images.igdb.com/igdb/image/upload/t_cover_big/${cartProduct.imageUrl}`} />
+                        <div>
+                            <div className="cart-name">{ cartProduct.name }</div>
+                            <div className="cart-desc">{ cartProduct.summary.length > 200 ? cartProduct.summary.slice(0, 200) + '...' : cartProduct.summary }</div>
+                            <div className="cart-price">${ cartProduct.price }</div>
+                        </div>
+                    </div>
+                  )
+                }
+            </Modal>
         </div>
         )
     }
@@ -57,6 +73,10 @@ class _App extends Component{
 
 
 
-const App = connect(null)(_App);
+const App = connect(
+  (state => state),
+  (dispatch) => ({
+      setCartProductNull: () => dispatch({ type: 'SET_CART_PRODUCT', cartProduct: null})
+  }))(_App);
 const root = createRoot(document.querySelector('#root'));
 root.render(<Provider store={ store }><Router><App /></Router></Provider>);
