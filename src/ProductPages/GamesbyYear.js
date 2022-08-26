@@ -1,12 +1,29 @@
 import React, {Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../store';
+import { fetchProducts, addCart } from '../store';
 import { Link } from 'react-router-dom';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
-
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 class GamesbyYear extends Component {
-
-
     componentDidMount(){
         this.props.fetchProducts();
     }
@@ -18,88 +35,132 @@ class GamesbyYear extends Component {
     <div>
         <main>
       <h2>Games from 1994</h2>
-            <ul>
-            { thisYearsGames1994.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
-        })}
-            </ul>
+      <Carousel responsive={responsive} ssr={true}>
 
-            <h2>Games from 1992</h2>
-            <ul>
-            { thisYearsGames1992.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
-        })}
-            </ul>
+      { thisYearsGames1994.map(product=>{
+  if(product.imageUrl.length > 10) {
+    product.imageUrl = product.imageUrl.substring(44, 100)
+    }
+  return (
+    <div className="wrapper" key={product.id}>
+      <div className="card">
+          <Link to={`/api/product/${product.id}`}>
+          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
+          height="170" /></div> </Link>
+            <div className='info'>
+              <h3>{product.name}</h3>
+              <p>{`$${product.price}`}</p>
+              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+            </div>
+        </div>
+    </div>
+  )
+})}
+</Carousel>
 
-            <h2>Games from 1990</h2>
-            <ul> 
-            { thisYearsGames1990.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
-        })}
-            </ul>
+<h2>Games from 1992</h2>
+      <Carousel responsive={responsive} ssr={true}>
 
-            <h2>Games from 1987</h2>
-            <ul> 
-            { thisYearsGames1987.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
-        })}
-            </ul>
+      { thisYearsGames1992.map(product=>{
+  if(product.imageUrl.length > 10) {
+    product.imageUrl = product.imageUrl.substring(44, 100)
+    }
+  return (
+    <div className="wrapper" key={product.id}>
+      <div className="card">
+          <Link to={`/api/product/${product.id}`}>
+          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
+          height="170" /></div> </Link>
+            <div className='info'>
+              <h3>{product.name}</h3>
+              <p>{`$${product.price}`}</p>
+              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+            </div>
+        </div>
+    </div>
+  )
+})}
+</Carousel>
 
-            <h2>Games from 1985</h2>
-            <ul> 
-            { thisYearsGames1985.map(product=>{
-          return (
-            <li>
-                <Link key={product.id}><img src={product.imageUrl}/> {product.name} </Link>
-            <div className='price'>{`$${product.price}`}</div> 
-            <button className='addtocart'>Add To Cart</button>     
-            <br></br>
-     <div>{product.summary}</div>
-            </li>
-          )
-        })}
-            </ul>
+<h2>Games from 1990</h2>
+      <Carousel responsive={responsive} ssr={true}>
+
+      { thisYearsGames1990.map(product=>{
+  if(product.imageUrl.length > 10) {
+    product.imageUrl = product.imageUrl.substring(44, 100)
+    }
+  return (
+    <div className="wrapper" key={product.id}>
+      <div className="card">
+          <Link to={`/api/product/${product.id}`}>
+          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
+          height="170" /></div> </Link>
+            <div className='info'>
+              <h3>{product.name}</h3>
+              <p>{`$${product.price}`}</p>
+              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+            </div>
+        </div>
+    </div>
+  )
+})}
+</Carousel>
+
+<h2>Games from 1987</h2>
+      <Carousel responsive={responsive} ssr={true}>
+
+      { thisYearsGames1987.map(product=>{
+  if(product.imageUrl.length > 10) {
+    product.imageUrl = product.imageUrl.substring(44, 100)
+    }
+  return (
+    <div className="wrapper" key={product.id}>
+      <div className="card">
+          <Link to={`/api/product/${product.id}`}>
+          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
+          height="170" /></div> </Link>
+            <div className='info'>
+              <h3>{product.name}</h3>
+              <p>{`$${product.price}`}</p>
+              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+            </div>
+        </div>
+    </div>
+  )
+})}
+</Carousel>
+
+<h2>Games from 1985</h2>
+      <Carousel responsive={responsive} ssr={true}>
+
+      { thisYearsGames1985.map(product=>{
+  if(product.imageUrl.length > 10) {
+    product.imageUrl = product.imageUrl.substring(44, 100)
+    }
+  return (
+    <div className="wrapper" key={product.id}>
+      <div className="card">
+          <Link to={`/api/product/${product.id}`}>
+          <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170"
+          height="170" /></div> </Link>
+            <div className='info'>
+              <h3>{product.name}</h3>
+              <p>{`$${product.price}`}</p>
+              <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+            </div>
+        </div>
+    </div>
+  )
+})}
+</Carousel>
         </main>
     </div>
 
 )
 }
-
 }
 
-const mapStateToProps = ({ product})=> {
+const mapStateToProps = ({ auth,product, cart})=> {
     const thisYearsGames1994 = product.filter(product => product.theme === 'thisYearsGames1994');
     const thisYearsGames1992 = product.filter(product => product.theme === 'thisYearsGames1992');
     const thisYearsGames1990 = product.filter(product => product.theme === 'thisYearsGames1990');
@@ -107,18 +168,22 @@ const mapStateToProps = ({ product})=> {
     const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
 
     return {
+      auth,
       thisYearsGames1994,
       thisYearsGames1992,
       thisYearsGames1990,
       thisYearsGames1987,
       thisYearsGames1985,
-
+cart
     };
   }
 
   const mapDispatch = (dispatch) => {
     return {
-        fetchProducts: ()=> dispatch(fetchProducts()),
+      addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+
+        fetchProducts: ()=> dispatch(fetchProducts())
+
     }
 };
 
