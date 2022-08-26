@@ -23,13 +23,15 @@ class SingleGame extends Component {
           <div className="singlegame">
 
             { (game||[]).map(game=>{
+              if(game.imageUrl.length > 40 && game.theme !== 'consoles') {
+                game.imageUrl = game.imageUrl.substring(44, 100)
               if(game.imageUrl.length > 10 && game.theme !== 'topPlatformGames') {
                  game.imageUrl = game.imageUrl.substring(44, 100)
               }
               return (
                       <div key={game.id} className='singlecard'>
                         <li className='product'>
-                          <div className="product-img"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${game.imageUrl}`} width="170" height="170" /></div>
+                          <div className="product-img"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${game.imageUrl}`} width="170" height="170" /></div>
                               <div className='productlisting'>
                                   <div className='content'>
                                     <div className='singleName'>{game.name}</div>
@@ -54,12 +56,12 @@ class SingleGame extends Component {
                               </div>
                         </li>
                       </div>
-                      )
+              
+              )
+            }
             })}
             </div>
-
-          }
-
+            }
   
         <Modal title="Add a new product to cart" visible={!!cartProduct} onCancel={() => this.setState({cartProduct: null})} footer={null}>
           {

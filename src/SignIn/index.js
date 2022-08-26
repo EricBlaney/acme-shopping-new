@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import SignInAdmin from '../SignInAdmin';
 import axios from 'axios';
 
+
 class SignIn extends Component{
   constructor(){
     super();
@@ -56,6 +57,13 @@ flag_email_input(){
       <div>
 
       <form onSubmit={ onSubmit }>
+        Sign-In: <br></br>
+        Username: 
+        <input required name='username' onChange={ onChange } value={ username }/>
+        Password:
+        <input required type='password' name='password' value={ password } onChange={ onChange }/>
+        <button>Login</button>
+        <button onClick={renderAdminSignIn}> Admin? Click here to sign in.</button>
        <div class='signup'> Sign-In</div>  <br></br>
         <div class='username'>Username:
         <input name='username' onChange={ onChange } value={ username }/>

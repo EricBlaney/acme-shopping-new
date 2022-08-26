@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../store';
+import { fetchProducts, addCart } from '../store';
 import { Link } from 'react-router-dom';
 import './dropdownSingle.css';
 import Carousel from 'react-multi-carousel';
@@ -55,7 +55,7 @@ class topXboxGames extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   

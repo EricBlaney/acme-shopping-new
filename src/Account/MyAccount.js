@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Admin from './Admin';
 import Carousel from 'react-multi-carousel';
 import MyAccountModals from './AdminModal/EditMyAccount/MyAccountModals'
+import './MyAccount.css';
 import 'react-multi-carousel/lib/styles.css';
 
 //Carousel responsiveness
@@ -72,7 +73,7 @@ class MyAccount extends React.Component{
         const {handleShowMyAccount, handleClose} = this;
 
         return(
-            <div>
+            <div className="myaccount">
             { adminAuth.isAdmin ? <Admin/> :
 
             <main key={auth.id} className='user-details'>

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import './Cart.css'; // npm install css-loader style-loader -D
-import { Link } from 'react-router-dom'
 import { deleteCart, updateQuantity, fetchCart, checkout} from './store'
 
 //new import from here
@@ -16,7 +15,6 @@ const Cart = ({ cart, deleteCart, updateQuantity, getCart, checkout, auth })=> {
 
 const totalPrice = (cart.lineItems || []).reduce((total, item) => total += (item.product.price * item.quantity), 0);
 console.log(totalPrice);
-
 console.log(auth.id);
   return (
 

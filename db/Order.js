@@ -7,7 +7,8 @@ const Order = conn.define('order', {
     defaultValue: true
   },
   guestId: {
-    type: Sequelize.BIGINT
+    type: Sequelize.BIGINT,
+    defaultValue: 39294
   }
 });
 

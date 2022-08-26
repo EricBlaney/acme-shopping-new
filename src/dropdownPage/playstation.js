@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../store';
+import { fetchProducts, addCart } from '../store';
 import { Link } from 'react-router-dom';
 import './dropdownSingle.css';
 import Carousel from 'react-multi-carousel';
