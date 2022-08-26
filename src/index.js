@@ -1,20 +1,19 @@
 import { createRoot } from 'react-dom/client';
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
+import { HashRouter as Router, Route } from 'react-router-dom';
+import Nav from './Nav'
+import store from './store'
+import LandingPage from './LandingPage';
 import SingleGame from './ProductPages/SingleGame';
 import MyAccount from './Account/MyAccount';
-// import UpdateMyAccount from './Account/UpdateMyAccount';
-import { HashRouter as Router, Route } from 'react-router-dom';
-import LandingPage from './LandingPage';
 import Cart from './Cart';
+import CheckoutSuccess from './CheckoutSuccess';
+import PasswordReset from './PasswordReset';
+import Search from './Search/Search'
 import SearchResults from './Search/SearchResults'
-import './index.css';
 import Platform from './ProductPages/Platform';
 import Genre from './ProductPages/Genre';
-import 'antd/dist/antd.css';
-import CheckoutSuccess from './CheckoutSuccess';
-import store from './store'
-import Nav from './Nav'
 import GamesbyYear from './ProductPages/GamesbyYear';
 import Console from './ProductPages/Console'
 import topFightingGames from './dropdownPage/topFightingGames';
@@ -33,25 +32,40 @@ import thisYearsGames1990 from './dropdownPage/1990';
 import thisYearsGames1989 from './dropdownPage/1989';
 import thisYearsGames1987 from './dropdownPage/1987';
 import thisYearsGames1985 from './dropdownPage/1985';
-import Search from './Search/Search';
+import 'antd/dist/antd.css';
+import './index.css';
+import { logout, exchangeToken, fetchCart, setUsers, fetchProducts, adminExchangeToken } from './store';
 
-
-
-
-import PasswordReset from './PasswordReset';
 
 class _App extends Component{
+
+    componentDidMount(){
+        this.props.exchangeToken();
+        this.props.adminExchangeToken()
+        this.props.fetchCart(this.props.auth);
+        this.props.fetchProducts();
+        this.props.setUsers();
+    }
+
+    componentDidUpdate(prevProps){
+        if(!prevProps.auth.id && this.props.auth.id){
+          this.props.exchangeToken();
+          this.props.adminExchangeToken();
+          this.props.fetchCart(this.props.auth);
+          this.props.fetchProducts();
+          this.props.setUsers();
+        }
+      }
 
     render(){
         return(
         <div id="main-body">
-            <Nav />
-            <Route component={ Search }/>
-
+            <Nav/>
+            
+            <Route component={ Search }/>  
             <Route path='/cart' exact component={ Cart }/>
             <Route path='/cart/success' exact component={ CheckoutSuccess }/>
             <Route path='/' exact component={ LandingPage }/>
-            <Route path='/api/product/:id' exact component={ SingleGame }/>
             <Route path='/api/genre' exact component={ Genre }/>
             <Route path='/api/genre/topFightingGames' exact component={ topFightingGames }/>
             <Route path='/api/genre/topRPGGames' exact component={ topRPGGames }/>
@@ -71,20 +85,39 @@ class _App extends Component{
             <Route path='/api/gamesbyyear/1987' exact component={ thisYearsGames1987 }/>
             <Route path='/api/gamesbyyear/1985' exact component={ thisYearsGames1985 }/>
             <Route path='/api/gamesbyyear/1989' exact component={ thisYearsGames1989 }/>
-
             <Route path='/api/console' exact component={ Console }/>
-
             <Route path='/api/myaccount' exact component={ MyAccount }/>
-            {/* <Route path='/updatemyaccount' exact component={ UpdateMyAccount }/> */}
             <Route path='/search/:term?' component={ SearchResults }/>
             <Route path='/passwordreset/:token/:username/:id' component={ PasswordReset }/>
+            <Route path='/api/product/:id' exact component={ SingleGame }/>
+
         </div>
         )
     }
 }
 
+const mapState = ({ auth }) => {
+    return {
+        auth,
+        
+    }
+};
 
 
-const App = connect(null)(_App);
+const mapDispatch = (dispatch) => {
+    return {
+        fetchCart: (auth)=> dispatch(fetchCart(auth)),
+        adminExchangeToken: ()=> dispatch(adminExchangeToken),
+        exchangeToken: ()=> dispatch(exchangeToken()),
+        fetchProducts: ()=> dispatch(fetchProducts()),
+        setUsers: ()=> dispatch(setUsers()),
+        logout: () => dispatch(logout())
+    }
+};
+
+
+
+
+const App = connect(mapState, mapDispatch)(_App);
 const root = createRoot(document.querySelector('#root'));
 root.render(<Provider store={ store }><Router><App /></Router></Provider>);
