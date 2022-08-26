@@ -1,22 +1,6 @@
-main {
-  background-color: black;
 
-}
-h2 {
-  padding: 14px 16px;
-  font-size: 20px;
-  color: white;
-  text-align: center;
-  text-transform: uppercase;
-  font-style: italic;
-  font-weight: 900;
-  border-radius: 25px;
-  font-family: "Avenir Next", sans-serif;
-  background: linear-gradient(to right, orange,blue, red, yellow);
-}
-
-  .row {
-    height: 90%
+ .row {
+    height: 90%;
   }
   
   .wrapper {
@@ -24,7 +8,7 @@ h2 {
     display: flex;
     width: 100%;
     justify-content: space-around;
- }
+  }
     
   .card  {
     width: 280px;
@@ -36,7 +20,9 @@ h2 {
     display: flex;
     align-items: flex-end;
     transition: 0.4s ease-out;
+
     box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5); }
+
     .card:hover {
       transform: translateY(20px); }
       .card:hover:before{
@@ -76,9 +62,14 @@ h2 {
       transform: translateY(30px);
       transition: 0.5s; }
       .card .info h3 {
+        color: white;
+        font-family:'Silkscreen', regular;
+
         margin: 0px; }
       .card .info p {
         letter-spacing: 1px;
+        font-family:'Silkscreen', regular;
+
         font-size: 20px;
         margin-top: 8px; }
       .card .info button {
