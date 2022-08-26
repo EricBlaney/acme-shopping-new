@@ -5,32 +5,14 @@ import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 import './Nav.css';
 import './Footer.css';
-import { logout, exchangeToken, fetchCart, setUsers, fetchProducts, adminExchangeToken } from './store';
+import { logout } from './store'
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
-
+import Search from './Search/Search';
 
 
 
 class Nav extends Component {
-
-    componentDidMount(){
-        this.props.fetchProducts();
-        this.props.exchangeToken();
-        this.props.adminExchangeToken()
-        this.props.fetchCart(this.props.auth);
-        this.props.setUsers();
-    }
-
-    componentDidUpdate(prevProps){
-        if(!prevProps.auth.id && this.props.auth.id){
-          this.props.fetchCart(this.props.auth);
-          this.props.exchangeToken();
-          this.props.adminExchangeToken()
-          this.props.fetchProducts();
-          this.props.setUsers();
-        }
-      }
 
     render() {
         const {logout, auth } = this.props;
@@ -43,12 +25,12 @@ class Nav extends Component {
                     <nav>
                       <header>
                           <div className="topnav">
-                            <button className="dropbtn"> <NavLink exact to='/'>Home</NavLink></button>
-                            <button className="dropbtn"> <NavLink exact to={`/api/console`}>Consoles</NavLink></button>
+                            <button className="dropbtn"> <Link exact to='/'>Home</Link></button>
+                            <button className="dropbtn"> <Link exact to={`/api/console`}>Consoles</Link></button>
 
                  
                 <div className="dropdown">
-               <button class="dropbtn"><NavLink exact to='/api/genre'> By Genre </NavLink></button>
+               <button className="dropbtn"><Link exact to='/api/genre'> By Genre </Link></button>
       <div  className="dropdown-content">
           <ul>
       <Link exact to={`/api/genre/topFightingGames`}>Fighting </Link>
@@ -60,7 +42,7 @@ class Nav extends Component {
       </div>
     </div>
                  <div className="dropdown">
-     <button class="dropbtn"> <NavLink exact to='/api/platform'> By Platform </NavLink></button>
+     <button className="dropbtn"> <Link exact to='/api/platform'> By Platform </Link></button>
       <div className="dropdown-content">
       <Link exact to={`/api/platform/nes`}>NES </Link>
       <Link exact to={`/api/platform/snes`}>SNES </Link>
@@ -71,7 +53,7 @@ class Nav extends Component {
     </div>
     
             <div className="dropdown">
-            <button class="dropbtn"><NavLink exact to='/api/gamesbyyear'>By Year</NavLink></button>
+            <button className="dropbtn"><Link exact to='/api/gamesbyyear'>By Year</Link></button>
       <div className="dropdown-content">
       <Link exact to={`/api/gamesbyyear/1985`}>1985 </Link>
       <Link exact to={`/api/gamesbyyear/1987`}>1987 </Link>
@@ -84,29 +66,21 @@ class Nav extends Component {
               
     
             <div className="topnav-right">
-          
-               <NavLink exact to='/myaccount' ><i class="fas fa-user-alt"></i> </NavLink> 
-                <NavLink to='/cart'><i class="fas fa-shopping-cart"></i></NavLink>
+            {/* <Route component={ Search }/>
+
+<Search /> */}
+               <NavLink exact to='/api/myaccount' ><i className="fas fa-user-alt"></i> </NavLink> 
+                <NavLink to='/cart'><i className="fas fa-shopping-cart"></i></NavLink>
             {
-              auth.id ? <Link to='/'><button class='logout' onClick={ logout }>logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
+              auth.id ? <Link to='/'><button className='logout' onClick={ logout }>logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
             }
                 
             { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
             </div>
 
 
-            <h1 className='mainlogo'><img src='https://blog.lootcrate.com/wp-content/uploads/2018/02/pacman_ghosts_header.gif'></img>
-RETROS </h1>
-
-                          {
-                            // auth.id ? <Link to='/'><button onClick={ logout }><i className="fa fa-sign-out"></i></button></Link> : <SignInContainer triggerText={signInTriggerText} />
-                          }
+            <h1 className='mainlogo'><img src='https://blog.lootcrate.com/wp-content/uploads/2018/02/pacman_ghosts_header.gif'></img>RETROS </h1>
                               
-                          {/* { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  } */}
-                          
-                          </div>
-
-                          {/* <h1 className='mainlogo'><img src='https://blog.lootcrate.com/wp-content/uploads/2018/02/pacman_ghosts_header.gif'></img> RETROS</h1> */}
 
                         
                         <div className="footer">
@@ -115,10 +89,8 @@ RETROS </h1>
                             <li><a href="https://www.instagram.com/fsseniorproject/"><i className="fa fa-instagram"></i></a></li>
                         </div>
                       
-                    
-                      
-
-
+                      </div>
+                        
                   </header>
                 </nav>
             </main>
@@ -135,11 +107,6 @@ RETROS </h1>
     
     const mapDispatch = (dispatch) => {
         return {
-            fetchCart: (auth)=> dispatch(fetchCart(auth)),
-            adminExchangeToken: ()=> dispatch(adminExchangeToken),
-            exchangeToken: ()=> dispatch(exchangeToken()),
-            fetchProducts: ()=> dispatch(fetchProducts()),
-            setUsers: ()=> dispatch(setUsers()),
             logout: () => dispatch(logout())
         }
     };
