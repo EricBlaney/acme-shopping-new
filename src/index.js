@@ -59,7 +59,7 @@ class _App extends Component{
                         <img className="cart-image" src={`//images.igdb.com/igdb/image/upload/t_cover_big/${cartProduct.imageUrl}`} />
                         <div>
                             <div className="cart-name">{ cartProduct.name }</div>
-                            <div className="cart-desc">{ cartProduct.summary.length > 200 ? cartProduct.summary.slice(0, 200) + '...' : cartProduct.summary }</div>
+                            <div className="cart-desc">{ cartProduct.summary && (cartProduct.summary.length > 200 ? cartProduct.summary.slice(0, 200) + '...' : cartProduct.summary) }</div>
                             <div className="cart-price">${ cartProduct.price }</div>
                         </div>
                     </div>

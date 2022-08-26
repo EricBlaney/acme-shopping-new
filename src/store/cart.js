@@ -12,6 +12,7 @@ const cart = (state = { lineItems: [ ], cartProduct: null, cartName: '' }, actio
   } else if (action.type === 'UPDATE_QUANTITY') {
     const lineItem = state.lineItems.find(item => item.product.id === action.id);
     lineItem.quantity = action.quantity;
+    state.lineItems = state.lineItems.filter(item => item.quantity > 0);
     state = {
       ...state
     };
@@ -89,18 +90,24 @@ export const updateQuantity = (product, quantity) => {
 export const checkout = () => {
   return async(disptach, getState) => {
     const line_items = getState().cart.lineItems;
-    const stripe_line_items = line_items.map(item => ({
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: item.product.name,
-          description: item.product.summary,
-          images:[ `https:${item.product.imageUrl}`]
-          },
+    const stripe_line_items = line_items.map(item => {
+      const image = item.product.imageUrl.startsWith('https') ? item.product.imageUrl : `https:${item.product.imageUrl}`;
+      const product_data = {
+        name: item.product.name,
+        images:[image]
+      }
+      if (item.product.summary) {
+        product_data.description = item.product.summary;
+      }
+      return {
+        price_data: {
+          currency: 'usd',
+          product_data,
           unit_amount: item.product.price * 100
         },
         quantity: item.quantity
-    }))
+      }
+    })
     const response = await axios.post('/api/orders/create-checkout-session', stripe_line_items, {
       headers: {
         authorization: window.localStorage.getItem('token')

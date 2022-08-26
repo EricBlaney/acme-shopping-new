@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Result } from 'antd';
+import { connect } from 'react-redux'
+import { checkout, deleteCart, fetchCart, updateQuantity } from './store'
 
 let timer;
 
@@ -9,11 +11,13 @@ class CheckoutSuccess extends Component {
     }
 
     componentDidMount() {
+        this.props.cart.lineItems.forEach(item => this.props.updateQuantity(item.product, 0));
+
         timer = setInterval(() => {
             this.setState(prevState => {
                 if(prevState.seconds > 0) {
                     return {
-                        seconds: prevState.seconds - 1 
+                        seconds: prevState.seconds - 1
                     };
                 } else {
                     this.toLandingpage();
@@ -28,7 +32,7 @@ class CheckoutSuccess extends Component {
     componentWillUnmount() {
         clearInterval(timer);
     }
-    
+
     toLandingpage = () => {
         this.props.history.push('/');
     }
@@ -41,7 +45,7 @@ class CheckoutSuccess extends Component {
                 subTitle = {`The page will automatically jump after ${this.state.seconds} seconds, please wait.`}
                 extra={[
                     <Button type="primary" key="console" onClick={this.toLandingpage}>
-                        Go Back To Landing Page 
+                        Go Back To Landing Page
                     </Button>
                 ]}
             />
@@ -49,4 +53,10 @@ class CheckoutSuccess extends Component {
     }
 }
 
-export default CheckoutSuccess;
+const mapDispatch = (dispatch)=> {
+    return {
+        updateQuantity: (product, num)=> dispatch(updateQuantity(product, num))
+    };
+};
+
+export default connect(state => state, mapDispatch)(CheckoutSuccess);

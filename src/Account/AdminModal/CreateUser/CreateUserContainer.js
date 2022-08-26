@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from './Modal 2';
+import { Modal } from './Modal';
 import TriggerButton from './TriggerButton';
 
 class CreateUserContainer extends React.Component {

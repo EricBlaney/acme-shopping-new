@@ -12,9 +12,7 @@ const Cart = ({ cart, deleteCart, updateQuantity, getCart, checkout })=> {
     getCart();
   }, [])
 
-const totalPrice = cart.lineItems.reduce((total, item) => total += item.product.price * item.quantity, 0);
-console.log(totalPrice);
-
+  const totalPrice = cart.lineItems.reduce((total, item) => total += item.product.price * item.quantity, 0);
 
   return (
     <div className="cart-container">
@@ -26,7 +24,7 @@ console.log(totalPrice);
               <img className="cart-image" src={lineItem.product.imageUrl} />
               <div>
                 <div className="cart-name">{ lineItem.product.name }</div>
-                <div className="cart-desc">{ lineItem.product.summary.length > 200 ? lineItem.product.summary.slice(0, 200) + '...' : lineItem.product.summary }</div>
+                <div className="cart-desc">{ lineItem.product.summary && (lineItem.product.summary.length > 200 ? lineItem.product.summary.slice(0, 200) + '...' : lineItem.product.summary) }</div>
                 <div className="cart-quantity">
                   <span className="quantity-minus" onClick={() => updateQuantity(lineItem.product, lineItem.quantity - 1)}>-</span>
                   <span className="quantity-num">{ lineItem.quantity }</span>
