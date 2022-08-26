@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList, deleteUser, deleteProduc, addCart } from '../store'
+import { fetchWishList, deleteUser, deleteProduct } from '../store'
 import { Link } from 'react-router-dom';
 import CreateUserContainer from './AdminModal/CreateUser/CreateUserContainer'
 import Modals from './AdminModal/EditUser/Modals'
@@ -87,7 +87,7 @@ class Admin extends React.Component{
      }
 
     render() {
-        const {wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth, thisUser, values, addCart} = this.props;
+        const {wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth, thisUser, values} = this.props;
         const { handleClose, handleShow, handleShowProduct, handleShowMyAccount } = this;
         const triggerTextCreate = 'Create User';
   
@@ -120,14 +120,14 @@ class Admin extends React.Component{
                         <Carousel responsive={responsive} ssr={true}> 
                         { 
                         wishlist.wishListItems.map(wishListItem=>{
-                            if(wishListItem.product.imageUrl.length > 10 && wishListItem.product.theme !== 'consoles') {
+                            if(wishListItem.product.imageUrl.length > 40 && wishListItem.product.theme !== 'consoles') {
                             wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100)
                                 }
                         return (
                             <div className="wrapper" key={wishListItem.product.id}>
                             <div className="card">
                             <Link className='link' to={`/api/product/${wishListItem.product.id}`}>
-                            <div className="picture">{wishListItem.product.theme === 'consoles' ? <img src={`${wishListItem.product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${wishListItem.product.imageUrl}`} width="170" height="170" />}</div>  
+                            <div className="picture">{wishListItem.product.theme === 'consoles' ? <img src={`${wishListItem.product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_1080p/${wishListItem.product.imageUrl}`} width="170" height="170" />}</div>  
                             </Link>
 
                                 <div className='info'>

@@ -25,7 +25,10 @@ Cart update:
 
 
 
-
+<!-- wishlist添加弹窗
 Profile中的add to cart不work
 Total price没有随商品变化增加或者减少
 add to cart这个Button怎样在nav中的不通商品列表里都work呢
+怎么样删除Localstorage呢
+checkout不work -->
+
