@@ -30,7 +30,7 @@ class Genre extends Component {
         this.props.fetchProducts();
     }
     render() {
-        const {  topFightingGames, topRPGGames, topSportsGames, topAdventureGames, topPlatformGames } = this.props;
+        const {  auth, topFightingGames, topRPGGames, topSportsGames, topAdventureGames, topPlatformGames } = this.props;
 
     return (
     <div>
@@ -162,7 +162,7 @@ class Genre extends Component {
 
 }
 
-const mapStateToProps = ({ product, cart, auth })=> {
+const mapStateToProps = ({ product, auth, cart })=> {
     const topFightingGames = product.filter(product => product.theme === 'topFightingGames');
     const topRPGGames = product.filter(product => product.theme === 'topRPGGames');
     const topSportsGames = product.filter(product => product.theme === 'topSportsGames');
@@ -182,7 +182,7 @@ const mapStateToProps = ({ product, cart, auth })=> {
 
    const mapDispatch = (dispatch) => {
      return {
-      addCart: (product, quantity) => dispatch(addCart(product, quantity, auth)),
+      addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
       fetchProducts: ()=> dispatch(fetchProducts()),
     }
  };

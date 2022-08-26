@@ -3,29 +3,29 @@ import { connect } from 'react-redux';
 import { fetchProducts } from '../store';
 import { Link } from 'react-router-dom';
 import './dropdownSingle.css';
-// import Carousel from 'react-multi-carousel';
-// import 'react-multi-carousel/lib/styles.css';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
-// //Carousel responsiveness
+//Carousel responsiveness
 
-// const responsive = {
-//   superLargeDesktop: {
-//     breakpoint: { max: 4000, min: 3000 },
-//     items: 5
-//   },
-//   desktop: {
-//     breakpoint: { max: 3000, min: 1024 },
-//     items: 4
-//   },
-//   tablet: {
-//     breakpoint: { max: 1024, min: 464 },
-//     items: 2
-//   },
-//   mobile: {
-//     breakpoint: { max: 464, min: 0 },
-//     items: 1
-//   }
-// };
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
 class topAdventureGames extends Component {
 
@@ -40,7 +40,7 @@ class topAdventureGames extends Component {
     <div>
         <main>
         <h2>Top Adventure Games</h2>
-        {/* <Carousel responsive={responsive} ssr={true}> */}
+        <Carousel responsive={responsive} ssr={true}>
             
             { topAdventureGames.map(product=>{
               if(product.imageUrl.length > 10) {
@@ -61,7 +61,7 @@ class topAdventureGames extends Component {
                   </div>   
                 )
         })}
-   {/* </Carousel>  */}
+   </Carousel> 
             </main>
             </div>
 )

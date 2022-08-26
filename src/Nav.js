@@ -8,8 +8,7 @@ import './Footer.css';
 import { logout, exchangeToken, fetchCart, setUsers, fetchProducts, adminExchangeToken } from './store';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
-import Search from './Search/Search';
-import { HashRouter as  Route } from 'react-router-dom';
+
 
 
 
@@ -47,7 +46,6 @@ class Nav extends Component {
                             <button className="dropbtn"> <NavLink exact to='/'>Home</NavLink></button>
                             <button className="dropbtn"> <NavLink exact to={`/api/console`}>Consoles</NavLink></button>
 
-<<<<<<< HEAD
                  
                 <div className="dropdown">
                <button class="dropbtn"><NavLink exact to='/api/genre'> By Genre </NavLink></button>
@@ -86,9 +84,7 @@ class Nav extends Component {
               
     
             <div className="topnav-right">
-            {/* <Route component={ Search }/>
-
-<Search /> */}
+          
                <NavLink exact to='/myaccount' ><i class="fas fa-user-alt"></i> </NavLink> 
                 <NavLink to='/cart'><i class="fas fa-shopping-cart"></i></NavLink>
             {
@@ -101,60 +97,16 @@ class Nav extends Component {
 
             <h1 className='mainlogo'><img src='https://blog.lootcrate.com/wp-content/uploads/2018/02/pacman_ghosts_header.gif'></img>
 RETROS </h1>
-=======
-                              
-                        <div className="dropdown">
-                        <button className="dropbtn"><NavLink exact to={`/api/genre`}> By Genre </NavLink></button>
-                            <div  className="dropdown-content">
-                              <ul>
-                                <Link exact to={`/api/genre/topFightingGames`}>Fighting </Link>
-                                <Link exact to={`/api/genre/topRPGGames`}>RPG</Link>
-                                <Link exact to={`/api/genre/topSportsGames`}>Sports</Link>
-                                <Link exact to={`/api/genre/topAdventureGames`}>Adventure</Link>
-                                <Link exact to={`/api/genre/topPlatformGames`}>Platform</Link>
-                            </ul>
-                          </div>
-                        </div>
-
-                        <div className="dropdown">
-                        <button className="dropbtn"> <NavLink exact to={`/api/platform`}> By Platform </NavLink></button>
-                          <div className="dropdown-content">
-                              <a href="#">NES</a>
-                              <a href="#">SNES</a>
-                              <a href="#">PlayStation</a>
-                              <a href="#">XBox</a>
-                              <a href="#">Sega</a>
-                          </div>
-                        </div>
-                  
-                          <div className="dropdown">
-                          <button className="dropbtn"><NavLink exact to={`/api/gamesbyyear`}>By Year</NavLink></button>
-                              <div className="dropdown-content">
-                                <a href="#">1985</a>
-                                <a href="#">1987</a>
-                                <a href="#">1989</a>
-                                <a href="#">1990</a>
-                                <a href="#">1992</a>
-                                <a href="#">1994</a>
-                              </div>
-                        </div>
-                            
-                  
-                          <div className="topnav-right">
-                            <NavLink exact to='/api/myaccount' ><i className="fas fa-user-alt"></i> </NavLink> 
-                              <NavLink to='/cart'><i className="fas fa-shopping-cart"></i></NavLink>
-
->>>>>>> cc0e7ef778463d1538c7009557520da31a9ffdf9
 
                           {
-                            auth.id ? <Link to='/'><button onClick={ logout }><i className="fa fa-sign-out"></i></button></Link> : <SignInContainer triggerText={signInTriggerText} />
+                            // auth.id ? <Link to='/'><button onClick={ logout }><i className="fa fa-sign-out"></i></button></Link> : <SignInContainer triggerText={signInTriggerText} />
                           }
                               
-                          { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  }
+                          {/* { auth.id ? null : <SignUpContainer triggerText={signUpTriggerText} />  } */}
                           
                           </div>
 
-                          <h1 className='mainlogo'><img src='https://blog.lootcrate.com/wp-content/uploads/2018/02/pacman_ghosts_header.gif'></img> RETROS</h1>
+                          {/* <h1 className='mainlogo'><img src='https://blog.lootcrate.com/wp-content/uploads/2018/02/pacman_ghosts_header.gif'></img> RETROS</h1> */}
 
                         
                         <div className="footer">
@@ -163,8 +115,10 @@ RETROS </h1>
                             <li><a href="https://www.instagram.com/fsseniorproject/"><i className="fa fa-instagram"></i></a></li>
                         </div>
                       
-                      </div>
-                        
+                    
+                      
+
+
                   </header>
                 </nav>
             </main>

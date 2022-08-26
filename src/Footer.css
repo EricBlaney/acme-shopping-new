@@ -2,19 +2,23 @@
 
 .footer {
     position: fixed;
+    display: flex;
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: #efefef;
+    background-color: white;
     text-align: center;
     z-index: 1;
     height: 40px;
+
+    
   }
 
   .fa {
     color: black;
-    width: 50px
- }
+    width: 50px;
+   position: relative;
+top: 11px }
 
 .fa-facebook {
     font-size: 20px;

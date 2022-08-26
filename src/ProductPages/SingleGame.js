@@ -18,13 +18,13 @@ class SingleGame extends Component {
     const { cartProduct } = this.state;
     return (
       <main>
-        <BackButton/>
+       <BackButton/>
           {
           <div className="singlegame">
 
             { (game||[]).map(game=>{
-              if(game.imageUrl.length > 10 && game.theme !== 'consoles') {
-                game.imageUrl = game.imageUrl.substring(44, 100)
+              if(game.imageUrl.length > 10 && game.theme !== 'topPlatformGames') {
+                 game.imageUrl = game.imageUrl.substring(44, 100)
               }
               return (
                       <div key={game.id} className='singlecard'>

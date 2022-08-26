@@ -66,14 +66,13 @@
     outline-offset: 15px;
     text-shadow: 1px 1px 2px #427388; 
     border-radius:10px;
- 
   }
   
   /* Dropdown Content (Hidden by Default) */
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: white;
     width: auto;
     /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
     z-index: 1;
@@ -134,9 +133,9 @@ padding: 5px;
   border-radius:10px;
   box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
  position: relative;
- right: 10px;
- top: 9px;
+ bottom: 15px;
  font-family:'Silkscreen', regular;
+ color: white
 } 
 
 .logout {
@@ -159,3 +158,9 @@ padding: 5px;
     outline-offset: 15px;
     text-shadow: 1px 1px 2px #427388; 
 }
+
+.signIn {
+  border: 2px red;
+  border-radius: 25px;
+}
+
