@@ -21,8 +21,6 @@ const cart = (state = { lineItems: [ ] }, action)=> {
 
 export const addCart = (product, quantity, auth) => {
   return async (dispatch) => {
-    console.log(auth);
-    console.log('that was auth')
     if(auth.id !== undefined) {
       const response = await axios.put('/api/orders/cart', {
         product,

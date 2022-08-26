@@ -14,7 +14,7 @@ const Cart = ({ cart, deleteCart, updateQuantity, getCart, checkout, auth })=> {
     }, [])
 
 
-const totalPrice = cart.lineItems.reduce((total, item) => total += (item.product.price * item.quantity), 0);
+const totalPrice = (cart.lineItems || []).reduce((total, item) => total += (item.product.price * item.quantity), 0);
 console.log(totalPrice);
 
 console.log(auth.id);
@@ -22,7 +22,7 @@ console.log(auth.id);
 
     <div className="cart-container">
       <ul className="cart-list">
-      {cart.lineItems.map( lineItem => {
+      {(cart.lineItems || []).map( lineItem => {
           return (
             <li key={ lineItem.id } className="cart-item">
               <img className="cart-image" src={lineItem.product.imageUrl} />
