@@ -1,56 +1,62 @@
 import React, {Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts, addCart } from '../store';
+import { addCart } from '../store';
 import { Link } from 'react-router-dom';
 import './dropdownSingle.css';
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+import { Modal } from 'antd';
 
-//Carousel responsiveness
+// import Carousel from 'react-multi-carousel';
+// import 'react-multi-carousel/lib/styles.css';
 
-const responsive = {
-  superLargeDesktop: {
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 4
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
-};
+// //Carousel responsiveness
+
+// const responsive = {
+//   superLargeDesktop: {
+//     breakpoint: { max: 4000, min: 3000 },
+//     items: 5
+//   },
+//   desktop: {
+//     breakpoint: { max: 3000, min: 1024 },
+//     items: 4
+//   },
+//   tablet: {
+//     breakpoint: { max: 1024, min: 464 },
+//     items: 2
+//   },
+//   mobile: {
+//     breakpoint: { max: 464, min: 0 },
+//     items: 1
+//   }
+// };
 
 class topFightingGames extends Component {
 
-    componentDidMount(){
-        this.props.fetchProducts();
+  constructor(){
+    super()
+    this.state = {
+      cartProduct: null
     }
+  }
 
     render() {
         const {  topFightingGames, auth } = this.props;
+        const { cartProduct } = this.state;
 
     return (
     <div>
         <main>
         <h2>Top Fighting Games</h2>
-        <Carousel responsive={responsive} ssr={true}>
+        {/* <Carousel responsive={responsive} ssr={true}> */}
             
             { topFightingGames.map(product=>{
-              if(product.imageUrl.length > 10) {
+              if(product.imageUrl.length > 40) {
                 product.imageUrl = product.imageUrl.substring(44, 100)
                 }
                 return (
                   <div className="wrapper" key={product.id}>
                     <div className="card">
                         <Link to={`/api/product/${product.id}`}>
-                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
+                        <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
                         height="170" /></div> </Link>
                           <div className='info'>
                             <h3>{product.name}</h3>
@@ -61,12 +67,28 @@ class topFightingGames extends Component {
                   </div>   
                 )
         })}
-   </Carousel> 
+   {/* </Carousel>  */}
             </main>
-            </div>
-)
-}
-}
+
+        <Modal title="Add a new product to cart" visible={!!cartProduct} onCancel={() => this.setState({cartProduct: null})} footer={null}>
+          {
+            cartProduct && (
+              <div className="cart-item">
+                <img className="cart-image" src={`//images.igdb.com/igdb/image/upload/t_cover_big/${cartProduct.imageUrl}`} />
+                <div>
+                  <div className="cart-name">{ cartProduct.name }</div>
+                  <div className="cart-desc">{ cartProduct.summary.length > 200 ? cartProduct.summary.slice(0, 200) + '...' : cartProduct.summary }</div>
+                  <div className="cart-price">${ cartProduct.price }</div>
+                </div>
+              </div>
+            )
+          }
+        </Modal>
+            </div>    
+
+            
+      )}}
+
 
 const mapStateToProps = ({ auth, product, cart })=> {
     const topFightingGames = product.filter(product => product.theme === 'topFightingGames');
@@ -80,7 +102,6 @@ const mapStateToProps = ({ auth, product, cart })=> {
   const mapDispatch = (dispatch) => {
     return {
         addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
-        fetchProducts: ()=> dispatch(fetchProducts())
     }
 };
   export default connect(mapStateToProps,mapDispatch)(topFightingGames)
