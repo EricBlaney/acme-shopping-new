@@ -16,12 +16,14 @@ class Nav extends Component {
         this.props.exchangeToken();
         this.props.adminExchangeToken()
         this.props.fetchCart(this.props.auth);
+        this.props.fetchCart()
         this.props.setUsers();
     }
 
     componentDidUpdate(prevProps){
         if(!prevProps.auth.id && this.props.auth.id){
           this.props.fetchCart(this.props.auth);
+          this.props.fetchCart()
           this.props.exchangeToken();
           this.props.adminExchangeToken()
           this.props.fetchProducts();

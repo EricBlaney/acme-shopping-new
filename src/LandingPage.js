@@ -38,7 +38,7 @@ class LandingPage extends React.Component{
   }
   
   render(){
-    const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990, thisYearsGames1985, thisYearsGames1987, thisYearsGames1989, thisYearsGames1994 } = this.props;
+    const { auth, thisYearsGames1992, thisYearsGames1990, thisYearsGames1985, thisYearsGames1987, thisYearsGames1989, thisYearsGames1994 } = this.props;
     const { cartProduct } = this.state;
     return (
       <main>
@@ -219,7 +219,6 @@ const mapDispatch = (dispatch)=> {
 };
 
 const mapStateToProps = ({auth, product, cart}) => {
-  const thisMonthGames1989 = product.filter(product => product.theme === 'thisMonthGames1989');
   const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
   const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
   const thisYearsGames1990 = product.filter(product => product.theme === 'thisYearsGames1990');
@@ -230,7 +229,6 @@ const mapStateToProps = ({auth, product, cart}) => {
       auth,
       thisYearsGames1985,
       thisYearsGames1987,
-      thisMonthGames1989,
       thisYearsGames1990,
       thisYearsGames1992,
       thisYearsGames1994,

@@ -36,9 +36,9 @@ class AdminSignIn extends Component{
       <form onSubmit={ onSubmit }>
         Admin Sign-In: <br></br>
         Username: 
-        <input name='username' onChange={ onChange } value={ username }/>
+        <input required name='username' onChange={ onChange } value={ username }/>
         Password:
-        <input type='password' name='password' value={ password } onChange={ onChange }/>
+        <input required type='password' name='password' value={ password } onChange={ onChange }/>
         <button>Login</button>
         <button onClick={renderSignIn}> Not an admin? Click here.</button>
       </form>

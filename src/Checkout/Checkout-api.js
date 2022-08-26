@@ -1,4 +1,4 @@
-const stripe = require("stripe")(process.env.STRIPE_API_KEY);
+const stripe = require("stripe")(process.env.STRIPE_API_KEY1);
 
 module.exports = async (req, res) => {
     const { totalAmount, cancelRoute, productIds, currentRoute } = req.body;
