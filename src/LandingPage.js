@@ -38,48 +38,17 @@ class LandingPage extends React.Component{
   }
   
   render(){
+
     const signUpTriggerText = 'Sign Up';
     const signInTriggerText = 'Sign In';
-    const { auth, thisYearsGames1992, thisYearsGames1990, thisYearsGames1985, thisYearsGames1987, thisYearsGames1989, thisYearsGames1994 } = this.props;
+    const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990, thisYearsGames1985, thisYearsGames1987, thisYearsGames1989, thisYearsGames1994 } = this.props;
     const { cartProduct } = this.state;
+    
     return (
       <main>
       { (
         <div className='row'>
-        <h2>Top Games of August 1989!</h2>
-        <Carousel responsive={responsive} ssr={true}>
-        
-        { thisYearsGames1989.map(product=>{
-          if(product.imageUrl.length > 10) {
-          product.imageUrl = product.imageUrl.substring(44, 100)
-          }
-          return (
-            
-            <div className="wrapper" key={product.id}>
-                      
-              <div className="card">
-                <Link to={`/api/product/${product.id}`}>
-                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_cover_big/${product.imageUrl}`}width="170" 
-                height="170" /></div> </Link>
-                  <div className='info'>
-                    <h3>{product.name}</h3>
-                    <p>{`$${product.price}`}</p>
-                    <button   onClick={() => {this.props.addCart(product, 1)
-                    this.setState({
-                      cartProduct: product
-                    })
-                    }}>
-                      Add To Cart</button>
-                  </div>
-              </div>
-            
-            </div>
-           
-
-          )
-        })}
-        </Carousel>
-
+       
         <h2>Top NES Games of the 80s!!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
@@ -254,6 +223,7 @@ const mapDispatch = (dispatch)=> {
 };
 
 const mapStateToProps = ({auth, product, cart}) => {
+
   const thisYearsGames1989 = product.filter(product => product.theme === 'thisYearsGames1989');
   const thisYearsGames1985 = product.filter(product => product.theme === 'thisYearsGames1985');
   const thisYearsGames1987 = product.filter(product => product.theme === 'thisYearsGames1987');
@@ -274,4 +244,3 @@ const mapStateToProps = ({auth, product, cart}) => {
   };
 
 export default connect(mapStateToProps, mapDispatch)(LandingPage);
-
