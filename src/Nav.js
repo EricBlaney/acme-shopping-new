@@ -113,8 +113,8 @@ class Nav extends Component {
                         <div className="footer">
                             <li><a href="https://www.facebook.com/profile.php?id=100085008934837"><i className="fa fa-facebook"></i></a></li>
                             <li><a href="https://twitter.com/fullstack2022"><i className="fa fa-twitter"></i></a></li>
-                            <li><a href="https://www.instagram.com/fsseniorproject/"><i className="fa fa-instagram"></i></a></li>
-                            <button onClick={()=>{handleShowSourceModal()}} >Sources</button>
+                            <li><a href="https://www.instagram.com/retrosfullstack/"><i className="fa fa-instagram"></i></a></li>
+                            <button className='sources' onClick={()=>{handleShowSourceModal()}} >Sources</button>
 
                         </div>
                        
