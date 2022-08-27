@@ -23,7 +23,7 @@ export const addToWishList = (product) => {
       }
     });
     if (response.status === 200) {
-      alert('Added to wishlist successfully')
+      dispatch({ type: 'SET_CART_PRODUCT', cartProduct: product, name: 'wishlist'});
     }
   }
 }

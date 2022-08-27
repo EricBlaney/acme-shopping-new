@@ -4,6 +4,7 @@ import { fetchWishList, addCart } from '../store'
 import { Link } from 'react-router-dom';
 import Admin from './Admin';
 import Carousel from 'react-multi-carousel';
+import './MyAccount.css';
 import MyAccountModals from './AdminModal/EditMyAccount/MyAccountModals'
 import 'react-multi-carousel/lib/styles.css';
 
@@ -97,16 +98,16 @@ class MyAccount extends React.Component{
 
                     {this.state.isShowMyAccountModal ? <MyAccountModals handleClose={ handleClose } isShowModal={this.state.isShowMyAccountModal} user={this.state.modalMyAccount}/> : null}
 
-                    
+
                     <br></br>
-                   <div class='wishlista'>Your Wish List:</div> 
+                   <div class='wishlista'>Your Wish List:</div>
                     <br></br>
-     
+
 
                     {
-                        wishlist ? 
-                        <Carousel responsive={responsive} ssr={true}> 
-                        { 
+                        wishlist ?
+                        <Carousel responsive={responsive} ssr={true}>
+                        {
                         wishlist.wishListItems.map(wishListItem=>{
                         if(wishListItem.product.imageUrl.length > 40 && wishListItem.product.theme !== 'consoles') {
                             wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100)
@@ -116,20 +117,20 @@ class MyAccount extends React.Component{
                             <div className="wrapper" key={wishListItem.product.id}>
                             <div className="card">
                             <Link className='link' to={`/api/product/${wishListItem.product.id}`}>
-                            <div className="picture">{wishListItem.product.theme === 'consoles' ? <img src={`${wishListItem.product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_1080p/${wishListItem.product.imageUrl}`} width="170" height="170" />}</div>  
+                            <div className="picture">{wishListItem.product.theme === 'consoles' ? <img src={`${wishListItem.product.imageUrl}`} width="170" height="170" /> : <img src={`//images.igdb.com/igdb/image/upload/t_1080p/${wishListItem.product.imageUrl}`} width="170" height="170" />}</div>
                             </Link>
 
                                 <div className='info'>
                                     <h3>{wishListItem.product.name}</h3>
                                     <p>{`$${wishListItem.product.price}`}</p>
-                                    <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                                    <button  onClick={() => this.props.addCart(wishListItem.product, 1, auth)}>Add To Cart</button>
                                 </div>
                             </div>
-                            </div>   
-                            
+                            </div>
+
                         )
                         }) }</Carousel>
-                        
+
                         : 'You have nothing in your Wish List! Go add something!'
                     }
                 </main> }

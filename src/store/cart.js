@@ -1,8 +1,11 @@
 import axios from 'axios';
 
-const cart = (state = { lineItems: [ ] }, action)=> {
+const cart = (state = { lineItems: [ ], cartProduct: null, cartName: '' }, action)=> {
   if(action.type === 'SET_CART'){
-    state = action.cart;
+    state = {
+      ...state,
+      lineItems: action.cart.lineItems.filter(item => item.quantity > 0)
+    }
   } else if (action.type === 'DELETE_CART') {
     const lineItems = state.lineItems.filter(item => item.product.id !== action.id)
     state = {
@@ -12,8 +15,15 @@ const cart = (state = { lineItems: [ ] }, action)=> {
   } else if (action.type === 'UPDATE_QUANTITY') {
     const lineItem = state.lineItems.find(item => item.product.id === action.id);
     lineItem.quantity = action.quantity;
+    state.lineItems = state.lineItems.filter(item => item.quantity > 0);
     state = {
       ...state
+    };
+  } else if (action.type === 'SET_CART_PRODUCT') {
+    state = {
+      ...state,
+      cartProduct:  action.cartProduct,
+      cartName: action.name
     };
   }
   return state;
@@ -50,9 +60,8 @@ export const addCart = (product, quantity, auth) => {
         })
       }
     }
-    // if (response.status === 200) {
-    //   alert('Added to cart successfully')
-    // }
+    dispatch({ type: 'SET_CART_PRODUCT', cartProduct: product, name: 'cart'});
+    dispatch(fetchCart(auth));
   }
 }
 

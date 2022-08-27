@@ -6,7 +6,7 @@ const LineItem = conn.define('lineItem', {
     type: Sequelize.INTEGER,
     defaultValue: 1,
     validate: {
-      min: 1
+      min: 0
     }
   }
 });
