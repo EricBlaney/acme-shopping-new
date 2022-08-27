@@ -110,4 +110,10 @@ position: relative;
 left: 20px
 }
 
+.ant-result-title {
+    color: #ffffffd9 !important;
+}
+.ant-result-subtitle {
+    color: #ffffff73 !important;
+}
 

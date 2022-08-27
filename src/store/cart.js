@@ -4,7 +4,7 @@ const cart = (state = { lineItems: [ ], cartProduct: null, cartName: '' }, actio
   if(action.type === 'SET_CART'){
     state = {
       ...state,
-      lineItems: action.cart.lineItems
+      lineItems: action.cart.lineItems.filter(item => item.quantity > 0)
     }
   } else if (action.type === 'DELETE_CART') {
     const lineItems = state.lineItems.filter(item => item.product.id !== action.id)
