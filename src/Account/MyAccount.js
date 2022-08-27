@@ -156,7 +156,7 @@ const mapState = ({ user, auth, adminAuth, wishlist}) => {
 const mapDispatch = (dispatch) => {
     return{
         getWishList: ()=> dispatch(fetchWishList()),
-        addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+        addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
     }
 }
 
