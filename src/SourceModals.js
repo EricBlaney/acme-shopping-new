@@ -35,6 +35,7 @@ class SourceModals extends React.Component {
                    <br></br>
                    Special Thanks to @edmundojr_ for the CSS Zelda Heart!
                    <br></br>
+                   Huge Thanks to Prof, Colton and Jonathan!!!!!!!!!
             </ModalBody>
             <ModalFooter>
               <Button variant="primary" onClick={onSubmit}>
