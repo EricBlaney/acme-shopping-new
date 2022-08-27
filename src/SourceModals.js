@@ -31,11 +31,10 @@ class SourceModals extends React.Component {
               <ModalTitle>Sources</ModalTitle>
             </ModalHeader>
             <ModalBody>
-                   API: https://api-docs.igdb.com/#about
+                   APIS: IGBD, Stripe, Github
                    <br></br>
                    Special Thanks to @edmundojr_ for the CSS Zelda Heart!
                    <br></br>
-                   APIS: IGBD, Stripe, Github
             </ModalBody>
             <ModalFooter>
               <Button variant="primary" onClick={onSubmit}>
