@@ -82,7 +82,7 @@ app.post('/create-checkout-session', async(req, res)=> {
   const session = await stripe.checkout.sessions.create({
     line_items: req.body,
     mode: 'payment',
-    success_url: `http://localhost:3000/#/cart/success`,
+    success_url: `https://retros-gaming.herokuapp.com/#/cart/success`,
     cancel_url: `http://localhost:3000/#/cart/cancel`,
   });
   res.json({ url: session.url })
