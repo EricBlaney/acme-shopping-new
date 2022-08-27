@@ -92,28 +92,33 @@ class Admin extends React.Component{
         const triggerTextCreate = 'Create User';
   
         return(
+            <main>
             <div className='admin' key={user.id}>
             {thisUser.map(user=>{
                 return(
                 <div key={user.id}>
-                    <h1> { user.username }'s Admin Profile </h1>
+                    <h1 class='adminname'> { user.username }'s Admin Profile </h1>
                         { user.avatar ? <img src={user.avatar} className="avatar"/> : null}
-                        <h3>{user.username}'s details:</h3>
+                        <h3 class='admindetails'>{user.username}'s details:</h3>
+
+                        <div class='eacz'>
                         <div>Email: {user.email}</div>
                         <div>Address: {user.street || "None Listed"}</div>
                         <div>City: {user.city || "None listed."}</div>
                         <div>Zipcode: {user.zipcode || 'None listed.'}</div>
-                        <button onClick={()=> handleShowMyAccount(user)}>Click Here to Edit Your Account</button>
+                        </div>
+                        <button class='editadmin' onClick={()=> handleShowMyAccount(user)}>Click Here to Edit Your Account</button>
                 </div>
                 )
             })}
+    
             {this.state.isShowMyAccountModal ? <MyAccountModals handleClose={ handleClose } isShowModal={this.state.isShowMyAccountModal} user={this.state.modalMyAccount}/> : null}
 
             <br></br>
             <br></br>
-            Your Wish List:
-            <br></br>
-            <br></br>
+            <p class='divider'>Your Wish List:</p>
+           
+   
 
                     {
                         wishlist ? 
@@ -144,14 +149,14 @@ class Admin extends React.Component{
                         : 'You have nothing in your Wish List! Go add something!'
                     }
 
+            <div class='admin1'>
+            <h3 class='admintools'>Admin Tools:</h3>
             <br></br>
-            <h3>Admin Tools</h3>
-            <br></br>
-            <h4>Current Users ({user.length} including you) </h4>
+            <h4 class='admintools1'>Current Users ({user.length}) including you </h4>
             <div>
 
-            <CreateUserContainer onSubmit={ onSubmit } triggerText={ triggerTextCreate } />
-            
+        <CreateUserContainer onSubmit={ onSubmit } triggerText={ triggerTextCreate } />
+        </div>
             </div>
             <br></br>
             <br></br>
@@ -174,8 +179,8 @@ class Admin extends React.Component{
                                 <tr key={user.id}>
                                     <td>{user.username}</td>
                                     <td>{user.email}</td>
-                                    <td><button onClick={()=>{ deleteUser(user) }}>X</button></td>
-                                    <td><button onClick={()=> handleShow(user)}>X</button> </td>
+                                    <td><button class='delete' onClick={()=>{ deleteUser(user) }}>X</button></td>
+                                    <td><button class='edit' onClick={()=> handleShow(user)}>Edit</button> </td>
                                     <td>{user.isAdmin ? 'Admin' : 'User'}</td>
                                 </tr>
                         )
@@ -220,8 +225,8 @@ class Admin extends React.Component{
                                     <td>{product.name}</td>
                                     <td>{product.condition}</td>
                                     <td>${product.price}</td>
-                                    <td><button onClick={()=>{ deleteProduct(product) }}>X</button></td>
-                                    <td><button onClick={()=> handleShowProduct(product)}>X</button> </td>
+                                    <td><button class='delete' onClick={()=>{ deleteProduct(product) }}>X</button></td>
+                                    <td><button class='edit' onClick={()=> handleShowProduct(product)}>edit</button> </td>
                                 </tr>
                         )
                     })
@@ -233,6 +238,7 @@ class Admin extends React.Component{
                 {this.state.isShowProductModal ? <ProductModals handleClose={ handleClose } isShowModal={this.state.isShowProductModal} product={this.state.modalProduct}/> : null}
 
             </div>
+            </main>
         )
     }
 }

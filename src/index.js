@@ -29,7 +29,6 @@ import topSegaGenesisGames from './dropdownPage/sega';
 import thisYearsGames1994 from './dropdownPage/1994';
 import thisYearsGames1992 from './dropdownPage/1992';
 import thisYearsGames1990 from './dropdownPage/1990';
-import thisYearsGames1989 from './dropdownPage/1989';
 import thisYearsGames1987 from './dropdownPage/1987';
 import thisYearsGames1985 from './dropdownPage/1985';
 import 'antd/dist/antd.css';
@@ -84,7 +83,6 @@ class _App extends Component{
             <Route path='/api/gamesbyyear/1990' exact component={ thisYearsGames1990 }/>
             <Route path='/api/gamesbyyear/1987' exact component={ thisYearsGames1987 }/>
             <Route path='/api/gamesbyyear/1985' exact component={ thisYearsGames1985 }/>
-            <Route path='/api/gamesbyyear/1989' exact component={ thisYearsGames1989 }/>
             <Route path='/api/console' exact component={ Console }/>
             <Route path='/api/myaccount' exact component={ MyAccount }/>
             <Route path='/search/:term?' component={ SearchResults }/>

@@ -37,7 +37,7 @@ class Console extends Component {
     return (
     <div>
         <main>
-      <h2>Consoles</h2>
+      <h2 class='h2'>Consoles</h2>
       <Carousel responsive={responsive} ssr={true}>
         
         { consoles.map(product=>{

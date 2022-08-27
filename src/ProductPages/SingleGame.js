@@ -16,16 +16,17 @@ class SingleGame extends Component {
   render(){
     const { auth, game  } = this.props;
     const { cartProduct } = this.state;
+    console.log(game)
+
     return (
       <main>
        <BackButton/>
-          {
+        
           <div className="singlegame">
-
-            { (game||[]).map(game=>{
-              if(game.imageUrl.length > 40 && game.theme !== 'consoles') {
-                game.imageUrl = game.imageUrl.substring(44, 100)
-              if(game.imageUrl.length > 10 && game.theme !== 'topPlatformGames') {
+            { game.map(game=>{
+              if(game.imageUrl.length > 40 && game.theme !== 'consoles'){
+                game.imageUrl = game.imageUrl.substring(44, 100)}
+              if(game.imageUrl.length > 10 && game.theme !== 'topPlatformGames'){
                  game.imageUrl = game.imageUrl.substring(44, 100)
               }
               return (
@@ -56,12 +57,11 @@ class SingleGame extends Component {
                               </div>
                         </li>
                       </div>
-              
-              )
-            }
-            })}
-            </div>
-            }
+                    )
+                  }
+                  )}
+                  </div>
+         
   
         <Modal title="Add a new product to cart" visible={!!cartProduct} onCancel={() => this.setState({cartProduct: null})} footer={null}>
           {
@@ -77,6 +77,8 @@ class SingleGame extends Component {
             )
           }
         </Modal>
+        
+
       </main>
     );
   }
@@ -91,13 +93,14 @@ const mapDispatch = (dispatch)=> {
 
 const mapStateToProps = ({auth, adminAuth, product, cart}, { match }) => {
   const id = match.params.id;
-  let game = product.filter(game => game.id === id)
+  const game = product.filter(game => game.id === id)
+  console.log(game)
 
     return {
       adminAuth,
       auth,
       cart,
-      game
+      game: game
     }
   };
 

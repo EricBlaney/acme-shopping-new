@@ -49,7 +49,7 @@ class LandingPage extends React.Component{
       { (
         <div className='row'>
        
-        <h2>Top NES Games of the 80s!!</h2>
+        <h2 class='h2'>Top NES Games of the 80s!!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
         { thisYearsGames1985.map(product=>{
@@ -78,7 +78,7 @@ class LandingPage extends React.Component{
         })}
         </Carousel>
 
-        <h2>Top NES Games of the late 80s!</h2>
+        <h2 class='h2'>Top NES Games of the late 80s!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
         { thisYearsGames1987.map(product=>{
@@ -108,7 +108,7 @@ class LandingPage extends React.Component{
         </Carousel>
         
         
-        <h2>Top SNES Games of the early 90s!</h2>
+        <h2 class='h2'>Top SNES Games of the early 90s!</h2>
         <Carousel responsive={responsive} ssr={true}>
         
         { thisYearsGames1990.map(product=>{
@@ -137,7 +137,7 @@ class LandingPage extends React.Component{
         })}
         </Carousel>
 
-        <h2>Top Games of 1992!</h2>
+        <h2 class='h2'>Top Games of 1992!</h2>
         <Carousel responsive={responsive} ssr={true}>
         { thisYearsGames1992.map(product=>{
           if(product.imageUrl.length > 40) {
@@ -166,7 +166,7 @@ class LandingPage extends React.Component{
         })}
         </Carousel>
 
-        <h2>Top Games of 1994!</h2>
+        <h2 class='h2'>Top Games of 1994!</h2>
         <Carousel responsive={responsive} ssr={true}>
         { thisYearsGames1994.map(product=>{
           if(product.imageUrl.length > 40) {

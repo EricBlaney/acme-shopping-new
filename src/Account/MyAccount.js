@@ -80,28 +80,29 @@ class MyAccount extends React.Component{
                 {thisUser.map(user=>{
                 return(
                     <div key={user.id}>
-                        <h1>
+                        <h1 class='profilename'>
                             { user.username }'s Profile
                             </h1>
                             { user.avatar ? <img src={user.avatar} className="avatar"/> : null}
-                            <h3>{user.username}'s details:</h3>
+                            <h3 class='userdetails'>{user.username}'s details:</h3>
+                            <div class='eacz'>
                             <div>Email: {user.email}</div>
                             <div>Address: {user.street || "None Listed"}</div>
                             <div>City: {user.city || "None listed."}</div>
                             <div>Zipcode: {user.zipcode || 'None listed.'}</div>
-                            <button onClick={()=> handleShowMyAccount(user)}>Click Here to Edit Your Account</button>
+                            </div>
+                            <button class='buttonuser' onClick={()=> handleShowMyAccount(user)}>Click Here to Edit Your Account</button>
                     </div>
                         )
                     })}
 
                     {this.state.isShowMyAccountModal ? <MyAccountModals handleClose={ handleClose } isShowModal={this.state.isShowMyAccountModal} user={this.state.modalMyAccount}/> : null}
 
+                    
                     <br></br>
+                   <div class='wishlista'>Your Wish List:</div> 
                     <br></br>
-                    <br></br>
-                    Your Wish List:
-                    <br></br>
-                    <br></br>
+     
 
                     {
                         wishlist ? 
