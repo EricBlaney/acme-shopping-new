@@ -30,28 +30,20 @@ const responsive = {
 };
 
 class LandingPage extends React.Component{
-  constructor(){
-    super();
-    this.state = {
-      cartProduct: null
-    }
-  }
-  
+
   render(){
 
     const signUpTriggerText = 'Sign Up';
     const signInTriggerText = 'Sign In';
     const { auth, thisMonthGames1989, thisYearsGames1992, thisYearsGames1990, thisYearsGames1985, thisYearsGames1987, thisYearsGames1989, thisYearsGames1994 } = this.props;
-    const { cartProduct } = this.state;
-    
     return (
       <main>
       { (
         <div className='row'>
-       
+
         <h2 class='h2'>Top NES Games of the 80s!!</h2>
         <Carousel responsive={responsive} ssr={true}>
-        
+
         { thisYearsGames1985.map(product=>{
           if(product.imageUrl.length > 40) {
           product.imageUrl = product.imageUrl.substring(44, 100)
@@ -60,7 +52,7 @@ class LandingPage extends React.Component{
             <div className="wrapper" key={product.id}>
               <div className="card">
                   <Link to={`/api/product/${product.id}`}>
-                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
+                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170"
                   height="170" /></div> </Link>
                     <div className='info'>
                       <h3>{product.name}</h3>
@@ -73,14 +65,14 @@ class LandingPage extends React.Component{
                       Add To Cart</button>
                     </div>
                 </div>
-            </div>   
+            </div>
           )
         })}
         </Carousel>
 
         <h2 class='h2'>Top NES Games of the late 80s!</h2>
         <Carousel responsive={responsive} ssr={true}>
-        
+
         { thisYearsGames1987.map(product=>{
           if(product.imageUrl.length > 40) {
           product.imageUrl = product.imageUrl.substring(44, 100)
@@ -89,7 +81,7 @@ class LandingPage extends React.Component{
             <div className="wrapper" key={product.id}>
               <div className="card">
                   <Link to={`/api/product/${product.id}`}>
-                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
+                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170"
                   height="170" /></div> </Link>
                     <div className='info'>
                       <h3>{product.name}</h3>
@@ -102,15 +94,15 @@ class LandingPage extends React.Component{
                       Add To Cart</button>
                     </div>
                 </div>
-            </div>   
+            </div>
           )
         })}
         </Carousel>
-        
-        
+
+
         <h2 class='h2'>Top SNES Games of the early 90s!</h2>
         <Carousel responsive={responsive} ssr={true}>
-        
+
         { thisYearsGames1990.map(product=>{
           if(product.imageUrl.length > 40) {
           product.imageUrl = product.imageUrl.substring(44, 100)
@@ -119,7 +111,7 @@ class LandingPage extends React.Component{
             <div className="wrapper" key={product.id}>
               <div className="card">
                   <Link to={`/api/product/${product.id}`}>
-                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
+                  <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170"
                   height="170" /></div> </Link>
                     <div className='info'>
                       <h3>{product.name}</h3>
@@ -132,7 +124,7 @@ class LandingPage extends React.Component{
                       Add To Cart</button>
                     </div>
                 </div>
-            </div>   
+            </div>
           )
         })}
         </Carousel>
@@ -147,8 +139,8 @@ class LandingPage extends React.Component{
             <div className="wrapper" key={product.id}>
               <div className="card">
                 <Link className='link' to={`/api/product/${product.id}`}>
-                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
-                height="170" /></div> 
+                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170"
+                height="170" /></div>
                 </Link>
                   <div className='info'>
                     <h3>{product.name}</h3>
@@ -176,8 +168,8 @@ class LandingPage extends React.Component{
             <div className="wrapper" key={product.id}>
               <div className="card">
                 <Link className='link' to={`/api/product/${product.id}`}>
-                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170" 
-                height="170" /></div> 
+                <div className="picture"><img src={`//images.igdb.com/igdb/image/upload/t_1080p/${product.imageUrl}`}width="170"
+                height="170" /></div>
                 </Link>
                 <div className='info'>
                   <h3>{product.name}</h3>
@@ -196,20 +188,6 @@ class LandingPage extends React.Component{
         </Carousel>
 
         </div> ) }
-        <Modal title="Add a new product to cart" visible={!!cartProduct} onCancel={() => this.setState({cartProduct: null})} footer={null}>
-          {
-            cartProduct && (
-              <div className="cart-item">
-                <img className="cart-image" src={`//images.igdb.com/igdb/image/upload/t_1080p/${cartProduct.imageUrl}`} />
-                <div>
-                  <div className="cart-name">{ cartProduct.name }</div>
-                  <div className="cart-desc">{ cartProduct.summary.length > 200 ? cartProduct.summary.slice(0, 200) + '...' : cartProduct.summary }</div>
-                  <div className="cart-price">${ cartProduct.price }</div>
-                </div>
-              </div>
-            )
-          }
-        </Modal>
       </main>
     );
 

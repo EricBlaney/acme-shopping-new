@@ -34,6 +34,7 @@ import thisYearsGames1985 from './dropdownPage/1985';
 import 'antd/dist/antd.css';
 import './index.css';
 import { logout, exchangeToken, fetchCart, setUsers, fetchProducts, adminExchangeToken } from './store';
+import { Modal } from 'antd'
 
 
 class _App extends Component{
@@ -57,11 +58,13 @@ class _App extends Component{
       }
 
     render(){
+        const { cartProduct, cartName } = this.props.cart;
+
         return(
         <div id="main-body">
             <Nav/>
-            
-            <Route component={ Search }/>  
+
+            <Route component={ Search }/>
             <Route path='/cart' exact component={ Cart }/>
             <Route path='/cart/success' exact component={ CheckoutSuccess }/>
             <Route path='/' exact component={ LandingPage }/>
@@ -88,15 +91,30 @@ class _App extends Component{
             <Route path='/api/myaccount' exact component={ MyAccount }/>
             <Route path='/search/:term?' component={ SearchResults }/>
             <Route path='/passwordreset/:token/:username/:id' component={ PasswordReset }/>
+
+            <Modal title={`Add a new product to ${cartName}`} visible={!!cartProduct} onCancel={() => this.props.setCartProductNull()} footer={null}>
+                {
+                  cartProduct && (
+                    <div className="cart-item">
+                        <img className="cart-image" src={`//images.igdb.com/igdb/image/upload/t_cover_big/${cartProduct.imageUrl}`} />
+                        <div>
+                            <div className="cart-name">{ cartProduct.name }</div>
+                            <div className="cart-desc">{ cartProduct.summary.length && (cartProduct.summary.length > 200 ? cartProduct.summary.slice(0, 200) + '...' : cartProduct.summary) }</div>
+                            <div className="cart-price">${ cartProduct.price }</div>
+                        </div>
+                    </div>
+                  )
+                }
+            </Modal>
         </div>
         )
     }
 }
 
-const mapState = ({ auth }) => {
+const mapState = ({ auth, cart }) => {
     return {
         auth,
-        
+        cart
     }
 };
 
@@ -108,7 +126,8 @@ const mapDispatch = (dispatch) => {
         exchangeToken: ()=> dispatch(exchangeToken()),
         fetchProducts: ()=> dispatch(fetchProducts()),
         setUsers: ()=> dispatch(setUsers()),
-        logout: () => dispatch(logout())
+        logout: () => dispatch(logout()),
+        setCartProductNull: () => dispatch({ type: 'SET_CART_PRODUCT', cartProduct: null})
     }
 };
 
