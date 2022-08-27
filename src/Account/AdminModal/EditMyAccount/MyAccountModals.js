@@ -79,9 +79,7 @@ class MyAccountModals extends React.Component {
               <Form.Label>City: </Form.Label>
               <Form.Control type="text" name='city' onChange={this.handleChange} defaultValue={city} placeholder="enter city"/>     
               <Form.Label>Zipcode: </Form.Label>
-              <Form.Control type="text" name='zipcode' onChange={this.handleChange} defaultValue={zipcode} placeholder="enter zipcode"/>
-              <Form.Label>Set Admin Privilege: </Form.Label>
-              <Form.Control type="checkbox" checked={isAdmin} name='isAdmin' onChange={this.onChangeAdmin} defaultValue={isAdmin} />            
+              <Form.Control type="text" name='zipcode' onChange={this.handleChange} defaultValue={zipcode} placeholder="enter zipcode"/>        
             </Form.Group>            
             </ModalBody>
             <ModalFooter>

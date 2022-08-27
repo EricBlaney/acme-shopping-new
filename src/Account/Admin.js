@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchWishList, deleteUser, deleteProduct } from '../store'
+import { fetchWishList, deleteUser, deleteProduct, addCart } from '../store'
 import { Link } from 'react-router-dom';
 import CreateUserContainer from './AdminModal/CreateUser/CreateUserContainer'
 import Modals from './AdminModal/EditUser/Modals'
@@ -52,7 +52,7 @@ class Admin extends React.Component{
     }
 
     componentDidUpdate(prevProps){
-        if(!prevProps.adminAuth.id && this.props.adminAuth.id){
+        if(!prevProps.auth.id && this.props.auth.id){
           this.props.getWishList();
         }
     }
@@ -87,12 +87,12 @@ class Admin extends React.Component{
      }
 
     render() {
-        const {wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth, thisUser, values} = this.props;
+        const {auth, wishlist, product, user, deleteUser, deleteProduct, onSubmit, adminAuth, thisUser, values} = this.props;
         const { handleClose, handleShow, handleShowProduct, handleShowMyAccount } = this;
         const triggerTextCreate = 'Create User';
   
         return(
-            <div className='admin' key={user.id}>
+            <div className='admin' key={auth.id}>
             {thisUser.map(user=>{
                 return(
                 <div key={user.id}>
@@ -115,14 +115,16 @@ class Admin extends React.Component{
             <br></br>
             <br></br>
 
-                    {
+            {
                         wishlist ? 
                         <Carousel responsive={responsive} ssr={true}> 
+                        <div></div>
                         { 
                         wishlist.wishListItems.map(wishListItem=>{
-                            if(wishListItem.product.imageUrl.length > 40 && wishListItem.product.theme !== 'consoles') {
+                        if(wishListItem.product.imageUrl.length > 40 && wishListItem.product.theme !== 'consoles') {
                             wishListItem.product.imageUrl = wishListItem.product.imageUrl.substring(44, 100)
                                 }
+
                         return (
                             <div className="wrapper" key={wishListItem.product.id}>
                             <div className="card">
@@ -133,7 +135,7 @@ class Admin extends React.Component{
                                 <div className='info'>
                                     <h3>{wishListItem.product.name}</h3>
                                     <p>{`$${wishListItem.product.price}`}</p>
-                                    <button onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                                    <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
                                 </div>
                             </div>
                             </div>   
@@ -237,10 +239,11 @@ class Admin extends React.Component{
     }
 }
 
-const mapState = ({adminAuth, product, user, wishlist}) => {
+const mapState = ({auth, adminAuth, product, user, wishlist}) => {
     let values = Object.values(user)
     const thisUser = values.filter((user)=>user.id === adminAuth.id)
     return {
+        auth,
         adminAuth,
         wishlist,
         product,
