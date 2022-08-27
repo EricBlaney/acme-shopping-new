@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProducts } from '../store';
+import { fetchProducts, addCart } from '../store';
 import { Link } from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -33,6 +33,7 @@ class Console extends Component {
 
     render() {
         const { auth, consoles } = this.props;
+        const { addCart } = this;
 
     return (
     <div>

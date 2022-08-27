@@ -47,7 +47,7 @@ const SearchResults = ({searchResults, auth, addCart}) => {
                             <h3>{product.name}</h3>
                 
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
+                            <button onClick={() => addCart(product, 1, auth)}>Add To Cart</button>
                         </div>
                     </div>
                     </div>   
@@ -61,7 +61,7 @@ const mapState = ({auth, product}, {match}) => {
     const term = match.params.term;
     const searchResults = product.filter(product => product.name.toLowerCase().includes(term.toLowerCase()))
     return {
-        
+        auth,
         searchResults
     }
 }
