@@ -34,7 +34,7 @@ class thisYearsGames1994 extends Component {
     }
 
     render() {
-        const {  thisYearsGames1994 } = this.props;
+        const {  thisYearsGames1994, auth } = this.props;
 
     return (
     <div>
@@ -68,17 +68,18 @@ class thisYearsGames1994 extends Component {
 }
 }
 
-const mapStateToProps = ({ product, cart })=> {
+const mapStateToProps = ({ product, cart, auth })=> {
     const thisYearsGames1994 = product.filter(product => product.theme === 'thisYearsGames1994');
     return {
         thisYearsGames1994,
-        cart
+        cart, 
+        auth
     };
   }
 
   const mapDispatch = (dispatch) => {
     return {
-        addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+      addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
         fetchProducts: ()=> dispatch(fetchProducts())
     }
 };

@@ -38,6 +38,7 @@ class topFightingGames extends Component {
     }
   }
 
+  
     render() {
         const {  topFightingGames, auth } = this.props;
         const { cartProduct } = this.state;
@@ -101,7 +102,7 @@ const mapStateToProps = ({ auth, product, cart })=> {
 
   const mapDispatch = (dispatch) => {
     return {
-        addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
+      addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth))
     }
 };
   export default connect(mapStateToProps,mapDispatch)(topFightingGames)
