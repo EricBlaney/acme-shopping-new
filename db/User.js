@@ -227,7 +227,7 @@ const sendEmail = async (email, subject, payload, template) => {
       port: 465,
       auth: {
         user: "retrosgamesnyc@gmail.com",
-        pass: "smkgzqutvsggeuar" // naturally, replace both with your real credentials or an application-specific password
+        pass: "smkgzqutvsggeuar" 
       },
       tls:{
         rejectUnauthorized: false
@@ -279,7 +279,7 @@ User.requestPasswordReset = async (user_email) => {
 
   // const clientURL = "http://localhost:3000"
 
-  const clientURL = "https://retros-gaming.herokuapp.com/"
+  const clientURL = "https://retros-gaming.herokuapp.com"
   const link = `${clientURL}/#/passwordreset/${resetToken}/${user.username}/${user.id}`;
   sendEmail(user.email,"Password Reset Request",{name: user.name,link: link,},"./template/requestResetPassword.handlebars");
   return link;
