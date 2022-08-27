@@ -11,8 +11,6 @@ const Order = conn.define('order', {
   }
 });
 
-
-
 Order.prototype.guestCreateOrderFromCart = async function(){
   const cart = await this.guestGetCart();
   cart.isCart = false;
