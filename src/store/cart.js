@@ -164,6 +164,7 @@ export const checkout = () => {
         },
         quantity: item.quantity
     }))
+
     const response = await axios.post('/api/orders/create-checkout-session', stripe_line_items, {
       headers: {
         authorization: window.localStorage.getItem('token')

@@ -41,10 +41,10 @@ class PasswordReset extends Component{
     const { username, password } = this.state;
     return (
         <div>
-        {this.state.success ? "Thank you for resetting your password" :
+        {this.state.success ? <div className="reset-password-text"> "Thank you for resetting your password" </div> :
         <form onSubmit={ onSubmit }>
-        Change Password for {username} <br></br>
-        Password:
+        <div className="reset-password-text">Change Password for {username}</div> 
+        <div className="reset-password-text">New Password:</div>
         <input type='password' name='password' value={ password } onChange={ onChange }/>
         <button type="submit">Change Password</button>
       </form>}
