@@ -6,22 +6,15 @@ import { Modal } from 'antd';
 import BackButton from '../BackButton'
 
 class SingleGame extends Component {
-  constructor(){
-    super()
-    this.state = {
-      cartProduct: null
-    }
-  }
 
   render(){
     const { auth, game  } = this.props;
-    const { cartProduct } = this.state;
     console.log(game)
 
     return (
       <main>
        <BackButton/>
-        
+
           <div className="singlegame">
             { game.map(game=>{
               if(game.imageUrl.length > 40 && game.theme !== 'consoles'){
@@ -37,16 +30,11 @@ class SingleGame extends Component {
                                   <div className='content'>
                                     <div className='singleName'>{game.name}</div>
                                     <div className="price-condition">
-                                    <div className='singlePrice'>{`$${game.price}  |`}</div> 
+                                    <div className='singlePrice'>{`$${game.price}  |`}</div>
                                     <div className='condition'>Condition: {`${game.condition}`}</div>
                                     </div>
                                     <div className='heart-cart'>
-                                      <button className='btn' onClick={() => {
-                                      this.props.addCart(game, 1, auth)
-                                      this.setState({
-                                        cartProduct: game
-                                      })
-                                    }}>Add To Cart</button>
+                                      <button className='btn' onClick={() => this.props.addCart(game, 1, auth)}>Add To Cart</button>
                                       <div className="heart-wrapper" onClick={ () => this.props.addToWishList(game)}>
                                         <div className='heart'></div>
                                       </div>
@@ -61,24 +49,6 @@ class SingleGame extends Component {
                   }
                   )}
                   </div>
-         
-  
-        <Modal title="Add a new product to cart" visible={!!cartProduct} onCancel={() => this.setState({cartProduct: null})} footer={null}>
-          {
-            cartProduct && (
-              <div className="cart-item">
-                <img className="cart-image" src={`//images.igdb.com/igdb/image/upload/t_cover_big/${cartProduct.imageUrl}`} />
-                <div>
-                  <div className="cart-name">{ cartProduct.name }</div>
-                  <div className="cart-desc">{ cartProduct.summary.length > 200 ? cartProduct.summary.slice(0, 200) + '...' : cartProduct.summary }</div>
-                  <div className="cart-price">${ cartProduct.price }</div>
-                </div>
-              </div>
-            )
-          }
-        </Modal>
-        
-
       </main>
     );
   }

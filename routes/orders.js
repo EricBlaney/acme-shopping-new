@@ -1,5 +1,5 @@
 const express = require('express');
-const stripe = require('stripe')(process.env.STRIPE_API_KEY2);
+const stripe = require('stripe')(process.env.STRIPE_API_KEY);
 const app = express.Router();
 
 const { isLoggedIn } = require('./middleware');
