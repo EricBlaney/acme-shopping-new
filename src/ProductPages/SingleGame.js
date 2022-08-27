@@ -41,7 +41,7 @@ class SingleGame extends Component {
                                     <div className='condition'>Condition: {`${game.condition}`}</div>
                                     </div>
                                     <div className='heart-cart'>
-                                      <button className='btn' onClick={() => {
+                                      <button className='btn1' onClick={() => {
                                       this.props.addCart(game, 1, auth)
                                       this.setState({
                                         cartProduct: game

@@ -65,7 +65,7 @@ class LandingPage extends React.Component{
                     <div className='info'>
                       <h3>{product.name}</h3>
                       <p>{`$${product.price}`}</p>
-                      <button  onClick={() => {this.props.addCart(product, 1, auth)
+                      <button class='add2'  onClick={() => {this.props.addCart(product, 1, auth)
                     this.setState({
                       cartProduct: product
                     })
@@ -94,7 +94,7 @@ class LandingPage extends React.Component{
                     <div className='info'>
                       <h3>{product.name}</h3>
                       <p>{`$${product.price}`}</p>
-                      <button  onClick={() => {this.props.addCart(product, 1, auth)
+                      <button class='add2' onClick={() => {this.props.addCart(product, 1, auth)
                     this.setState({
                       cartProduct: product
                     })
@@ -124,7 +124,7 @@ class LandingPage extends React.Component{
                     <div className='info'>
                       <h3>{product.name}</h3>
                       <p>{`$${product.price}`}</p>
-                      <button  onClick={() => {this.props.addCart(product, 1, auth)
+                      <button class='add2' onClick={() => {this.props.addCart(product, 1, auth)
                     this.setState({
                       cartProduct: product
                     })
@@ -153,7 +153,7 @@ class LandingPage extends React.Component{
                   <div className='info'>
                     <h3>{product.name}</h3>
                     <p>{`$${product.price}`}</p>
-                    <button  onClick={() => {this.props.addCart(product, 1, auth)
+                    <button class='add2' onClick={() => {this.props.addCart(product, 1, auth)
                     this.setState({
                       cartProduct: product
                     })
@@ -182,7 +182,7 @@ class LandingPage extends React.Component{
                 <div className='info'>
                   <h3>{product.name}</h3>
                   <p>{`$${product.price}`}</p>
-                  <button  onClick={() => {this.props.addCart(product, 1, auth)
+                  <button class='add2' onClick={() => {this.props.addCart(product, 1, auth)
                     this.setState({
                       cartProduct: product
                     })

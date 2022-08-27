@@ -26,8 +26,8 @@ console.log(auth.id);
             <li key={ lineItem.id } className="cart-item">
               <img className="cart-image" src={lineItem.product.imageUrl} />
               <div>
-                <div className="cart-name">{ lineItem.product.name }</div>
-                <div className="cart-desc">{ lineItem.product.summary.length > 200 ? lineItem.product.summary.slice(0, 200) + '...' : lineItem.product.summary }</div>
+                <div className="cart-name1">{ lineItem.product.name }</div>
+                <div className="cart-desc1">{ lineItem.product.summary.length > 200 ? lineItem.product.summary.slice(0, 200) + '...' : lineItem.product.summary }</div>
                 <div className="cart-quantity">
                   <span className="quantity-minus" onClick={() => updateQuantity(lineItem.product, lineItem.quantity - 1, auth)}>-</span>
                   <span className="quantity-num">{ lineItem.quantity }</span>

@@ -111,8 +111,9 @@ class Nav extends Component {
                             <button onClick={()=>{handleShowSourceModal()}} >Sources</button>
 
                         </div>
+                       
                         {this.state.isShowSourceModal ? <SourceModals handleClose={ handleClose } isShowModal={this.state.isShowSourceModal}/> : null}
-
+                     
                       </div>
                         
                   </header>
