@@ -39,7 +39,7 @@ class topXboxGames extends Component {
     return (
     <div>
         <main>
-        <h2>Top XBox Games</h2>
+        <h2 class='h2'>Top XBox Games</h2>
         <Carousel responsive={responsive} ssr={true}>
             
             { topXboxGames.map(product=>{

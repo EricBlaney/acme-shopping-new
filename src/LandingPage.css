@@ -1,6 +1,7 @@
 
  .row {
     height: 90%;
+    border: 2px red
   }
   
   .wrapper {
@@ -8,6 +9,8 @@
     display: flex;
     width: 100%;
     justify-content: space-around;
+    border: 2px red
+
   }
     
   .card  {

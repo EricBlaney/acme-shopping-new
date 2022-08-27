@@ -39,7 +39,7 @@ class topSNESGames extends Component {
     return (
     <div>
         <main>
-        <h2>Top SNES Games</h2>
+        <h2  class='h2'>Top SNES Games</h2>
         <Carousel responsive={responsive} ssr={true}>
             
             { topSNESGames.map(product=>{

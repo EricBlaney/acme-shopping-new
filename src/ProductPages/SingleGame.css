@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600&family=Roboto:wght@300;400;500;700;900&display=swap');
 
-*{
+/* *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
-}
+} */
 
 /* .singleGame {
     display: flex;
@@ -17,8 +17,10 @@
 .singlecard {
     display: flex;
     justify-content: center;
-    padding-top: 5rem;
-    padding-bottom: 10rem;
+    padding-top: 20rem;
+    padding-bottom: 100rem;
+
+
 }
 
 .product{

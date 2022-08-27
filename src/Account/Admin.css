@@ -1,8 +1,20 @@
+.main {
+    border-style: solid;
+    border-radius: 20px;
+    font-family:'Silkscreen', regular;
+    background: linear-gradient(to right,purple, pink);
+    box-shadow: 0 0 .2rem #fff,
+    0 0 .2rem #fff,
+    0 0 2rem blue,
+    0 0 0.8rem red,
+    0 0 2.8rem red,
+    inset 0 0 1.3rem ;    
+}
 .admin{
     text-align: center;
-    color: white;
-}
+    font-family:'Silkscreen', regular;
 
+}
 table {
     margin-left: auto;
     margin-right: auto;
@@ -25,3 +37,77 @@ td {
     padding-left: 5rem;
     padding-right: 5rem;
 }
+
+h1.adminname {
+    color: white;
+    padding: 25px;
+position: relative;
+top:10px;
+    font-weight: bold;
+   
+}
+
+
+h3.admindetails {
+    color: white;
+    padding: 25px;
+font-size: 30px;
+font-weight: bold;
+
+}
+
+.eacz {
+font-size:25px;
+}
+
+.editadmin{
+    font-size:25px;
+background-color: black;
+border-radius: 15px;
+}
+.editadmin:hover {
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388; 
+  }
+
+.divider {
+    font-size: 30px;
+    padding: 25px;
+    font-weight: bold;
+}
+
+h3.admintools {
+    color: white;
+    padding: 40px;
+font-size: 30px;
+font-weight: bold;
+}
+
+h4.admintools1 {
+    color: white;
+font-size: 25px;
+position: relative;
+bottom:20px;
+
+}
+
+.createadmin{
+    font-size:25px;
+    background-color: purple;
+    border-radius: 15px;
+}
+
+.admin1{
+text-align: center;
+}
+
+.delete{
+    color: black
+}
+
+.edit{
+    color: black
+}
+

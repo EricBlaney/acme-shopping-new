@@ -34,7 +34,7 @@ class GamesbyYear extends Component {
     return (
     <div>
         <main>
-      <h2>Games from 1994</h2>
+      <h2 class='h2'>Games from 1994</h2>
       <Carousel responsive={responsive} ssr={true}>
 
       { thisYearsGames1994.map(product=>{
@@ -58,7 +58,7 @@ class GamesbyYear extends Component {
 })}
 </Carousel>
 
-<h2>Games from 1992</h2>
+<h2 class='h2'>Games from 1992</h2>
       <Carousel responsive={responsive} ssr={true}>
 
       { thisYearsGames1992.map(product=>{
@@ -82,7 +82,7 @@ class GamesbyYear extends Component {
 })}
 </Carousel>
 
-<h2>Games from 1990</h2>
+<h2 class='h2'>Games from 1990</h2>
       <Carousel responsive={responsive} ssr={true}>
 
       { thisYearsGames1990.map(product=>{
@@ -106,7 +106,7 @@ class GamesbyYear extends Component {
 })}
 </Carousel>
 
-<h2>Games from 1987</h2>
+<h2 class='h2'>Games from 1987</h2>
       <Carousel responsive={responsive} ssr={true}>
 
       { thisYearsGames1987.map(product=>{
@@ -130,7 +130,7 @@ class GamesbyYear extends Component {
 })}
 </Carousel>
             
-<h2>Games from 1985</h2>
+<h2 class='h2'>Games from 1985</h2>
       <Carousel responsive={responsive} ssr={true}>
 
       { thisYearsGames1985.map(product=>{

@@ -38,7 +38,7 @@ class Platform extends Component {
         <main>
 
           
-      <h2>Top NES Games</h2>
+      <h2 class='h2'>Top NES Games</h2>
       <Carousel responsive={responsive} ssr={true}>
             
             { topNESGames.map(product=>{
@@ -62,7 +62,7 @@ class Platform extends Component {
         })}
    </Carousel> 
 
-   <h2>Top SNES Games</h2>
+   <h2 class='h2'>Top SNES Games</h2>
    <Carousel responsive={responsive} ssr={true}>
             
             { topSNESGames.map(product=>{
@@ -86,7 +86,7 @@ class Platform extends Component {
         })}
    </Carousel> 
 
-            <h2>Top PlayStation Games</h2>
+            <h2 class='h2'>Top PlayStation Games</h2>
             <Carousel responsive={responsive} ssr={true}>
             
             { topPlayStationGames.map(product=>{
@@ -110,7 +110,7 @@ class Platform extends Component {
         })}
    </Carousel> 
 
-   <h2>Top XBox Games</h2>
+   <h2 class='h2'>Top XBox Games</h2>
             <Carousel responsive={responsive} ssr={true}>
             
             { topXboxGames.map(product=>{
@@ -134,7 +134,7 @@ class Platform extends Component {
         })}
    </Carousel> 
 
-            <h2>Top Sega Genesis Games</h2>
+            <h2 class='h2'>Top Sega Genesis Games</h2>
             <Carousel responsive={responsive} ssr={true}>
             
             { topSegaGenesisGames.map(product=>{
@@ -167,7 +167,7 @@ class Platform extends Component {
 
 const mapStateToProps = ({ product})=> {
     const topNESGames = product.filter(product => product.theme === 'topNESGames');
-    const topSNESGames = product.filter(product => product.theme === 'topNESGames');
+    const topSNESGames = product.filter(product => product.theme === 'topSNESGames');
     const topPlayStationGames = product.filter(product => product.theme === 'topPlayStationGames');
     const topXboxGames = product.filter(product => product.theme === 'topXboxGames');
     const topSegaGenesisGames = product.filter(product => product.theme === 'topSegaGenesisGames');

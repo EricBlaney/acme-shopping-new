@@ -54,13 +54,13 @@ class Nav extends Component {
                 <div className="dropdown">
                <button className="dropbtn"><Link exact to='/api/genre'> By Genre </Link></button>
       <div  className="dropdown-content">
-          <ul>
+          
       <Link exact to={`/api/genre/topFightingGames`}>Fighting </Link>
       <Link exact to={`/api/genre/topRPGGames`}>RPG</Link>
       <Link exact to={`/api/genre/topSportsGames`}>Sports</Link>
       <Link exact to={`/api/genre/topAdventureGames`}>Adventure</Link>
       <Link exact to={`/api/genre/topPlatformGames`}>Platform</Link>
-        </ul>
+        
       </div>
     </div>
                  <div className="dropdown">
@@ -79,7 +79,6 @@ class Nav extends Component {
       <div className="dropdown-content">
       <Link exact to={`/api/gamesbyyear/1985`}>1985 </Link>
       <Link exact to={`/api/gamesbyyear/1987`}>1987 </Link>
-      <Link exact to={`/api/gamesbyyear/1989`}>1989 </Link>
       <Link exact to={`/api/gamesbyyear/1990`}>1990 </Link>
       <Link exact to={`/api/gamesbyyear/1992`}>1992 </Link>
       <Link exact to={`/api/gamesbyyear/1994`}>1994 </Link>

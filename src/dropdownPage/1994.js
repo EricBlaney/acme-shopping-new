@@ -39,7 +39,7 @@ class thisYearsGames1994 extends Component {
     return (
     <div>
         <main>
-        <h2>Top 1994 Games</h2>
+        <h2 class='h2'>Top 1994 Games</h2>
         <Carousel responsive={responsive} ssr={true}>
             
             { thisYearsGames1994.map(product=>{

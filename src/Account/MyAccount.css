@@ -1,11 +1,40 @@
 .myaccount {
     color: white;
+    font-family:'Silkscreen', regular;
+
 }
 
-h1 {
-    color: white
-}
-
-h3 {
+h1.profilename {
     color: white;
+    font-weight: bold;
+    font-size: 40px;
+
+
 }
+
+h3.userdetails {
+    color: white;
+    font-size: 30px;
+    padding: 10px
+
+}
+
+.buttonuser {
+    font-size:25px;
+background-color: black;
+border-radius: 15px;
+position: relative;
+top:10px;
+}
+
+.buttonuser:hover {
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388; 
+  }
+
+  .wishlista {
+    font-size:25px;
+
+  }
