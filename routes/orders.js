@@ -82,10 +82,16 @@ app.post('/create-checkout-session', async(req, res)=> {
   const session = await stripe.checkout.sessions.create({
     line_items: req.body,
     mode: 'payment',
+
     success_url: `https://retros-gaming.herokuapp.com/#/cart/success`,
     // success_url: process.env.CHECKOUT_SUCCESS_URL,
     cancel_url: `https://retros-gaming.herokuapp.com/#/cart/cancel`,
     // cancel_url: process.env.CHECKOUT_CANCEL_URL,
+//     success_url: `https://retros-gaming.herokuapp.com/#/cart/success`,
+//     cancel_url: `http://localhost:3000/#/cart/cancel`,
+    success_url: process.env.CHECKOUT_SUCCESS_URL,
+    cancel_url: process.env.CHECKOUT_CANCEL_URL,
+
   });
   res.json({ url: session.url })
 });
