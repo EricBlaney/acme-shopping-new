@@ -89,15 +89,15 @@ const setupdb = async() => {
             Product.create({theme: 'topNESGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
         });
     
-        //   const topSNESGames = await client
-        //   .fields('name,summary,cover.url,total_rating'
-        //   .limit(10)
-        //   .where('release_dates.platform = 19 & total_rating > 80')
-        //   .request('https://api.igdb.com/v4/games')
-        //   // console.log(topSNESGames.data)
-        //   topSNESGames.data.map(game=>{
-        //     Product.create({theme: 'topSNESGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
-        // });
+          const topSNESGames = await client
+          .fields('name,summary,cover.url,total_rating')
+          .limit(10)
+          .where('release_dates.platform = 19 & total_rating > 80')
+          .request('https://api.igdb.com/v4/games')
+          // console.log(topSNESGames.data)
+          topSNESGames.data.map(game=>{
+            Product.create({theme: 'topSNESGames', name: `${game.name}`, summary: `${game.summary}`, imageUrl: `${game.cover.url}`, rating: `${game.total_rating}`, price: `${Number(faker.commerce.price(10,60,2))}`, condition: `${randomCondition(arr)}`})
+        });
     
           const topPlayStationGames = await client
           .fields('name,summary,cover.url,total_rating')

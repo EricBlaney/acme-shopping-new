@@ -51,7 +51,9 @@ class SignUp extends Component{
           <div class='username'>
           Username:
           <input name='username' onChange={ onChange } value={ username }/>
+          <br></br>
           Email:
+          <br></br>
           <input name='email' value={email} onChange={onChange}/>
           Password:
           <input type='password' name='password' value={ password } onChange={ onChange }/>
