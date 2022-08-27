@@ -34,7 +34,7 @@ class topXboxGames extends Component {
     }
 
     render() {
-        const {  topXboxGames } = this.props;
+        const {  topXboxGames, auth } = this.props;
 
     return (
     <div>
@@ -68,17 +68,18 @@ class topXboxGames extends Component {
 }
 }
 
-const mapStateToProps = ({ product, cart })=> {
+const mapStateToProps = ({ product, cart, auth })=> {
     const topXboxGames = product.filter(product => product.theme === 'topXboxGames');
     return {
         topXboxGames,
-        cart
+        cart,
+        auth
     };
   }
 
   const mapDispatch = (dispatch) => {
     return {
-        addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+      addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
         fetchProducts: ()=> dispatch(fetchProducts())
     }
 };

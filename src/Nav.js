@@ -5,17 +5,39 @@ import SignUpContainer from './SignUp/SignUpContainer';
 import SignInContainer from './SignIn/SignInContainer';
 import './Nav.css';
 import './Footer.css';
+import SourceModals from './SourceModals'
 import { logout } from './store'
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import { Badge } from 'antd';
 import Search from './Search/Search';
 
-
-
 class Nav extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+        isShowSourceModal: false
+    };
+
+    this.handleClose = this.handleClose.bind(this);
+    this.handleShowSourceModal = this.handleShowSourceModal.bind(this);
+  };
+
+  handleShowSourceModal = () =>{
+    this.setState({
+      isShowSourceModal: true
+    })
+ }
+
+ handleClose = () =>{
+    this.setState({
+      isShowSourceModal: false,
+    })
+ }
 
     render() {
         const {logout, auth } = this.props;
+        const { handleClose, handleShowSourceModal } = this;
         const signUpTriggerText = 'Sign Up';
         const signInTriggerText = 'Sign In';
 
@@ -69,7 +91,7 @@ class Nav extends Component {
 
 <Search /> */}
                <NavLink exact to='/api/myaccount' ><i className="fas fa-user-alt"></i> </NavLink> 
-                <NavLink to='/cart'><i className="fas fa-shopping-cart"></i></NavLink>
+               <NavLink to='/cart'><i className="fas fa-shopping-cart"></i></NavLink>
             {
               auth.id ? <Link to='/'><button className='logout' onClick={ logout }>logout</button></Link> : <SignInContainer triggerText={signInTriggerText} />
             }
@@ -86,8 +108,11 @@ class Nav extends Component {
                             <li><a href="https://www.facebook.com/profile.php?id=100085008934837"><i className="fa fa-facebook"></i></a></li>
                             <li><a href="https://twitter.com/fullstack2022"><i className="fa fa-twitter"></i></a></li>
                             <li><a href="https://www.instagram.com/fsseniorproject/"><i className="fa fa-instagram"></i></a></li>
+                            <button onClick={()=>{handleShowSourceModal()}} >Sources</button>
+
                         </div>
-                      
+                        {this.state.isShowSourceModal ? <SourceModals handleClose={ handleClose } isShowModal={this.state.isShowSourceModal}/> : null}
+
                       </div>
                         
                   </header>

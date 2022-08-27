@@ -34,7 +34,7 @@ class topAdventureGames extends Component {
     }
 
     render() {
-        const {  topAdventureGames } = this.props;
+        const {  topAdventureGames, auth } = this.props;
 
     return (
     <div>
@@ -55,7 +55,7 @@ class topAdventureGames extends Component {
                           <div className='info'>
                             <h3>{product.name}</h3>
                             <p>{`$${product.price}`}</p>
-                            <button  onClick={() => this.props.addCart(product, 1)}>Add To Cart</button>
+                            <button  onClick={() => this.props.addCart(product, 1, auth)}>Add To Cart</button>
                           </div>
                       </div>
                   </div>   
@@ -68,17 +68,18 @@ class topAdventureGames extends Component {
 }
 }
 
-const mapStateToProps = ({ product, cart })=> {
+const mapStateToProps = ({ product, cart, auth})=> {
     const topAdventureGames = product.filter(product => product.theme === 'topAdventureGames');
     return {
         topAdventureGames,
-        cart
+        cart,
+        auth
     };
   }
 
   const mapDispatch = (dispatch) => {
     return {
-        addCart: (product, quantity) => dispatch(addCart(product, quantity)),
+      addCart: (product, quantity, auth) => dispatch(addCart(product, quantity, auth)),
         fetchProducts: ()=> dispatch(fetchProducts())
     }
 };
