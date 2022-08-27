@@ -24,7 +24,7 @@ export const createUser = (credentials) => {
     }
     catch(error) {
         console.log(error.response);
-      if (error.response.data.includes('Cannot add duplicate email')) {
+      if (error.response.data === 'Cannot add duplicate email') {
         alert('Cannot add duplicate email')
       } else {
         console.log(error);
