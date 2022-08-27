@@ -39,7 +39,7 @@ class topSegaGenesisGames extends Component {
     return (
     <div>
         <main>
-        <h2>Top Sega Genesis Games</h2>
+        <h2  class='h2'>Top Sega Genesis Games</h2>
         <Carousel responsive={responsive} ssr={true}>
             
             { topSegaGenesisGames.map(product=>{

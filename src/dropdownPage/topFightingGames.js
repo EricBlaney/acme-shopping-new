@@ -5,29 +5,29 @@ import { Link } from 'react-router-dom';
 import './dropdownSingle.css';
 import { Modal } from 'antd';
 
-// import Carousel from 'react-multi-carousel';
-// import 'react-multi-carousel/lib/styles.css';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
-// //Carousel responsiveness
+//Carousel responsiveness
 
-// const responsive = {
-//   superLargeDesktop: {
-//     breakpoint: { max: 4000, min: 3000 },
-//     items: 5
-//   },
-//   desktop: {
-//     breakpoint: { max: 3000, min: 1024 },
-//     items: 4
-//   },
-//   tablet: {
-//     breakpoint: { max: 1024, min: 464 },
-//     items: 2
-//   },
-//   mobile: {
-//     breakpoint: { max: 464, min: 0 },
-//     items: 1
-//   }
-// };
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
 class topFightingGames extends Component {
 
@@ -45,9 +45,9 @@ class topFightingGames extends Component {
 
     return (
     <div>
-        <main>
-        <h2>Top Fighting Games</h2>
-        {/* <Carousel responsive={responsive} ssr={true}> */}
+        <main className='back'>
+        <h2  class='h2'>Top Fighting Games</h2>
+        <Carousel responsive={responsive} ssr={true}>
             
             { topFightingGames.map(product=>{
               if(product.imageUrl.length > 40) {
@@ -68,7 +68,7 @@ class topFightingGames extends Component {
                   </div>   
                 )
         })}
-   {/* </Carousel>  */}
+   </Carousel> 
             </main>
 
         <Modal title="Add a new product to cart" visible={!!cartProduct} onCancel={() => this.setState({cartProduct: null})} footer={null}>

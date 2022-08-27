@@ -35,7 +35,7 @@ class Genre extends Component {
     return (
     <div>
         <main>
-        <h2>Top Fighting Games</h2>
+        <h2 class='h2'>Top Fighting Games</h2>
         <Carousel responsive={responsive} ssr={true}>
             
             { topFightingGames.map(product=>{
@@ -59,7 +59,7 @@ class Genre extends Component {
         })}
    </Carousel> 
 
-   <h2>Top RPG Games</h2>
+   <h2 class='h2'>Top RPG Games</h2>
    <Carousel responsive={responsive} ssr={true}>
             
             { topRPGGames.map(product=>{
@@ -83,7 +83,7 @@ class Genre extends Component {
         })}
    </Carousel> 
 
-            <h2>Top Adventure Games</h2>
+            <h2 class='h2'>Top Adventure Games</h2>
             <Carousel responsive={responsive} ssr={true}>
             
             { topAdventureGames.map(product=>{
@@ -107,7 +107,7 @@ class Genre extends Component {
         })}
    </Carousel> 
 
-   <h2>Top Sports Games</h2>
+   <h2 class='h2'>Top Sports Games</h2>
             <Carousel responsive={responsive} ssr={true}>
             
             { topSportsGames.map(product=>{
@@ -131,7 +131,7 @@ class Genre extends Component {
         })}
    </Carousel> 
 
-            <h2>Top Platform Games</h2>
+            <h2 class='h2'>Top Platform Games</h2>
             <Carousel responsive={responsive} ssr={true}>
             
             { topPlatformGames.map(product=>{

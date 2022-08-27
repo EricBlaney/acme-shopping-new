@@ -17,11 +17,12 @@ const totalPrice = (cart.lineItems || []).reduce((total, item) => total += (item
 console.log(totalPrice);
 console.log(auth.id);
   return (
-
-    <div className="cart-container">
+<div class='cart3000'>
+<div className="cart-container">
       <ul className="cart-list">
       {(cart.lineItems || []).map( lineItem => {
           return (
+         
             <li key={ lineItem.id } className="cart-item">
               <img className="cart-image" src={lineItem.product.imageUrl} />
               <div>
@@ -32,7 +33,7 @@ console.log(auth.id);
                   <span className="quantity-num">{ lineItem.quantity }</span>
                   <span className="quantity-plus" onClick={() => updateQuantity(lineItem.product, lineItem.quantity + 1, auth)}>+</span>
                 </div>
-                <div className="cart-delete" onClick={() => deleteCart(lineItem.product, auth)}>delete</div>
+                <button className="cart-delete" onClick={() => deleteCart(lineItem.product, auth)}>delete</button>
               </div>
             </li>
               )
@@ -40,17 +41,15 @@ console.log(auth.id);
        }
       </ul>
 
-      {/* <div>
-        <Link to="../Checkout/PurchaseButton"><Button onClick={handleBuy}>Purchase</Button></Link>
-      </div> */}
-
-        <Card meta={<Button>Checkout</Button>} title="Total Price">
-          <div>
-            <h2>Total:</h2>
-            <h2>{`$${totalPrice}`}</h2>
-          </div>
-          <Button style={{marginBottom: 50}} className="Checkout" onClick={checkout}>Checkout</Button>
-        </Card>
+<div class='totalcheckout'>
+        {/* <Card meta={<Button>Checkout</Button>} title="Total Price"> */}
+          <div class='checkouttotal'>
+            <h4 class='totalc'>Total: {`$${totalPrice}`}</h4>          
+          <Button style={{marginBottom: 100}} className="Checkout" onClick={checkout}>Checkout</Button>
+        {/* </Card> */}
+        </div>
+    </div>
+    </div>
     </div>
   );
 };

@@ -39,15 +39,16 @@ class CreateUser extends Component{
     const { username, password, email, isAdmin } = this.state;
     return (
         <form onSubmit={ onSubmit }>
-            Username: 
+          <div class='adminc'> Username:  </div>
             <input name='username' onChange={ onChange } value={ username }/>
-            Password:
+            <div class='adminc'> Password:  </div>
             <input type='password' name='password' value={ password } onChange={ onChange }/>
-            Email:
+            <div class='adminc'> Email:  </div>
             <input type='email' name='email' value={ email } onChange={ onChange }/>
-            Set Admin Privilege?
+            <div class='adminc'> Set Admin Privilege?  </div>
             <input type="checkbox" name="isAdmin" onChange = { onChangeAdmin } value={ isAdmin }  />
-            <button>Create User</button>
+            <button class='adminbutton'>Create User</button>
+           
         </form>
     );
   }
