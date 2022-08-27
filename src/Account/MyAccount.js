@@ -4,6 +4,7 @@ import { fetchWishList, addCart } from '../store'
 import { Link } from 'react-router-dom';
 import Admin from './Admin';
 import Carousel from 'react-multi-carousel';
+import './MyAccount.css';
 import MyAccountModals from './AdminModal/EditMyAccount/MyAccountModals'
 import 'react-multi-carousel/lib/styles.css';
 

@@ -217,3 +217,19 @@ top: 15px
 }
 .reset-password{
 font: 50px}
+
+.btn{
+  background-color: black;
+  font-family:'Silkscreen', regular;
+  border-radius:10px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+border: 1px solid white
+}
+
+.btn:hover {
+  border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388; 
+}
